@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-public class SplashActivity extends Activity {
+public class AppSplashActivity extends Activity {
 	
 	private static int TIEMPO_DEL_SPLASH = 2000;
 
@@ -20,8 +20,8 @@ public class SplashActivity extends Activity {
 
 			@Override
 			public void run() {
-				Intent i = new Intent(SplashActivity.this,
-						GPSActivity.class);
+				Intent i = new Intent(AppSplashActivity.this,
+						AppGPSActivity.class);
 				startActivity(i);
 
 				finish();

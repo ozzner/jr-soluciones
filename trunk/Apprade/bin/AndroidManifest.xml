@@ -41,7 +41,7 @@
     		android:value="AIzaSyDclT_TBXcH6HYB5RbRaWW9mdaH-DpO05Q"/>
         
         <activity
-            android:name="contenedor.apprade.Vista.GPSMapaActivity"
+            android:name="contenedor.apprade.Vista.AppGPSMapaActivity"
             android:label="@string/app_name" >
             
         <intent-filter>
