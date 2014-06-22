@@ -1,4 +1,4 @@
-package edu.pe.apprade;
+package contenedor.apprade.Vista;
 
 public class RegistroActivity {
 
