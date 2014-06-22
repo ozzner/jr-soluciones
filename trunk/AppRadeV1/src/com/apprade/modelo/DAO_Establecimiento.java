@@ -132,28 +132,31 @@ public class DAO_Establecimiento extends ListActivity {
     	return null;
 	}
 
-	@Override
-	protected void onPostExecute(Void result) {
-    super.onPostExecute(result);
-    // Dismiss the progress dialog
-    if (pDialog.isShowing())
-        pDialog.dismiss();
-    /**
-     * Updating parsed JSON data into ListView
-     * */
-//    ListAdapter adapter = new SimpleAdapter(
-    		
+//	@Override
+//	protected void onPostExecute(Void result) {
+//    super.onPostExecute(result);
+//    // Dismiss the progress dialog
+//    if (pDialog.isShowing())
+//        pDialog.dismiss();
+//    /**
+//     * Updating parsed JSON data into ListView
+//     * */
+////    ListAdapter adapter = new SimpleAdapter(
 //    		
-//            DAO_Establecimiento.this, contactList,
-//            R.layout.list_item, new String[] { TAG_NAME, TAG_EMAIL,
-//                    TAG_PHONE_MOBILE }, new int[] { R.id.name,
-//                    R.id.email, R.id.mobile });
-
-//    setListAdapter(adapter);
+////    		
+////            DAO_Establecimiento.this, contactList,
+////            R.layout.list_item, new String[] { TAG_NAME, TAG_EMAIL,
+////                    TAG_PHONE_MOBILE }, new int[] { R.id.name,
+////                    R.id.email, R.id.mobile });
+//
+////    setListAdapter(adapter);
+//
+//
+//	}
+    }
 
 
 }
     
-    ......
+ 
 
-}
