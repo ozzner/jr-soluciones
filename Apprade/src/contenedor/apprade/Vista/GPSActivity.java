@@ -1,6 +1,8 @@
-package edu.pe.apprade;
+package contenedor.apprade.Vista;
 
 
+import contenedor.apprade.Controlador.GPSTracker;
+import edu.pe.apprade.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;

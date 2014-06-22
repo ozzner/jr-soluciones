@@ -1,12 +1,12 @@
-package edu.pe.apprade;
+package contenedor.apprade.Vista;
 
+import edu.pe.apprade.R;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-
 import android.view.View;
 import android.widget.EditText;
 

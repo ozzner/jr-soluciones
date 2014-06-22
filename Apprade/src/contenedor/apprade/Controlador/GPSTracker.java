@@ -1,4 +1,4 @@
-package edu.pe.apprade;
+package contenedor.apprade.Controlador;
 
 import android.app.AlertDialog;
 import android.app.Service;
