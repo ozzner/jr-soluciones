@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class GPSActivity  extends Activity {
+public class AppGPSActivity  extends Activity {
 	TextView tvLat, tvLon;
 	Button btnShowLocation;
 	GPSTracker gps;
@@ -34,7 +34,7 @@ public class GPSActivity  extends Activity {
 				@Override
 				public void onClick(View arg0) {		
 					
-			        gps = new GPSTracker(GPSActivity.this);
+			        gps = new GPSTracker(AppGPSActivity.this);
 
 			        if(gps.canGetLocation()){
 			        	

@@ -15,7 +15,7 @@ import contenedor.apprade.Controlador.GPSTracker;
 import edu.pe.apprade.R;
 
 
-public class GPSMapaActivity extends FragmentActivity {
+public class AppGPSMapaActivity extends FragmentActivity {
 	
 	 private GoogleMap map;
 	 
@@ -43,7 +43,7 @@ public class GPSMapaActivity extends FragmentActivity {
 	        map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 			map.setMyLocationEnabled(true);
 			
-			gps = new GPSTracker(GPSMapaActivity.this);
+			gps = new GPSTracker(AppGPSMapaActivity.this);
 	        
 	        if(gps.canGetLocation()){
 	        	

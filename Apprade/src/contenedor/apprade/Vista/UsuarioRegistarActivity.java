@@ -1,5 +1,5 @@
 package contenedor.apprade.Vista;
 
-public class RegistroActivity {
+public class UsuarioRegistarActivity {
 
 }
