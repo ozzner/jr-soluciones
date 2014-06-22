@@ -9,7 +9,7 @@ import java.util.Date;
  * @author Renzo
  *
  */
-public class DAO_Usuario {
+public class Modelo_Usuario {
 	
 	private int usuarioID;
 	private String email;
@@ -24,9 +24,13 @@ public class DAO_Usuario {
 	private Date fechaRegistro;
 	private String password;
 	
+
+	public Modelo_Usuario() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
-	
-	public DAO_Usuario(int usuarioID, String email, char sexo, String nombre,
+	public Modelo_Usuario(int usuarioID, String email, char sexo, String nombre,
 			Date fechaNacimiento, String apMaterno, String apPaterno,
 			int idRanking, int rate, String uid, Date fechaRegistro,
 			String password) {
@@ -192,8 +196,6 @@ public class DAO_Usuario {
 
 
 
-	public DAO_Usuario() {
-		
-	}
+
 
 }
