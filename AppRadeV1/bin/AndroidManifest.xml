@@ -46,7 +46,7 @@
         
         
         <activity
-            android:name="com.apprade.vista.Splash_Activity"
+            android:name="com.apprade.vista.App_Splash_Activity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,11 +55,11 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="com.apprade.vista.Registro_Activity" ></activity>
+        <activity android:name="com.apprade.vista.Usuario_Registro_Activity" ></activity>
         
-        <activity android:name="com.apprade.vista.Login_Activity"></activity>
+        <activity android:name="com.apprade.vista.Usuario_Login_Activity"></activity>
         
-        <activity android:name="com.apprade.vista.GPS_Mapa_Activity"></activity>
+        <activity android:name="com.apprade.vista.App_GPSMapa_Activity"></activity>
         
         
         

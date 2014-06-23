@@ -19,7 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Registro_Activity extends Activity{
+public class Usuario_Registro_Activity extends Activity{
 	
 	private TextView mDateDisplay;
 	private Button mPickDate;
@@ -115,7 +115,7 @@ public class Registro_Activity extends Activity{
 				int selectedId = radioSexGroup.getCheckedRadioButtonId();
 				radioSexButton = (RadioButton) findViewById(selectedId);
 
-				Toast.makeText(Registro_Activity.this, radioSexButton.getText(),
+				Toast.makeText(Usuario_Registro_Activity.this, radioSexButton.getText(),
 						Toast.LENGTH_SHORT).show();
 
 				
@@ -127,7 +127,7 @@ public class Registro_Activity extends Activity{
 	
     public void btnRegistrar_onClick (View v) {
     	
-    	Intent i = new Intent(this, Login_Activity.class);
+    	Intent i = new Intent(this, Usuario_Login_Activity.class);
     	startActivity(i);
     	finish();
         
