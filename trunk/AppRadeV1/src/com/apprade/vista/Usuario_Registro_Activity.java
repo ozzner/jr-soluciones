@@ -55,12 +55,7 @@ public class Usuario_Registro_Activity extends Activity{
 		setContentView(R.layout.activity_registro);
 
 		addListenerOnButton();
-		
-
-		
-		mDateDisplay = (TextView) findViewById(R.id.display);
-		mPickDate = (Button) findViewById(R.id.date);
-				
+					
 		mPickDate.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				showDialog(DATE_DIALOG_ID);
@@ -105,8 +100,7 @@ public class Usuario_Registro_Activity extends Activity{
 		
 	public void addListenerOnButton() {
 
-		radioSexGroup = (RadioGroup) findViewById(R.id.radioSex);
-		btnDisplay = (Button) findViewById(R.id.btnSex);
+
 
 		btnDisplay.setOnClickListener(new OnClickListener() {
 
