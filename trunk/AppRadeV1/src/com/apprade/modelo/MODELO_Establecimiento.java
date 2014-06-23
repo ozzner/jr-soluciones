@@ -2,35 +2,53 @@ package com.apprade.modelo;
 
 public class MODELO_Establecimiento {
 	
-	private String idEstablecimiento;
+	private String establecimientoID;
 	private String nombre;
-	private String lat;
-	private String lon;
+	private String latitud;
+	private String longitud;
 	
 	
-	public String getIdEstablecimiento() {
-		return idEstablecimiento;
+	/*CONSTRUCTORES*/
+	public MODELO_Establecimiento() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	public void setIdEstablecimiento(String idEstablecimiento) {
-		this.idEstablecimiento = idEstablecimiento;
+		
+	public MODELO_Establecimiento(String establecimientoID, String nombre,
+			String latitud, String longitud) {
+		super();
+		this.establecimientoID = establecimientoID;
+		this.nombre = nombre;
+		this.latitud = latitud;
+		this.longitud = longitud;
 	}
+
+
+	/* SET - GET*/
+	public String getEstablecimientoID() {
+		return establecimientoID;
+	}
+	public void setEstablecimientoID(String establecimientoID) {
+		this.establecimientoID = establecimientoID;
+	}
+	public String getLatitud() {
+		return latitud;
+	}
+	public void setLatitud(String latitud) {
+		this.latitud = latitud;
+	}
+	public String getLongitud() {
+		return longitud;
+	}
+	public void setLongitud(String longitud) {
+		this.longitud = longitud;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-	public String getLat() {
-		return lat;
-	}
-	public void setLat(String lat) {
-		this.lat = lat;
-	}
-	public String getLon() {
-		return lon;
-	}
-	public void setLon(String lon) {
-		this.lon = lon;
 	}
 	
 	
