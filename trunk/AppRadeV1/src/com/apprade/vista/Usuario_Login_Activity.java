@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.EditText;
 
 
-public class Login_Activity extends Activity {
+public class Usuario_Login_Activity extends Activity {
 private EditText email;
 	
 	@SuppressLint("CommitPrefEdits")
@@ -39,7 +39,7 @@ private EditText email;
         editor.putString("mail", email.getText().toString());
         editor.commit();
         
-        Intent i = new Intent(this, GPS_Mapa_Activity.class);
+        Intent i = new Intent(this, App_GPSMapa_Activity.class);
         startActivity(i);
         finish();
         

@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 
 
-public class GPS_Mapa_Activity extends FragmentActivity {
+public class App_GPSMapa_Activity extends FragmentActivity {
 	
 	 private GoogleMap map;
 	 
@@ -43,7 +43,7 @@ public class GPS_Mapa_Activity extends FragmentActivity {
 	        map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 			map.setMyLocationEnabled(true);
 			
-			gps = new HANDLER_GPS_Tracker(GPS_Mapa_Activity.this);
+			gps = new HANDLER_GPS_Tracker(App_GPSMapa_Activity.this);
 	        
 	        if(gps.canGetLocation()){
 	        	

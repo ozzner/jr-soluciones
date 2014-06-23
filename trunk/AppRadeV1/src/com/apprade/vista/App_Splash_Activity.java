@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 
-public class Splash_Activity extends Activity {
+public class App_Splash_Activity extends Activity {
 
 	private static int TIEMPO_DEL_SPLASH = 2000;
 
@@ -21,8 +21,8 @@ public class Splash_Activity extends Activity {
 
 			@Override
 			public void run() {
-				Intent i = new Intent(Splash_Activity.this,
-						Registro_Activity.class);
+				Intent i = new Intent(App_Splash_Activity.this,
+						Usuario_Registro_Activity.class);
 				startActivity(i);
 
 				finish();
