@@ -65,12 +65,12 @@ public class Usuario_Registro_Activity extends Activity{
 		
 		
 //		OBTIENE LA FECHA ACTUAL Y LA MUESTRA EN EL DATEPICKER
-		
-		final Calendar c = Calendar.getInstance();
-		mYear = c.get(Calendar.YEAR);
-		mMonth = c.get(Calendar.MONTH);
-		mDay = c.get(Calendar.DAY_OF_MONTH);
-		
+//		
+//		final Calendar c = Calendar.getInstance();
+//		mYear = c.get(Calendar.YEAR);
+//		mMonth = c.get(Calendar.MONTH);
+//		mDay = c.get(Calendar.DAY_OF_MONTH);
+//		
 		
 //		updateDisplay();
 	}

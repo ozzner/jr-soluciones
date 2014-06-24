@@ -1,4 +1,4 @@
-package com.apprade.modelo;
+package com.apprade.helper;
 
 import android.app.AlertDialog;
 import android.app.Service;
@@ -13,7 +13,7 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 
-public class HANDLER_GPS_Tracker extends Service implements LocationListener {
+public class Helper_GPS_Tracker extends Service implements LocationListener {
 
 	private final Context mContext;
 
@@ -39,7 +39,7 @@ public class HANDLER_GPS_Tracker extends Service implements LocationListener {
 	// Declaring a Location Manager
 	protected LocationManager locationManager;
 
-	public HANDLER_GPS_Tracker(Context context) {
+	public Helper_GPS_Tracker(Context context) {
 		this.mContext = context;
 		getLocation();
 	}
@@ -109,7 +109,7 @@ public class HANDLER_GPS_Tracker extends Service implements LocationListener {
 	 * */
 	public void stopUsingGPS(){
 		if(locationManager != null){
-			locationManager.removeUpdates(HANDLER_GPS_Tracker.this);
+			locationManager.removeUpdates(Helper_GPS_Tracker.this);
 		}		
 	}
 	

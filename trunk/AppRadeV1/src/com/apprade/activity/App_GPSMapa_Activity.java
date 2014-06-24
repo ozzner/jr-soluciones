@@ -1,7 +1,7 @@
 package com.apprade.activity;
 
 import com.apprade.R;
-import com.apprade.helper.HANDLER_GPS_Tracker;
+import com.apprade.helper.Helper_GPS_Tracker;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,7 +19,7 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 	
 	 private GoogleMap map;
 	 
-	 HANDLER_GPS_Tracker gps;
+	 Helper_GPS_Tracker gps;
 	 private double latitude;
 	 private double longitude;
 	
@@ -43,7 +43,7 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 	        map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 			map.setMyLocationEnabled(true);
 			
-			gps = new HANDLER_GPS_Tracker(App_GPSMapa_Activity.this);
+			gps = new Helper_GPS_Tracker(App_GPSMapa_Activity.this);
 	        
 	        if(gps.canGetLocation()){
 	        	
