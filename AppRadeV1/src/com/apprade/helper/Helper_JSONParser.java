@@ -76,8 +76,7 @@ public class Helper_JSONParser{
 	    		    	
 	    	return json;
 	  }
-	  
-	  
+	  	 
 	  public JSONObject httpGet(URI url,List<NameValuePair> params) {
 	    	
 	    	try {	
@@ -113,11 +112,9 @@ public class Helper_JSONParser{
 	    		    	
 	    	return json;
 	  }
-	  
-	  
-
-	@SuppressWarnings("unused")
-	private JSONObject parserToJsonObject(InputStream inStream){
+	  	  
+	  @SuppressWarnings("unused")
+	  private JSONObject parserToJsonObject(InputStream inStream){
 		  
 		  if(inStream!=null)	{
 			  	/* Recibe la data, la almacena y la transforma a una cadena String*/
