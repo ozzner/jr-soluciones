@@ -1,12 +1,9 @@
 package com.apprade.entity;
 
-import java.util.Date;
-
 /**
  * @author Renzo
  *
  */
-
 
 public class Entity_Usuario {
 	
@@ -14,26 +11,26 @@ public class Entity_Usuario {
 	private String email;
 	private char sexo;
 	private String nombre;
-	private Date fechaNacimiento;
+	private String fechaNacimiento;
 	private String apMaterno;
 	private String apPaterno;
 	private int idRanking;
 	private int rate;
 	private String uid;
-	private Date fechaRegistro;
+	private String fechaRegistro;
 	private String password;
-	
+	private Entity_Ranking oRanking;
 
 	public Entity_Usuario() {
 		super();
-		// TODO Auto-generated constructor stub
+		oRanking = new Entity_Ranking();
 	}
 	
-	public Entity_Usuario(int usuarioID, String email, char sexo, String nombre,
-			Date fechaNacimiento, String apMaterno, String apPaterno,
-			int idRanking, int rate, String uid, Date fechaRegistro,
-			String password) {
-		
+
+	public Entity_Usuario(int usuarioID, String email, char sexo,
+			String nombre, String fechaNacimiento, String apMaterno,
+			String apPaterno, int idRanking, int rate, String uid,
+			String fechaRegistro, String password, Entity_Ranking oRanking) {
 		super();
 		this.usuarioID = usuarioID;
 		this.email = email;
@@ -47,9 +44,17 @@ public class Entity_Usuario {
 		this.uid = uid;
 		this.fechaRegistro = fechaRegistro;
 		this.password = password;
+		this.oRanking = oRanking;
 	}
 
 
+	public Entity_Ranking getoRanking() {
+		return oRanking;
+	}
+
+	public void setoRanking(Entity_Ranking oRanking) {
+		this.oRanking = oRanking;
+	}
 
 	public int getUsuarioID() {
 		return usuarioID;
@@ -83,11 +88,11 @@ public class Entity_Usuario {
 		this.nombre = nombre;
 	}
 
-	public Date getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
@@ -131,11 +136,11 @@ public class Entity_Usuario {
 		this.uid = uid;
 	}
 
-	public Date getFechaRegistro() {
+	public String getFechaRegistro() {
 		return fechaRegistro;
 	}
 	
-	public void setFechaRegistro(Date fechaRegistro) {
+	public void setFechaRegistro(String fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
 
