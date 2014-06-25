@@ -22,7 +22,7 @@ public class App_Splash_Activity extends Activity {
 			@Override
 			public void run() {
 				Intent i = new Intent(App_Splash_Activity.this,
-						Usuario_Registro_Activity.class);
+						Usuario_Login_Activity.class);
 				startActivity(i);
 
 				finish();
