@@ -22,7 +22,7 @@ public class Entity_Usuario {
 	private Entity_Ranking oRanking;
 
 	public Entity_Usuario() {
-		super();
+		super();		
 		oRanking = new Entity_Ranking();
 	}
 	

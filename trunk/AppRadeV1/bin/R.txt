@@ -65,7 +65,8 @@ int id EditText02 0x7f060014
 int id RelativeLayout1 0x7f060009
 int id TextView01 0x7f060013
 int id TextView02 0x7f060010
-int id action_settings 0x7f060017
+int id action_settings 0x7f060018
+int id btnLogin 0x7f060017
 int id btnShowLocation 0x7f060005
 int id button1 0x7f06000d
 int id editText1 0x7f06000b
