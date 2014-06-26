@@ -67,7 +67,6 @@ public class Helper_Http_Method {
 			        } catch (Exception e) {
 			            Log.e("log_tag", "Error in http connection "+e.toString());
 			        }
-			    	Log.e("TAG-INPUTSTREAM", in +"");
 			    				
     	return in;
 			 		
