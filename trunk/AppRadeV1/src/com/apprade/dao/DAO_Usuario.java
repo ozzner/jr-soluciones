@@ -81,7 +81,7 @@ public class DAO_Usuario{
 					
 					oUsuario.setoRanking(oRank =  new Entity_Ranking(
 							Integer.parseInt(oRankData.getString("rankingID")),
-							oRankData.getString("rankingID")
+							oRankData.getString("name")
 							));										
 					bEstado = true;
 					
