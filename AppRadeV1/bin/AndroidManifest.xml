@@ -38,10 +38,7 @@
             android:value="AIzaSyDclT_TBXcH6HYB5RbRaWW9mdaH-DpO05Q" />
         
         <meta-data android:name="com.google.android.gms.version"
-           android:value="@integer/google_play_services_version" />
-   		
-   		
-        
+           android:value="@integer/google_play_services_version" />   		   		    
         
         <activity
             android:name="com.apprade.activity.App_Splash_Activity"
