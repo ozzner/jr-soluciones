@@ -8,6 +8,7 @@ import com.apprade.R;
 
 
 import com.apprade.dao.DAO_Usuario;
+import com.apprade.entity.Entity_Ranking;
 import com.apprade.entity.Entity_Usuario;
 import com.apprade.helper.Helper_JSONStatus;
 
@@ -31,16 +32,16 @@ public class Usuario_Login_Activity extends Activity {
 	private EditText password,email;	
 	private Button btnLogin;
 	private DAO_Usuario dao;
-	private Entity_Usuario oUser;
-	private Helper_JSONStatus status;
-	private String sEmail,sPassword;
+	private Entity_Ranking rank;
+	private Entity_Usuario user;
+	private String sEmail="",sPassword="";
     
 	
 	public Usuario_Login_Activity() {
 		super();
 		dao= new DAO_Usuario();
-		status = new Helper_JSONStatus();
-		oUser= new Entity_Usuario();
+		rank = new Entity_Ranking();
+		user = new Entity_Usuario() ;
 	}
 
 	@Override
@@ -58,8 +59,7 @@ public class Usuario_Login_Activity extends Activity {
 			public void onClick(View v) {
 					exeHttpAsync();
 			}
-		});
-			
+		});			
 	}
 		
 	private void exeHttpAsync(){
@@ -72,11 +72,11 @@ public class Usuario_Login_Activity extends Activity {
 		@Override
 		protected Boolean doInBackground(String... params) {
 			boolean bRequest = false;
-			
+		
 			sEmail = email.getText().toString();
 			sPassword = password.getText().toString();
 			
-			if (!dao.loginUsuario(sEmail, sPassword)) 
+			if (dao.loginUsuario(sEmail, sPassword)) 
 				bRequest = true;
 
 			return bRequest;
@@ -86,7 +86,9 @@ public class Usuario_Login_Activity extends Activity {
 		protected void onPostExecute(Boolean result) {		
 			super.onPostExecute(result);
 			if (result) {
-				Toast.makeText(getApplicationContext(),"Estado: "+status.getHttpCode()+" UserEmail_"+oUser.getEmail(), Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext()," ranking_: "+dao.oUsuario.oRanking.getNombre(), Toast.LENGTH_LONG).show();
+			}else{
+				Toast.makeText(getApplicationContext()," error: "+dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
 			}
 		}
 						

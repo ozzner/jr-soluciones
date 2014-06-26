@@ -14,12 +14,11 @@ public class Entity_Usuario {
 	private String fechaNacimiento;
 	private String apMaterno;
 	private String apPaterno;
-	private int idRanking;
 	private int rate;
 	private String uid;
 	private String fechaRegistro;
 	private String password;
-	private Entity_Ranking oRanking;
+	public Entity_Ranking oRanking;
 
 	public Entity_Usuario() {
 		super();		
@@ -29,7 +28,7 @@ public class Entity_Usuario {
 
 	public Entity_Usuario(int usuarioID, String email, char sexo,
 			String nombre, String fechaNacimiento, String apMaterno,
-			String apPaterno, int idRanking, int rate, String uid,
+			String apPaterno, int rate, String uid,
 			String fechaRegistro, String password, Entity_Ranking oRanking) {
 		super();
 		this.usuarioID = usuarioID;
@@ -39,7 +38,6 @@ public class Entity_Usuario {
 		this.fechaNacimiento = fechaNacimiento;
 		this.apMaterno = apMaterno;
 		this.apPaterno = apPaterno;
-		this.idRanking = idRanking;
 		this.rate = rate;
 		this.uid = uid;
 		this.fechaRegistro = fechaRegistro;
@@ -110,14 +108,6 @@ public class Entity_Usuario {
 
 	public void setApPaterno(String apPaterno) {
 		this.apPaterno = apPaterno;
-	}
-
-	public int getIdRanking() {
-		return idRanking;
-	}
-
-	public void setIdRanking(int idRanking) {
-		this.idRanking = idRanking;
 	}
 
 	public int getRate() {

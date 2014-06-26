@@ -24,15 +24,15 @@ import android.util.Log;
 /**
  * @author Renzo Santillan
  *
- *
  */
-public class DAO_Usuario {
+public class DAO_Usuario{
 
 	private static URI URL = URI.create("http://192.168.1.100/api/v1/");
 	private static String ENTITY = "usuario";
-	private Entity_Usuario oUsuario ;
-	private Helper_JSONStatus oJsonStatus;
+	public Entity_Usuario oUsuario ;
+	public  Helper_JSONStatus oJsonStatus;
 	private Helper_Http_Method oHttp;
+	private Entity_Ranking oRank;
 	
 	
 	public DAO_Usuario() {
@@ -42,7 +42,7 @@ public class DAO_Usuario {
 			}
 	
 	public boolean loginUsuario(String email , String password)
-	{	
+	{	InputStream in = null;
 		JSONObject oJson = null; 
 		boolean bEstado = false;
 				
@@ -55,38 +55,45 @@ public class DAO_Usuario {
 		String paramsString = URLEncodedUtils.format(parametros, "UTF-8");
 		Log.e("PARAMETROS",paramsString+"");
 		try {						
-			    InputStream in =  oHttp.httpGet(URL + "?" + paramsString);
+			    in =  oHttp.httpGet(URL + "?" + paramsString);
 			    oJson =oHttp.parserToJsonObject(in);
 			    Log.e("OBJ",oJson+"");
+			    
 				boolean bEStatus = Boolean.parseBoolean(oJson.getString("error_status"));
-				JSONObject oJsonData =  oJson.getJSONObject("data").getJSONObject("user1");
-				Log.e("DATA",oJsonData+"");
+				
 				if(!bEStatus){
-													
-					oUsuario.setUsuarioID(Integer.parseInt(oJsonData.getString("userID")));
-					oUsuario.setEmail(oJsonData.getString("email"));
+					JSONObject oUserData =  oJson.getJSONObject("data").getJSONObject("user1");
+					JSONObject oRankData =  oJson.getJSONObject("data").getJSONObject("user1").getJSONObject("ranking");
+					
+					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
+					
+					oUsuario.setUsuarioID(Integer.parseInt(oUserData.getString("userID")));
+					oUsuario.setEmail(oUserData.getString("email"));
 					Log.e("EMAIL",oUsuario.getEmail());
-					oUsuario.setSexo(oJsonData.getString("sex").charAt(0));
-					oUsuario.setNombre(oJsonData.getString("name"));
-					oUsuario.setFechaNacimiento(oJsonData.getString("date_birth"));
-					oUsuario.setFechaRegistro(oJsonData.getString("date_at"));
-					oUsuario.setApPaterno(oJsonData.getString("last_name1"));
-					oUsuario.setApMaterno(oJsonData.getString("last_name2"));
-					oUsuario.setRate(Integer.parseInt(oJsonData.getString("rate")));
-					oUsuario.setUid(oJsonData.getString("Api_key"));
+					oUsuario.setSexo(oUserData.getString("sex").charAt(0));
+					oUsuario.setNombre(oUserData.getString("name"));
+					oUsuario.setFechaNacimiento(oUserData.getString("date_birth"));
+					oUsuario.setFechaRegistro(oUserData.getString("date_at"));
+					oUsuario.setApPaterno(oUserData.getString("last_name1"));
+					oUsuario.setApMaterno(oUserData.getString("last_name2"));
+					oUsuario.setRate(Integer.parseInt(oUserData.getString("rate")));
+					oUsuario.setUid(oUserData.getString("Api_key"));
 					
-					JSONObject oJsonRanking = oJson.getJSONObject("ranking");
-					Log.e("ranking",oJsonRanking+"");
-					oUsuario.setIdRanking(Integer.parseInt(oJsonRanking.getString("rankingID")));
-					oUsuario.setApMaterno(oJsonRanking.getString("name"));				
-					
-					oJsonStatus.setHttpCode(Integer.parseInt(oJsonData.getString("httpCode")));
+					oUsuario.setoRanking(oRank =  new Entity_Ranking(
+							Integer.parseInt(oRankData.getString("rankingID")),
+							oRankData.getString("rankingID")
+							));										
 					bEstado = true;
 					
 				}else{
-					oJsonStatus.setError_cod(Double.parseDouble(oJsonData.getString("error_cod")));
-					oJsonStatus.setMessage(oJsonData.getString("message"));
-					oJsonStatus.setInfo(oJsonData.getString("info"));
+					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
+					JSONObject oErrorData=  oJson.getJSONObject("data");
+					Log.e("DATA-error",oErrorData+"");
+					oJsonStatus.setError_cod(Double.parseDouble(oErrorData.getString("error_cod")));
+					Log.e("error_cod",Double.parseDouble(oErrorData.getString("error_cod"))+"");
+					oJsonStatus.setMessage(oErrorData.getString("message"));
+					Log.e("message",(oErrorData.getString("message"))+"");
+					oJsonStatus.setInfo(oErrorData.getString("info"));
 				}
 			
 		} catch (Exception e) {

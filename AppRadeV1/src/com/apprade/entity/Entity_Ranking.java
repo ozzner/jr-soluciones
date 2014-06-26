@@ -15,14 +15,12 @@ public class Entity_Ranking {
 	public Entity_Ranking() {
 		// TODO Auto-generated constructor stub
 	}
-
 	
 	public Entity_Ranking(int rankingID, String nombre) {
 		super();
 		this.rankingID = rankingID;
 		this.nombre = nombre;
 	}
-
 	
 	public int getRankingID() {
 		return rankingID;
@@ -39,6 +37,5 @@ public class Entity_Ranking {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
 	
 }
