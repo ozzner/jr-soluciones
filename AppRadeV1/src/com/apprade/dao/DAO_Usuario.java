@@ -53,11 +53,9 @@ public class DAO_Usuario{
 		parametros.add( new BasicNameValuePair("password", password));
 
 		String paramsString = URLEncodedUtils.format(parametros, "UTF-8");
-		Log.e("PARAMETROS",paramsString+"");
 		try {						
 			    in =  oHttp.httpGet(URL + "?" + paramsString);
 			    oJson =oHttp.parserToJsonObject(in);
-			    Log.e("OBJ",oJson+"");
 			    
 				boolean bEStatus = Boolean.parseBoolean(oJson.getString("error_status"));
 				
@@ -69,7 +67,6 @@ public class DAO_Usuario{
 					
 					oUsuario.setUsuarioID(Integer.parseInt(oUserData.getString("userID")));
 					oUsuario.setEmail(oUserData.getString("email"));
-					Log.e("EMAIL",oUsuario.getEmail());
 					oUsuario.setSexo(oUserData.getString("sex").charAt(0));
 					oUsuario.setNombre(oUserData.getString("name"));
 					oUsuario.setFechaNacimiento(oUserData.getString("date_birth"));
@@ -87,12 +84,10 @@ public class DAO_Usuario{
 					
 				}else{
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
+					
 					JSONObject oErrorData=  oJson.getJSONObject("data");
-					Log.e("DATA-error",oErrorData+"");
 					oJsonStatus.setError_cod(Double.parseDouble(oErrorData.getString("error_cod")));
-					Log.e("error_cod",Double.parseDouble(oErrorData.getString("error_cod"))+"");
 					oJsonStatus.setMessage(oErrorData.getString("message"));
-					Log.e("message",(oErrorData.getString("message"))+"");
 					oJsonStatus.setInfo(oErrorData.getString("info"));
 				}
 			

@@ -9,17 +9,25 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="20dp" >
+        android:padding="50dp" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/check_user" />
 
         <EditText
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="12dp"
             android:fontFamily="Trebuchet MS"
-            android:layout_marginBottom="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="15dp"
             android:hint="apprade@prorade.com"
             android:textAlignment="center"
-            android:ems="10" />
+            />
 
         <EditText
             android:id="@+id/txtPassword"
@@ -27,8 +35,9 @@
             android:layout_height="wrap_content"
             android:fontFamily="Trebuchet MS"
             android:textAlignment="center"
+            android:textSize="12dp"
             android:hint="Password"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="40dp"
             android:ems="10" >
 
             <requestFocus />
@@ -36,12 +45,22 @@
 
         <Button
             android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="96dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
             android:layout_marginBottom="50dp"
             android:fontFamily="Trebuchet MS"
             android:onClick="btnLogin_onClick"
-            android:text="Login" />
+            android:text="Login"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="Trebuchet MS"
+            android:textSize="10dp"
+            android:text="¿Registrar otra cuenta?" />
 
     </LinearLayout>
 
