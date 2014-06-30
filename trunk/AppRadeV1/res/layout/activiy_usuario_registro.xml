@@ -8,8 +8,7 @@
         android:id="@+id/ScrollView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
->
+        android:layout_centerInParent="true" >
 
         <LinearLayout
             android:id="@+id/lay_contenedor"
@@ -60,22 +59,43 @@
 
                     <LinearLayout
                         android:id="@+id/lay_sexo"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical" >
+                        android:orientation="horizontal" >
 
-                        <RadioButton
-                            android:id="@+id/rb_masculino"
+                        <RadioGroup
+                            android:id="@+id/radioGroup1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Masculino" />
+                            android:layout_weight=".5" >
 
-                        <RadioButton
-                            android:id="@+id/rb_femenino"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Femenino" />
+                            <RadioButton
+                                android:id="@+id/radioSexButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                android:text="Masculino" />
+
+                            <RadioButton
+                                android:id="@+id/radioSexButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Femenino" />
+
+                        </RadioGroup>
+                         <ImageButton
+					         android:id="@+id/imb_date"
+					         android:layout_width="wrap_content"
+					  		 android:layout_height="wrap_content"
+					         android:cropToPadding="true"
+					         android:layout_weight=".5"
+					         android:layout_gravity="center_vertical"
+					         android:background="#0000"
+					         android:src="@drawable/date" />
                     </LinearLayout>
+
+                    
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -99,14 +119,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Ingrese password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                     />
 
                 <EditText
                     android:id="@+id/et_pass_confirmar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Confirme password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                   />
             </LinearLayout>
 
             <Button
