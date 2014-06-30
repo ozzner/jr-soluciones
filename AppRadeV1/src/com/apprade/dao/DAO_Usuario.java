@@ -97,7 +97,23 @@ public class DAO_Usuario{
 		
 		return bEstado;
 	}
-	
+
+	public boolean registarUsuario(String nombres, String apellidos,String correo,String pass){
+		InputStream in = null;
+		JSONObject oJson = null; 
+		boolean bEstado = false;
+		
+	List<NameValuePair> parametros = new ArrayList<NameValuePair>();
+		
+		parametros.add( new BasicNameValuePair("entity", ENTITY));
+		parametros.add( new BasicNameValuePair("email", correo));
+		parametros.add( new BasicNameValuePair("sexo", pass));
+		parametros.add( new BasicNameValuePair("nombre", pass));
+		parametros.add( new BasicNameValuePair("fecha", pass));
+		parametros.add( new BasicNameValuePair("apellido1", pass));
+		parametros.add( new BasicNameValuePair("password", pass));
+		
+		return false;}
 
 	
 		 		

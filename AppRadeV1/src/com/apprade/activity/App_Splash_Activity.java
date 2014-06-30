@@ -15,7 +15,7 @@ import android.view.Window;
 
 public class App_Splash_Activity extends Activity {
 
-	private static final int TIEMPO_DEL_SPLASH = 2000;
+	private static final int TIEMPO_DEL_SPLASH = 1500;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

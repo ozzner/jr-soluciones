@@ -4,6 +4,7 @@ package com.apprade.activity;
 import java.util.Calendar;
 
 import com.apprade.R;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -14,116 +15,87 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Usuario_Registro_Activity extends Activity{
-	
-	private TextView mDateDisplay;
-	private Button mPickDate;
-	private int mYear;
-	private int mMonth;
-	private int mDay;
-	static final int DATE_DIALOG_ID = 0;
-
+public class Usuario_Registro_Activity extends Activity {
+	private Button btnSend;
+	private EditText etNombres;
+	private EditText etApellidos;
+	private EditText etCorreo;
+	private EditText etPassword;
+	private EditText etRepitepass;
 	private RadioGroup radioSexGroup;
 	private RadioButton radioSexButton;
-	private Button btnDisplay;
+	 private ImageButton ib;
+	 private Calendar cal;
+	 private int day;
+	 private int month;
+	 private int year;
 	
-	private EditText et1;
+	
+	public Usuario_Registro_Activity() {
+		super();
+		
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activiy_usuario_registro);
+				
+		btnSend = (Button)findViewById(R.id.btn_enviar);
+		etNombres = (EditText)findViewById(R.id.et_nombres);
+		etPassword = (EditText)findViewById(R.id.et_password_reg);
+		etApellidos = (EditText)findViewById(R.id.et_paterno);
+		etCorreo = (EditText)findViewById(R.id.et_correo);
+		ib = (ImageButton) findViewById(R.id.imb_date);
 		
+		 ib.setOnClickListener( new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				  showDialog(0);
+			}
+		});
 		
-		
+		btnSend.setOnClickListener( new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				
+				  cal = Calendar.getInstance();
+				  day = cal.get(Calendar.DAY_OF_MONTH);
+				  month = cal.get(Calendar.MONTH);
+				  year = cal.get(Calendar.YEAR);
+												
+				Toast.makeText(getApplicationContext(),"Prueba", Toast.LENGTH_LONG).show();
+			
+				int selectedId = radioSexGroup.getCheckedRadioButtonId();
+				radioSexButton = (RadioButton) findViewById(selectedId);
+			}
+		});
 	}
-
+		 
+	 protected Dialog onCreateDialog(int id) {
+		  return new DatePickerDialog(this, datePickerListener, year, month, day);
+		 }
+	 
+	 private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+		  public void onDateSet(DatePicker view, int selectedYear,
+		    int selectedMonth, int selectedDay) {
+			  String sFecha = (selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDay);
+			  Toast.makeText(getApplicationContext(),(sFecha), Toast.LENGTH_LONG).show();
+		  }
+		 };
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+}
 
 
-//	INICIA EL CÓDIGO DEL DATEPICKER
-	
-//	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-//		public void onDateSet(DatePicker view, int year, int monthOfYear,
-//				int dayOfMonth) {
-//			mYear = year;
-//			mMonth = monthOfYear;
-//			mDay = dayOfMonth;
-//			updateDisplay();
-//		}
-//	};
-//
-//	/** Called when the activity is first created. */
-//	@Override
-//	protected void onCreate(Bundle savedInstanceState) {
-//		super.onCreate(savedInstanceState);
-//		setContentView(R.layout.activiy_usuario_registro);
-//
-//		addListenerOnButton();
-//					
-//		mPickDate.setOnClickListener(new View.OnClickListener() {
-//			public void onClick(View v) {
-//				showDialog(DATE_DIALOG_ID);
-//			}
-//		});
-//		
-		
-		
-//		OBTIENE LA FECHA ACTUAL Y LA MUESTRA EN EL DATEPICKER
-//		
-//		final Calendar c = Calendar.getInstance();
-//		mYear = c.get(Calendar.YEAR);
-//		mMonth = c.get(Calendar.MONTH);
-//		mDay = c.get(Calendar.DAY_OF_MONTH);
-//		
-		
-//		updateDisplay();
-	}
 
-// 		MUESTRA LA FECHA ACTUAL Y LA MUESTRA EN EL TEXTVIEW
-	
-//		private void updateDisplay() {
-//		mDateDisplay.setText(new StringBuilder()
-//	
-//				.append(mMonth + 1).append("-").append(mDay).append("-")
-//				.append(mYear).append(" "));
-//		}
-//
-//		@Override
-//		protected Dialog onCreateDialog(int id) {
-//			
-//			switch (id) {
-//			case DATE_DIALOG_ID:
-//			return new DatePickerDialog(this, mDateSetListener, mYear, mMonth,
-//					mDay);
-//		}
-//		return null;
-//	}
-
-		// check network connection
+// check network connection
 //	    public boolean isConnected(){
 //	    	
 //	        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE); 
@@ -146,9 +118,8 @@ public class Usuario_Registro_Activity extends Activity{
 //
 //			public void onClick(View v) {
 //
-//				int selectedId = radioSexGroup.getCheckedRadioButtonId();
-//				radioSexButton = (RadioButton) findViewById(selectedId);
-//
+
+
 //				Toast.makeText(Usuario_Registro_Activity.this, radioSexButton.getText(),
 //						Toast.LENGTH_SHORT).show();
 //
