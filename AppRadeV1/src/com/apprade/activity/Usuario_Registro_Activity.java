@@ -34,34 +34,62 @@ public class Usuario_Registro_Activity extends Activity{
 	
 	private EditText et1;
 
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activiy_usuario_registro);
+		
+		
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 //	INICIA EL CÓDIGO DEL DATEPICKER
 	
-	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-		public void onDateSet(DatePicker view, int year, int monthOfYear,
-				int dayOfMonth) {
-			mYear = year;
-			mMonth = monthOfYear;
-			mDay = dayOfMonth;
-			updateDisplay();
-		}
-	};
-
-	/** Called when the activity is first created. */
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_registro);
-
-		addListenerOnButton();
-					
-		mPickDate.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				showDialog(DATE_DIALOG_ID);
-			}
-		});
-		
+//	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+//		public void onDateSet(DatePicker view, int year, int monthOfYear,
+//				int dayOfMonth) {
+//			mYear = year;
+//			mMonth = monthOfYear;
+//			mDay = dayOfMonth;
+//			updateDisplay();
+//		}
+//	};
+//
+//	/** Called when the activity is first created. */
+//	@Override
+//	protected void onCreate(Bundle savedInstanceState) {
+//		super.onCreate(savedInstanceState);
+//		setContentView(R.layout.activiy_usuario_registro);
+//
+//		addListenerOnButton();
+//					
+//		mPickDate.setOnClickListener(new View.OnClickListener() {
+//			public void onClick(View v) {
+//				showDialog(DATE_DIALOG_ID);
+//			}
+//		});
+//		
 		
 		
 //		OBTIENE LA FECHA ACTUAL Y LA MUESTRA EN EL DATEPICKER
@@ -77,23 +105,23 @@ public class Usuario_Registro_Activity extends Activity{
 
 // 		MUESTRA LA FECHA ACTUAL Y LA MUESTRA EN EL TEXTVIEW
 	
-		private void updateDisplay() {
-		mDateDisplay.setText(new StringBuilder()
-	
-				.append(mMonth + 1).append("-").append(mDay).append("-")
-				.append(mYear).append(" "));
-		}
-
-		@Override
-		protected Dialog onCreateDialog(int id) {
-			
-			switch (id) {
-			case DATE_DIALOG_ID:
-			return new DatePickerDialog(this, mDateSetListener, mYear, mMonth,
-					mDay);
-		}
-		return null;
-	}
+//		private void updateDisplay() {
+//		mDateDisplay.setText(new StringBuilder()
+//	
+//				.append(mMonth + 1).append("-").append(mDay).append("-")
+//				.append(mYear).append(" "));
+//		}
+//
+//		@Override
+//		protected Dialog onCreateDialog(int id) {
+//			
+//			switch (id) {
+//			case DATE_DIALOG_ID:
+//			return new DatePickerDialog(this, mDateSetListener, mYear, mMonth,
+//					mDay);
+//		}
+//		return null;
+//	}
 
 		// check network connection
 //	    public boolean isConnected(){
@@ -109,35 +137,35 @@ public class Usuario_Registro_Activity extends Activity{
 //	    }
 		
 //	INICIA EL CÓDIGO DEL RADIO BUTTON
-		
-	public void addListenerOnButton() {
-
-
-
-		btnDisplay.setOnClickListener(new OnClickListener() {
-
-			public void onClick(View v) {
-
-				int selectedId = radioSexGroup.getCheckedRadioButtonId();
-				radioSexButton = (RadioButton) findViewById(selectedId);
-
-				Toast.makeText(Usuario_Registro_Activity.this, radioSexButton.getText(),
-						Toast.LENGTH_SHORT).show();
-
-				
-			}
-
-		});
-
-	}
-	
-    public void btnRegistrar_onClick (View v) {
-    	
-    	Intent i = new Intent(this, Usuario_Login_Activity.class);
-    	startActivity(i);
-    	finish();
-        
-        
-    } 
-
-}
+//		
+//	public void addListenerOnButton() {
+//
+//
+//
+//		btnDisplay.setOnClickListener(new OnClickListener() {
+//
+//			public void onClick(View v) {
+//
+//				int selectedId = radioSexGroup.getCheckedRadioButtonId();
+//				radioSexButton = (RadioButton) findViewById(selectedId);
+//
+//				Toast.makeText(Usuario_Registro_Activity.this, radioSexButton.getText(),
+//						Toast.LENGTH_SHORT).show();
+//
+//				
+//			}
+//
+//		});
+//
+//	}
+//	
+//    public void btnRegistrar_onClick (View v) {
+//    	
+//    	Intent i = new Intent(this, Usuario_Login_Activity.class);
+//    	startActivity(i);
+//    	finish();
+//        
+//        
+//    } 
+//
+//}
