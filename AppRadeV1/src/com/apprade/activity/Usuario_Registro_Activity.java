@@ -89,8 +89,7 @@ public class Usuario_Registro_Activity extends Activity {
 			  String sFecha = (selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDay);
 			  Toast.makeText(getApplicationContext(),(sFecha), Toast.LENGTH_LONG).show();
 		  }
-		 };
-	
+		 };	
 }
 
 
