@@ -71,7 +71,7 @@ public class Usuario_Registro_Activity extends Activity {
 				  month = cal.get(Calendar.MONTH);
 				  year = cal.get(Calendar.YEAR);
 												
-				Toast.makeText(getApplicationContext(),"Prueba", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(),"Prueba", Toast.LENGTH_SHORT).show();
 			
 				int selectedId = radioSexGroup.getCheckedRadioButtonId();
 				radioSexButton = (RadioButton) findViewById(selectedId);
@@ -107,27 +107,7 @@ public class Usuario_Registro_Activity extends Activity {
 //	                return false;   
 //	    }
 		
-//	INICIA EL CÓDIGO DEL RADIO BUTTON
-//		
-//	public void addListenerOnButton() {
-//
-//
-//
-//		btnDisplay.setOnClickListener(new OnClickListener() {
-//
-//			public void onClick(View v) {
-//
 
-
-//				Toast.makeText(Usuario_Registro_Activity.this, radioSexButton.getText(),
-//						Toast.LENGTH_SHORT).show();
-//
-//				
-//			}
-//
-//		});
-//
-//	}
 //	
 //    public void btnRegistrar_onClick (View v) {
 //    	
