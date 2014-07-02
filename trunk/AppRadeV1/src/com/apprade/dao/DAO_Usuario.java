@@ -76,10 +76,7 @@ public class DAO_Usuario{
 					oUsuario.setRate(Integer.parseInt(oUserData.getString("rate")));
 					oUsuario.setUid(oUserData.getString("Api_key"));
 					
-					oUsuario.setoRanking(oRank =  new Entity_Ranking(
-							Integer.parseInt(oRankData.getString("rankingID")),
-							oRankData.getString("name")
-							));										
+											
 					bEstado = true;
 					
 				}else{

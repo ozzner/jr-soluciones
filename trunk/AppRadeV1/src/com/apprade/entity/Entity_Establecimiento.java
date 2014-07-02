@@ -1,12 +1,17 @@
 package com.apprade.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Entity_Establecimiento {
 	
 	private String establecimientoID;
 	private String nombre;
 	private String latitud;
 	private String longitud;
-	
+	private List<Entity_Categoria> categoria = new ArrayList<Entity_Categoria>();
+	private List<Entity_Distrito>distrito =  new ArrayList<Entity_Distrito>();
+	private List<Entity_Coordenadas>coordenadas = new ArrayList<Entity_Coordenadas>();
 	
 	/*CONSTRUCTORES*/
 	public Entity_Establecimiento() {
@@ -49,6 +54,30 @@ public class Entity_Establecimiento {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public List<Entity_Categoria> getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(List<Entity_Categoria> categoria) {
+		this.categoria = categoria;
+	}
+
+	public List<Entity_Distrito> getDistrito() {
+		return distrito;
+	}
+
+	public void setDistrito(List<Entity_Distrito> distrito) {
+		this.distrito = distrito;
+	}
+
+	public List<Entity_Coordenadas> getCoordenadas() {
+		return coordenadas;
+	}
+
+	public void setCoordenadas(List<Entity_Coordenadas> coordenadas) {
+		this.coordenadas = coordenadas;
 	}
 	
 	

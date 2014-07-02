@@ -3,6 +3,9 @@
  */
 package com.apprade.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Renzo
  *
@@ -12,13 +15,12 @@ public class Entity_Comentario {
 	private int comentarioID;
 	private String fecha;
 	private String mensaje;
-	private Entity_Usuario oUsuario; 
-	private Entity_Establecimiento oEstablecimiento; 
+	private List<Entity_Usuario> usuario = new ArrayList<Entity_Usuario>(); 
+	private List<Entity_Establecimiento> establecimiento = new ArrayList<Entity_Establecimiento>(); 
 	
 	
 	public Entity_Comentario() {
-		oUsuario =  new Entity_Usuario();
-		oEstablecimiento =  new Entity_Establecimiento();		
+	
 	}
 
 
@@ -28,8 +30,6 @@ public class Entity_Comentario {
 		this.comentarioID = comentarioID;
 		this.fecha = fecha;
 		this.mensaje = mensaje;
-		this.oUsuario = oUsuario;
-		this.oEstablecimiento = oEstablecimiento;
 	}
 
 
@@ -57,22 +57,27 @@ public class Entity_Comentario {
 		this.mensaje = mensaje;
 	}
 
-	public Entity_Usuario getoUsuario() {
-		return oUsuario;
+
+	public List<Entity_Usuario> getUsuario() {
+		return usuario;
 	}
 
-	public void setoUsuario(Entity_Usuario oUsuario) {
-		this.oUsuario = oUsuario;
+
+	public void setUsuario(List<Entity_Usuario> usuario) {
+		this.usuario = usuario;
 	}
 
-	public Entity_Establecimiento getoEstablecimiento() {
-		return oEstablecimiento;
+
+	public List<Entity_Establecimiento> getEstablecimiento() {
+		return establecimiento;
 	}
 
-	public void setoEstablecimiento(Entity_Establecimiento oEstablecimiento) {
-		this.oEstablecimiento = oEstablecimiento;
+
+	public void setEstablecimiento(List<Entity_Establecimiento> establecimiento) {
+		this.establecimiento = establecimiento;
 	}
-	
+
+
 	
 	
 	

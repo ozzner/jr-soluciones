@@ -86,7 +86,7 @@ public class Usuario_Login_Activity extends Activity {
 		protected void onPostExecute(Boolean result) {		
 			super.onPostExecute(result);
 			if (result) {
-				Toast.makeText(getApplicationContext()," ranking_: "+dao.oUsuario.oRanking.getNombre(), Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext()," ranking_: ", Toast.LENGTH_LONG).show();
 			}else{
 				Toast.makeText(getApplicationContext()," error: "+dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
 			}
