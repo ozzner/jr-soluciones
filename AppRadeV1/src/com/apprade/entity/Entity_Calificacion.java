@@ -3,6 +3,10 @@
  */
 package com.apprade.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 /**
  * @author Renzo
  *
@@ -12,12 +16,12 @@ public class Entity_Calificacion {
 	private String cola;
 	private String hora;
 	private String fecha;
-	private Entity_Usuario oUsuario;
-	private Entity_Establecimiento oEstablecimiento;
+	
+	private List<Entity_Usuario> usuario = new ArrayList<Entity_Usuario>();
+	private List<Entity_Establecimiento> establecimiento = new ArrayList<Entity_Establecimiento>() ;
 	
 	public Entity_Calificacion() {
-		oUsuario = new Entity_Usuario();
-		oEstablecimiento =  new Entity_Establecimiento();
+
 	}	
 
 	public Entity_Calificacion(String cola, String hora, String fecha,
@@ -26,30 +30,8 @@ public class Entity_Calificacion {
 		this.cola = cola;
 		this.hora = hora;
 		this.fecha = fecha;
-		this.oUsuario = oUsuario;
-		this.oEstablecimiento = oEstablecimiento;
 	}
 	
-	public Entity_Usuario getoUsuario() {
-		return oUsuario;
-	}
-
-
-	public void setoUsuario(Entity_Usuario oUsuario) {
-		this.oUsuario = oUsuario;
-	}
-
-
-	public Entity_Establecimiento getoEstablecimiento() {
-		return oEstablecimiento;
-	}
-
-
-	public void setoEstablecimiento(Entity_Establecimiento oEstablecimiento) {
-		this.oEstablecimiento = oEstablecimiento;
-	}
-
-
 	public String getCola() {
 		return cola;
 	}
@@ -72,6 +54,22 @@ public class Entity_Calificacion {
 
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
+	}
+
+	public List<Entity_Usuario> getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(List<Entity_Usuario> usuario) {
+		this.usuario = usuario;
+	}
+
+	public List<Entity_Establecimiento> getEstablecimiento() {
+		return establecimiento;
+	}
+
+	public void setEstablecimiento(List<Entity_Establecimiento> establecimiento) {
+		this.establecimiento = establecimiento;
 	}
 
 	

@@ -1,5 +1,8 @@
 package com.apprade.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Renzo
  *
@@ -18,11 +21,10 @@ public class Entity_Usuario {
 	private String uid;
 	private String fechaRegistro;
 	private String password;
-	public Entity_Ranking oRanking;
+	private List<Entity_Ranking>ranking = new ArrayList<Entity_Ranking>();
 
 	public Entity_Usuario() {
 		super();		
-		oRanking = new Entity_Ranking();
 	}
 	
 
@@ -42,17 +44,8 @@ public class Entity_Usuario {
 		this.uid = uid;
 		this.fechaRegistro = fechaRegistro;
 		this.password = password;
-		this.oRanking = oRanking;
 	}
 
-
-	public Entity_Ranking getoRanking() {
-		return oRanking;
-	}
-
-	public void setoRanking(Entity_Ranking oRanking) {
-		this.oRanking = oRanking;
-	}
 
 	public int getUsuarioID() {
 		return usuarioID;
@@ -140,6 +133,14 @@ public class Entity_Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<Entity_Ranking> getRanking() {
+		return ranking;
+	}
+
+	public void setRanking(List<Entity_Ranking> ranking) {
+		this.ranking = ranking;
 	}
 
 
