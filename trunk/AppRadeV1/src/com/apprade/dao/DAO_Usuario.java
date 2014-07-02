@@ -61,7 +61,6 @@ public class DAO_Usuario{
 				
 				if(!bEStatus){
 					JSONObject oUserData =  oJson.getJSONObject("data").getJSONObject("user1");
-					JSONObject oRankData =  oJson.getJSONObject("data").getJSONObject("user1").getJSONObject("ranking");
 					
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
 					
