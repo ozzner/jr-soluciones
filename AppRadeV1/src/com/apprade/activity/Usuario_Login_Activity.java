@@ -35,6 +35,7 @@ public class Usuario_Login_Activity extends Activity {
 	private Entity_Ranking rank;
 	private Entity_Usuario user;
 	private String sEmail="",sPassword="";
+	private String nombre;
     
 	
 	public Usuario_Login_Activity() {
@@ -48,6 +49,12 @@ public class Usuario_Login_Activity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_usuario_login);
+		
+		
+//		Intent intent = getIntent();
+//        nombre = intent.getStringExtra("NOMBRE");
+//        
+//        Toast.makeText(this, nombre, Toast.LENGTH_LONG).show();
 		
 		email = (EditText)findViewById(R.id.txtEmail);
 		password= (EditText)findViewById(R.id.txtPassword);
