@@ -22,14 +22,14 @@ public class App_Splash_Activity extends Activity {
 		setContentView(R.layout.activity_splash);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-       //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
  
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
  
                 Intent mainIntent = new Intent().setClass(
-                		App_Splash_Activity.this, Usuario_Registro_Activity.class);
+                		App_Splash_Activity.this, Usuario_Login_Activity.class);
                 startActivity(mainIntent);
                 
                 finish();
