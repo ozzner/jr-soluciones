@@ -13,6 +13,7 @@ import com.apprade.entity.Entity_Usuario;
 import com.apprade.helper.Helper_JSONStatus;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +31,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+@SuppressLint("NewApi")
 public class Usuario_Login_Activity extends Activity {
 	
 	private EditText password,email;	
@@ -39,7 +41,7 @@ public class Usuario_Login_Activity extends Activity {
 	private Entity_Usuario user;
 	private String sEmail="",sPassword="";
 	private String nombre;
-    
+    private ActionBar actionBar;
 	
 	public Usuario_Login_Activity() {
 		super();
@@ -53,7 +55,6 @@ public class Usuario_Login_Activity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_usuario_login);
 		
-		
 //		Intent intent = getIntent();
 //        nombre = intent.getStringExtra("NOMBRE");
 //        
@@ -62,7 +63,8 @@ public class Usuario_Login_Activity extends Activity {
 		email = (EditText)findViewById(R.id.txtEmail);
 		password= (EditText)findViewById(R.id.txtPassword);
 		btnLogin = (Button)findViewById(R.id.btnLogin);
-		
+		ActionBar Bar = getActionBar();
+		Bar.setIcon(R.drawable.check_user);
 		btnLogin.setOnClickListener( new OnClickListener() {			
 			
 			@Override
@@ -113,19 +115,25 @@ public class Usuario_Login_Activity extends Activity {
 	     return true;
 	   } 
 	   
-	   @Override
+
+	@Override
 	   public boolean onOptionsItemSelected(MenuItem item) {
+		  
+		  actionBar = getActionBar();
 	     switch (item.getItemId()) {
-	     // action with ID action_refresh was selected
+	
 	     case R.id.login_action:
 	       Toast.makeText(this, "Accion  LOGIN", Toast.LENGTH_SHORT)
 	           .show();
+		   actionBar.setSubtitle("Inicio sesion");
 	       break;
-	     // action with ID action_settings was selected
+
 	     case R.id.about_action:
 	       Toast.makeText(this, "Accion ABOUT", Toast.LENGTH_SHORT)
 	           .show();
+		   actionBar.setSubtitle("About app");
 	       break;
+	       
 	     default:
 	       break;
 	     }
