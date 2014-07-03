@@ -5,12 +5,13 @@
         android:id="@+id/login_action"
         android:title="Iniciar sesión"
         android:icon="@drawable/login"
-        android:showAsAction="always"
+        android:showAsAction="ifRoom|withText"
         />
+
     <item 
         android:id="@+id/about_action"
-        android:title="About app"
+        android:title="About"
         android:icon="@drawable/about"
-        android:showAsAction="ifRoom"
+        android:showAsAction="never"
         />
 </menu>
