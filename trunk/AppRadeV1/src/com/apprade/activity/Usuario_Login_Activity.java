@@ -20,6 +20,9 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -99,11 +102,36 @@ public class Usuario_Login_Activity extends Activity {
 			}
 		}
 						
-		
 	}
 	
 
-	
+	   @Override
+	   public boolean onCreateOptionsMenu(Menu menu) {
+	     MenuInflater inflater = getMenuInflater();
+	     inflater.inflate(R.menu.login_menu, menu);
+	     
+	     return true;
+	   } 
+	   
+	   @Override
+	   public boolean onOptionsItemSelected(MenuItem item) {
+	     switch (item.getItemId()) {
+	     // action with ID action_refresh was selected
+	     case R.id.login_action:
+	       Toast.makeText(this, "Accion  LOGIN", Toast.LENGTH_SHORT)
+	           .show();
+	       break;
+	     // action with ID action_settings was selected
+	     case R.id.about_action:
+	       Toast.makeText(this, "Accion ABOUT", Toast.LENGTH_SHORT)
+	           .show();
+	       break;
+	     default:
+	       break;
+	     }
+
+	     return true;
+	   } 
 	
 	
 //	setContentView(R.layout.activity_usuario_login);		
