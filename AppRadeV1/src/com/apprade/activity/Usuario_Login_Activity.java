@@ -64,16 +64,45 @@ public class Usuario_Login_Activity extends Activity {
 		password= (EditText)findViewById(R.id.txtPassword);
 		btnLogin = (Button)findViewById(R.id.btnLogin);
 		ActionBar Bar = getActionBar();
-		Bar.setIcon(R.drawable.check_user);
+//		Bar.setIcon(R.drawable.check_user);
 		btnLogin.setOnClickListener( new OnClickListener() {			
 			
 			@Override
 			public void onClick(View v) {
-					exeHttpAsync();
+					//exeHttpAsync();
+			 llamarMapa();
 			}
 		});			
 	}
 		
+	protected void llamarMapa() {
+		
+		boolean esError=false;
+		
+		sEmail = email.getText().toString();
+		sPassword = password.getText().toString();
+		
+		if(sEmail.compareTo("")==0){
+			email.setError("Debes ingresar un Correo");
+    		esError=true;
+    	}
+		
+		if(sPassword.compareTo("")==0){
+			password.setError("Debes ingresar un Password");
+    		esError=true;
+    	}
+		
+		if(esError)
+			return;
+		
+		
+		Intent i = new Intent(this, App_GPSMapa_Activity.class);
+		startActivity(i);
+		finish();
+		
+		
+	}
+
 	private void exeHttpAsync(){
 		TaskHttpMethodAsync task =  new TaskHttpMethodAsync();
 		task.execute();
@@ -87,6 +116,9 @@ public class Usuario_Login_Activity extends Activity {
 		
 			sEmail = email.getText().toString();
 			sPassword = password.getText().toString();
+			
+			
+			
 			
 			if (dao.loginUsuario(sEmail, sPassword)) 
 				bRequest = true;
@@ -140,6 +172,13 @@ public class Usuario_Login_Activity extends Activity {
 
 	     return true;
 	   } 
+	
+	public void tvRegistrar_onClick (View v){
+		
+		Intent i = new Intent (this, Usuario_Registro_Activity.class);
+		startActivity(i);
+		finish();
+	}
 	
 	
 //	setContentView(R.layout.activity_usuario_login);		

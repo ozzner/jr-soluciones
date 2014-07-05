@@ -72,8 +72,28 @@ public class Usuario_Registro_Activity extends Activity {
 			}
 		 });
 		
-	}
-			public void btnEnviar_onClick(View v) {
+	
+	
+	
+		 btnSend.setOnClickListener( new OnClickListener() {
+			
+		@Override
+		public void onClick(View v) {
+			 
+			EnviarRegistro();
+		}
+	 });
+		 
+		 
+		 
+	
+}
+	
+	
+	
+	
+	
+			public void EnviarRegistro() {
 
 				
 				 RadioButton selectRadio = (RadioButton) findViewById(rgSexo
@@ -106,8 +126,8 @@ public class Usuario_Registro_Activity extends Activity {
 						 i.putExtra("PASSWORD", pass);
 						 
 						 Toast.makeText(this, saludo+nom, Toast.LENGTH_LONG).show();
-						 
 						 startActivity(i);
+						 finish();
 						 
 						
 					} catch (Exception e) {

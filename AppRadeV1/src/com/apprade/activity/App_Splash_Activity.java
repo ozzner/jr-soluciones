@@ -24,7 +24,7 @@ public class App_Splash_Activity extends Activity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
  
-        TimerTask task = new TimerTask() {
+        TimerTask task = new TimerTask(){
             @Override
             public void run() {
  
