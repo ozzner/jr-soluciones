@@ -156,17 +156,27 @@ public class Usuario_Login_Activity extends Activity {
 		  actionBar = getActionBar();
 	     switch (item.getItemId()) {
 	
-	     case R.id.login_action:
+	     case R.id.log_login_action:
 	       Toast.makeText(this, "Accion  LOGIN", Toast.LENGTH_SHORT)
 	           .show();
 		   actionBar.setSubtitle("Inicio sesion");
 	       break;
 
-	     case R.id.about_action:
+	     case R.id.log_about_action:
 	       Toast.makeText(this, "Accion ABOUT", Toast.LENGTH_SHORT)
 	           .show();
 		   actionBar.setSubtitle("About app");
 	       break;
+	       
+	     case R.id.log_registro_action:
+		       Intent i = new Intent(getApplicationContext(),Usuario_Registro_Activity.class);
+		       startActivity(i);
+		       
+		       Toast.makeText(this, "Registro nuevo", Toast.LENGTH_SHORT)
+	           .show();
+			   actionBar.setSubtitle("Registrar");
+		       break;
+	       
 	       
 	     default:
 	       break;
