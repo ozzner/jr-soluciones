@@ -5,11 +5,15 @@ import java.util.Calendar;
 
 import com.apprade.R;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -38,7 +42,7 @@ public class Usuario_Registro_Activity extends Activity {
 	private int year;
 	private String sFecha;
 	private String saludo;
-	
+	private  ActionBar actionBar;
 	
 	
 	
@@ -88,10 +92,6 @@ public class Usuario_Registro_Activity extends Activity {
 		 
 	
 }
-	
-	
-	
-	
 	
 			public void EnviarRegistro() {
 
@@ -163,6 +163,48 @@ public class Usuario_Registro_Activity extends Activity {
 		  }
 		  
 		 };	
+		 
+
+		 @Override
+		   public boolean onCreateOptionsMenu(Menu menu) {
+		     MenuInflater inflater = getMenuInflater();
+		     inflater.inflate(R.menu.registro_menu, menu);
+		     
+		     return true;
+		   } 
+		   
+
+		@Override
+		   public boolean onOptionsItemSelected(MenuItem item) {
+			  
+			  actionBar = getActionBar();
+		     switch (item.getItemId()) {
+		
+		     case R.id.reg_login_action:
+		       Toast.makeText(this, "Accion  LOGIN", Toast.LENGTH_SHORT)
+		           .show();
+			   actionBar.setSubtitle("Inicio sesion");
+		       break;
+
+		     case R.id.reg_about_action:
+		       Toast.makeText(this, "Accion ABOUT", Toast.LENGTH_SHORT)
+		           .show();
+			   actionBar.setSubtitle("About app");
+		       break;      
+		       
+		     default:
+		       break;
+		     }
+
+		     return true;
+		   } 
+
+		 
+		 
+		 
+		 
+		 
+		 
 		 
 		 
 }
