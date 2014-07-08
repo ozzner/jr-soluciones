@@ -63,8 +63,10 @@ public class Usuario_Login_Activity extends Activity {
 		email = (EditText)findViewById(R.id.txtEmail);
 		password= (EditText)findViewById(R.id.txtPassword);
 		btnLogin = (Button)findViewById(R.id.btnLogin);
+		
 		ActionBar Bar = getActionBar();
 //		Bar.setIcon(R.drawable.check_user);
+		
 		btnLogin.setOnClickListener( new OnClickListener() {			
 			
 			@Override
