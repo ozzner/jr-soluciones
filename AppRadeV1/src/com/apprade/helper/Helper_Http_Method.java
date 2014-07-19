@@ -104,7 +104,7 @@ public class Helper_Http_Method {
 	}
 
 	
-	  public JSONObject parserToJsonObject(InputStream inStream){
+	public JSONObject parserToJsonObject(InputStream inStream){
 		  boolean isOk = false;  	
 		  
 		  if(inStream!=null)	{
