@@ -41,7 +41,7 @@ public class Usuario_Registro_Activity extends Activity {
 	private int month;
 	private int year;
 	private String sFecha;
-	private String saludo;
+	private String saludo,sSexo;
 	private  ActionBar actionBar;
 	
 	
@@ -61,7 +61,6 @@ public class Usuario_Registro_Activity extends Activity {
 		etNombres = (EditText)findViewById(R.id.et_nombres);
 		etPassword = (EditText)findViewById(R.id.et_password_reg);
 		etConfPassword = (EditText)findViewById(R.id.et_pass_confirmar);
-		etApellidos = (EditText)findViewById(R.id.et_paterno);
 		etCorreo = (EditText)findViewById(R.id.et_correo);
 		ib = (ImageButton) findViewById(R.id.imb_date);
 		rgSexo = (RadioGroup)findViewById(R.id.rg_sexo);
@@ -87,9 +86,6 @@ public class Usuario_Registro_Activity extends Activity {
 			EnviarRegistro();
 		}
 	 });
-		 
-		 
-		 
 	
 }
 	
@@ -100,47 +96,72 @@ public class Usuario_Registro_Activity extends Activity {
 			             .getCheckedRadioButtonId());
 				 
 
-				 String nom = etNombres.getText().toString();
-				 String ape = etApellidos.getText().toString();
-				 String correo = etCorreo.getText().toString();
-				 String pass = etPassword.getText().toString();
-				 String confpass = etConfPassword.getText().toString();
+				 String sNombre = etNombres.getText().toString();
+				 String sEmail = etCorreo.getText().toString();
+				 String sPassword = etPassword.getText().toString();
+				 String sPassword2 = etConfPassword.getText().toString();
 				 
 				 String sexo = selectRadio.getText().toString();
-			 
-//				 if (!(nom.equals("") | ape.equals("") | correo.equals("") | pass.equals("") | confpass.equals(""))) {
-				 if (!(nom.equals(""))){	 
-					 
-					 if(sexo.equals("Masculino")){
-					 	saludo = "Bienvenido: ";
-					 }
-					 if(sexo.equals("Femenino")){
-						 saludo = "Bienvenida: ";
-					 }
-					 					 
-					 try {
-						 
-						 Intent i = new Intent (this, App_GPSMapa_Activity.class);
-						 i.putExtra("NOMBRE", nom);
-						 i.putExtra("CORREO", correo);
-						 i.putExtra("PASSWORD", pass);
-						 
-						 Toast.makeText(this, saludo+nom, Toast.LENGTH_LONG).show();
-						 startActivity(i);
-						 finish();
-						 
-						
-					} catch (Exception e) {
-						
-					}
-					 
-					 
-				 }
+					
+				 boolean esError=false;
+					
+					if(sEmail.compareTo("")==0){
+						etCorreo.setError("Debes ingresar un Correo");
+			    		esError=true;
+			    	}
+					
+					if(sPassword.compareTo("")==0){
+						etPassword.setError("Debes ingresar un Password");
+			    		esError=true;
+			    	}
+					
+					if(sNombre.compareTo("")==0){
+						etNombres.setError("Debes ingresar un nombre");
+			    		esError=true;
+			    	}
+					
+					if(sPassword2.compareTo("")==0){
+						etConfPassword.setError("Debes confirmar tu Password");
+			    		esError=true;
+			    	}
+					
+					if(esError)
+						return;
+				
 				 
-				 else {
-					 
-					 Toast.makeText(this, "Faltan completar 1 o más campos", Toast.LENGTH_LONG).show();
-				 }
+				 
+				 
+				 
+				 
+				 
+//				 
+//				 
+//				 
+//				 
+//					 					 
+//					 try {
+//						 
+//						 Intent i = new Intent (this, App_GPSMapa_Activity.class);
+//						 i.putExtra("NOMBRE", nom);
+//						 i.putExtra("CORREO", correo);
+//						 i.putExtra("PASSWORD", pass);
+//						 
+//						 Toast.makeText(this, saludo+nom, Toast.LENGTH_LONG).show();
+//						 startActivity(i);
+//						 finish();
+//						 
+//						
+//					} catch (Exception e) {
+//						
+//					}
+//					 
+//					 
+//				 }
+//				 
+//				 else {
+//					 
+//					 Toast.makeText(this, "Faltan completar 1 o más campos", Toast.LENGTH_LONG).show();
+//				 }
 			
 	
 	}
@@ -149,8 +170,6 @@ public class Usuario_Registro_Activity extends Activity {
 		  return new DatePickerDialog(this, datePickerListener, year, month, day);
 		 }
     
-     
-	 
 	 private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
 		  public void onDateSet(DatePicker view, int selectedYear,
 		    int selectedMonth, int selectedDay) {
@@ -173,7 +192,12 @@ public class Usuario_Registro_Activity extends Activity {
 		     return true;
 		   } 
 		   
-
+		 
+		 
+		 
+		 
+		 
+		 
 		@Override
 		   public boolean onOptionsItemSelected(MenuItem item) {
 			  
