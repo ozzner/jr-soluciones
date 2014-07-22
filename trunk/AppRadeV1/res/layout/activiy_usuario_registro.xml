@@ -44,13 +44,6 @@
                     <requestFocus />
                 </EditText>
 
-                <EditText
-                    android:id="@+id/et_paterno"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Apellidos"
-                    android:inputType="textPersonName" />
-
                 <LinearLayout
                     android:id="@+id/lay_sexo_fecha"
                     android:layout_width="match_parent"
@@ -139,9 +132,8 @@
 
             <Button
                 android:id="@+id/btn_enviar"
-                android:layout_width="131dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/send"
                 android:text="Enviar" />
         </LinearLayout>
     </ScrollView>
