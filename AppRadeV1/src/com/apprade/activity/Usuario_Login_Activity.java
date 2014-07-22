@@ -110,10 +110,10 @@ public class Usuario_Login_Activity extends Activity {
 		task.execute();
 	}
 	
-	   class TaskHttpMethodAsync extends AsyncTask<String, Void,Boolean>{
+    class TaskHttpMethodAsync extends AsyncTask<String, Void,Boolean>{
 
-		@Override
-		protected Boolean doInBackground(String... params) {
+    @Override
+    protected Boolean doInBackground(String... params) {
 			boolean bRequest = false;
 		
 			sEmail = email.getText().toString();
@@ -128,8 +128,8 @@ public class Usuario_Login_Activity extends Activity {
 			return bRequest;
 		}
 
-		@Override
-		protected void onPostExecute(Boolean result) {		
+    @Override
+	protected void onPostExecute(Boolean result) {		
 			super.onPostExecute(result);
 			if (result) {
 				Toast.makeText(getApplicationContext()," ranking_: ", Toast.LENGTH_LONG).show();
@@ -139,19 +139,17 @@ public class Usuario_Login_Activity extends Activity {
 		}
 						
 	}
-	
 
-	   @Override
-	   public boolean onCreateOptionsMenu(Menu menu) {
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
 	     MenuInflater inflater = getMenuInflater();
 	     inflater.inflate(R.menu.login_menu, menu);
 	     
 	     return true;
 	   } 
 	   
-
 	@Override
-	   public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
 		  
 		  actionBar = getActionBar();
 	     switch (item.getItemId()) {
