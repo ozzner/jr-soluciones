@@ -108,7 +108,7 @@ public class DAO_Usuario{
 		
 		String paramsString = URLEncodedUtils.format(parametros, "UTF-8");
 		try {						
-			    in =  oHttp.httpGet(URL + "?" + paramsString);
+			    in =  oHttp.httpPost(URL + "?" + paramsString);
 			    oJson =oHttp.parserToJsonObject(in);
 			    
 				boolean bEStatus = Boolean.parseBoolean(oJson.getString("error_status"));
