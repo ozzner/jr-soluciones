@@ -4,12 +4,15 @@ package com.apprade.activity;
 import java.util.Calendar;
 
 import com.apprade.R;
+import com.apprade.activity.Usuario_Login_Activity.TaskHttpMethodAsync;
+import com.apprade.dao.DAO_Usuario;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,16 +43,16 @@ public class Usuario_Registro_Activity extends Activity {
 	private int day;
 	private int month;
 	private int year;
-	private String sFecha;
-	private String saludo,sSexo;
+	private String sFecha,sNombre,sEmail,sPassword,sPassword2,sSexo;
+	private String saludo;
 	private  ActionBar actionBar;
-	
+	private DAO_Usuario dao;
 	
 	
 	
 	public Usuario_Registro_Activity() {
 		super();
-		
+		dao = new DAO_Usuario();
 	}
 
 	@Override
@@ -96,11 +99,10 @@ public class Usuario_Registro_Activity extends Activity {
 			             .getCheckedRadioButtonId());
 				 
 
-				 String sNombre = etNombres.getText().toString();
-				 String sEmail = etCorreo.getText().toString();
-				 String sPassword = etPassword.getText().toString();
-				 String sPassword2 = etConfPassword.getText().toString();
-				 
+				  sNombre = etNombres.getText().toString();
+				  sEmail = etCorreo.getText().toString();
+				  sPassword = etPassword.getText().toString();
+				  sPassword2 = etConfPassword.getText().toString();				 
 				 String sexo = selectRadio.getText().toString();
 					
 				 boolean esError=false;
@@ -115,23 +117,28 @@ public class Usuario_Registro_Activity extends Activity {
 			    		esError=true;
 			    	}
 					
-					if(sNombre.compareTo("")==0){
-						etNombres.setError("Debes ingresar un nombre");
-			    		esError=true;
-			    	}
-					
 					if(sPassword2.compareTo("")==0){
 						etConfPassword.setError("Debes confirmar tu Password");
 			    		esError=true;
 			    	}
 					
+					if(sNombre.compareTo("")==0){
+						etNombres.setError("Debes ingresar un nombre");
+			    		esError=true;
+			    	}
+					
+										
 					if(esError)
 						return;
 				
 				 
-				 
-				 
-				 
+				 if (sexo == "Masculino") 
+					sSexo = "M";
+				 else
+					 sSexo = "F";
+				
+
+				 exeHttpAsync();
 				 
 				 
 //				 
@@ -165,23 +172,56 @@ public class Usuario_Registro_Activity extends Activity {
 			
 	
 	}
-		 
-	 protected Dialog onCreateDialog(int id) {
-		  return new DatePickerDialog(this, datePickerListener, year, month, day);
-		 }
-    
-	 private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
-		  public void onDateSet(DatePicker view, int selectedYear,
-		    int selectedMonth, int selectedDay) {
-			  sFecha = (selectedDay + " - " + (selectedMonth + 1) + " - " + selectedYear);
-//			  Toast.makeText(getApplicationContext(),(sFecha), Toast.LENGTH_LONG).show();
-			  txFecha.setText(sFecha);
-			  return;
-			  
-			  			  
-		  }
-		  
-		 };	
+			
+			 protected Dialog onCreateDialog(int id) {
+				  return new DatePickerDialog(this, datePickerListener, year, month, day);
+				 }
+		    
+			 private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+				  public void onDateSet(DatePicker view, int selectedYear,
+				    int selectedMonth, int selectedDay) {
+					  sFecha = (selectedDay + " - " + (selectedMonth + 1) + " - " + selectedYear);
+				  Toast.makeText(getApplicationContext(),(sFecha), Toast.LENGTH_LONG).show();
+					  txFecha.setText(sFecha);
+					  return;
+					  			  
+				  }
+				  
+				 };	
+				 
+				 
+				 
+
+			private void exeHttpAsync(){
+				TaskHttpMethodAsync task =  new TaskHttpMethodAsync();
+				task.execute();
+			}
+			
+		    class TaskHttpMethodAsync extends AsyncTask<String, Void,Boolean>{
+
+		    @Override
+		    protected Boolean doInBackground(String... params) {
+					boolean bRequest = false;
+					
+					
+					if (dao.registarUsuario(sEmail, sSexo, sNombre, sPassword, sFecha)) 
+						bRequest = true;
+
+					return bRequest;
+				}
+
+		    @Override
+			protected void onPostExecute(Boolean result) {		
+					super.onPostExecute(result);
+					if (result) {
+						Toast.makeText(getApplicationContext(), "Mensaje: "+dao.oJsonStatus.getMessage(), Toast.LENGTH_LONG).show();
+					}else{
+						Toast.makeText(getApplicationContext()," error: "+dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
+					}
+				}
+								
+			}		
+			
 		 
 
 		 @Override
@@ -192,10 +232,6 @@ public class Usuario_Registro_Activity extends Activity {
 		     return true;
 		   } 
 		   
-		 
-		 
-		 
-		 
 		 
 		 
 		@Override
