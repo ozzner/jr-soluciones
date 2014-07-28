@@ -22,7 +22,7 @@ import com.apprade.helper.Helper_JSONStatus;
  */
 public class DAO_Calificacion {
 	
-	private static URI URL = URI.create("http://192.168.1.100/api/v1/");
+	private static URI URL = URI.create("http://192.168.1.200/api/v1/");
 	private static String ENTITY = "calificacion";
 	public Entity_Calificacion oCali ;
 	public  Helper_JSONStatus oJsonStatus;
