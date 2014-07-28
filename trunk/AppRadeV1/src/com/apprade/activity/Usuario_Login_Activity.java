@@ -15,7 +15,10 @@ import com.apprade.helper.Helper_JSONStatus;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -42,7 +45,7 @@ public class Usuario_Login_Activity extends Activity {
 	private String sEmail="",sPassword="";
 	private String nombre;
     private ActionBar actionBar;
-	
+	private ProgressDialog proDialogo;
 	public Usuario_Login_Activity() {
 		super();
 		dao= new DAO_Usuario();
@@ -90,18 +93,27 @@ public class Usuario_Login_Activity extends Activity {
 				if(esError)
 					return;
 				
-				exeHttpAsync();			 
+				exeHttpAsync();	//Lanza 2do hilo.		 
 			}
 		});			
 	}
 		
+	
+	protected void showDialogo(){
+
+		proDialogo = new ProgressDialog(Usuario_Login_Activity.this);
+		proDialogo.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		proDialogo.setMessage("Conectando...");
+		proDialogo.show();
+	}
+	
+	
 	protected void llamarMapa() {
 		
 		Intent i = new Intent(this, App_GPSMapa_Activity.class);
 		startActivity(i);
 		finish();
-		
-		
+			
 	}
 
 	private void exeHttpAsync(){
@@ -114,22 +126,36 @@ public class Usuario_Login_Activity extends Activity {
     @Override
     protected Boolean doInBackground(String... params) {
 			boolean bRequest = false;
-		
+	
 			sEmail = email.getText().toString();
 			sPassword = password.getText().toString();
 			
-			
-			
-			
 			if (dao.loginUsuario(sEmail, sPassword)) 
 				bRequest = true;
-
+	
 			return bRequest;
 		}
 
+    
+    @Override
+    protected void onPreExecute() {
+    	
+    	showDialogo();
+    	
+    	proDialogo.setOnCancelListener(new OnCancelListener() {
+    	
+        @Override
+	    public void onCancel(DialogInterface dialog) {
+	    	TaskHttpMethodAsync.this.cancel(true);  }
+	    });
+	    proDialogo.setProgress(0);
+	   // pDialog.show();
+    }
+    
     @Override
 	protected void onPostExecute(Boolean result) {		
 			super.onPostExecute(result);
+			proDialogo.dismiss();
 			if (result) {
 				Toast.makeText(getApplicationContext()," ranking_: ok ", Toast.LENGTH_LONG).show();
 				llamarMapa();
@@ -137,6 +163,14 @@ public class Usuario_Login_Activity extends Activity {
 				Toast.makeText(getApplicationContext()," error: "+dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
 			}
 		}
+    @Override
+    protected void onCancelled() {
+    Toast.makeText(getApplicationContext(), "Acción cancelada!",
+    Toast.LENGTH_SHORT).show();
+    }
+    
+    
+    
 						
 	}
 
