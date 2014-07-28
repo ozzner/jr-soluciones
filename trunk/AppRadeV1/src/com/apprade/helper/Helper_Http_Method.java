@@ -36,7 +36,8 @@ import android.util.Log;
  *
  */
 public class Helper_Http_Method {
-
+	
+private static int TIMEOUT = 7000;/*milisegundos*/
     
 	public Helper_Http_Method() {
 		// TODO Auto-generated constructor stub
@@ -51,20 +52,20 @@ public class Helper_Http_Method {
 			    	   	HttpClient httpClient = new DefaultHttpClient();
 		
 			    		HttpParams httpParamentros = httpClient.getParams();
-			    		HttpConnectionParams.setConnectionTimeout(httpParamentros, 8000);
-			    		HttpConnectionParams.setSoTimeout(httpParamentros, 8000);
+			    		HttpConnectionParams.setConnectionTimeout(httpParamentros, TIMEOUT);
+			    		HttpConnectionParams.setSoTimeout(httpParamentros, TIMEOUT);
 			    							    	
 			    		URI www = new URI(url);			    		
 			    		HttpGet get= new HttpGet();				    		
 			    		get.setURI(www); 					    		
 			    		HttpResponse response = httpClient.execute(get);			    		
 			    		in = response.getEntity().getContent();		    		
-			    		
-			        } catch(ConnectTimeoutException e){
-			            Log.e("Exception: Timeout", e.toString());
-			        } catch (Exception e) {
-			            Log.e("log_tag", "Error in http connection "+e.toString());
-			        }
+	    		
+	        } catch(ConnectTimeoutException e){
+	            Log.e("Exception: Timeout", e.toString());
+	        } catch (Exception e) {
+	            Log.e("log_tag", "Error in http connection "+e.toString());
+	        }
 			    				
     	return in;
 			 		
@@ -77,21 +78,17 @@ public class Helper_Http_Method {
 		
 		try {	
     		
-    		DefaultHttpClient httpClient = new DefaultHttpClient();
-    		/* timeout*/
-    		HttpParams httpParamentros = httpClient.getParams();
-    		HttpConnectionParams.setConnectionTimeout(httpParamentros, 8000);
-    		HttpConnectionParams.setSoTimeout(httpParamentros, 8000);
-    		
-    		HttpPost post = new HttpPost(url);
-    		post.setEntity(new UrlEncodedFormEntity(parametros));
-    	    //URI www = new URI(url);
-    	    // post.setURI(www); 		
-    		HttpResponse response = httpClient.execute(post);
-    		in = response.getEntity().getContent();
-    	
-    		Log.e("TAG-INSTREAM",in+"");
-
+		    		DefaultHttpClient httpClient = new DefaultHttpClient();
+		    	
+		    		HttpParams httpParamentros = httpClient.getParams();
+		    		HttpConnectionParams.setConnectionTimeout(httpParamentros, TIMEOUT);
+		    		HttpConnectionParams.setSoTimeout(httpParamentros, TIMEOUT);
+		    		
+		    		HttpPost post = new HttpPost(url);
+		    		post.setEntity(new UrlEncodedFormEntity(parametros));
+		    		HttpResponse response = httpClient.execute(post);
+		    		in = response.getEntity().getContent();
+		    	
         } catch(ConnectTimeoutException e){
             Log.e("Exception: Timeout", e.toString());
         } catch (Exception e) {
