@@ -33,7 +33,7 @@ public class App_Splash_Activity extends Activity {
             public void run() {
       
                 Intent mainIntent = new Intent().setClass(
-                		App_Splash_Activity.this, Usuario_Login_Activity.class);
+                		App_Splash_Activity.this, App_GPSMapa_Activity.class);
                 startActivity(mainIntent);
                 
                 finish();
