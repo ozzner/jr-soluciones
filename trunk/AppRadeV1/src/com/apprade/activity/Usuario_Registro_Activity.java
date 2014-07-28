@@ -31,20 +31,16 @@ import android.widget.Toast;
 public class Usuario_Registro_Activity extends Activity {
 	private Button btnSend;
 	private EditText etNombres;
-	private EditText etApellidos;
 	private EditText etCorreo;
 	private EditText etPassword;
 	private EditText etConfPassword;
-	private EditText etRepitepass;
 	private RadioGroup rgSexo;
 	private TextView txFecha;
 	private ImageButton ib;
-	private Calendar cal;
 	private int day;
 	private int month;
 	private int year;
 	private String sFecha,sNombre,sEmail,sPassword,sPassword2,sSexo;
-	private String saludo;
 	private  ActionBar actionBar;
 	private DAO_Usuario dao;
 	
@@ -140,11 +136,7 @@ public class Usuario_Registro_Activity extends Activity {
 
 				 exeHttpAsync();
 				 
-				 
-//				 
-//				 
-//				 
-//				 
+			
 //					 					 
 //					 try {
 //						 
