@@ -10,13 +10,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.SupportMapFragment;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 public class App_GPSMapa_Activity extends FragmentActivity {
@@ -28,7 +33,7 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 	 private double longitude;
 	 private String nombre;
 	 private ActionBar actionBar;
-	 
+	 private PopupWindow popWin;
 	 
 	 
 	    @Override
@@ -98,6 +103,30 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 
 	}
 	    
+	    
+	 /*
+	  * POPUP CONFIGURATIONS 
+	  * */   
+	    
+	    private void initiatePopupWindow() {
+	    	try {
+	    	// We need to get the instance of the LayoutInflater
+	    	LayoutInflater inflater = (LayoutInflater) App_GPSMapa_Activity.this
+	    	.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	    	View layout = inflater.inflate(R.layout.popup_comentario,
+	    	(ViewGroup) findViewById(R.id.popup_element));
+	    	popWin = new PopupWindow(layout, 300, 370, true);
+	    	popWin.showAtLocation(layout, Gravity.CENTER, 0, 0);
+
+//	    	btnClosePopup = (Button) layout.findViewById(R.id.btn_close_popup);
+//	    	btnClosePopup.setOnClickListener(cancel_button_click_listener);
+
+	    	} catch (Exception e) {
+	    	e.printStackTrace();
+	    	}
+	    	}
+
+  
 
 		@Override
 		public boolean onCreateOptionsMenu(Menu menu) {
@@ -117,6 +146,7 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 		       Toast.makeText(this, "Acción comentar", Toast.LENGTH_SHORT)
 		           .show();
 			   actionBar.setSubtitle("Comentando...");
+			   initiatePopupWindow();
 		       break;
 
 		       
