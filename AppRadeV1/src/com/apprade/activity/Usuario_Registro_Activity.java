@@ -11,7 +11,10 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -40,10 +43,10 @@ public class Usuario_Registro_Activity extends Activity {
 	private int day;
 	private int month;
 	private int year;
-	private String sFecha,sNombre,sEmail,sPassword,sPassword2,sSexo;
+	private ProgressDialog proDialog;
+	private String sFecha="2006-05-18",sNombre,sEmail,sPassword,sPassword2,sSexo;
 	private  ActionBar actionBar;
 	private DAO_Usuario dao;
-	
 	
 	
 	public Usuario_Registro_Activity() {
@@ -73,23 +76,19 @@ public class Usuario_Registro_Activity extends Activity {
 				  showDialog(0);
 			}
 		 });
-		
-	
-	
 	
 		 btnSend.setOnClickListener( new OnClickListener() {
 			
 		@Override
 		public void onClick(View v) {
-			 
+			
 			EnviarRegistro();
+				exeHttpAsync();
 		}
 	 });
 	
 }
-	
 			public void EnviarRegistro() {
-
 				
 				 RadioButton selectRadio = (RadioButton) findViewById(rgSexo
 			             .getCheckedRadioButtonId());
@@ -100,7 +99,7 @@ public class Usuario_Registro_Activity extends Activity {
 				  sPassword = etPassword.getText().toString();
 				  sPassword2 = etConfPassword.getText().toString();				 
 				 String sexo = selectRadio.getText().toString();
-					
+
 				 boolean esError=false;
 					
 					if(sEmail.compareTo("")==0){
@@ -133,36 +132,6 @@ public class Usuario_Registro_Activity extends Activity {
 				 else
 					 sSexo = "F";
 				
-
-				 exeHttpAsync();
-				 
-			
-//					 					 
-//					 try {
-//						 
-//						 Intent i = new Intent (this, App_GPSMapa_Activity.class);
-//						 i.putExtra("NOMBRE", nom);
-//						 i.putExtra("CORREO", correo);
-//						 i.putExtra("PASSWORD", pass);
-//						 
-//						 Toast.makeText(this, saludo+nom, Toast.LENGTH_LONG).show();
-//						 startActivity(i);
-//						 finish();
-//						 
-//						
-//					} catch (Exception e) {
-//						
-//					}
-//					 
-//					 
-//				 }
-//				 
-//				 else {
-//					 
-//					 Toast.makeText(this, "Faltan completar 1 o más campos", Toast.LENGTH_LONG).show();
-//				 }
-			
-	
 	}
 			
 			 protected Dialog onCreateDialog(int id) {
@@ -176,12 +145,8 @@ public class Usuario_Registro_Activity extends Activity {
 				  Toast.makeText(getApplicationContext(),(sFecha), Toast.LENGTH_LONG).show();
 					  txFecha.setText(sFecha);
 					  return;
-					  			  
-				  }
-				  
-				 };	
-				 
-				 
+					  			  }
+				   };	 
 				 
 
 			private void exeHttpAsync(){
@@ -201,10 +166,26 @@ public class Usuario_Registro_Activity extends Activity {
 
 					return bRequest;
 				}
+		    
 
+		    protected void onPreExecute() {
+		    	
+		    	showDialogo();
+		    	
+		    	proDialog.setOnCancelListener(new OnCancelListener() {
+		    	
+		        @Override
+			    public void onCancel(DialogInterface dialog) {
+			    	TaskHttpMethodAsync.this.cancel(true);  }
+			    });
+			    proDialog.setProgress(0);
+		    }
+		    
+		    
 		    @Override
 			protected void onPostExecute(Boolean result) {		
 					super.onPostExecute(result);
+					proDialog.dismiss();
 					if (result) {
 						Toast.makeText(getApplicationContext(), "Mensaje: "+dao.oJsonStatus.getMessage(), Toast.LENGTH_LONG).show();
 					}else{
@@ -214,7 +195,12 @@ public class Usuario_Registro_Activity extends Activity {
 								
 			}		
 			
-		 
+			protected void llamarMapa() {
+				
+				Intent i = new Intent(this, App_GPSMapa_Activity.class);
+				startActivity(i);
+				finish();				
+			}		 
 
 		 @Override
 		   public boolean onCreateOptionsMenu(Menu menu) {
@@ -226,6 +212,13 @@ public class Usuario_Registro_Activity extends Activity {
 		   
 		 
 		 
+		public void showDialogo() {
+			proDialog = new ProgressDialog(Usuario_Registro_Activity.this);
+			proDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			proDialog.setMessage("Enviando...");
+			proDialog.show();
+		}
+
 		@Override
 		   public boolean onOptionsItemSelected(MenuItem item) {
 			  
@@ -249,14 +242,7 @@ public class Usuario_Registro_Activity extends Activity {
 		     }
 
 		     return true;
-		   } 
-
-		 
-		 
-		 
-		 
-		 
-		 
+		   } 	 
 		 
 		 
 }
@@ -285,4 +271,31 @@ public class Usuario_Registro_Activity extends Activity {
 //        
 //    } 
 //
+//}
+
+
+
+// 
+//try {
+//
+//Intent i = new Intent (this, App_GPSMapa_Activity.class);
+//i.putExtra("NOMBRE", nom);
+//i.putExtra("CORREO", correo);
+//i.putExtra("PASSWORD", pass);
+//
+//Toast.makeText(this, saludo+nom, Toast.LENGTH_LONG).show();
+//startActivity(i);
+//finish();
+//
+//
+//} catch (Exception e) {
+//
+//}
+//
+//
+//}
+//
+//else {
+//
+//Toast.makeText(this, "Faltan completar 1 o más campos", Toast.LENGTH_LONG).show();
 //}

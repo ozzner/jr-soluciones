@@ -41,7 +41,6 @@ public class Usuario_Login_Activity extends Activity {
 	private Button btnLogin;
 	private DAO_Usuario dao;
 	private Entity_Ranking rank;
-	private Entity_Usuario user;
 	private String sEmail="",sPassword="";
 	private String nombre;
     private ActionBar actionBar;
@@ -50,19 +49,13 @@ public class Usuario_Login_Activity extends Activity {
 		super();
 		dao= new DAO_Usuario();
 		rank = new Entity_Ranking();
-		user = new Entity_Usuario() ;
 	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_usuario_login);
-		
-//		Intent intent = getIntent();
-//        nombre = intent.getStringExtra("NOMBRE");
-//        
-//        Toast.makeText(this, nombre, Toast.LENGTH_LONG).show();
-		
+	
 		email = (EditText)findViewById(R.id.txtEmail);
 		password= (EditText)findViewById(R.id.txtPassword);
 		btnLogin = (Button)findViewById(R.id.btnLogin);
@@ -100,7 +93,6 @@ public class Usuario_Login_Activity extends Activity {
 		
 	
 	protected void showDialogo(){
-
 		proDialogo = new ProgressDialog(Usuario_Login_Activity.this);
 		proDialogo.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		proDialogo.setMessage("Conectando...");
@@ -136,7 +128,6 @@ public class Usuario_Login_Activity extends Activity {
 			return bRequest;
 		}
 
-    
     @Override
     protected void onPreExecute() {
     	
@@ -157,22 +148,21 @@ public class Usuario_Login_Activity extends Activity {
 			super.onPostExecute(result);
 			proDialogo.dismiss();
 			if (result) {
-				Toast.makeText(getApplicationContext()," ranking_: ok ", Toast.LENGTH_LONG).show();
+				String sUser = dao.oUsuario.getNombre();
+				Toast.makeText(getApplicationContext(),"Bienvenid@_"+sUser, Toast.LENGTH_LONG).show();
 				llamarMapa();
 			}else{
-				Toast.makeText(getApplicationContext()," error: "+dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(),"Error: "+dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
 			}
 		}
+    
     @Override
     protected void onCancelled() {
     Toast.makeText(getApplicationContext(), "Acción cancelada!",
     Toast.LENGTH_SHORT).show();
     }
-    
-    
-    
-						
-	}
+			
+}//End ClassAsync
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

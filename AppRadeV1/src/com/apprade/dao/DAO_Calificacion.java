@@ -50,9 +50,9 @@ public class DAO_Calificacion {
 		
 		String paramsString = URLEncodedUtils.format(parametros, "UTF-8");
 		try {						
-			    in =  oHttp.httpPost(URL + "?" + paramsString);
-			    oJson =oHttp.parserToJsonObject(in);
-			    
+//			    in =  oHttp.httpPost(URL + "?" + paramsString);
+//			    oJson =oHttp.parserToJsonObject(in);
+//			    
 				boolean bEStatus = Boolean.parseBoolean(oJson.getString("error_status"));
 				
 				if(!bEStatus){
@@ -89,7 +89,7 @@ public class DAO_Calificacion {
 		String paramsString = URLEncodedUtils.format(parametros, "UTF-8");
 		try {						
 			    in =  oHttp.httpGet(URL + "?" + paramsString);
-			    oJson =oHttp.parserToJsonObject(in);
+			   // oJson =oHttp.parserToJsonObject(in);
 			    
 				boolean bEStatus = Boolean.parseBoolean(oJson.getString("error_status"));
 				
