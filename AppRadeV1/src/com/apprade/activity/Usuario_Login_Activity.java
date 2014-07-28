@@ -71,32 +71,31 @@ public class Usuario_Login_Activity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-					//exeHttpAsync();
-			 llamarMapa();
+				
+				boolean esError=false;
+				
+				sEmail = email.getText().toString();
+				sPassword = password.getText().toString();
+				
+				if(sEmail.compareTo("")==0){
+					email.setError("Debes ingresar un Correo");
+		    		esError=true;
+		    	}
+				
+				if(sPassword.compareTo("")==0){
+					password.setError("Debes ingresar un Password");
+		    		esError=true;
+		    	}
+				
+				if(esError)
+					return;
+				
+				exeHttpAsync();			 
 			}
 		});			
 	}
 		
 	protected void llamarMapa() {
-		
-		boolean esError=false;
-		
-		sEmail = email.getText().toString();
-		sPassword = password.getText().toString();
-		
-		if(sEmail.compareTo("")==0){
-			email.setError("Debes ingresar un Correo");
-    		esError=true;
-    	}
-		
-		if(sPassword.compareTo("")==0){
-			password.setError("Debes ingresar un Password");
-    		esError=true;
-    	}
-		
-		if(esError)
-			return;
-		
 		
 		Intent i = new Intent(this, App_GPSMapa_Activity.class);
 		startActivity(i);
@@ -132,7 +131,8 @@ public class Usuario_Login_Activity extends Activity {
 	protected void onPostExecute(Boolean result) {		
 			super.onPostExecute(result);
 			if (result) {
-				Toast.makeText(getApplicationContext()," ranking_: ", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext()," ranking_: ok ", Toast.LENGTH_LONG).show();
+				llamarMapa();
 			}else{
 				Toast.makeText(getApplicationContext()," error: "+dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
 			}
