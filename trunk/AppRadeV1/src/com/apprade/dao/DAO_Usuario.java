@@ -1,6 +1,7 @@
 package com.apprade.dao;
 
 import java.io.InputStream;
+import java.io.Writer;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.json.JSONObject;
 import com.apprade.entity.Entity_Ranking;
 import com.apprade.entity.Entity_Usuario;
 import com.apprade.helper.Helper_Http_Method;
+import com.apprade.helper.Helper_JSONParser;
 import com.apprade.helper.Helper_JSONStatus;
 
 import android.content.Context;
@@ -26,18 +28,20 @@ import android.widget.Toast;
  *
  */
 public class DAO_Usuario{
-	//private static URI URL = URI.create("itlab.fis.ulima.edu.pe/api/v1");
+	//private static URI URL = URI.create("itlab.fis.ulima.edu.pe/api/v1/");
 	private static URI URL = URI.create("http://192.168.1.200/api/v1/");
 	private static String ENTITY = "usuario";
 	public Entity_Usuario oUsuario ;
 	public  Helper_JSONStatus oJsonStatus;
+	private Helper_JSONParser oParser;
 	private Helper_Http_Method oHttp;
 	
 	public DAO_Usuario() {
 		oUsuario = new Entity_Usuario();
 		oJsonStatus =  new Helper_JSONStatus();
+		oParser = new Helper_JSONParser();
 		oHttp = new Helper_Http_Method();
-			}
+	}
 	
 	public boolean loginUsuario(String email , String password)
 	{	InputStream in = null;
@@ -53,7 +57,7 @@ public class DAO_Usuario{
 		String paramsString = URLEncodedUtils.format(parametros, "UTF-8");
 		try {						
 			    in =  oHttp.httpGet(URL + "?" + paramsString);
-			    oJson =oHttp.parserToJsonObject(in);
+			    oJson =oParser.parserToJsonObject(in);
 			    
 				boolean bEStatus = Boolean.parseBoolean(oJson.getString("error_status"));
 				
@@ -106,10 +110,12 @@ public class DAO_Usuario{
 		parametros.add( new BasicNameValuePair("fecha", fecha));
 		parametros.add( new BasicNameValuePair("password", password));
 		
-		String paramsString = URLEncodedUtils.format(parametros, "UTF-8");
+		Log.e("Parametros", parametros+"");
+		String sParams = URLEncodedUtils.format(parametros, "UTF-8");
+		Log.e("StringPAram", sParams+"");
 		try {						
-			    in =  oHttp.httpPost(URL + "?" + paramsString);
-			    oJson =oHttp.parserToJsonObject(in);
+			    in =  oHttp.httpPost(URL, parametros);
+			    oJson =oParser.parserToJsonObject(in);
 			    
 				boolean bEStatus = Boolean.parseBoolean(oJson.getString("error_status"));
 				
