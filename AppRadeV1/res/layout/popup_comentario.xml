@@ -4,30 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="right"
-    android:padding="10sp"
+    android:padding="20sp"
     android:orientation="vertical" >
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       android:background="@android:color/black"
-          android:padding="10sp"
+        android:background="#66FF0000"
+        android:padding="10sp"
         android:orientation="vertical" >
-        
-       <LinearLayout
-           android:id="@+id/lay_btn_comen"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/btn_cancel_comen"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/lay_btn_comen"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_action_cancel" />
+            android:gravity="right"
+            android:orientation="horizontal" >
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_cancel_comen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_action_cancel" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/lay_est_datos"
