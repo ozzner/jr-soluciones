@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     
     <style name="AppBaseTheme" parent="android:Theme.Light">
@@ -11,11 +11,16 @@
     </style>
     
     <style name="AppDialog" parent="android:style/Theme.Dialog">
+        
+       	<item name="android:background">@color/transparent</item>
+        <item name="android:colorForeground">#fff</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
         
     </style>
-
+    
+<!-- 	<color name="transparent_green_color">#8800ff00</color>   -->
+	<color name="transparent">#13BDD7D5</color>
 </resources>
