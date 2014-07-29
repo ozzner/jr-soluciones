@@ -136,7 +136,7 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 				popWin.dismiss();
 			}
 	    	};
-
+	    	
 		@Override
 		public boolean onCreateOptionsMenu(Menu menu) {
 		     MenuInflater inflater = getMenuInflater();
