@@ -8,10 +8,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.SupportMapFragment;
-
+import android.view.View.OnClickListener;
 import android.app.ActionBar;
+import android.app.ActionBar.LayoutParams;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Camera.Parameters;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
@@ -21,6 +24,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
@@ -34,7 +38,7 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 	 private String nombre;
 	 private ActionBar actionBar;
 	 private PopupWindow popWin;
-	 
+	 private Button btnCancel;
 	 
 	    @Override
 	    public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,6 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 	               
 	        Intent intent = getIntent();
 	        nombre = intent.getStringExtra("NOMBRE");
-       
 	        setUpMapIfNeeded();
             	        
 	    }
@@ -103,30 +106,36 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 
 	}
 	    
-	    
 	 /*
 	  * POPUP CONFIGURATIONS 
-	  * */   
+	  */   
 	    
+
+	    	
 	    private void initiatePopupWindow() {
 	    	try {
 	    	// We need to get the instance of the LayoutInflater
-	    	LayoutInflater inflater = (LayoutInflater) App_GPSMapa_Activity.this
-	    	.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	    	View layout = inflater.inflate(R.layout.popup_comentario,
-	    	(ViewGroup) findViewById(R.id.popup_element));
-	    	popWin = new PopupWindow(layout, 300, 370, true);
-	    	popWin.showAtLocation(layout, Gravity.CENTER, 0, 0);
+	    		LayoutInflater inflater = (LayoutInflater) App_GPSMapa_Activity.this
+	    				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	    				View layout = inflater.inflate(R.layout.popup_comentario,
+	    				(ViewGroup) findViewById(R.id.popup_element));
+	    				popWin = new PopupWindow(layout, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, true);
+	    				popWin.showAtLocation(layout, Gravity.CENTER, 0, 0);
 
-//	    	btnClosePopup = (Button) layout.findViewById(R.id.btn_close_popup);
-//	    	btnClosePopup.setOnClickListener(cancel_button_click_listener);
+	    	btnCancel = (Button) layout.findViewById(R.id.btn_cancel_comen);
+    	    btnCancel.setOnClickListener((android.view.View.OnClickListener) cancel_button_click_listener);
 
 	    	} catch (Exception e) {
 	    	e.printStackTrace();
 	    	}
-	    	}
+	}
 
-  
+	    private OnClickListener cancel_button_click_listener = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				popWin.dismiss();
+			}
+	    	};
 
 		@Override
 		public boolean onCreateOptionsMenu(Menu menu) {
