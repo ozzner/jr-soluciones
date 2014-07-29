@@ -28,8 +28,8 @@ import android.widget.Toast;
  *
  */
 public class DAO_Usuario{
-	//private static URI URL = URI.create("itlab.fis.ulima.edu.pe/api/v1/");
-	private static URI URL = URI.create("http://192.168.1.200/api/v1/");
+	private static URI URL = URI.create("itlab.fis.ulima.edu.pe/api/v1/");
+//	private static URI URL = URI.create("http://192.168.1.200/api/v1/");
 	private static String ENTITY = "usuario";
 	public Entity_Usuario oUsuario ;
 	public  Helper_JSONStatus oJsonStatus;
