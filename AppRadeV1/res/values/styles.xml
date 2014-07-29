@@ -12,8 +12,9 @@
     
     <style name="AppDialog" parent="android:style/Theme.Dialog">
         
-       	<item name="android:background">@color/transparent</item>
-        <item name="android:colorForeground">#fff</item>
+<!--        	<item name="android:background">@color/transparente</item> -->
+       	<item name="android:windowBackground">@color/transparente</item> 
+       	<item name="android:colorForeground">#fff</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowIsTranslucent">true</item>
@@ -21,6 +22,11 @@
         
     </style>
     
-<!-- 	<color name="transparent_green_color">#8800ff00</color>   -->
-	<color name="transparent">#13BDD7D5</color>
+	<color name="transparente">#0000ff00</color>
+	<color name="transparente2">#90BDDEDB</color>  
+	
+<!-- 	<color name="transparente">#BDD7D5</color> -->
+
+
+
 </resources>
