@@ -63,6 +63,12 @@
         
         <activity android:name="com.apprade.activity.App_GPSMapa_Activity"></activity>
         
+        <activity android:name="com.apprade.activity.Usuario_Comentar_Activity"
+            		android:screenOrientation="portrait"
+            		android:theme="@style/AppDialog"
+            		>
+        </activity>
+        
         
         
     </application>

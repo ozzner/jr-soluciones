@@ -155,7 +155,8 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 		       Toast.makeText(this, "Acción comentar", Toast.LENGTH_SHORT)
 		           .show();
 			   actionBar.setSubtitle("Comentando...");
-			   initiatePopupWindow();
+//			   initiatePopupWindow();
+			   usuario_comentar();
 		       break;
 
 		       
@@ -165,6 +166,14 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 
 		     return true;
 		   } 
+		
+		
+		public void usuario_comentar(){
+			
+			Intent i = new Intent (this, Usuario_Comentar_Activity.class);
+			startActivity(i);
+			
+		}
 	    
 	    
 	    
