@@ -37,6 +37,7 @@ public class Usuario_Registro_Activity extends Activity {
 	private EditText etCorreo;
 	private EditText etPassword;
 	private EditText etConfPassword;
+	private EditText etFecha;
 	private RadioGroup rgSexo;
 	private TextView txFecha;
 	private ImageButton ib;
@@ -66,8 +67,8 @@ public class Usuario_Registro_Activity extends Activity {
 		etCorreo = (EditText)findViewById(R.id.et_correo);
 		ib = (ImageButton) findViewById(R.id.imb_date);
 		rgSexo = (RadioGroup)findViewById(R.id.rg_sexo);
-		txFecha= (TextView) findViewById(R.id.txtFecha);
-	
+//		txFecha= (TextView) findViewById(R.id.txtFecha);
+		etFecha = (EditText)findViewById(R.id.edt_fecha);
 		
 		 ib.setOnClickListener( new OnClickListener() {
 			
@@ -83,7 +84,8 @@ public class Usuario_Registro_Activity extends Activity {
 		public void onClick(View v) {
 			
 			EnviarRegistro();
-				exeHttpAsync();
+//			exeHttpAsync();
+				
 		}
 	 });
 	
@@ -98,10 +100,15 @@ public class Usuario_Registro_Activity extends Activity {
 				  sEmail = etCorreo.getText().toString();
 				  sPassword = etPassword.getText().toString();
 				  sPassword2 = etConfPassword.getText().toString();				 
-				 String sexo = selectRadio.getText().toString();
+				  String sexo = selectRadio.getText().toString();
 
 				 boolean esError=false;
 					
+				 	if (sexo == "Masculino") 
+						sSexo = "M";
+					 else
+						 sSexo = "F";
+				 
 					if(sEmail.compareTo("")==0){
 						etCorreo.setError("Debes ingresar un Correo");
 			    		esError=true;
@@ -122,15 +129,18 @@ public class Usuario_Registro_Activity extends Activity {
 			    		esError=true;
 			    	}
 					
+					if(sPassword.equals(sPassword2)){
+						exeHttpAsync();
+					}
+					else{
+						Toast.makeText(getApplicationContext(),"Las contraseñas no coinciden", Toast.LENGTH_LONG).show();
+						etPassword.setText("");
+						etConfPassword.setText("");
+					}
 										
 					if(esError)
 						return;
-				
-				 
-				 if (sexo == "Masculino") 
-					sSexo = "M";
-				 else
-					 sSexo = "F";
+								 
 				
 	}
 			
@@ -141,9 +151,9 @@ public class Usuario_Registro_Activity extends Activity {
 			 private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
 				  public void onDateSet(DatePicker view, int selectedYear,
 				    int selectedMonth, int selectedDay) {
-					  sFecha = (selectedDay + " - " + (selectedMonth + 1) + " - " + selectedYear);
-				  Toast.makeText(getApplicationContext(),(sFecha), Toast.LENGTH_LONG).show();
-					  txFecha.setText(sFecha);
+						sFecha = (selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDay);
+//				  		Toast.makeText(getApplicationContext(),(sFecha), Toast.LENGTH_LONG).show();
+						etFecha.setText(sFecha);
 					  return;
 					  			  }
 				   };	 
@@ -188,6 +198,8 @@ public class Usuario_Registro_Activity extends Activity {
 					proDialog.dismiss();
 					if (result) {
 						Toast.makeText(getApplicationContext(), "Mensaje: "+dao.oJsonStatus.getMessage(), Toast.LENGTH_LONG).show();
+						Intent i = new Intent (getApplicationContext(),App_GPSMapa_Activity.class);
+						startActivity(i);
 					}else{
 						Toast.makeText(getApplicationContext()," error: "+dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
 					}
