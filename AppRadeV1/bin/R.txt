@@ -84,6 +84,7 @@ int id btnLogin 0x7f06000d
 int id btnShowLocation 0x7f060005
 int id btn_cancel_comen 0x7f060022
 int id btn_enviar 0x7f060020
+int id edt_fecha 0x7f06001b
 int id et_correo 0x7f06001d
 int id et_nombres 0x7f060014
 int id et_pass_confirmar 0x7f06001f
@@ -121,7 +122,6 @@ int id textView2 0x7f060026
 int id textView3 0x7f060028
 int id tvRegistrarCuenta 0x7f06000e
 int id txtEmail 0x7f06000b
-int id txtFecha 0x7f06001b
 int id txtLat 0x7f060006
 int id txtLon 0x7f060007
 int id txtPassword 0x7f06000c

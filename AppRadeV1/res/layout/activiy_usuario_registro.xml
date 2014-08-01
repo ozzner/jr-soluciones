@@ -92,11 +92,15 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/txtFecha"
+            <EditText
+                android:id="@+id/edt_fecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="18/05/91" />
+                android:layout_gravity="center_horizontal"
+                android:text="yyyy-mm-dd" 
+                android:editable="false" />
+
+            
 
             <LinearLayout
                 android:id="@+id/lay_sesion"
