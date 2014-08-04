@@ -1,6 +1,10 @@
 package com.apprade.activity;
 
 import com.apprade.R;
+import com.apprade.activity.Usuario_Registro_Activity.TaskHttpMethodAsync;
+import com.apprade.dao.DAO_Establecimiento;
+import com.apprade.dao.DAO_Usuario;
+import com.apprade.entity.Entity_Establecimiento;
 import com.apprade.helper.Helper_GPS_Tracker;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -8,13 +12,17 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.SupportMapFragment;
+
 import android.view.View.OnClickListener;
 import android.app.ActionBar;
 import android.app.ActionBar.LayoutParams;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.hardware.Camera.Parameters;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
@@ -30,7 +38,8 @@ import android.widget.Toast;
 
 public class App_GPSMapa_Activity extends FragmentActivity {
 	
-	 private GoogleMap map;
+
+	private GoogleMap map;
 	 
 	 Helper_GPS_Tracker gps;
 	 private double latitude;
@@ -39,7 +48,22 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 	 private ActionBar actionBar;
 	 private PopupWindow popWin;
 	 private Button btnCancel;
+	 private DAO_Establecimiento dao;
+	 private ProgressDialog proDialog;
+	 public Entity_Establecimiento ettEst; 
 	 
+	 
+	 /**
+	 * BOB El constructor
+	 */
+	 
+	public App_GPSMapa_Activity() {
+		super();
+		dao = new DAO_Establecimiento();
+		ettEst = new Entity_Establecimiento();
+	}
+	
+	
 	    @Override
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
@@ -106,12 +130,75 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 
 	}
 	    
+	    /*
+	     * AsynTask class
+	     *  
+	     */
+	    
+	    private void exeHttpAsync(){
+			TaskHttpMethodAsync task =  new TaskHttpMethodAsync();
+			task.execute();
+		}
+		
+	    class TaskHttpMethodAsync extends AsyncTask<String, Void,Boolean>{
+
+	    @Override
+	    protected Boolean doInBackground(String... params) {
+				boolean bRequest = false;
+						
+//				if (dao.listarTodoEstablecimiento()){
+//					
+//					bRequest = true;
+//				}
+//					
+
+				return bRequest;
+			}
+
+		protected void onPreExecute() {
+	    	
+	    	showDialogo();
+	    	
+	    	proDialog.setOnCancelListener(new OnCancelListener() {
+	    	
+	        @Override
+		    public void onCancel(DialogInterface dialog) {
+		    	TaskHttpMethodAsync.this.cancel(true);  }
+		    });
+		    proDialog.setProgress(0);
+	    }
+
+		@Override
+		protected void onPostExecute(Boolean result) {		
+				super.onPostExecute(result);
+				proDialog.dismiss();
+				
+				if (result) {
+					Toast.makeText(getApplicationContext(), "Mensaje: OK", Toast.LENGTH_LONG).show();
+				}else{
+					Toast.makeText(getApplicationContext()," error: true",Toast.LENGTH_LONG).show();
+				}
+			}
+		
+		
+	    private void showDialogo() {
+			 
+				proDialog = new ProgressDialog(App_GPSMapa_Activity.this);
+				proDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+				proDialog.setMessage("Enviando...");
+				proDialog.show();
+
+		}
+							
+}	
+	    
+	    
+	    
+	    
 	 /*
 	  * POPUP CONFIGURATIONS 
 	  */   
 	    
-
-	    	
 	    private void initiatePopupWindow() {
 	    	try {
 	    	// We need to get the instance of the LayoutInflater
@@ -148,7 +235,8 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 		@Override
 	    public boolean onOptionsItemSelected(MenuItem item) {
 			  
-			  actionBar = getActionBar();
+		     actionBar = getActionBar();
+		     
 		     switch (item.getItemId()) {
 		
 		     case R.id.action_map_comentar:
@@ -158,7 +246,6 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 //			   initiatePopupWindow();
 			   usuario_comentar();
 		       break;
-
 		       
 		     default:
 		       break;
@@ -169,10 +256,9 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 		
 		
 		public void usuario_comentar(){
-			
-			Intent i = new Intent (this, Usuario_Comentar_Activity.class);
-			startActivity(i);
-			
+			exeHttpAsync();
+//			Intent i = new Intent (this, Usuario_Comentar_Activity.class);
+//			startActivity(i);
 		}
 	    
 	    
