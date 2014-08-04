@@ -5,65 +5,55 @@ import java.util.List;
 
 public class Entity_Establecimiento {
 	
-	private String establecimientoID;
+	private int establecimientoID;
 	private String nombre;
 	private String direccion;	
-	private String latitud;
 	private int ruc;
-	private String longitud;
 	
 	private List<Entity_Categoria>categoria = new ArrayList<Entity_Categoria>();
 	private List<Entity_Distrito>distrito =  new ArrayList<Entity_Distrito>();
 	private List<Entity_Coordenadas>coordenadas = new ArrayList<Entity_Coordenadas>();
 	
 	/*CONSTRUCTORES*/
-	
-	/**
-	 * @param establecimientoID
-	 * @param nombre
-	 * @param direccion
-	 * @param latitud
-	 * @param ruc
-	 * @param longitud
-	 * @param categoria
-	 * @param distrito
-	 * @param coordenadas
-	 */
-	public Entity_Establecimiento(String establecimientoID, String nombre,
-			String direccion, String latitud, int ruc, String longitud,
-			List<Entity_Categoria> categoria, List<Entity_Distrito> distrito,
-			List<Entity_Coordenadas> coordenadas) {
-		super();
-		this.establecimientoID = establecimientoID;
-		this.nombre = nombre;
-		this.direccion = direccion;
-		this.latitud = latitud;
-		this.ruc = ruc;
-		this.longitud = longitud;
-		this.categoria = categoria;
-		this.distrito = distrito;
-		this.coordenadas = coordenadas;
-	}
 
-	/**
-	 * 
-	 */
 	public Entity_Establecimiento() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
+	 * @param establecimientoID
+	 * @param nombre
+	 * @param direccion
+	 * @param ruc
+	 * @param categoria
+	 * @param distrito
+	 * @param coordenadas
+	 */
+	public Entity_Establecimiento(int establecimientoID, String nombre,
+			String direccion, int ruc, List<Entity_Categoria> categoria,
+			List<Entity_Distrito> distrito, List<Entity_Coordenadas> coordenadas) {
+		super();
+		this.establecimientoID = establecimientoID;
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.ruc = ruc;
+		this.categoria = categoria;
+		this.distrito = distrito;
+		this.coordenadas = coordenadas;
+	}
+
+	/**
 	 * @return the establecimientoID
 	 */
-	public String getEstablecimientoID() {
+	public int getEstablecimientoID() {
 		return establecimientoID;
 	}
 
 	/**
 	 * @param establecimientoID the establecimientoID to set
 	 */
-	public void setEstablecimientoID(String establecimientoID) {
+	public void setEstablecimientoID(int establecimientoID) {
 		this.establecimientoID = establecimientoID;
 	}
 
@@ -96,20 +86,6 @@ public class Entity_Establecimiento {
 	}
 
 	/**
-	 * @return the latitud
-	 */
-	public String getLatitud() {
-		return latitud;
-	}
-
-	/**
-	 * @param latitud the latitud to set
-	 */
-	public void setLatitud(String latitud) {
-		this.latitud = latitud;
-	}
-
-	/**
 	 * @return the ruc
 	 */
 	public int getRuc() {
@@ -121,20 +97,6 @@ public class Entity_Establecimiento {
 	 */
 	public void setRuc(int ruc) {
 		this.ruc = ruc;
-	}
-
-	/**
-	 * @return the longitud
-	 */
-	public String getLongitud() {
-		return longitud;
-	}
-
-	/**
-	 * @param longitud the longitud to set
-	 */
-	public void setLongitud(String longitud) {
-		this.longitud = longitud;
 	}
 
 	/**
@@ -178,6 +140,9 @@ public class Entity_Establecimiento {
 	public void setCoordenadas(List<Entity_Coordenadas> coordenadas) {
 		this.coordenadas = coordenadas;
 	}
+
+
+
 
 	
 	
