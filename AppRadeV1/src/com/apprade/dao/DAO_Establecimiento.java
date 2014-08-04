@@ -64,10 +64,10 @@ public class DAO_Establecimiento {
 		
 		boolean bEstado = false;
 		
-	    List<Entity_Establecimiento> listaEst = new ArrayList<Entity_Establecimiento>();
-	    List<Entity_Establecimiento> listaDis = new ArrayList<Entity_Establecimiento>();	
-	    List<Entity_Establecimiento> listaCoo = new ArrayList<Entity_Establecimiento>();
-	    List<Entity_Establecimiento> listaCat = new ArrayList<Entity_Establecimiento>();	
+	    List<Entity_Establecimiento> lista = new ArrayList<Entity_Establecimiento>();
+	    List<Entity_Distrito> listaDis = new ArrayList<Entity_Distrito>();	
+	    List<Entity_Coordenadas> listaCoo = new ArrayList<Entity_Coordenadas>();
+	    List<Entity_Categoria> listaCat = new ArrayList<Entity_Categoria>();	
 
 	    
 		List<NameValuePair> parametros = new ArrayList<NameValuePair>();
@@ -95,21 +95,26 @@ public class DAO_Establecimiento {
 							JSONObject oDistric =  oEstabli.getJSONObject("district");							
 							int iIdDis = Integer.parseInt(oDistric.getString("districtID"));
 							String sNameDis = oDistric.getString("name");
-							Entity_Distrito ettDist = new Entity_Distrito(iIdDis, sNameDis, null);
-							listaDis.add(ettEstab);
+							Entity_Distrito ettDis = new Entity_Distrito(iIdDis, sNameDis, null);
+							listaDis.add(ettDis);
 							
 							JSONObject oCateg =  oEstabli.getJSONObject("category");
 							String sNameCat = oCateg.getString("name");
 							int iIdCat = Integer.parseInt(oCateg.getString("categoryID"));
 							Entity_Categoria ettCat = new Entity_Categoria(iIdCat, sNameCat);
-														
+							listaCat.add(ettCat);
+																										
 							JSONObject oCoodin =  oEstabli.getJSONObject("coordinates");
 							int iIdCoo = Integer.parseInt(oCoodin.getString("coordinatesID"));
 							float fLatit = Float.parseFloat(oCoodin.getString("latitude"));
 							float fLongi = Float.parseFloat(oCoodin.getString("longitude"));							
 							Entity_Coordenadas ettCoor = new Entity_Coordenadas(iIdCoo, fLatit, fLongi, null);
-							
+							listaCoo.add(ettCoor);
 						
+							Entity_Establecimiento ettEst = new Entity_Establecimiento
+									(iIdEst, sNameEst, null, iIdEst, listaCat, listaDis, listaCoo);
+							
+							lista.add(ettEst);//Lista final
 						}
 					
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
