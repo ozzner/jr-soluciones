@@ -40,11 +40,13 @@ public class Usuario_Login_Activity extends Activity {
 	private EditText password,email;	
 	private Button btnLogin;
 	private DAO_Usuario dao;
-	private Entity_Ranking rank;
+	public Entity_Ranking rank;
 	private String sEmail="",sPassword="";
 	private String nombre;
     private ActionBar actionBar;
 	private ProgressDialog proDialogo;
+	
+	
 	public Usuario_Login_Activity() {
 		super();
 		dao= new DAO_Usuario();
