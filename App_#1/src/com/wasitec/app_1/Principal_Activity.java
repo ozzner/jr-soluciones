@@ -41,7 +41,7 @@ public class Principal_Activity extends ActionBarActivity {
 	
 		if (id == R.id.action_settings) {
 			
-			Intent i = new Intent(this, Guia_Activity.class);
+			Intent i = new Intent(this, Guide_Activity.class);
 			startActivity(i);
 			
 		}
@@ -69,7 +69,7 @@ public class Principal_Activity extends ActionBarActivity {
 	public void btnOpe1_onClick (View v) {
 		
 		Toast.makeText(this, R.string.Ope_1, Toast.LENGTH_SHORT).show();
-		Intent i = new Intent (this, Proteina_Activity.class);
+		Intent i = new Intent (this, Protein_Activity.class);
 		startActivity(i);
 		
 	}
@@ -77,7 +77,7 @@ public class Principal_Activity extends ActionBarActivity {
 	public void btnOpe2_onClick (View v) {
 		
 		Toast.makeText(this, R.string.Ope_2, Toast.LENGTH_SHORT).show();
-		Intent i = new Intent (this, Humedad_Activity.class);
+		Intent i = new Intent (this, Moisture_Activity.class);
 		startActivity(i);
 		
 	}
@@ -85,7 +85,7 @@ public class Principal_Activity extends ActionBarActivity {
 	public void btnOpe3_onClick (View v) {
 		
 		Toast.makeText(this, R.string.Ope_3, Toast.LENGTH_SHORT).show();
-		Intent i = new Intent (this, Grasa_Activity.class);
+		Intent i = new Intent (this, Fat_Activity.class);
 		startActivity(i);
 		
 	}
@@ -93,14 +93,14 @@ public class Principal_Activity extends ActionBarActivity {
 	public void btnOpe4_onClick (View v) {
 
 		Toast.makeText(this, R.string.Ope_4, Toast.LENGTH_SHORT).show();
-		Intent i = new Intent (this, Fibra_Activity.class);
+		Intent i = new Intent (this, Fiber_Activity.class);
 		startActivity(i);
 	}
 	
 	public void btnOpe5_onClick (View v) {
 
 		Toast.makeText(this, R.string.Ope_5, Toast.LENGTH_SHORT).show();
-		Intent i = new Intent (this, Ceniza_Activity.class);
+		Intent i = new Intent (this, Ash_Activity.class);
 		startActivity(i);
 	}
 

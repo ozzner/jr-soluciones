@@ -1,13 +1,18 @@
 package com.wasitec.app_1;
 
+import java.text.DecimalFormat;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Grasa_Activity extends ActionBarActivity {
+public class Fat_Activity extends ActionBarActivity {
 	
 	EditText val1, val2;
 	TextView rest; 
@@ -25,6 +30,30 @@ public class Grasa_Activity extends ActionBarActivity {
 
 		rest = (TextView) findViewById(R.id.txtResult);
 		
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main_ope, menu);
+		return true;
+	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		int id = item.getItemId();
+	
+		if (id == R.id.definition) {
+			
+			Intent i = new Intent(this, Fat_Guide_Activity.class);
+			startActivity(i);
+		}
+		
+
+		return super.onOptionsItemSelected(item);
 	}
 		
 		public void btnResult_onClick (View v){
@@ -68,7 +97,10 @@ public class Grasa_Activity extends ActionBarActivity {
 			else {
 				
 			result = (1 - (valor2/valor1)) * 100;
-			rest.setText("El resultado es: "+ result.toString() + " %" + "de Grasa");
+			DecimalFormat df = new DecimalFormat("0.000"); 
+			
+			String resultado = df.format(result);
+			rest.setText(resultado);
 			
 			}
 			

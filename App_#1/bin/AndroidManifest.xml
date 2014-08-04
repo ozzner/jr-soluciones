@@ -30,41 +30,41 @@
             	  android:windowSoftInputMode="stateHidden" >
         </activity>
       
-        <activity android:name="com.wasitec.app_1.Guia_Activity"
+        <activity android:name="com.wasitec.app_1.Guide_Activity"
             	  android:screenOrientation="portrait"
             	  android:theme="@android:style/Theme.Dialog" >
             
         </activity>
         
-        <activity android:name="com.wasitec.app_1.Proteina_Activity"
+        <activity android:name="com.wasitec.app_1.Protein_Activity"
             android:screenOrientation="portrait"
             android:logo="@drawable/back3"
             android:theme="@style/AppTheme"  >
             
         </activity>
         
-        <activity android:name="com.wasitec.app_1.Humedad_Activity"
+        <activity android:name="com.wasitec.app_1.Moisture_Activity"
             android:screenOrientation="portrait" >
             
         </activity>
         
-        <activity android:name="com.wasitec.app_1.Grasa_Activity"
+        <activity android:name="com.wasitec.app_1.Fat_Activity"
             android:screenOrientation="portrait" >
             
         </activity>
         
-        <activity android:name="com.wasitec.app_1.Fibra_Activity"
+        <activity android:name="com.wasitec.app_1.Fiber_Activity"
             android:screenOrientation="portrait" >
             
         </activity>
         
-        <activity android:name="com.wasitec.app_1.Ceniza_Activity"
+        <activity android:name="com.wasitec.app_1.Ash_Activity"
             android:screenOrientation="portrait" >
             
         </activity>
         
         
-        <activity android:name="com.wasitec.app_1.Proteina_Guide_Activity"
+        <activity android:name="com.wasitec.app_1.Protein_Guide_Activity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog"
             android:label="@string/Ope_1" >
@@ -72,7 +72,7 @@
         </activity>    
         
         
-        <activity android:name="com.wasitec.app_1.Humedad_Guide_Activity"
+        <activity android:name="com.wasitec.app_1.Moisture_Guide_Activity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog"
             android:label="@string/Ope_2" >
@@ -80,7 +80,7 @@
         </activity>   
         
         
-        <activity android:name="com.wasitec.app_1.Grasa_Guide_Activity"
+        <activity android:name="com.wasitec.app_1.Fat_Guide_Activity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog"
             android:label="@string/Ope_3" >
@@ -88,7 +88,7 @@
         </activity>   
         
         
-        <activity android:name="com.wasitec.app_1.Fibra_Guide_Activity"
+        <activity android:name="com.wasitec.app_1.Fiber_Guide_Activity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" 
             android:label="@string/Ope_4">
@@ -96,7 +96,7 @@
         </activity>   
         
         
-        <activity android:name="com.wasitec.app_1.Ceniza_Guide_Activity"
+        <activity android:name="com.wasitec.app_1.Ash_Guide_Activity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog"
             android:label="@string/Ope_5" >
