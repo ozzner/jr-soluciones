@@ -64,7 +64,12 @@ public class DAO_Establecimiento {
 		
 		boolean bEstado = false;
 		
-	    List<Entity_Establecimiento> lista = new ArrayList<Entity_Establecimiento>();	
+	    List<Entity_Establecimiento> listaEst = new ArrayList<Entity_Establecimiento>();
+	    List<Entity_Establecimiento> listaDis = new ArrayList<Entity_Establecimiento>();	
+	    List<Entity_Establecimiento> listaCoo = new ArrayList<Entity_Establecimiento>();
+	    List<Entity_Establecimiento> listaCat = new ArrayList<Entity_Establecimiento>();	
+
+	    
 		List<NameValuePair> parametros = new ArrayList<NameValuePair>();
 		
 		parametros.add( new BasicNameValuePair("entity", ENTITY));
@@ -82,17 +87,16 @@ public class DAO_Establecimiento {
 			
 						for (int i = 0; i < iNum; i++) {
 							
-							JSONObject oEstabli =  oData.getJSONObject("establishment"+i);	
+							JSONObject oEstabli =  oData.getJSONObject("establishment"+(i+1));	
 							
 							int iIdEst = Integer.parseInt(oEstabli.getString("establishmentID"));
 							String sNameEst = oEstabli.getString("name");
-							String sDire = oEstabli.getString("address");
 							
-							JSONObject oDistric =  oEstabli.getJSONObject("district");
-							String sNameDis = oDistric.getString("name");
+							JSONObject oDistric =  oEstabli.getJSONObject("district");							
 							int iIdDis = Integer.parseInt(oDistric.getString("districtID"));
+							String sNameDis = oDistric.getString("name");
 							Entity_Distrito ettDist = new Entity_Distrito(iIdDis, sNameDis, null);
-							
+							listaDis.add(ettEstab);
 							
 							JSONObject oCateg =  oEstabli.getJSONObject("category");
 							String sNameCat = oCateg.getString("name");
@@ -105,9 +109,7 @@ public class DAO_Establecimiento {
 							float fLongi = Float.parseFloat(oCoodin.getString("longitude"));							
 							Entity_Coordenadas ettCoor = new Entity_Coordenadas(iIdCoo, fLatit, fLongi, null);
 							
-							ettEstab = new Entity_Establecimiento(
-									iIdEst, iIdEst, sDire, fLatit, null, fLongi, ettCat,ettDist, ettCoor);
-							lista.add(ettEstab);
+						
 						}
 					
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
