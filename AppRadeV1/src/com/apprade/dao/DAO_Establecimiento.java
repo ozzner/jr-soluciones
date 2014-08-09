@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.conn.params.ConnConnectionParamBean;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
@@ -24,14 +25,17 @@ import com.apprade.helper.Helper_JSONStatus;
 
 
 public class DAO_Establecimiento {
-	   
-	//private static URI URL = URI.create("itlab.fis.ulima.edu.pe/api/v1/");
-	private static final URI URL = URI.create("http://192.168.0.200/api/v1/");
-	private static final String ENTITY = "establecimiento";
+	
+	
 	public Entity_Establecimiento ettEstab ;
-	public  Helper_JSONStatus oJsonStatus;
+	public  Helper_JSONStatus oJsonStatus;	
 	private Helper_JSONParser oParser;
 	private Helper_Http_Method oHttp;
+	private static DAO_Conexion conn;
+	private static URI URL ;
+	private static final String ENTITY = "establecimiento";
+	
+	
 	/**
 	 * @param oEstable
 	 * @param oJsonStatus
@@ -55,14 +59,16 @@ public class DAO_Establecimiento {
 		oHttp = new Helper_Http_Method();
 		oParser = new Helper_JSONParser();
 		oJsonStatus = new Helper_JSONStatus();
+		conn = new DAO_Conexion();
 	}
 
 
 	public List<Entity_Establecimiento> listarTodoEstablecimiento()
-	{	InputStream in = null;
+	{	
+		URL= URI.create(conn.getUrl());
+		InputStream in = null;
 		JSONObject oJson = null;
-		
-		boolean bEstado = false;
+
 		
 	    List<Entity_Establecimiento> lista = new ArrayList<Entity_Establecimiento>();
 	    List<Entity_Distrito> listaDis = new ArrayList<Entity_Distrito>();	
@@ -79,9 +85,9 @@ public class DAO_Establecimiento {
 			    in =  oHttp.httpGet(URL + "?" + paramsString);
 			    oJson =oParser.parserToJsonObject(in);
 			    
-				boolean bEStatus = Boolean.parseBoolean(oJson.getString("error_status"));
+			    boolean bStatus = Boolean.parseBoolean(oJson.getString("error_status"));
 				
-				if(!bEStatus){
+				if(!bStatus){
 					JSONObject oData =  oJson.getJSONObject("data");
 					int iNum = oData.length();
 			
@@ -118,8 +124,6 @@ public class DAO_Establecimiento {
 						}
 					
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
-															
-					bEstado = true;
 					
 				}else{
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));

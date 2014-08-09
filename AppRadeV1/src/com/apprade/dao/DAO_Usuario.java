@@ -28,8 +28,9 @@ import android.widget.Toast;
  *
  */
 public class DAO_Usuario{
-	private static URI URL = URI.create("http://itlab.fis.ulima.edu.pe/api/v1/");
-//	private static URI URL = URI.create("http://192.168.1.200/api/v1/");
+	
+	private DAO_Conexion conn;
+	private static  URI URL;
 	private static String ENTITY = "usuario";
 	public Entity_Usuario oUsuario ;
 	public  Helper_JSONStatus oJsonStatus;
@@ -41,10 +42,13 @@ public class DAO_Usuario{
 		oJsonStatus =  new Helper_JSONStatus();
 		oParser = new Helper_JSONParser();
 		oHttp = new Helper_Http_Method();
+		conn = new DAO_Conexion();
 	}
 	
 	public boolean loginUsuario(String email , String password)
-	{	InputStream in = null;
+	{	
+		URL= URI.create(conn.getUrl());
+		InputStream in = null;
 		JSONObject oJson = null; 
 		boolean bEstado = false;
 				
@@ -59,9 +63,9 @@ public class DAO_Usuario{
 			    in =  oHttp.httpGet(URL + "?" + paramsString);
 			    oJson =oParser.parserToJsonObject(in);
 			    
-				boolean bEStatus = Boolean.parseBoolean(oJson.getString("error_status"));
+			     bEstado  = Boolean.parseBoolean(oJson.getString("error_status"));
 				
-				if(!bEStatus){
+				if(!bEstado){
 					JSONObject oUserData =  oJson.getJSONObject("data").getJSONObject("user1");
 					
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
@@ -97,6 +101,8 @@ public class DAO_Usuario{
 	}
 
 	public boolean registarUsuario(String email, String sexo,String nombre,String password,String fecha){
+		
+		URL= URI.create(conn.getUrl());
 		InputStream in = null;
 		JSONObject oJson = null; 
 		boolean bEstado = false;
@@ -117,12 +123,11 @@ public class DAO_Usuario{
 			    in =  oHttp.httpPost(URL, parametros);
 			    oJson =oParser.parserToJsonObject(in);
 			    
-				boolean bEStatus = Boolean.parseBoolean(oJson.getString("error_status"));
+			    bEstado = Boolean.parseBoolean(oJson.getString("error_status"));
 				
-				if(!bEStatus){
+				if(!bEstado){
 					JSONObject oUserData =  oJson.getJSONObject("data");					
 					oJsonStatus.setMessage(oUserData.getString("message"));
-					bEstado = true;
 					
 				}else{
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));

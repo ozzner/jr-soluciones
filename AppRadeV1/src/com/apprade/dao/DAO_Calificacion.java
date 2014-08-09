@@ -22,7 +22,8 @@ import com.apprade.helper.Helper_JSONStatus;
  */
 public class DAO_Calificacion {
 	
-	private static URI URL = URI.create("http://192.168.1.200/api/v1/");
+	private DAO_Conexion conn;
+	private static URI URL;
 	private static String ENTITY = "calificacion";
 	public Entity_Calificacion oCali ;
 	public  Helper_JSONStatus oJsonStatus;
@@ -33,10 +34,12 @@ public class DAO_Calificacion {
 		oCali = new Entity_Calificacion();
 		oJsonStatus =  new Helper_JSONStatus();
 		oHttp = new Helper_Http_Method();
+		conn = new DAO_Conexion();
 	}
 	
 	
 	public boolean registrarCalificacion(String usuario, String establecimiento,String cola){
+		URL= URI.create(conn.getUrl());
 		InputStream in = null;
 		JSONObject oJson = null; 
 		boolean bEstado = false;
@@ -77,7 +80,9 @@ public class DAO_Calificacion {
 		}
 
 	public boolean listarCalificacion(String usuarioID)
-	{	InputStream in = null;
+	{	
+		URL= URI.create(conn.getUrl());
+		InputStream in = null;
 		JSONObject oJson = null; 
 		boolean bEstado = false;
 				
