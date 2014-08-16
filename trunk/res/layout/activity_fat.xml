@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="21" 
+    android:background="@drawable/fondo2">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="6"
+        android:orientation="vertical"
+        
+        android:padding="10dip" >
+
+        <TextView
+            android:id="@+id/txtOpe3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            
+            android:text="@string/Ope_3"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_weight="4.5" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weight1"
+                
+                android:layout_marginTop="15dip"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weight3"
+               
+                android:layout_marginTop="15dip"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="right" 
+            android:layout_marginLeft="10dip">
+
+            <EditText
+                android:id="@+id/edt_val1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                
+                android:ems="10"
+                android:hint="000,0000"
+                android:numeric="decimal" />
+
+            <EditText
+                android:id="@+id/edt_val2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                
+                android:ems="10"
+                android:hint="000,0000"
+                android:numeric="decimal" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        
+        android:layout_weight="4.5"
+        android:orientation="vertical"
+        android:padding="10dip" 
+        >
+
+        <Button
+            android:id="@+id/btnResult"
+            style="@style/estilo_boton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="0dip"
+            android:onClick="btnResult_onClick"
+            android:text="@string/rpta" />
+
+        <TextView
+            android:id="@+id/txtResult"
+            style="@style/estilo_result2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dip"
+            android:text="		"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+             />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_weight="6"
+        android:layout_marginLeft="3dip"
+        android:layout_marginRight="3dip" >
+
+        <ImageView
+            android:id="@+id/img_publicidad"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/bannner" />
+
+    </LinearLayout>
+
+</LinearLayout>

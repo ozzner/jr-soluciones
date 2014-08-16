@@ -1,0 +1,106 @@
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fondo2"
+    android:weightSum="21">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" 
+        android:layout_weight="8.7"
+        android:layout_marginTop="7dip">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="FOOD  LAB"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="CALCULATOR"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_weight="3.3" 
+        android:padding="25dip" >
+
+        <Button
+            android:id="@+id/btnOpe_1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Ope_1" 
+            style="@style/estilo_boton"
+            android:layout_marginBottom="5dip"
+            android:onClick="btnOpe1_onClick"/>
+
+        <Button
+            android:id="@+id/btnOpe_2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Ope_2"
+            style="@style/estilo_boton" 
+            android:layout_marginBottom="5dip"
+            android:onClick="btnOpe2_onClick"/>
+
+        <Button
+            android:id="@+id/btnOpe_3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Ope_3"
+            style="@style/estilo_boton"
+            android:layout_marginBottom="5dip"
+            android:onClick="btnOpe3_onClick" />
+
+        <Button
+            android:id="@+id/btnOpe_4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Ope_4"
+            style="@style/estilo_boton"
+            android:layout_marginBottom="5dip"
+            android:onClick="btnOpe4_onClick" />
+
+        <Button
+            android:id="@+id/btnOpe_5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Ope_5"
+            style="@style/estilo_boton"
+            android:layout_marginBottom="5dip"
+            android:onClick="btnOpe5_onClick" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_weight="9" 
+        android:layout_marginLeft="3dip"
+        android:layout_marginRight="3dip">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/bannner" />
+
+    </LinearLayout>
+    
+</LinearLayout>
