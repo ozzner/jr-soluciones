@@ -23,7 +23,6 @@ public class DAO_Conexion {
 		super();	
 	}
 
-	
 	public String getUrl() {
 		return url;
 	}
