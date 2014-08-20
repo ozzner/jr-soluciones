@@ -7,9 +7,11 @@ import com.apprade.R;
 import com.apprade.activity.Usuario_Registro_Activity.TaskHttpMethodAsync;
 import com.apprade.dao.DAO_Establecimiento;
 import com.apprade.dao.DAO_Usuario;
+import com.apprade.entity.Entity_Coordenadas;
 import com.apprade.entity.Entity_Establecimiento;
 import com.apprade.helper.Helper_GPS_Tracker;
 import com.apprade.helper.Helper_JSONStatus;
+import com.google.android.gms.internal.es;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -105,7 +107,7 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 	        	CameraUpdate camera1 = CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15f);
 	        	map.animateCamera(camera1);
 			
-	        	setUpMap();
+//	        	setUpMap();
 	        }else{
 	        	
 	        	gps.showSettingsAlert();
@@ -121,15 +123,16 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 //	    	
 //	    }
 	    
-	    private void setUpMap() {
-	    	
-	    	int i;
-	    	for (i=0; i<5; i++){
+	    private void setUpMap(float lat, float lon, String nom) {
+	    	Log.e("Longitud", lon+"");
+	    	Log.e("latitud", lat+"");
+	    	Log.e("nombre", nom+"");
+	
 	    		
-	    		map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("Has hecho click!"));
+	    		map.addMarker(new MarkerOptions().position(new LatLng(lat, lon)).title("Nombre: "+nom));
 	    			
-	    		latitude = latitude+0.002;	    		
-	    	}
+//	    		latitude = latitude+0.002;	    		
+	    	
 
 //		map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("Aquí estoy :)"));
 
@@ -146,25 +149,42 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 		
 	    class TaskHttpMethodAsync extends AsyncTask<String, Void,Boolean>{
 
+	    List<Entity_Establecimiento> lista_establecimiento = new ArrayList<Entity_Establecimiento>();
+	    
 	    @Override
 	    protected Boolean doInBackground(String... params) {
 				boolean bRequest = false;
-						
-				List<Entity_Establecimiento> data_list = new ArrayList<Entity_Establecimiento>();
-				data_list = dao.listarTodoEstablecimiento();
+				float lat = 0,lon = 0;
+				
+				lista_establecimiento = dao.listarTodoEstablecimiento();
 				
 				bRequest = status.getError_status();
-				Log.e("bRequest", bRequest+"");
 				
-				if (!bRequest) {					
-					for (Entity_Establecimiento dato : data_list) {
-						Log.e("Lista: ", dato+"");
+				if (!bRequest) {
+					List<Entity_Coordenadas> lista_coordenadas = new ArrayList<Entity_Coordenadas>();
+					
+					for (Entity_Establecimiento esta : lista_establecimiento) {
+						lista_coordenadas =  esta.getCoordenadas();
+						
+						for (Entity_Coordenadas coor : lista_coordenadas) {
+							
+							lat = coor.getLatitud();
+							lon = coor.getLongitud();
+							
+					    	Log.e("Longitud_for", lon+"");
+					    	Log.e("latitud_for", lat+"");
+					    	
+					    	int c =0;
+							 c++;
+					    	Log.e("contador", c+"");
+						}
+						
+			
+						setUpMap(lat,lon,esta.getNombre());
 					}
 				}
 				return bRequest;
 			}
-
-	    
 	    
 	    
 		protected void onPreExecute() {
