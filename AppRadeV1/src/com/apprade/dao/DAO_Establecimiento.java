@@ -127,7 +127,7 @@ public class DAO_Establecimiento {
 					
 				}else{
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
-					
+					lista=null; //Temporal
 //					JSONObject oErrorData=  oJson.getJSONObject("data");
 //					oJsonStatus.setError_cod(Double.parseDouble(oErrorData.getString("error_cod")));
 //					oJsonStatus.setMessage(oErrorData.getString("message"));

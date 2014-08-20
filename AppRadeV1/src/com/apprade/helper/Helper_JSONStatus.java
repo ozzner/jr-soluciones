@@ -40,7 +40,7 @@ public class Helper_JSONStatus {
 		this.httpCode = httpCoode;
 	}
 
-	public boolean isError_status() {
+	public boolean getError_status() {
 		return error_status;
 	}
 

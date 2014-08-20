@@ -1,11 +1,15 @@
 package com.apprade.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.apprade.R;
 import com.apprade.activity.Usuario_Registro_Activity.TaskHttpMethodAsync;
 import com.apprade.dao.DAO_Establecimiento;
 import com.apprade.dao.DAO_Usuario;
 import com.apprade.entity.Entity_Establecimiento;
 import com.apprade.helper.Helper_GPS_Tracker;
+import com.apprade.helper.Helper_JSONStatus;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,6 +17,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.SupportMapFragment;
 
+import android.util.Log;
 import android.view.View.OnClickListener;
 import android.app.ActionBar;
 import android.app.ActionBar.LayoutParams;
@@ -51,7 +56,7 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 	 private DAO_Establecimiento dao;
 	 private ProgressDialog proDialog;
 	 public Entity_Establecimiento ettEst; 
-	 
+	 private Helper_JSONStatus status;
 	 
 	 /**
 	 * BOB El constructor
@@ -61,6 +66,7 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 		super();
 		dao = new DAO_Establecimiento();
 		ettEst = new Entity_Establecimiento();
+		status =  new Helper_JSONStatus();
 	}
 	
 	
@@ -122,14 +128,12 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 	    		
 	    		map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("Has hecho click!"));
 	    			
-	    		latitude = latitude+0.002;
-	    		
+	    		latitude = latitude+0.002;	    		
 	    	}
 
 //		map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("Aquí estoy :)"));
 
-	}
-	    
+	}	    
 	    /*
 	     * AsynTask class
 	     *  
@@ -146,15 +150,23 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 	    protected Boolean doInBackground(String... params) {
 				boolean bRequest = false;
 						
-//				if (dao.listarTodoEstablecimiento()){
-//					
-//					bRequest = true;
-//				}
-//					
-
+				List<Entity_Establecimiento> data_list = new ArrayList<Entity_Establecimiento>();
+				data_list = dao.listarTodoEstablecimiento();
+				
+				bRequest = status.getError_status();
+				Log.e("bRequest", bRequest+"");
+				
+				if (!bRequest) {					
+					for (Entity_Establecimiento dato : data_list) {
+						Log.e("Lista: ", dato+"");
+					}
+				}
 				return bRequest;
 			}
 
+	    
+	    
+	    
 		protected void onPreExecute() {
 	    	
 	    	showDialogo();
@@ -173,13 +185,12 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 				super.onPostExecute(result);
 				proDialog.dismiss();
 				
-				if (result) {
-					Toast.makeText(getApplicationContext(), "Mensaje: OK", Toast.LENGTH_LONG).show();
+				if (!result) {
+					Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_LONG).show();
 				}else{
-					Toast.makeText(getApplicationContext()," error: true",Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
 				}
 			}
-		
 		
 	    private void showDialogo() {
 			 
@@ -189,12 +200,9 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 				proDialog.show();
 
 		}
-							
+
 }	
-	    
-	    
-	    
-	    
+	    	    
 	 /*
 	  * POPUP CONFIGURATIONS 
 	  */   

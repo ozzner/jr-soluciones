@@ -57,14 +57,18 @@
         
         <activity android:name="com.apprade.activity.Usuario_Login_Activity"
              android:windowSoftInputMode="stateHidden">
-            <intent-filter>
+           
+        </activity>
+        
+        <activity android:name="com.apprade.activity.App_GPSMapa_Activity">
+             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
+            
         </activity>
-        
-        <activity android:name="com.apprade.activity.App_GPSMapa_Activity"></activity>
         
         <activity android:name="com.apprade.activity.Usuario_Comentar_Activity"
             	  android:theme="@style/AppDialog">
