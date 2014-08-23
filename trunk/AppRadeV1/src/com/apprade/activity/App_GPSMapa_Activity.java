@@ -1,5 +1,6 @@
 package com.apprade.activity;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,12 +128,12 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 	    	Log.e("Longitud", lon+"");
 	    	Log.e("latitud", lat+"");
 	    	Log.e("nombre", nom+"");
-	
-	    		
-	    		map.addMarker(new MarkerOptions().position(new LatLng(lat, lon)).title("Nombre: "+nom));
-	    			
+	   
+//	    		
+	    		map.addMarker(new MarkerOptions().position(new LatLng(lat,lon)).title("Nombre: "+nom));
+	    		Log.e("nombre", lat+" "+ lon+"");
 //	    		latitude = latitude+0.002;	    		
-	    	
+//	    	
 
 //		map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("Aquí estoy :)"));
 
@@ -162,7 +163,7 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 				
 				if (!bRequest) {
 					List<Entity_Coordenadas> lista_coordenadas = new ArrayList<Entity_Coordenadas>();
-					
+					int c =0;
 					for (Entity_Establecimiento esta : lista_establecimiento) {
 						lista_coordenadas =  esta.getCoordenadas();
 						
@@ -170,17 +171,18 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 							
 							lat = coor.getLatitud();
 							lon = coor.getLongitud();
-							
+					
 					    	Log.e("Longitud_for", lon+"");
 					    	Log.e("latitud_for", lat+"");
 					    	
-					    	int c =0;
+					    	
 							 c++;
 					    	Log.e("contador", c+"");
+					    	
+					    	setUpMap(lat,lon,esta.getNombre());
 						}
+					
 						
-			
-						setUpMap(lat,lon,esta.getNombre());
 					}
 				}
 				return bRequest;

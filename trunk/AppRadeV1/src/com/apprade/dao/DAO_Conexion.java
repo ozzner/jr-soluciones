@@ -9,7 +9,7 @@ package com.apprade.dao;
  */
 public class DAO_Conexion {
 
-	private String url = "http://192.168.0.28/api/v1/";
+	private String url = "http://192.168.1.41/api/v1/";
 
 	/**
 	 * @param url

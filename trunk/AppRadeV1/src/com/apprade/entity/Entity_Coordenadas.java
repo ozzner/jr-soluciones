@@ -3,6 +3,10 @@
  */
 package com.apprade.entity;
 
+import java.text.DecimalFormat;
+
+import org.xml.sax.Parser;
+
 /**
  * @author Renzo
  *
@@ -39,8 +43,10 @@ public class Entity_Coordenadas {
 		return latitud;
 	}
 
-	public void setLatitud(float latitud) {
-		this.latitud = latitud;
+	public void setLatitud(float latitud) {	
+		float d = latitud;
+		DecimalFormat df = new DecimalFormat("#.######");
+		this.latitud = Float.parseFloat(df.format(d));
 	}
 
 	public float getLongitud() {
@@ -48,7 +54,9 @@ public class Entity_Coordenadas {
 	}
 
 	public void setLongitud(float longitud) {
-		this.longitud = longitud;
+		float d = longitud;
+		DecimalFormat df = new DecimalFormat("#.######");
+		this.longitud = Float.parseFloat(df.format(d));
 	}
 
 	public String getReferencia() {
