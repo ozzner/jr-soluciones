@@ -20,7 +20,6 @@ public class Entity_Establecimiento {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 	/**
 	 * @param establecimientoID
 	 * @param nombre
