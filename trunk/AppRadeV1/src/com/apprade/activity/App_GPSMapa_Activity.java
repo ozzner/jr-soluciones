@@ -1,5 +1,6 @@
 package com.apprade.activity;
 
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +24,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.SupportMapFragment;
 
+import android.R.array;
 import android.util.Log;
 import android.view.View.OnClickListener;
 import android.app.ActionBar;
@@ -131,21 +133,21 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 	public void setUpMap(final float lat, final float lon, final String nom) {
 
 		new Thread(new Runnable() {
-			
+
 			public void run() {
-				
+
 				runOnUiThread(new Runnable() {
 					public void run() {
+
 						map.addMarker(new MarkerOptions().position(
-								 new LatLng(lat, lon)).title("Nombre: " + nom));
+								new LatLng(lat, lon)).title("" + nom));
+
 					}
 				});
 			}
-			
-		}).start();
 
-}
-	
+		}).start();
+	}
 
 	/**
 	 * AsynTask class
@@ -157,7 +159,7 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 	}
 
 	class TaskHttpMethodAsync extends AsyncTask<String, Void, Boolean> {
-
+		String[] arrNomEst = null;
 		List<Entity_Establecimiento> lista_establecimiento = new ArrayList<Entity_Establecimiento>();
 
 		@Override
@@ -171,23 +173,25 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 
 			if (!bRequest) {
 				List<Entity_Coordenadas> lista_coordenadas = new ArrayList<Entity_Coordenadas>();
-				int c = 0;
+				arrNomEst = new String[lista_establecimiento.size()];
+
+				int a = 0;
 				for (Entity_Establecimiento esta : lista_establecimiento) {
 					lista_coordenadas = esta.getCoordenadas();
 
-					for (Entity_Coordenadas coor : lista_coordenadas) {
+					arrNomEst[a] = esta.getNombre();
+					a++;
+				}
 
-						lat = coor.getLatitud();
-						lon = coor.getLongitud();
-//
-//						Log.e("Longitud_for", lon + "");
-//						Log.e("latitud_for", lat + "");
-//
-//						c++;
-//						Log.e("contador", c + "");
+				int c = 0;
+				for (Entity_Coordenadas coor : lista_coordenadas) {
 
-						setUpMap(lat, lon, esta.getNombre());
-					}
+					lat = coor.getLatitud();
+					lon = coor.getLongitud();
+
+					setUpMap(lat, lon, arrNomEst[c]);
+					c++;
+
 				}
 			}
 			return bRequest;
@@ -202,7 +206,8 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					TaskHttpMethodAsync.this.cancel(true);
-					Toast.makeText(getApplicationContext(),"Cancelado!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "Cancelado!",
+							Toast.LENGTH_SHORT).show();
 				}
 			});
 			proDialog.setProgress(0);
@@ -215,12 +220,10 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 
 			if (!result) {
 				actionBar.setSubtitle("Ok!");
-//				Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_LONG)
-//						.show();
+
 			} else {
 				actionBar.setSubtitle("Error!");
-//				Toast.makeText(getApplicationContext(), "Error",
-//						Toast.LENGTH_LONG).show();
+
 			}
 		}
 
@@ -228,7 +231,7 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 
 			proDialog = new ProgressDialog(App_GPSMapa_Activity.this);
 			proDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			proDialog.setMessage("cargando...");
+			// proDialog.setMessage("cargando...");
 			proDialog.show();
 
 		}
@@ -282,7 +285,8 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 		switch (item.getItemId()) {
 
 		case R.id.action_map_comentar:
-//			Toast.makeText(this, "Acción comentar", Toast.LENGTH_SHORT).show();
+			// Toast.makeText(this, "Acción comentar",
+			// Toast.LENGTH_SHORT).show();
 			actionBar.setSubtitle("cargando...");
 			// initiatePopupWindow();
 			usuario_comentar();
