@@ -60,7 +60,8 @@
            
         </activity>
         
-        <activity android:name="com.apprade.activity.App_GPSMapa_Activity">
+        <activity android:name="com.apprade.activity.App_GPSMapa_Activity"
+            android:screenOrientation="portrait">
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
