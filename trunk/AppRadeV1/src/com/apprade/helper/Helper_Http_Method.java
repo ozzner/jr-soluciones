@@ -37,7 +37,7 @@ import android.util.Log;
  */
 public class Helper_Http_Method {
 	
-private static int TIMEOUT = 7000;/*milisegundos*/
+private static int TIMEOUT = 17000;/*milisegundos*/
     
 	public Helper_Http_Method() {
 		// TODO Auto-generated constructor stub
