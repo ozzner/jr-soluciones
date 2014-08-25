@@ -20,6 +20,7 @@ public class Entity_Establecimiento {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	/**
 	 * @param establecimientoID
 	 * @param nombre
@@ -29,6 +30,7 @@ public class Entity_Establecimiento {
 	 * @param distrito
 	 * @param coordenadas
 	 */
+	
 	public Entity_Establecimiento(int establecimientoID, String nombre,
 			String direccion, int ruc, List<Entity_Categoria> categoria,
 			List<Entity_Distrito> distrito, List<Entity_Coordenadas> coordenadas) {

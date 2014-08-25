@@ -9,11 +9,12 @@ package com.apprade.dao;
  */
 public class DAO_Conexion {
 
-	private String url = "http://192.168.1.41/api/v1/";
+	private String url = "http://192.168.43.29/api/v1/";
 
 	/**
 	 * @param url
 	 */
+	
 	public DAO_Conexion(String url) {
 		super();
 		this.url = url;
@@ -26,10 +27,9 @@ public class DAO_Conexion {
 	public String getUrl() {
 		return url;
 	}
+	
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-	
-	
+		
 }
