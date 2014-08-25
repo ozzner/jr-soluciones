@@ -27,11 +27,24 @@ public class Entity_Usuario {
 		super();		
 	}
 	
-
+	/**
+	 * @param usuarioID
+	 * @param email
+	 * @param sexo
+	 * @param nombre
+	 * @param fechaNacimiento
+	 * @param apMaterno
+	 * @param apPaterno
+	 * @param rate
+	 * @param uid
+	 * @param fechaRegistro
+	 * @param password
+	 * @param ranking
+	 */
 	public Entity_Usuario(int usuarioID, String email, char sexo,
 			String nombre, String fechaNacimiento, String apMaterno,
-			String apPaterno, int rate, String uid,
-			String fechaRegistro, String password, Entity_Ranking oRanking) {
+			String apPaterno, int rate, String uid, String fechaRegistro,
+			String password, List<Entity_Ranking> ranking) {
 		super();
 		this.usuarioID = usuarioID;
 		this.email = email;
@@ -44,7 +57,13 @@ public class Entity_Usuario {
 		this.uid = uid;
 		this.fechaRegistro = fechaRegistro;
 		this.password = password;
+		this.ranking = ranking;
 	}
+
+
+
+
+
 
 
 	public int getUsuarioID() {
