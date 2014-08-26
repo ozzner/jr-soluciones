@@ -20,7 +20,10 @@ import com.google.android.gms.internal.es;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.SupportMapFragment;
 
@@ -49,7 +52,7 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
-public class App_GPSMapa_Activity extends FragmentActivity {
+public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerClickListener, OnInfoWindowClickListener {
 
 	private GoogleMap map;
 
@@ -84,6 +87,7 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 		Intent intent = getIntent();
 		nombre = intent.getStringExtra("NOMBRE");
 		setUpMapIfNeeded();
+		
 
 	}
 
@@ -98,12 +102,18 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 		map = ((SupportMapFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.map)).getMap();
 		map.setMyLocationEnabled(true);
+		
+		map.setOnMarkerClickListener(this);
+		map.setOnInfoWindowClickListener(this);
+		
 		gps = new Helper_GPS_Tracker(App_GPSMapa_Activity.this);
 
 		if (gps.canGetLocation()) {
 
 			latitude = gps.getLatitude();
 			longitude = gps.getLongitude();
+			
+			
 
 			// Toast.makeText(getApplicationContext(),
 			// "Your Location is - \nLat: " +
@@ -220,6 +230,7 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 
 			if (!result) {
 				actionBar.setSubtitle("Ok!");
+				
 
 			} else {
 				actionBar.setSubtitle("Error!");
@@ -301,8 +312,25 @@ public class App_GPSMapa_Activity extends FragmentActivity {
 
 	public void usuario_comentar() {
 		exeHttpAsync();
-		// Intent i = new Intent (this, Usuario_Comentar_Activity.class);
-		// startActivity(i);
+//		Intent i = new Intent (this, Usuario_Comentar_Activity.class);
+//		startActivity(i);
+		 
 	}
+	
+	public void onInfoWindowClick(Marker marker) {
+		// abriendo y pasando datos al otro activity
+		
+		
+		Intent intent = new Intent(getApplicationContext() ,Usuario_Comentar_Activity.class);
+		startActivity(intent);
+	}
+
+	@Override
+	public boolean onMarkerClick(Marker arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
 
 }
