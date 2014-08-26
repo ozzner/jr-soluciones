@@ -97,7 +97,7 @@ public class DAO_Establecimiento {
 							
 							int iIdEst = Integer.parseInt(oEstabli.getString("establishmentID"));
 							String sNameEst = oEstabli.getString("name");
-							
+							String sDirEst = oEstabli.getString("address");
 							JSONObject oDistric =  oEstabli.getJSONObject("district");							
 							int iIdDis = Integer.parseInt(oDistric.getString("districtID"));
 							String sNameDis = oDistric.getString("name");
@@ -118,7 +118,7 @@ public class DAO_Establecimiento {
 							listaCoo.add(ettCoor);
 						
 							Entity_Establecimiento ettEst = new Entity_Establecimiento
-									(iIdEst, sNameEst, null, iIdEst, listaCat, listaDis, listaCoo);
+									(iIdEst, sNameEst, sDirEst, iIdEst, listaCat, listaDis, listaCoo);
 							
 							lista.add(ettEst);//Lista final
 						}
