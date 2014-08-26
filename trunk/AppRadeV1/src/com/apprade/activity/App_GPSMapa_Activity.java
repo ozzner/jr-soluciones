@@ -1,5 +1,6 @@
 package com.apprade.activity;
 
+import java.io.ObjectOutputStream.PutField;
 import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import com.apprade.activity.Usuario_Registro_Activity.TaskHttpMethodAsync;
 import com.apprade.dao.DAO_Establecimiento;
 import com.apprade.dao.DAO_Usuario;
 import com.apprade.entity.Entity_Coordenadas;
+import com.apprade.entity.Entity_Distrito;
 import com.apprade.entity.Entity_Establecimiento;
 import com.apprade.helper.Helper_GPS_Tracker;
 import com.apprade.helper.Helper_JSONStatus;
@@ -25,6 +27,7 @@ import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Tile;
 import com.google.android.gms.maps.SupportMapFragment;
 
 import android.R.array;
@@ -67,7 +70,10 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	private ProgressDialog proDialog;
 	public Entity_Establecimiento ettEst;
 	private Helper_JSONStatus status;
-
+	
+	
+	
+	
 	/**
 	 * BOB El constructor
 	 */
@@ -140,7 +146,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	//
 	// }
 
-	public void setUpMap(final float lat, final float lon, final String nom) {
+	public void setUpMap(final float lat, final float lon, final String nom, final String dir) {
 
 		new Thread(new Runnable() {
 
@@ -150,7 +156,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 					public void run() {
 
 						map.addMarker(new MarkerOptions().position(
-								new LatLng(lat, lon)).title("" + nom));
+								new LatLng(lat, lon)).title(nom + " " + dir));
 
 					}
 				});
@@ -170,12 +176,14 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 
 	class TaskHttpMethodAsync extends AsyncTask<String, Void, Boolean> {
 		String[] arrNomEst = null;
+		String[] arrDirEst = null;
 		List<Entity_Establecimiento> lista_establecimiento = new ArrayList<Entity_Establecimiento>();
 
 		@Override
 		protected Boolean doInBackground(String... params) {
 			boolean bRequest = false;
 			float lat = 0, lon = 0;
+			//String distrito;
 
 			lista_establecimiento = dao.listarTodoEstablecimiento();
 
@@ -183,23 +191,29 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 
 			if (!bRequest) {
 				List<Entity_Coordenadas> lista_coordenadas = new ArrayList<Entity_Coordenadas>();
+				//List<Entity_Distrito> lista_distrito = new ArrayList<Entity_Distrito>();
 				arrNomEst = new String[lista_establecimiento.size()];
-
+				arrDirEst = new String[lista_establecimiento.size()];
+				
 				int a = 0;
 				for (Entity_Establecimiento esta : lista_establecimiento) {
+					
 					lista_coordenadas = esta.getCoordenadas();
+					//lista_distrito = esta.getDistrito();
 
 					arrNomEst[a] = esta.getNombre();
+					arrDirEst[a] = esta.getDireccion();
+					
 					a++;
 				}
-
+												
 				int c = 0;
 				for (Entity_Coordenadas coor : lista_coordenadas) {
 
 					lat = coor.getLatitud();
 					lon = coor.getLongitud();
 
-					setUpMap(lat, lon, arrNomEst[c]);
+					setUpMap(lat, lon,  arrNomEst[c], arrDirEst[c] );
 					c++;
 
 				}
@@ -314,15 +328,35 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 		exeHttpAsync();
 //		Intent i = new Intent (this, Usuario_Comentar_Activity.class);
 //		startActivity(i);
-		 
+		
 	}
 	
 	public void onInfoWindowClick(Marker marker) {
 		// abriendo y pasando datos al otro activity
 		
+		int posicion = this.getPosicion(marker.getTitle());
 		
 		Intent intent = new Intent(getApplicationContext() ,Usuario_Comentar_Activity.class);
+		intent.putExtra("AAA", marker.getTitle());
+		
 		startActivity(intent);
+	}
+	
+	
+	public int getPosicion(String edificio) {
+		
+		String[] arrNomEst = null;
+		List<Entity_Establecimiento> lista_establecimiento = new ArrayList<Entity_Establecimiento>();
+
+		arrNomEst = new String[lista_establecimiento.size()];
+		
+		int posicion = 0;
+		for (int i = 0; i < arrNomEst.length; i++) {
+			if (arrNomEst[i].equals(edificio)) {
+				posicion = i;
+			}
+		}
+		return posicion;
 	}
 
 	@Override
