@@ -71,8 +71,11 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	public Entity_Establecimiento ettEst;
 	private Helper_JSONStatus status;
 	
+	String[] arrNomEst = null;
+	String[] arrDirEst = null;
 	
-	
+	int a = 0;
+	int c = 0;
 	
 	/**
 	 * BOB El constructor
@@ -138,15 +141,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 
 	}
 
-	// public void btnLogin_onClick (View v){
-	//
-	// Intent intent = new Intent(this, Usuario_Login_Activity.class);
-	//
-	// startActivity(intent);
-	//
-	// }
 
-	public void setUpMap(final float lat, final float lon, final String nom, final String dir) {
+	public void setUpMap(final float lat, final float lon, final String nom, final int dir) {
 
 		new Thread(new Runnable() {
 
@@ -175,8 +171,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	}
 
 	class TaskHttpMethodAsync extends AsyncTask<String, Void, Boolean> {
-		String[] arrNomEst = null;
-		String[] arrDirEst = null;
+		
 		List<Entity_Establecimiento> lista_establecimiento = new ArrayList<Entity_Establecimiento>();
 
 		@Override
@@ -195,7 +190,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 				arrNomEst = new String[lista_establecimiento.size()];
 				arrDirEst = new String[lista_establecimiento.size()];
 				
-				int a = 0;
+				//int a = 0;
 				for (Entity_Establecimiento esta : lista_establecimiento) {
 					
 					lista_coordenadas = esta.getCoordenadas();
@@ -207,13 +202,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 					a++;
 				}
 												
-				int c = 0;
+				//int c = 0;
 				for (Entity_Coordenadas coor : lista_coordenadas) {
 
 					lat = coor.getLatitud();
 					lon = coor.getLongitud();
 
-					setUpMap(lat, lon,  arrNomEst[c], arrDirEst[c] );
+					setUpMap(lat, lon,  arrNomEst[c], arrNomEst.length );
 					c++;
 
 				}
@@ -334,25 +329,22 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	public void onInfoWindowClick(Marker marker) {
 		// abriendo y pasando datos al otro activity
 		
-		int posicion = this.getPosicion(marker.getTitle());
+		
+//		int posicion = this.getPosicion(marker.getTitle());
 		
 		Intent intent = new Intent(getApplicationContext() ,Usuario_Comentar_Activity.class);
-		intent.putExtra("AAA", marker.getTitle());
-		
+		intent.putExtra("AAA", 20);
 		startActivity(intent);
 	}
 	
 	
-	public int getPosicion(String edificio) {
+	public int getPosicion(String detalleEst) {
 		
-		String[] arrNomEst = null;
-		List<Entity_Establecimiento> lista_establecimiento = new ArrayList<Entity_Establecimiento>();
-
-		arrNomEst = new String[lista_establecimiento.size()];
+		
 		
 		int posicion = 0;
-		for (int i = 0; i < arrNomEst.length; i++) {
-			if (arrNomEst[i].equals(edificio)) {
+		for (int i = 0; i < 524; i++) {
+			if (arrNomEst[i].equals(detalleEst)) {
 				posicion = i;
 			}
 		}
