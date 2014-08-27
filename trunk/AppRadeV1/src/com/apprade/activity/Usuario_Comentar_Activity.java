@@ -10,6 +10,7 @@ import com.apprade.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -33,8 +34,9 @@ public class Usuario_Comentar_Activity extends Activity {
 	    btnCancel.setOnClickListener((android.view.View.OnClickListener) cancel_button_click_listener);
 	    
 	    Intent i = getIntent();
-		String saludo = i.getStringExtra("AAA");
-		Toast.makeText(this, saludo, Toast.LENGTH_LONG).show();
+		final String saludo  = i.getStringExtra("AAA");
+		Log.e("ass", saludo);
+		Toast.makeText(this, saludo , Toast.LENGTH_LONG).show();
 		
 	}
 	
