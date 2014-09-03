@@ -67,6 +67,9 @@ public class DAO_Comentario {
 		super();
 		ettEstab = new Entity_Establecimiento();
 		conn =  new DAO_Conexion();
+	    oHttp = new Helper_Http_Method();
+	    oParser = new Helper_JSONParser();
+	    oJsonStatus = new Helper_JSONStatus();
 	}
 		
 	
@@ -142,7 +145,7 @@ public class DAO_Comentario {
 
 	}
 	
-	public boolean insertarComentario(String establecimientoID){
+	public boolean insertarComentario(String establecimientoID,String usuarioID,String mensaje){
 		
 		URL= URI.create(conn.getUrl());
 		InputStream in = null;
@@ -152,7 +155,9 @@ public class DAO_Comentario {
 	List<NameValuePair> parametros = new ArrayList<NameValuePair>();
 		
 		parametros.add( new BasicNameValuePair("entity", ENTITY));
+		parametros.add( new BasicNameValuePair("mensaje", mensaje));
 		parametros.add( new BasicNameValuePair("establecimientoID", establecimientoID));
+		parametros.add( new BasicNameValuePair("usuarioID", usuarioID));
 
 		try {						
 			    in =  oHttp.httpPost(URL, parametros);
