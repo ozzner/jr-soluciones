@@ -62,8 +62,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	
 	String[] arrNomEst = null;
 	String[] arrDirEst = null;
-	
-	HashMap<String, String> arreglo = new HashMap<String, String>();
 
 	
 	int arraymapas[] = new int[1000];
@@ -140,7 +138,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	//
 	// }
 
-	public void setUpMap(final float lat, final float lon, final String nom, final String dir, final String contador) {
+	public void setUpMap(final float lat, final float lon, final String nom, final String dir) {
 
 		new Thread(new Runnable() {
 
@@ -151,16 +149,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 					@Override
 					public void run() {
 						
-						
+							
 						
 						Marker dodo = map.addMarker(new MarkerOptions().position(
 								new LatLng(lat, lon)).title(nom + "  - "+ dir ));
-																				
-						arreglo.put(dodo.getId(), contador);
 						
+
 						
-//						Log.e("BBBBBBB", arreglo+"");
-//						Log.e("CCCCCCC", contador);
 						
 						
 
@@ -219,7 +214,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 //					arraymapas[c] = c;
 					
 					
-					setUpMap(lat, lon, arrNomEst[c], arrDirEst[c], c+"");
+					setUpMap(lat, lon, arrNomEst[c], arrDirEst[c]);
 					
 					c++;
 
@@ -338,12 +333,28 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	public void onInfoWindowClick(Marker marker) {
 		// abriendo y pasando datos al otro activity
 		
-		titulo = marker.getId();
-		int posicion=this.getPosicion(marker.getTitle());
-		Log.e("AAAAAAAAAA", posicion+"");
-//		Intent intent = new Intent(getApplicationContext() ,Usuario_Comentar_Activity.class);
-//		startActivity(intent);
-		//Log.e("AAAAAAAAAA", arraymapas[1]+"");
+		
+		
+//		Log.e("ID", marker.getId());
+		String identificador = marker.getId();
+				
+		String contador = identificador.substring(1,identificador.length());
+//		Log.e("ID-EXTRAC", contador);
+		
+		int count = Integer.parseInt(contador);
+//		Log.e("ID-EXTRAC", count+"");
+		
+				
+		Log.e("ESTABLECIMIENTO", arrNomEst[count]);
+		Log.e("ESTABLECIMIENTO", arrDirEst[count]);
+
+		Intent intent = new Intent(getApplicationContext() ,Usuario_Comentar_Activity.class);
+		intent.putExtra("IDESTABLECIMIENTO", marker.getId());
+		intent.putExtra("ESTABLECIMIENTO", arrNomEst[count]);
+		intent.putExtra("DIRECCION", arrDirEst[count]);
+				
+		startActivity(intent);
+		
 		
 	}
 
