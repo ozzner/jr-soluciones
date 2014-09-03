@@ -148,17 +148,9 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						
-							
-						
-						Marker dodo = map.addMarker(new MarkerOptions().position(
+																
+						map.addMarker(new MarkerOptions().position(
 								new LatLng(lat, lon)).title(nom + "  - "+ dir ));
-						
-
-						
-						
-						
-
 					}
 				});
 			}
