@@ -12,26 +12,26 @@ import com.apprade.activity.Usuario_Login_Activity.TaskHttpMethodAsync;
 import com.apprade.dao.DAO_Comentario;
 
 import android.app.Activity;
-<<<<<<< .mine
+
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
-=======
+
 import android.content.Intent;
->>>>>>> .r100
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-<<<<<<< .mine
+
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-=======
+
 import android.widget.Toast;
->>>>>>> .r100
+
 
 /**
  * @author Julio
@@ -64,7 +64,7 @@ public class Usuario_Comentar_Activity extends Activity {
 	    etComentario = (EditText)findViewById(R.id.et_comentario);
 		
 	    btnCancel.setOnClickListener((android.view.View.OnClickListener) cancel_button_click_listener);
-<<<<<<< .mine
+
 	    ivEnviarComentario.setOnClickListener( new OnClickListener() {
 			
 			@Override
@@ -85,15 +85,7 @@ public class Usuario_Comentar_Activity extends Activity {
 
 	protected void exeHttpAsync() {		
 		TaskHttpMethodAsync task =  new TaskHttpMethodAsync();
-		task.execute();
-=======
-	    
-	    Intent i = getIntent();
-		final String saludo  = i.getStringExtra("AAA");
-		Log.e("ass", saludo);
-		Toast.makeText(this, saludo , Toast.LENGTH_LONG).show();
-		
->>>>>>> .r100
+		task.execute();		
 	}
 	
 	class TaskHttpMethodAsync extends AsyncTask<String, Void,Boolean>{
@@ -104,7 +96,7 @@ public class Usuario_Comentar_Activity extends Activity {
 				String sEstablecimientoID = etComentario.getText().toString();
 						Log.e("CASO", sEstablecimientoID);
 						
-				if (dao.insertarComentario(sEstablecimientoID)) 
+				if (dao.insertarComentario(sEstablecimientoID, "10", "Hola mundo")) 
 					bRequest = true;
 		
 				return bRequest;
@@ -131,7 +123,7 @@ public class Usuario_Comentar_Activity extends Activity {
 				proDialogo.dismiss();
 				
 				if (result) {
-					Toast.makeText(getApplicationContext(),"Bienvenid@_OK", Toast.LENGTH_LONG).show();					
+					Toast.makeText(getApplicationContext(),"Bienvenid@_OK "+dao.oJsonStatus.getMessage(), Toast.LENGTH_LONG).show();					
 				}else{
 					Toast.makeText(getApplicationContext(),"Error: "+dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
 				}
@@ -146,12 +138,6 @@ public class Usuario_Comentar_Activity extends Activity {
 	}//End ClassAs
 	
 	
-	
-	
-	
-	
-	
-
 	private OnClickListener cancel_button_click_listener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
