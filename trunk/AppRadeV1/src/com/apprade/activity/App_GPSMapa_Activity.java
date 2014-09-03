@@ -1,24 +1,13 @@
 package com.apprade.activity;
 
-import java.io.ObjectOutputStream.PutField;
-import java.lang.reflect.Array;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import com.apprade.R;
-import com.apprade.activity.Usuario_Registro_Activity.TaskHttpMethodAsync;
 import com.apprade.dao.DAO_Establecimiento;
-import com.apprade.dao.DAO_Usuario;
 import com.apprade.entity.Entity_Coordenadas;
-import com.apprade.entity.Entity_Distrito;
 import com.apprade.entity.Entity_Establecimiento;
 import com.apprade.helper.Helper_GPS_Tracker;
 import com.apprade.helper.Helper_JSONStatus;
-import com.google.android.gms.internal.es;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,11 +16,7 @@ import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Tile;
 import com.google.android.gms.maps.SupportMapFragment;
-
-import android.R.array;
-import android.util.Log;
 import android.view.View.OnClickListener;
 import android.app.ActionBar;
 import android.app.ActionBar.LayoutParams;
@@ -40,7 +25,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
-import android.hardware.Camera.Parameters;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -70,13 +54,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	private ProgressDialog proDialog;
 	public Entity_Establecimiento ettEst;
 	private Helper_JSONStatus status;
-	
-	String[] arrNomEst = null;
-	String[] arrDirEst = null;
-	
-	int a = 0;
-	int c = 0;
-	
+
 	/**
 	 * BOB El constructor
 	 */
@@ -96,8 +74,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 		Intent intent = getIntent();
 		nombre = intent.getStringExtra("NOMBRE");
 		setUpMapIfNeeded();
-		
-
+	
 	}
 
 	@Override
@@ -140,19 +117,28 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 		}
 
 	}
+	
+	// public void btnLogin_onClick (View v){
+	//
+	// Intent intent = new Intent(this, Usuario_Login_Activity.class);
+	//
+	// startActivity(intent);
+	//
+	// }
 
-
-	public void setUpMap(final float lat, final float lon, final String nom, final int dir) {
+	public void setUpMap(final float lat, final float lon, final String nom) {
 
 		new Thread(new Runnable() {
 
+			@Override
 			public void run() {
 
 				runOnUiThread(new Runnable() {
+					@Override
 					public void run() {
 
 						map.addMarker(new MarkerOptions().position(
-								new LatLng(lat, lon)).title(nom + " " + dir));
+								new LatLng(lat, lon)).title("" + nom));
 
 					}
 				});
@@ -171,14 +157,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	}
 
 	class TaskHttpMethodAsync extends AsyncTask<String, Void, Boolean> {
-		
+		String[] arrNomEst = null;
 		List<Entity_Establecimiento> lista_establecimiento = new ArrayList<Entity_Establecimiento>();
 
 		@Override
 		protected Boolean doInBackground(String... params) {
 			boolean bRequest = false;
 			float lat = 0, lon = 0;
-			//String distrito;
 
 			lista_establecimiento = dao.listarTodoEstablecimiento();
 
@@ -186,29 +171,23 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 
 			if (!bRequest) {
 				List<Entity_Coordenadas> lista_coordenadas = new ArrayList<Entity_Coordenadas>();
-				//List<Entity_Distrito> lista_distrito = new ArrayList<Entity_Distrito>();
 				arrNomEst = new String[lista_establecimiento.size()];
-				arrDirEst = new String[lista_establecimiento.size()];
-				
-				//int a = 0;
+
+				int a = 0;
 				for (Entity_Establecimiento esta : lista_establecimiento) {
-					
 					lista_coordenadas = esta.getCoordenadas();
-					//lista_distrito = esta.getDistrito();
 
 					arrNomEst[a] = esta.getNombre();
-					arrDirEst[a] = esta.getDireccion();
-					
 					a++;
 				}
-												
-				//int c = 0;
+
+				int c = 0;
 				for (Entity_Coordenadas coor : lista_coordenadas) {
 
 					lat = coor.getLatitud();
 					lon = coor.getLongitud();
 
-					setUpMap(lat, lon,  arrNomEst[c], arrNomEst.length );
+					setUpMap(lat, lon, arrNomEst[c]);
 					c++;
 
 				}
@@ -216,6 +195,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 			return bRequest;
 		}
 
+		@Override
 		protected void onPreExecute() {
 
 			showDialogo();
@@ -255,9 +235,9 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 			proDialog.show();
 
 		}
-
 	}
 
+	
 	/*
 	 * POPUP CONFIGURATIONS
 	 */
@@ -269,13 +249,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View layout = inflater.inflate(R.layout.popup_comentario,
 					(ViewGroup) findViewById(R.id.popup_element));
-			popWin = new PopupWindow(layout, LayoutParams.WRAP_CONTENT,
-					LayoutParams.WRAP_CONTENT, true);
+			popWin = new PopupWindow(layout, android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+					android.view.ViewGroup.LayoutParams.WRAP_CONTENT, true);
 			popWin.showAtLocation(layout, Gravity.CENTER, 0, 0);
 
 			btnCancel = (Button) layout.findViewById(R.id.btn_cancel_comen);
 			btnCancel
-					.setOnClickListener((android.view.View.OnClickListener) cancel_button_click_listener);
+					.setOnClickListener(cancel_button_click_listener);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -303,57 +283,39 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 		actionBar = getActionBar();
 
 		switch (item.getItemId()) {
-
 		case R.id.action_map_comentar:
 			// Toast.makeText(this, "Acción comentar",
 			// Toast.LENGTH_SHORT).show();
 			actionBar.setSubtitle("cargando...");
+			Intent i = new Intent(getApplicationContext(), Usuario_Comentar_Activity.class);
+			startActivity(i);
 			// initiatePopupWindow();
-			usuario_comentar();
+//			exe();
 			break;
 
 		default:
 			break;
 		}
-
+		
 		return true;
 	}
 
-	public void usuario_comentar() {
+	public void exe() {
 		exeHttpAsync();
 //		Intent i = new Intent (this, Usuario_Comentar_Activity.class);
 //		startActivity(i);
-		
+		 
 	}
 	
+	@Override
 	public void onInfoWindowClick(Marker marker) {
 		// abriendo y pasando datos al otro activity
-		
-		
-//		int posicion = this.getPosicion(marker.getTitle());
-		
 		Intent intent = new Intent(getApplicationContext() ,Usuario_Comentar_Activity.class);
-		intent.putExtra("AAA", 20);
 		startActivity(intent);
-	}
-	
-	
-	public int getPosicion(String detalleEst) {
-		
-		
-		
-		int posicion = 0;
-		for (int i = 0; i < 524; i++) {
-			if (arrNomEst[i].equals(detalleEst)) {
-				posicion = i;
-			}
-		}
-		return posicion;
 	}
 
 	@Override
 	public boolean onMarkerClick(Marker arg0) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
