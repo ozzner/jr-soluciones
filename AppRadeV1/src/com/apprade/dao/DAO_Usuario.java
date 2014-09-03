@@ -59,6 +59,7 @@ public class DAO_Usuario{
 		parametros.add( new BasicNameValuePair("password", password));
 
 		String paramsString = URLEncodedUtils.format(parametros, "UTF-8");
+		
 		try {						
 			    in =  oHttp.httpGet(URL + "?" + paramsString);
 			    oJson =oParser.parserToJsonObject(in);
@@ -100,6 +101,7 @@ public class DAO_Usuario{
 		return bEstado;
 	}
 
+	
 	public boolean registarUsuario(String email, String sexo,String nombre,String password,String fecha){
 		
 		URL= URI.create(conn.getUrl());
@@ -116,9 +118,6 @@ public class DAO_Usuario{
 		parametros.add( new BasicNameValuePair("fecha", fecha));
 		parametros.add( new BasicNameValuePair("password", password));
 		
-		Log.e("Parametros", parametros+"");
-		String sParams = URLEncodedUtils.format(parametros, "UTF-8");
-		Log.e("StringPAram", sParams+"");
 		try {						
 			    in =  oHttp.httpPost(URL, parametros);
 			    oJson =oParser.parserToJsonObject(in);

@@ -66,10 +66,11 @@ public class DAO_Comentario {
 	public DAO_Comentario() {
 		super();
 		ettEstab = new Entity_Establecimiento();
+		conn =  new DAO_Conexion();
 	}
 		
 	
-	public List<Entity_Comentario> listarTodoComentario(){
+	public List<Entity_Comentario> listarTodoComentario(String establecimientoID){
 		
 		URL= URI.create(conn.getUrl());
 		InputStream in = null;
@@ -83,6 +84,7 @@ public class DAO_Comentario {
 		List<NameValuePair> parametros = new ArrayList<NameValuePair>();
 		
 		parametros.add( new BasicNameValuePair("entity", ENTITY));
+		parametros.add( new BasicNameValuePair("establecimientoID", establecimientoID));
 		String paramsString = URLEncodedUtils.format(parametros, "UTF-8");
 		
 		try {						
@@ -140,8 +142,44 @@ public class DAO_Comentario {
 
 	}
 	
-	
-	
+	public boolean insertarComentario(String establecimientoID){
+		
+		URL= URI.create(conn.getUrl());
+		InputStream in = null;
+		JSONObject oJson = null; 
+		boolean bEstado = false;
+		
+	List<NameValuePair> parametros = new ArrayList<NameValuePair>();
+		
+		parametros.add( new BasicNameValuePair("entity", ENTITY));
+		parametros.add( new BasicNameValuePair("establecimientoID", establecimientoID));
+
+		try {						
+			    in =  oHttp.httpPost(URL, parametros);
+			    oJson =oParser.parserToJsonObject(in);
+			    
+			  boolean  bError = Boolean.parseBoolean(oJson.getString("error_status"));
+				
+				if(!bError){
+					JSONObject oUserData =  oJson.getJSONObject("data");					
+					oJsonStatus.setMessage(oUserData.getString("message"));
+					bEstado = true;
+					
+				}else{
+					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
+					
+					JSONObject oErrorData=  oJson.getJSONObject("data");
+					oJsonStatus.setError_cod(Double.parseDouble(oErrorData.getString("error_cod")));
+					oJsonStatus.setMessage(oErrorData.getString("message"));
+					oJsonStatus.setInfo(oErrorData.getString("info"));
+				}
+			
+		} catch (Exception e) {
+			Log.e("URL", e.getMessage());
+			}
+		
+		return bEstado;	
+	}
 	
 	
 	

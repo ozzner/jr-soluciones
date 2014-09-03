@@ -5,11 +5,10 @@ package com.apprade.dao;
 
 /**
  * @author renzo
- *
  */
 public class DAO_Conexion {
 
-	private String url = "http://192.168.43.29/api/v1/";
+	private String url = "http://apprade.com/api/v1/";
 
 	/**
 	 * @param url
