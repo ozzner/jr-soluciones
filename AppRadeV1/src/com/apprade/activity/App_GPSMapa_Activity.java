@@ -1,6 +1,7 @@
 package com.apprade.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import com.apprade.R;
 import com.apprade.dao.DAO_Establecimiento;
@@ -13,10 +14,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.SupportMapFragment;
+
+import android.util.Log;
 import android.view.View.OnClickListener;
 import android.app.ActionBar;
 import android.app.ActionBar.LayoutParams;
@@ -54,7 +58,17 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	private ProgressDialog proDialog;
 	public Entity_Establecimiento ettEst;
 	private Helper_JSONStatus status;
+	
+	
+	String[] arrNomEst = null;
+	String[] arrDirEst = null;
+	
+	HashMap<String, String> arreglo = new HashMap<String, String>();
 
+	
+	int arraymapas[] = new int[1000];
+	String titulo;
+	
 	/**
 	 * BOB El constructor
 	 */
@@ -126,7 +140,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	//
 	// }
 
-	public void setUpMap(final float lat, final float lon, final String nom) {
+	public void setUpMap(final float lat, final float lon, final String nom, final String dir, final String contador) {
 
 		new Thread(new Runnable() {
 
@@ -136,9 +150,19 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-
-						map.addMarker(new MarkerOptions().position(
-								new LatLng(lat, lon)).title("" + nom));
+						
+						
+						
+						Marker dodo = map.addMarker(new MarkerOptions().position(
+								new LatLng(lat, lon)).title(nom + "  - "+ dir ));
+																				
+						arreglo.put(dodo.getId(), contador);
+						
+						
+//						Log.e("BBBBBBB", arreglo+"");
+//						Log.e("CCCCCCC", contador);
+						
+						
 
 					}
 				});
@@ -157,7 +181,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	}
 
 	class TaskHttpMethodAsync extends AsyncTask<String, Void, Boolean> {
-		String[] arrNomEst = null;
+//		String[] arrNomEst = null;
+//		String[] arrDirEst = null;
 		List<Entity_Establecimiento> lista_establecimiento = new ArrayList<Entity_Establecimiento>();
 
 		@Override
@@ -166,18 +191,23 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 			float lat = 0, lon = 0;
 
 			lista_establecimiento = dao.listarTodoEstablecimiento();
+			
 
 			bRequest = status.getError_status();
 
 			if (!bRequest) {
 				List<Entity_Coordenadas> lista_coordenadas = new ArrayList<Entity_Coordenadas>();
 				arrNomEst = new String[lista_establecimiento.size()];
+				arrDirEst = new String[lista_establecimiento.size()];
 
 				int a = 0;
 				for (Entity_Establecimiento esta : lista_establecimiento) {
 					lista_coordenadas = esta.getCoordenadas();
 
 					arrNomEst[a] = esta.getNombre();
+					arrDirEst[a] = esta.getDireccion();
+					
+					
 					a++;
 				}
 
@@ -186,8 +216,11 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 
 					lat = coor.getLatitud();
 					lon = coor.getLongitud();
-
-					setUpMap(lat, lon, arrNomEst[c]);
+//					arraymapas[c] = c;
+					
+					
+					setUpMap(lat, lon, arrNomEst[c], arrDirEst[c], c+"");
+					
 					c++;
 
 				}
@@ -287,10 +320,10 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 			// Toast.makeText(this, "Acción comentar",
 			// Toast.LENGTH_SHORT).show();
 			actionBar.setSubtitle("cargando...");
-			Intent i = new Intent(getApplicationContext(), Usuario_Comentar_Activity.class);
-			startActivity(i);
+//			Intent i = new Intent(getApplicationContext(), Usuario_Comentar_Activity.class);
+//			startActivity(i);
 			// initiatePopupWindow();
-//			exe();
+			exeHttpAsync();
 			break;
 
 		default:
@@ -300,20 +333,31 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 		return true;
 	}
 
-	public void exe() {
-		exeHttpAsync();
-//		Intent i = new Intent (this, Usuario_Comentar_Activity.class);
-//		startActivity(i);
-		 
-	}
-	
+		
 	@Override
 	public void onInfoWindowClick(Marker marker) {
 		// abriendo y pasando datos al otro activity
-		Intent intent = new Intent(getApplicationContext() ,Usuario_Comentar_Activity.class);
-		startActivity(intent);
+		
+		titulo = marker.getId();
+		int posicion=this.getPosicion(marker.getTitle());
+		Log.e("AAAAAAAAAA", posicion+"");
+//		Intent intent = new Intent(getApplicationContext() ,Usuario_Comentar_Activity.class);
+//		startActivity(intent);
+		//Log.e("AAAAAAAAAA", arraymapas[1]+"");
+		
 	}
 
+	
+	public int getPosicion(String idestablecimiento){
+		int posicion=0;
+		for (int i = 0; i < 524; i++) {
+			if(arrNomEst[i]==(titulo)){
+				posicion = i;
+			}
+		}
+		return posicion;
+	}
+	
 	@Override
 	public boolean onMarkerClick(Marker arg0) {
 		return false;
