@@ -4,14 +4,120 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="12" />
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <activity
+            android:name="com.example.appcalculator1.Splash_Activity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+<activity android:name="com.example.appcalculator1.Principal_Activity"
+                  android:screenOrientation="portrait"
+                  android:logo="@drawable/icono_footlab"
+                  android:windowSoftInputMode="stateHidden" >
+        </activity>
+
+        <activity android:name="com.example.appcalculator1.Guide_Activity"
+                  android:screenOrientation="portrait"
+                  android:theme="@android:style/Theme.Dialog" >
+            
+        </activity>
+
+        <activity android:name="com.example.appcalculator1.Protein_Activity"
+            android:screenOrientation="portrait"
+            android:logo="@drawable/back3"
+            android:theme="@style/AppTheme"
+            android:parentActivityName="com.example.appcalculator1.Principal_Activity"  >
+            
+        </activity>
+
+        <activity android:name="com.example.appcalculator1.Moisture_Activity"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.example.appcalculator1.Principal_Activity" >
+            
+        </activity>
+        
+        <activity android:name="com.example.appcalculator1.Fat_Activity"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.example.appcalculator1.Principal_Activity" >
+            
+        </activity>
+        
+        <activity android:name="com.example.appcalculator1.Fiber_Activity"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.example.appcalculator1.Principal_Activity" >
+            
+        </activity>
+        
+        <activity android:name="com.example.appcalculator1.Ash_Activity"
+            android:screenOrientation="portrait" 
+            android:parentActivityName="com.example.appcalculator1.Principal_Activity">
+            
+        </activity>
+
+ 
+        <activity android:name="com.example.appcalculator1.Protein_Guide_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog"
+            android:label="@string/Ope_1" >
+            
+        </activity>    
+        
+        
+        <activity android:name="com.example.appcalculator1.Moisture_Guide_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog"
+            android:label="@string/Ope_2" >
+            
+        </activity>   
+        
+        
+        <activity android:name="com.example.appcalculator1.Fat_Guide_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog"
+            android:label="@string/Ope_3" >
+            
+        </activity>   
+        
+        
+        <activity android:name="com.example.appcalculator1.Fiber_Guide_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" 
+            android:label="@string/Ope_4">
+            
+        </activity>   
+        
+        
+        <activity android:name="com.example.appcalculator1.Ash_Guide_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog"
+            android:label="@string/Ope_5" >
+            
+        </activity>   
+        
+        <activity android:name="com.example.appcalculator1.Resultado_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog"
+            android:label="El resultado es:" >
+            
+        </activity> 
+
+
+
+
     </application>
 
 </manifest>
