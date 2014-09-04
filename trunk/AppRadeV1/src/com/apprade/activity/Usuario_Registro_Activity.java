@@ -6,6 +6,7 @@ import java.util.Calendar;
 import com.apprade.R;
 import com.apprade.activity.Usuario_Login_Activity.TaskHttpMethodAsync;
 import com.apprade.dao.DAO_Usuario;
+import com.apprade.helper.Helper_SharedPreferences;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -15,6 +16,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -196,8 +198,13 @@ public class Usuario_Registro_Activity extends Activity {
 			protected void onPostExecute(Boolean result) {		
 					super.onPostExecute(result);
 					proDialog.dismiss();
+					
 					if (result) {
-						Toast.makeText(getApplicationContext(), "Mensaje: "+dao.oJsonStatus.getMessage(), Toast.LENGTH_LONG).show();
+						
+						Helper_SharedPreferences oShaPre =  new Helper_SharedPreferences();
+						oShaPre.storeLogin(1, dao.oUsuario.getEmail(), dao.oUsuario.getUsuarioID());
+						
+						Toast.makeText(getApplicationContext(), "Bienvenido@: "+dao.oUsuario.getNombre(), Toast.LENGTH_LONG).show();
 						Intent i = new Intent (getApplicationContext(),App_GPSMapa_Activity.class);
 						startActivity(i);
 					}else{
