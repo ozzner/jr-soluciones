@@ -64,9 +64,9 @@ public class DAO_Usuario{
 			    in =  oHttp.httpGet(URL + "?" + paramsString);
 			    oJson =oParser.parserToJsonObject(in);
 			    
-			     bEstado  = Boolean.parseBoolean(oJson.getString("error_status"));
+			 boolean bError  = Boolean.parseBoolean(oJson.getString("error_status")); //False = no error
 				
-				if(!bEstado){
+				if(!bError){
 					JSONObject oUserData =  oJson.getJSONObject("data").getJSONObject("user1");
 					
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
