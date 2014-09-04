@@ -145,6 +145,8 @@ public class DAO_Comentario {
 
 	}
 	
+	
+	
 	public boolean insertarComentario(String establecimientoID,String usuarioID,String mensaje){
 		
 		URL= URI.create(conn.getUrl());
