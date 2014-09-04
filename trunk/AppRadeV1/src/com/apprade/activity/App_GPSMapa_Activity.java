@@ -192,9 +192,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 					lista_coordenadas = esta.getCoordenadas();
 
 					arrNomEst[a] = esta.getNombre();
-					arrDirEst[a] = esta.getDireccion();
-					
-					
+					arrDirEst[a] = esta.getDireccion();								
 					a++;
 				}
 
@@ -324,8 +322,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	@Override
 	public void onInfoWindowClick(Marker marker) {
 		// abriendo y pasando datos al otro activity
-		
-		
+			
 		
 //		Log.e("ID", marker.getId());
 		String identificador = marker.getId();
@@ -337,8 +334,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 //		Log.e("ID-EXTRAC", count+"");
 		
 				
-		Log.e("ESTABLECIMIENTO", arrNomEst[count]);
-		Log.e("ESTABLECIMIENTO", arrDirEst[count]);
+//		Log.e("ESTABLECIMIENTO", arrNomEst[count]);
+//		Log.e("ESTABLECIMIENTO", arrDirEst[count]);
 
 		Intent intent = new Intent(getApplicationContext() ,Usuario_Comentar_Activity.class);
 		intent.putExtra("IDESTABLECIMIENTO", marker.getId());
