@@ -16,12 +16,11 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
+
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -42,7 +41,6 @@ public class Usuario_Login_Activity extends Activity {
 	private DAO_Usuario dao;
 	public Entity_Ranking rank;
 	private String sEmail="",sPassword="";
-	private String nombre;
     private ActionBar actionBar;
 	private ProgressDialog proDialogo;
 	
@@ -63,7 +61,7 @@ public class Usuario_Login_Activity extends Activity {
 		btnLogin = (Button)findViewById(R.id.btnLogin);
 		
 		ActionBar Bar = getActionBar();
-//		Bar.setIcon(R.drawable.check_user);
+		Bar.setIcon(R.drawable.check_user);
 		
 		btnLogin.setOnClickListener( new OnClickListener() {			
 			
@@ -149,10 +147,12 @@ public class Usuario_Login_Activity extends Activity {
 	protected void onPostExecute(Boolean result) {		
 			super.onPostExecute(result);
 			proDialogo.dismiss();
+			
 			if (result) {
 				String sUser = dao.oUsuario.getNombre();
 				Toast.makeText(getApplicationContext(),"Bienvenid@_"+sUser, Toast.LENGTH_LONG).show();
-				llamarMapa();
+				
+
 			}else{
 				Toast.makeText(getApplicationContext(),"Error: "+dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
 			}
@@ -174,6 +174,7 @@ public class Usuario_Login_Activity extends Activity {
 	     return true;
 	   } 
 	   
+	
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
 		  
