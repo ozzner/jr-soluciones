@@ -41,6 +41,7 @@ public class Entity_Usuario {
 	 * @param password
 	 * @param ranking
 	 */
+	
 	public Entity_Usuario(int usuarioID, String email, char sexo,
 			String nombre, String fechaNacimiento, String apMaterno,
 			String apPaterno, int rate, String uid, String fechaRegistro,
