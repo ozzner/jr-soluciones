@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Food Lab Calculator</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">FLC Guide</string>
+    
+    <string name="definition">Definition</string>
+    <string name="about">About</string>
+    
+    
+    <string name="Ope_1">PROTEIN</string>
+    <string name="Ope_2">MOISTURE</string>
+    <string name="Ope_3">FAT</string>
+    <string name="Ope_4">CRUDE FIBER</string>
+    <string name="Ope_5">ASH</string>
+    
+    <string name="title1">Food Lab</string>
+    <string name="title2">Calculator</string>
+    
+    
+    <string name="guide">Protein: Following Kjeltec Method. \n
+						Moisture: Gravimetric calculation, oven drying. \n
+						Fat: Gravimetric calculation solvent extraction. \n
+						Fiber: Gravimetric calculation of crude fiber. \n
+						Ash: Gravimetric calculation of Ashing.</string>
+						
+    
+    <string name="subtitle1">Protein:</string>
+    <string name="desc1">Following Kjeltec Method.</string>
+    
+    <string name="subtitle2">Moisture:</string>
+    <string name="desc2">Gravimetric calculation, oven drying.</string>
+    
+    <string name="subtitle3">Fat:</string>
+    <string name="desc3">Gravimetric calculation solvent extraction.</string>
+    
+    <string name="w.sample">W. Sample (gr)</string>
+    <string name="vol.sample">Vol. Sample (ml)</string>
+    <string name="vol.blank">Vol. Blank (ml)</string>
+    <string name="N">Normalization</string>
+    
+    <string name="weight1">Initial Weight (gr)</string>
+    <string name="weight2">Intermediate Weight  (gr)</string>
+    <string name="weight3">Final Weight (gr)</string>
+    
+    
+    <string name="rpta">Calculate</string>
+
+    <string name="el_result_1">The Result is:</string>
+    <string name="el_result_2">of</string>
+    
+    <string name="guide_protein">Initial Weight:\nIs the weight before drying.\n\nFinal Weight:\nIs the weight after drying.</string>
+    <string name="guide_moisture">Initial Weight:\nIs the weight before drying.\n\nFinal Weight:\nIs the weight after drying.</string>
+    <string name="guide_fat">Initial Weight:\nIs the weight before drying.\n\nWeight 2:\nIs the weight after drying.</string>
+    <string name="guide_fiber">Initial Weight:\nIs the weight before deffating the sample.\n\nIntermediate Weight:\nIs the weight after Acid and Alkali Hydrolisis.\n\nFinal Weight:\nIs the weight after Ashing.</string>
+    <string name="guide_ash">Initial Weight:\nIs the weight before Ashing.\n\nWeight 2:\nIs the weight after Ashing.</string>
+	
+    
+
+</resources>

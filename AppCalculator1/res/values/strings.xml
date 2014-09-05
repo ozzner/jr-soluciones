@@ -9,11 +9,11 @@
     <string name="about">Acerca de</string>
     
     
-    <string name="Ope_1">Proteína</string>
-    <string name="Ope_2">Humedad</string>
-    <string name="Ope_3">Grasa</string>
-    <string name="Ope_4">Fibra Cruda</string>
-    <string name="Ope_5">Ceniza</string>
+    <string name="Ope_1">PROTEÍNA</string>
+    <string name="Ope_2">HUMEDAD</string>
+    <string name="Ope_3">GRASA</string>
+    <string name="Ope_4">FIBRA CRUDA</string>
+    <string name="Ope_5">CENIZA</string>
     
     <string name="title1">FOOD  LAB</string>
     <string name="title2">CALCULATOR</string>
@@ -36,7 +36,7 @@
     <string name="weight2">Peso Intermedio (gr)</string>
     <string name="weight3">Peso Final (gr)</string>    
     
-    <string name="rpta">Resultado</string>
+    <string name="rpta">Calcular</string>
     
     <string name="el_result_1">El resultado es:</string>
     <string name="el_result_2">de</string>
