@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="21" 
-    android:background="@drawable/fondo2">
+    android:background="#eeeded">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -92,17 +92,17 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        
+        android:layout_height="fill_parent"        
         android:layout_weight="4.5"
         android:orientation="vertical"
         android:padding="10dip" 
+        android:gravity="center"
         >
 
         <Button
             android:id="@+id/btnResult"
             style="@style/estilo_boton"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="10dip"
@@ -110,17 +110,6 @@
             android:layout_marginTop="0dip"
             android:onClick="btnResult_onClick"
             android:text="@string/rpta" />
-
-        <TextView
-            android:id="@+id/txtResult"
-            style="@style/estilo_result2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dip"
-            android:text="		"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-             />
 
     </LinearLayout>
 
