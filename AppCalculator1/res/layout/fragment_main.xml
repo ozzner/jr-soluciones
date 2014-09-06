@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@drawable/fondo2"
+    android:background="@drawable/fondo"
     android:weightSum="21">
 
     <LinearLayout
