@@ -2,9 +2,8 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
     <!-- PRESS -->
     <item android:state_pressed="true">
-         
-        <shape android:shape="rectangle">                   
-            <solid android:color="#f4e9d7"/>           
+            <shape android:shape="rectangle">   
+            <solid android:color="#d3d3d3"/>           
             <corners android:bottomLeftRadius="9dp"
                  android:bottomRightRadius="9dp" 
                  android:topLeftRadius="9dp"
@@ -16,9 +15,8 @@
      
     <!-- FOCUS -->
     <item android:state_focused="true">
-         
-        <shape android:shape="rectangle">           
-            <solid android:color="#ffcb00"/>
+        <shape android:shape="rectangle"> 
+            <solid android:color="#d3d3d3"/>
             <corners android:bottomLeftRadius="9dp"
                  android:bottomRightRadius="9dp" 
                  android:topLeftRadius="9dp"
@@ -31,7 +29,7 @@
     <item android:state_selected="true">
          
         <shape android:shape="rectangle">
-            <solid android:color="#ff8ecf"/>
+            <solid android:color="#d3d3d3"/>
             <corners android:bottomLeftRadius="9dp" 
                 android:bottomRightRadius="9dp" 
                 android:topLeftRadius="9dp" 
@@ -40,7 +38,7 @@
          
     </item>
      
-    <!-- DEFAULT -->
-        <item android:drawable="@android:color/transparent"/>
+<!--     DEFAULT -->
+<!--         <item android:drawable="@android:color/transparent"/><item ></item> -->
 
 </selector>
