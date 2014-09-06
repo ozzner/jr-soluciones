@@ -38,13 +38,34 @@ public class Protein_Activity extends ActionBarActivity {
 		val2 = (EditText)findViewById(R.id.edt_val2);
 		val3 = (EditText)findViewById(R.id.edt_val3);
 		val4 = (EditText)findViewById(R.id.edt_val4);
-		Button btna = (Button)findViewById(R.id.btnResult);
 		
-		Typeface tf =  Typeface.createFromAsset(getAssets(), "fonts/Trebuchet MS.ttf");
+		TextView tv1 = (TextView)findViewById(R.id.textView1);
+		TextView tv2 = (TextView)findViewById(R.id.textView2);
+		TextView tv3 = (TextView)findViewById(R.id.textView3);
+		TextView tv4 = (TextView)findViewById(R.id.textView4);
+		
+		Button btna = (Button)findViewById(R.id.btnResult);
+		TextView tvOp1 = (TextView)findViewById(R.id.txtOpe1);
+		
+		Typeface tf =  Typeface.createFromAsset(getAssets(), "fonts/playtime.ttf");
 		btna.setTypeface(tf);
+		
+		val1.setTypeface(tf);
+		val2.setTypeface(tf);
+		val3.setTypeface(tf);
+		val4.setTypeface(tf);
+		tv1.setTypeface(tf);
+		tv2.setTypeface(tf);
+		tv3.setTypeface(tf);
+		tv4.setTypeface(tf);
+		
+		
+		tvOp1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/umbrage.ttf"));
+		
 		
 		android.app.ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+//        actionBar.setIcon(R.drawable.ic_back);
 	}
 	
 	@Override
