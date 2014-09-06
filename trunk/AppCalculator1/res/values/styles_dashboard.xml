@@ -13,6 +13,7 @@
  
  <style name="dashboard_button_center" parent="@style/DashboardButton">
       <item name="android:layout_width">110dp</item>        
-      <item name="android:layout_weight">0</item>     
+      <item name="android:layout_weight">0</item>    
+      <item name="android:textColor">#004050</item>r
   </style>
 </resources>
