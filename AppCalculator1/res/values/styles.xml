@@ -42,7 +42,7 @@
    
    
    <style name="estilo_result2" parent="@android:style/Widget.Button">
-       <item name="android:textSize">17sp</item>
+       <item name="android:textSize">25dp</item>
        <item name="android:textStyle">italic</item>
        <item name="android:textColor">#FFFFFF</item>
        <item name="android:gravity">center</item>
@@ -50,7 +50,7 @@
        <item name="android:shadowDx">1</item>
        <item name="android:shadowDy">1</item>
        <item name="android:shadowRadius">0.6</item>
-       <item name="android:background">@drawable/estilo_result2</item>
+       <item name="android:background">@drawable/buttonshape</item>
        <item name="android:padding">10dip</item>
    </style>
        
