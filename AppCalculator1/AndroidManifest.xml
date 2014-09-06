@@ -38,7 +38,7 @@
 
         <activity android:name="Protein_Activity"
             android:screenOrientation="portrait"
-            android:logo="@drawable/back3"
+   
             android:theme="@style/AppTheme"
             android:parentActivityName="Principal_Activity"  >
             
