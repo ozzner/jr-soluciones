@@ -39,10 +39,8 @@ public class Protein_Activity extends ActionBarActivity {
 		val3 = (EditText)findViewById(R.id.edt_val3);
 		val4 = (EditText)findViewById(R.id.edt_val4);
 		
-		TextView tv1 = (TextView)findViewById(R.id.textView1);
-		TextView tv2 = (TextView)findViewById(R.id.textView2);
-		TextView tv3 = (TextView)findViewById(R.id.textView3);
-		TextView tv4 = (TextView)findViewById(R.id.textView4);
+		TextView tv1 = (TextView)findViewById(R.id.txtCeniza1);
+		TextView tv3 = (TextView)findViewById(R.id.txtCeniza2);
 		
 		Button btna = (Button)findViewById(R.id.btnResult);
 		TextView tvOp1 = (TextView)findViewById(R.id.txtOpe1);
@@ -55,9 +53,7 @@ public class Protein_Activity extends ActionBarActivity {
 		val3.setTypeface(tf);
 		val4.setTypeface(tf);
 		tv1.setTypeface(tf);
-		tv2.setTypeface(tf);
 		tv3.setTypeface(tf);
-		tv4.setTypeface(tf);
 		
 		
 		tvOp1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/umbrage.ttf"));
