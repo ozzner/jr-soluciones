@@ -63,7 +63,7 @@ public class Principal_Activity extends Activity {
 
 		case "español":
 //			bt2.setText("Español");
-//			bt2.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_action_call, 0, 0);
+			abc.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.p, 0, 0);
 			break;
 		default:
 			break;
