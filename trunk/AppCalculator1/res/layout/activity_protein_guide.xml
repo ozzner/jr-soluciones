@@ -6,7 +6,7 @@
     android:padding="20dip">
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tv_result"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/guide_protein"
