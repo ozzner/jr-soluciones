@@ -2,14 +2,13 @@ package com.wasitec;
 
 import java.text.DecimalFormat;
 
-
-
-
-
-import android.app.ActionBar;
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,8 +42,38 @@ public class Fiber_Activity extends ActionBarActivity {
 		
 		tvOp1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/umbrage.ttf"));
 		
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+	}
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main_ope, menu);
+		return true;
+	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		int id = item.getItemId();
+	
+		if (id == R.id.definition) {
+			
+			Intent i = new Intent(this, Fiber_Guide_Activity.class);
+			startActivity(i);
+		}else{
+			Intent main = new Intent(getApplicationContext(),Principal_Activity.class);
+			startActivity(main);
+			finish();
+		}
+		
+		
+
+		return super.onOptionsItemSelected(item);
 	}
 		
 		public void btnResult_onClick (View v){
@@ -93,7 +122,10 @@ public class Fiber_Activity extends ActionBarActivity {
 			DecimalFormat df = new DecimalFormat("0.000"); 
 			
 			String resultado = df.format(result);			
-			rest.setText(resultado);
+			
+			Intent intents = new Intent(getApplicationContext(), Resultado_Activity.class);
+			intents.putExtra(Principal_Activity.TAG_RESULT, resultado);
+			startActivity(intents);
 			
 			}
 			
