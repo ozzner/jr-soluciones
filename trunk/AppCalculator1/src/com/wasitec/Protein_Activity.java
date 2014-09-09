@@ -82,7 +82,6 @@ public class Protein_Activity extends ActionBarActivity {
 		startActivity(main);
 		finish();
 		
-
 		return super.onOptionsItemSelected(item);
 	}
 	
