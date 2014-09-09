@@ -31,7 +31,7 @@
                 <Button
                     android:id="@+id/btnProtenia"
                     style="@style/dashboard_button_center"
-                    android:drawableTop="@drawable/ic_action_call"
+                    android:drawableTop="@drawable/p"
                     android:onClick="btn1_onClick"
                     android:text="@string/Ope_1" />
             </LinearLayout>
@@ -45,7 +45,7 @@
                 <Button
                     android:id="@+id/btnHumendad"
                     style="@style/dashboard_button_center"
-                    android:drawableTop="@drawable/ic_action_go_to_today"
+                    android:drawableTop="@drawable/h"
                     android:onClick="btn2_onClick"
                     android:text="@string/Ope_2" />
             </LinearLayout>
@@ -68,7 +68,7 @@
                 <Button
                     android:id="@+id/btnGrasa"
                     style="@style/dashboard_button_center"
-                    android:drawableTop="@drawable/ic_action_good"
+                    android:drawableTop="@drawable/g"
                     android:onClick="btn3_onClick"
                     android:text="@string/Ope_3" />
             </LinearLayout>
@@ -91,7 +91,7 @@
                 <Button
                     android:id="@+id/btnFibra"
                     style="@style/dashboard_button_center"
-                    android:drawableTop="@drawable/ic_action_new_label"
+                    android:drawableTop="@drawable/f"
                     android:onClick="btn4_onClick"
                     android:text="@string/Ope_4" />
             </LinearLayout>
@@ -105,7 +105,7 @@
                 <Button
                     android:id="@+id/btn5"
                     style="@style/dashboard_button_center"
-                    android:drawableTop="@drawable/ic_action_undo"
+                    android:drawableTop="@drawable/c"
                     android:onClick="btn5_onClick"
                     android:text="@string/Ope_5" />
             </LinearLayout>
