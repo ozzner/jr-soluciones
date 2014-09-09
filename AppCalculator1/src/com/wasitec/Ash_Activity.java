@@ -1,18 +1,13 @@
 package com.wasitec;
 
 import java.text.DecimalFormat;
-
-
-
-
-
-
-
-
-import android.app.ActionBar;
+import android.support.v7.app.ActionBar;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,14 +31,12 @@ public class Ash_Activity extends ActionBarActivity {
 		
 		val1 = (EditText)findViewById(R.id.edt_val1);
 		val2 = (EditText)findViewById(R.id.edt_val2);
-		TextView tv1 = (TextView)findViewById(R.id.txtCeniza1);
 		TextView tv2 = (TextView)findViewById(R.id.txtCeniza2);
 		
 	
 		Button btna = (Button)findViewById(R.id.btnResult);
 		TextView tvOp1 = (TextView)findViewById(R.id.txtOpe5);
 	
-		tv1.setTypeface(tf);
 		tv2.setTypeface(tf);
 		
 		btna.setTypeface(tf);
@@ -51,9 +44,43 @@ public class Ash_Activity extends ActionBarActivity {
 		val2.setTypeface(tf);
 
 		tvOp1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/umbrage.ttf"));
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        
 	}
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main_ope, menu);
+		return true;
+	}
+
+	
+
+	
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		int id = item.getItemId();
+	
+		if (id == R.id.definition) {
+			
+			Intent i = new Intent(this, Ash_Guide_Activity.class);
+			startActivity(i);
+		}else{
+			Intent main = new Intent(getApplicationContext(),Principal_Activity.class);
+			startActivity(main);
+			finish();
+		}
+		
+
+		return super.onOptionsItemSelected(item);
+	}
+	
 		
 		public void btnResult_onClick (View v){
 
@@ -95,8 +122,11 @@ public class Ash_Activity extends ActionBarActivity {
 			DecimalFormat df = new DecimalFormat("0.000"); 
 			
 			String resultado = df.format(result);
-			rest.setText(resultado);
 			
+			
+			Intent intents = new Intent(getApplicationContext(), Resultado_Activity.class);
+			intents.putExtra(Principal_Activity.TAG_RESULT, resultado);
+			startActivity(intents);
 			}
 			
 		}

@@ -3,10 +3,6 @@ package com.wasitec;
 
 import java.text.DecimalFormat;
 
-
-
-
-
 import android.R.bool;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -39,7 +35,6 @@ public class Protein_Activity extends ActionBarActivity {
 		val3 = (EditText)findViewById(R.id.edt_val3);
 		val4 = (EditText)findViewById(R.id.edt_val4);
 		
-		TextView tv1 = (TextView)findViewById(R.id.txtCeniza1);
 		TextView tv3 = (TextView)findViewById(R.id.txtCeniza2);
 		
 		Button btna = (Button)findViewById(R.id.btnResult);
@@ -52,16 +47,16 @@ public class Protein_Activity extends ActionBarActivity {
 		val2.setTypeface(tf);
 		val3.setTypeface(tf);
 		val4.setTypeface(tf);
-		tv1.setTypeface(tf);
 		tv3.setTypeface(tf);
 		
 		
 		tvOp1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/umbrage.ttf"));
 		
 		
-		android.app.ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 //        actionBar.setIcon(R.drawable.ic_back);
+        actionBar.show();
 	}
 	
 	@Override
@@ -83,6 +78,9 @@ public class Protein_Activity extends ActionBarActivity {
 			Intent i = new Intent(this, Protein_Guide_Activity.class);
 			startActivity(i);
 		}
+		Intent main = new Intent(getApplicationContext(),Principal_Activity.class);
+		startActivity(main);
+		finish();
 		
 
 		return super.onOptionsItemSelected(item);
@@ -139,14 +137,14 @@ public class Protein_Activity extends ActionBarActivity {
 			
 			else {
 				
-//			result = ((((valor2 - valor3) * valor4 * 14.01)/(valor1 * 10)) * 100) * 6.25;
-//			DecimalFormat df = new DecimalFormat("0.000"); 
-//			
-//			String resultado = df.format(result);
-//			rest.setText(resultado);
+			result = ((((valor2 - valor3) * valor4 * 14.01)/(valor1 * 10)) * 100) * 6.25;
+			DecimalFormat df = new DecimalFormat("0.000"); 
 			
-				Intent i = new Intent (this, Resultado_Activity.class);
-				startActivity(i);
+			String resultado = df.format(result);
+				
+				Intent intents = new Intent(getApplicationContext(), Resultado_Activity.class);
+				intents.putExtra(Principal_Activity.TAG_RESULT, resultado);
+				startActivity(intents);
 			
 			}
 			

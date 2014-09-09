@@ -1,21 +1,14 @@
 package com.wasitec;
 
 import java.util.Locale;
-
+import android.support.v7.app.ActionBar;
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -25,7 +18,7 @@ public class Principal_Activity extends Activity {
 	Button bt3;
 	Button bt4;
 	Button bt5;
-
+	public static final String TAG_RESULT = "resultado";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,13 +50,14 @@ public class Principal_Activity extends Activity {
 		switch (sLenguaje) {
 
 		case "English":
-//			bt2.setText("English");
-//			bt2.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_action_call, 0, 0);
+
+			bt2.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.m, 0, 0);
+			bt3.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.f, 0, 0);
+			bt5.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.a, 0, 0);
 			break;
 
 		case "español":
-//			bt2.setText("Español");
-			abc.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.p, 0, 0);
+
 			break;
 		default:
 			break;
@@ -93,20 +87,7 @@ public class Principal_Activity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	// public static class PlaceholderFragment extends Fragment {
-	//
-	// public PlaceholderFragment() {
-	// }
-	//
-	// @Override
-	// public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	// Bundle savedInstanceState) {
-	// View rootView = inflater.inflate(R.layout.dashboard, container,
-	// false);
-	// return rootView;
-	// }
-	//
-	// }
+
 
 	public void btn1_onClick(View v) {
 
