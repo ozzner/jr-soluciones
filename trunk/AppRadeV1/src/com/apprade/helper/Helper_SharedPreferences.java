@@ -14,7 +14,6 @@ public class Helper_SharedPreferences  {
 	private static final int Status = -1;
 	private Context contexto;
 	
-	
 	public void run() {
 		
 		shaPreLogin = contexto.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);

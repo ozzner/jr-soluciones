@@ -68,29 +68,37 @@ public class Usuario_Login_Activity extends Activity {
 			@Override
 			public void onClick(View v) {
 				
-				boolean esError=false;
-				
-				sEmail = email.getText().toString();
-				sPassword = password.getText().toString();
-				
-				if(sEmail.compareTo("")==0){
-					email.setError("Debes ingresar un Correo");
-		    		esError=true;
-		    	}
-				
-				if(sPassword.compareTo("")==0){
-					password.setError("Debes ingresar un Password");
-		    		esError=true;
-		    	}
-				
-				if(esError)
-					return;
-				
-				exeHttpAsync();	//Lanza 2do hilo.		 
+				if (validarCampos()) 
+					exeHttpAsync();
+					
+					 
 			}
 		});			
 	}
 		
+	
+
+	protected boolean validarCampos(){
+		boolean esError=false;
+		
+		sEmail = email.getText().toString();
+		sPassword = password.getText().toString();
+		
+		if(sEmail.compareTo("")==0){
+			email.setError("Debes ingresar un Correo");
+			
+    	}else if(sPassword.compareTo("")==0){
+			password.setError("Debes ingresar un Password");
+    		
+    	}else{
+    		esError=true;
+    	}
+		
+		return esError;
+		
+	}
+	
+	
 	
 	protected void showDialogo(){
 		proDialogo = new ProgressDialog(Usuario_Login_Activity.this);
@@ -149,9 +157,10 @@ public class Usuario_Login_Activity extends Activity {
 			proDialogo.dismiss();
 			
 			if (result) {
+				llamarMapa();
+				
 				String sUser = dao.oUsuario.getNombre();
 				Toast.makeText(getApplicationContext(),"Bienvenid@_"+sUser, Toast.LENGTH_LONG).show();
-				
 
 			}else{
 				Toast.makeText(getApplicationContext(),"Error: "+dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
@@ -182,24 +191,20 @@ public class Usuario_Login_Activity extends Activity {
 	     switch (item.getItemId()) {
 	
 	     case R.id.log_login_action:
-	       Toast.makeText(this, "Accion  LOGIN", Toast.LENGTH_SHORT)
-	           .show();
-		   actionBar.setSubtitle("Inicio sesion");
+	    	 actionBar.setSubtitle("Login");
+	    	 if (validarCampos()) 
+					exeHttpAsync();
 	       break;
-
+	       
 	     case R.id.log_about_action:
-	       Toast.makeText(this, "Accion ABOUT", Toast.LENGTH_SHORT)
-	           .show();
-		   actionBar.setSubtitle("About app");
+		   actionBar.setSubtitle("Acerca de");
 	       break;
 	       
 	     case R.id.log_registro_action:
+	    	 
 		       Intent i = new Intent(getApplicationContext(),Usuario_Registro_Activity.class);
 		       startActivity(i);
-		       
-		       Toast.makeText(this, "Registro nuevo", Toast.LENGTH_SHORT)
-	           .show();
-			   actionBar.setSubtitle("Registrar");
+			   finish();
 		       break;
 	       
 	       

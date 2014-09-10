@@ -249,7 +249,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 
 			proDialog = new ProgressDialog(App_GPSMapa_Activity.this);
 			proDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			// proDialog.setMessage("cargando...");
+		    proDialog.setMessage("cargando...");
 			proDialog.show();
 
 		}
@@ -301,16 +301,21 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 		actionBar = getActionBar();
 
 		switch (item.getItemId()) {
-		case R.id.action_map_comentar:
-			// Toast.makeText(this, "Acción comentar",
-			// Toast.LENGTH_SHORT).show();
-			actionBar.setSubtitle("cargando...");
-//			Intent i = new Intent(getApplicationContext(), Usuario_Comentar_Activity.class);
-//			startActivity(i);
-			// initiatePopupWindow();
+		case R.id.cargar_establ_acc:
+//			 Toast.makeText(this, "Bye",
+//			 Toast.LENGTH_SHORT).show();
+			actionBar.setSubtitle("Actualizado");
 			exeHttpAsync();
 			break;
-
+			// initiatePopupWindow();
+		case R.id.logout_acc:
+			actionBar.setSubtitle("Chau");
+			Intent i = new Intent(getApplicationContext(), Usuario_Login_Activity.class);
+			startActivity(i);
+			finish();
+			
+			break;
+			
 		default:
 			break;
 		}

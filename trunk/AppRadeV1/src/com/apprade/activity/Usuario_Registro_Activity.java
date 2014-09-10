@@ -39,7 +39,6 @@ public class Usuario_Registro_Activity extends Activity {
 	private EditText etCorreo;
 	private EditText etPassword;
 	private EditText etConfPassword;
-	private EditText etFecha;
 	private RadioGroup rgSexo;
 	private TextView txFecha;
 	private ImageButton ib;
@@ -70,7 +69,7 @@ public class Usuario_Registro_Activity extends Activity {
 		ib = (ImageButton) findViewById(R.id.imb_date);
 		rgSexo = (RadioGroup)findViewById(R.id.rg_sexo);
 //		txFecha= (TextView) findViewById(R.id.txtFecha);
-		etFecha = (EditText)findViewById(R.id.edt_fecha);
+	
 		
 		 ib.setOnClickListener( new OnClickListener() {
 			
@@ -154,8 +153,7 @@ public class Usuario_Registro_Activity extends Activity {
 				  public void onDateSet(DatePicker view, int selectedYear,
 				    int selectedMonth, int selectedDay) {
 						sFecha = (selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDay);
-//				  		Toast.makeText(getApplicationContext(),(sFecha), Toast.LENGTH_LONG).show();
-						etFecha.setText(sFecha);
+			  		Toast.makeText(getApplicationContext(),(sFecha), Toast.LENGTH_LONG).show();
 					  return;
 					  			  }
 				   };	 
@@ -171,8 +169,7 @@ public class Usuario_Registro_Activity extends Activity {
 		    @Override
 		    protected Boolean doInBackground(String... params) {
 					boolean bRequest = false;
-					
-					
+										
 					if (dao.registarUsuario(sEmail, sSexo, sNombre, sPassword, sFecha)) 
 						bRequest = true;
 
@@ -202,24 +199,27 @@ public class Usuario_Registro_Activity extends Activity {
 					if (result) {
 						
 						Helper_SharedPreferences oShaPre =  new Helper_SharedPreferences();
-						oShaPre.storeLogin(1, dao.oUsuario.getEmail(), dao.oUsuario.getUsuarioID());
+						oShaPre.storeLogin(1, sEmail, dao.oUsuario.getUsuarioID(),getApplicationContext());
 						
-						Toast.makeText(getApplicationContext(), "Bienvenido@: "+dao.oUsuario.getNombre(), Toast.LENGTH_LONG).show();
-						Intent i = new Intent (getApplicationContext(),App_GPSMapa_Activity.class);
+						Toast.makeText(getApplicationContext(), "Bienvenido@: "+sNombre, Toast.LENGTH_LONG).show();
+						Intent i = new Intent (getApplicationContext(),Usuario_Login_Activity.class);
 						startActivity(i);
+						finish();
 					}else{
-						Toast.makeText(getApplicationContext()," error: "+dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(),"Error: "+dao.oJsonStatus.getMessage()+"\nInfo: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
 					}
+					
+					
 				}
 								
 			}		
 			
-			protected void llamarMapa() {
-				
-				Intent i = new Intent(this, App_GPSMapa_Activity.class);
-				startActivity(i);
-				finish();				
-			}		 
+//			protected void llamarMapa() {
+//				
+//				Intent i = new Intent(this, App_GPSMapa_Activity.class);
+//				startActivity(i);
+//				finish();				
+//			}		 
 
 		 @Override
 		   public boolean onCreateOptionsMenu(Menu menu) {
@@ -242,22 +242,21 @@ public class Usuario_Registro_Activity extends Activity {
 		   public boolean onOptionsItemSelected(MenuItem item) {
 			  
 			  actionBar = getActionBar();
-		     switch (item.getItemId()) {
-		
-		     case R.id.reg_login_action:
-		       Toast.makeText(this, "Accion  LOGIN", Toast.LENGTH_SHORT)
-		           .show();
-			   actionBar.setSubtitle("Inicio sesion");
-		       break;
 
-		     case R.id.reg_about_action:
-		       Toast.makeText(this, "Accion ABOUT", Toast.LENGTH_SHORT)
-		           .show();
-			   actionBar.setSubtitle("About app");
-		       break;      
-		       
-		     default:
-		       break;
+			  switch (item.getItemId()) {
+		
+			     case R.id.reg_login_action:
+					Intent login = new Intent(getApplicationContext(), Usuario_Login_Activity.class);
+					startActivity(login);
+					finish();
+			       break;
+	
+			     case R.id.reg_about_action:
+				   actionBar.setSubtitle("About app");
+			       break;      
+			       
+			     default:
+			       break;
 		     }
 
 		     return true;

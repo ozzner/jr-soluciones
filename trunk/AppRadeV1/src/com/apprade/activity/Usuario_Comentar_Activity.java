@@ -94,8 +94,7 @@ public class Usuario_Comentar_Activity extends Activity {
 	    protected Boolean doInBackground(String... params) {
 				boolean bRequest = false;
 				String sEstablecimientoID = etComentario.getText().toString();
-						Log.e("CASO", sEstablecimientoID);
-						
+											
 				if (dao.insertarComentario(sEstablecimientoID, "10", "Hola mundo")) 
 					bRequest = true;
 		
@@ -107,14 +106,14 @@ public class Usuario_Comentar_Activity extends Activity {
 	    	
 	    	showDialogo();
 	    	
-	    	proDialogo.setOnCancelListener(new OnCancelListener() {
+	    	proDialogo.setOnCancelListener(new OnCancelListener() { 
 	    	
 	        @Override
 		    public void onCancel(DialogInterface dialog) {
 		    	TaskHttpMethodAsync.this.cancel(true);  }
 		    });
 		    proDialogo.setProgress(0);
-		   // pDialog.show();
+		  
 	    }
 	    
 	    @Override
@@ -141,7 +140,7 @@ public class Usuario_Comentar_Activity extends Activity {
 	private OnClickListener cancel_button_click_listener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-	
+			finish();
 		}
 	};
 	

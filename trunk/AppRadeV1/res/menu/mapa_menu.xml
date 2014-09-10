@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-        
-        <item 
-        android:id="@+id/action_map_comentar"
-        android:title="Comentar"
-        android:icon="@drawable/ic_action_email"
-        android:showAsAction="ifRoom|withText"
-        />
 
-  
+    <item
+        android:id="@+id/cargar_establ_acc"
+        android:icon="@drawable/ic_action_place"
+        android:showAsAction="always|withText"
+        android:title="Cargar"/>
+    <item
+        android:id="@+id/logout_acc"
+        android:icon="@drawable/ic_action_cancel"
+        android:showAsAction="always|withText"
+        android:title="Salir"/>
 
 </menu>
