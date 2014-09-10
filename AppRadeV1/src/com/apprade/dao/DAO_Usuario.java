@@ -122,11 +122,12 @@ public class DAO_Usuario{
 			    in =  oHttp.httpPost(URL, parametros);
 			    oJson =oParser.parserToJsonObject(in);
 			    
-			    bEstado = Boolean.parseBoolean(oJson.getString("error_status"));
+			  boolean  bError = Boolean.parseBoolean(oJson.getString("error_status"));
 				
-				if(!bEstado){
+				if(!bError){
 					JSONObject oUserData =  oJson.getJSONObject("data");					
 					oJsonStatus.setMessage(oUserData.getString("message"));
+					bEstado = true;
 					
 				}else{
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));

@@ -3,15 +3,15 @@
    
     <item 
         android:id="@+id/log_login_action"
-        android:title="Iniciar sesión"
-        android:icon="@drawable/login"
+        android:title="Login"
+        android:icon="@drawable/ic_action_accounts"
         android:showAsAction="ifRoom|withText"
         />
 
     <item 
         android:id="@+id/log_registro_action"
         android:title="Registro"
-        android:icon="@drawable/registro"
+        android:icon="@drawable/ic_action_new_account"
         android:showAsAction="ifRoom|withText"
         />
     <item 
