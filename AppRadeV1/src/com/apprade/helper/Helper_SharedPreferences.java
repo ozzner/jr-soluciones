@@ -24,7 +24,6 @@ public class Helper_SharedPreferences  {
 		editorLogin.putInt("userID", UserID);
 		editorLogin.putInt("status", Status);
 		editorLogin.commit();
-
 	}
 	
 
@@ -65,8 +64,8 @@ public class Helper_SharedPreferences  {
 	}
 	
 	
-	public void storeLogin(int status, String email, int userID) {
-
+	public void storeLogin(int status, String email, int userID,Context context) {
+		contexto=context;
 		shaPreLogin = contexto.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
 		SharedPreferences.Editor editorLogin = shaPreLogin.edit();
