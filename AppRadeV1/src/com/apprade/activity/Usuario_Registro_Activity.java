@@ -108,7 +108,7 @@ public class Usuario_Registro_Activity extends Activity {
 				 	if (sexo == "Masculino") 
 						sSexo = "M";
 					 else
-						 sSexo = "F";
+						sSexo = "F";
 				 
 					if(sEmail.compareTo("")==0){
 						etCorreo.setError("Debes ingresar un Correo");
@@ -201,12 +201,14 @@ public class Usuario_Registro_Activity extends Activity {
 						Helper_SharedPreferences oShaPre =  new Helper_SharedPreferences();
 						oShaPre.storeLogin(1, sEmail, dao.oUsuario.getUsuarioID(),getApplicationContext());
 						
-						Toast.makeText(getApplicationContext(), "Bienvenido@: "+sNombre, Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(),"Hola "+ sNombre+", ya puedes iniciar sesión con tus datos, presiona Login " , Toast.LENGTH_LONG).show();
 						Intent i = new Intent (getApplicationContext(),Usuario_Login_Activity.class);
+						i.putExtra("correo", sEmail);
+						i.putExtra("password", sPassword);
 						startActivity(i);
 						finish();
 					}else{
-						Toast.makeText(getApplicationContext(),"Error: "+dao.oJsonStatus.getMessage()+"\nInfo: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(),dao.oJsonStatus.getMessage()+"\nInfo: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
 					}
 					
 					

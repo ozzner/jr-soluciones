@@ -3,12 +3,15 @@ package com.apprade.activity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import com.apprade.R;
 import com.apprade.dao.DAO_Establecimiento;
+import com.apprade.dao.DAO_Usuario;
 import com.apprade.entity.Entity_Coordenadas;
 import com.apprade.entity.Entity_Establecimiento;
 import com.apprade.helper.Helper_GPS_Tracker;
 import com.apprade.helper.Helper_JSONStatus;
+import com.apprade.helper.Helper_SharedPreferences;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -50,7 +53,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	Helper_GPS_Tracker gps;
 	private double latitude;
 	private double longitude;
-	private String nombre;
+	private int usuarioID;
 	private ActionBar actionBar;
 	private PopupWindow popWin;
 	private Button btnCancel;
@@ -58,10 +61,11 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	private ProgressDialog proDialog;
 	public Entity_Establecimiento ettEst;
 	private Helper_JSONStatus status;
-	
+	private DAO_Usuario daoUser;
 	
 	String[] arrNomEst = null;
 	String[] arrDirEst = null;
+	int[] arrIdEstt ;
 
 	
 	int arraymapas[] = new int[1000];
@@ -76,6 +80,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 		dao = new DAO_Establecimiento();
 		ettEst = new Entity_Establecimiento();
 		status = new Helper_JSONStatus();
+		daoUser = new DAO_Usuario();
 	}
 
 	@Override
@@ -83,10 +88,23 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gps_mapa);
 
-		Intent intent = getIntent();
-		nombre = intent.getStringExtra("NOMBRE");
+		try {
+		
+			Bundle oBundle = getIntent().getExtras();
+			usuarioID = oBundle.getInt("user_id");
+			Toast.makeText(getApplicationContext(), "idUsuario "+usuarioID, Toast.LENGTH_SHORT).show();
+			
+		} catch (Exception e) {
+		ArrayList<String> datos = new ArrayList<String>();
+		
+			Helper_SharedPreferences oShared = new Helper_SharedPreferences();
+			datos = oShared.getAlldataStore(getApplicationContext());
+			usuarioID=Integer.parseInt(datos.get(1)); 
+			Toast.makeText(getApplicationContext(), "Ops! "+usuarioID, Toast.LENGTH_SHORT).show();
+		}
+		
+		
 		setUpMapIfNeeded();
-	
 	}
 
 	@Override
@@ -96,7 +114,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 	}
 
 	private void setUpMapIfNeeded() {
-
+		
 		map = ((SupportMapFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.map)).getMap();
 		map.setMyLocationEnabled(true);
@@ -178,7 +196,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 			float lat = 0, lon = 0;
 
 			lista_establecimiento = dao.listarTodoEstablecimiento();
-			
 
 			bRequest = status.getError_status();
 
@@ -186,13 +203,15 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 				List<Entity_Coordenadas> lista_coordenadas = new ArrayList<Entity_Coordenadas>();
 				arrNomEst = new String[lista_establecimiento.size()];
 				arrDirEst = new String[lista_establecimiento.size()];
-
+				arrIdEstt = new int[lista_establecimiento.size()];
+				
 				int a = 0;
 				for (Entity_Establecimiento esta : lista_establecimiento) {
 					lista_coordenadas = esta.getCoordenadas();
 
 					arrNomEst[a] = esta.getNombre();
-					arrDirEst[a] = esta.getDireccion();								
+					arrDirEst[a] = esta.getDireccion();		
+					arrIdEstt[a] = esta.getEstablecimientoID();
 					a++;
 				}
 
@@ -237,11 +256,12 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 
 			if (!result) {
 				actionBar.setSubtitle("Ok!");
-				
-
+				 Toast.makeText(getApplicationContext(), "¡Listo!",
+						 Toast.LENGTH_SHORT).show();
 			} else {
 				actionBar.setSubtitle("Error!");
-
+				 Toast.makeText(getApplicationContext(), "¡Hubo un error!",
+						 Toast.LENGTH_SHORT).show();
 			}
 		}
 
@@ -249,36 +269,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 
 			proDialog = new ProgressDialog(App_GPSMapa_Activity.this);
 			proDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		    proDialog.setMessage("cargando...");
+		    proDialog.setMessage("Cargando...");
 			proDialog.show();
 
 		}
 	}
 
 	
-	/*
-	 * POPUP CONFIGURATIONS
-	 */
-
-	private void initiatePopupWindow() {
-		try {
-			// We need to get the instance of the LayoutInflater
-			LayoutInflater inflater = (LayoutInflater) App_GPSMapa_Activity.this
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View layout = inflater.inflate(R.layout.popup_comentario,
-					(ViewGroup) findViewById(R.id.popup_element));
-			popWin = new PopupWindow(layout, android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
-					android.view.ViewGroup.LayoutParams.WRAP_CONTENT, true);
-			popWin.showAtLocation(layout, Gravity.CENTER, 0, 0);
-
-			btnCancel = (Button) layout.findViewById(R.id.btn_cancel_comen);
-			btnCancel
-					.setOnClickListener(cancel_button_click_listener);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	private OnClickListener cancel_button_click_listener = new OnClickListener() {
 		@Override
@@ -302,14 +299,14 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 
 		switch (item.getItemId()) {
 		case R.id.cargar_establ_acc:
-//			 Toast.makeText(this, "Bye",
-//			 Toast.LENGTH_SHORT).show();
-			actionBar.setSubtitle("Actualizado");
 			exeHttpAsync();
 			break;
-			// initiatePopupWindow();
+			
 		case R.id.logout_acc:
 			actionBar.setSubtitle("Chau");
+			Helper_SharedPreferences oShared = new Helper_SharedPreferences();
+			oShared.storeStatus(0, getApplicationContext());// 0 => Inicia desde el login
+			
 			Intent i = new Intent(getApplicationContext(), Usuario_Login_Activity.class);
 			startActivity(i);
 			finish();
@@ -329,26 +326,26 @@ public class App_GPSMapa_Activity extends FragmentActivity implements OnMarkerCl
 		// abriendo y pasando datos al otro activity
 			
 		
-//		Log.e("ID", marker.getId());
+		Log.e("ID", marker.getId());
 		String identificador = marker.getId();
 				
 		String contador = identificador.substring(1,identificador.length());
-//		Log.e("ID-EXTRAC", contador);
+		Log.e("ID-EXTRAC", contador);
 		
 		int count = Integer.parseInt(contador);
-//		Log.e("ID-EXTRAC", count+"");
 		
 				
-//		Log.e("ESTABLECIMIENTO", arrNomEst[count]);
-//		Log.e("ESTABLECIMIENTO", arrDirEst[count]);
+		Log.e("ESTABLECIMIENTO", arrNomEst[count]);
+		Log.e("ESTABLECIMIENTO", arrDirEst[count]);
 
-		Intent intent = new Intent(getApplicationContext() ,Usuario_Comentar_Activity.class);
-		intent.putExtra("IDESTABLECIMIENTO", marker.getId());
-		intent.putExtra("ESTABLECIMIENTO", arrNomEst[count]);
-		intent.putExtra("DIRECCION", arrDirEst[count]);
-				
-		startActivity(intent);
 		
+		Intent intent = new Intent(getApplicationContext() ,Usuario_Comentar_Activity.class);
+		
+		intent.putExtra("establecimientoID",arrIdEstt[count]);
+		intent.putExtra("nomEstablecimiento", arrNomEst[count]);
+		intent.putExtra("direccion", arrDirEst[count]);
+		intent.putExtra("usuarioID", usuarioID);
+		startActivity(intent);
 		
 	}
 

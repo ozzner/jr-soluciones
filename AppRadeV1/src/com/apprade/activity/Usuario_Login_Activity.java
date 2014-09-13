@@ -11,18 +11,18 @@ import com.apprade.dao.DAO_Usuario;
 import com.apprade.entity.Entity_Ranking;
 import com.apprade.entity.Entity_Usuario;
 import com.apprade.helper.Helper_JSONStatus;
+import com.apprade.helper.Helper_SharedPreferences;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
-
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -62,6 +62,12 @@ public class Usuario_Login_Activity extends Activity {
 		
 		ActionBar Bar = getActionBar();
 		Bar.setIcon(R.drawable.check_user);
+		
+		
+		
+		email.setText(getIntent().getStringExtra("correo"));
+		password.setText(getIntent().getStringExtra("password"));
+		
 		
 		btnLogin.setOnClickListener( new OnClickListener() {			
 			
@@ -110,8 +116,10 @@ public class Usuario_Login_Activity extends Activity {
 	
 	protected void llamarMapa() {
 		
-		Intent i = new Intent(this, App_GPSMapa_Activity.class);
-		startActivity(i);
+		Intent mapa = new Intent(getApplicationContext(), App_GPSMapa_Activity.class);
+		Log.e("oUserID - login", dao.oUsuario.getUsuarioID()+"");
+		mapa.putExtra("user_id",dao.oUsuario.getUsuarioID());
+		startActivity(mapa);
 		finish();
 			
 	}
@@ -158,12 +166,17 @@ public class Usuario_Login_Activity extends Activity {
 			
 			if (result) {
 				llamarMapa();
+				Helper_SharedPreferences oShared = new Helper_SharedPreferences();
+				oShared.getAlldataStore(getApplicationContext());
+				
+				oShared.storeLogin(1,dao.oUsuario.getEmail() ,dao.oUsuario.getUsuarioID(), getApplicationContext());
+				
 				
 				String sUser = dao.oUsuario.getNombre();
-				Toast.makeText(getApplicationContext(),"Bienvenid@_"+sUser, Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(),"Bienvenid@_"+sUser, Toast.LENGTH_SHORT).show();
 
 			}else{
-				Toast.makeText(getApplicationContext(),"Error: "+dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(),dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
 			}
 		}
     
