@@ -4,7 +4,7 @@
     <item
         android:id="@+id/cargar_establ_acc"
         android:icon="@drawable/ic_action_place"
-        android:showAsAction="always|withText"
+        android:showAsAction="withText|always"
         android:title="Cargar"/>
     <item
         android:id="@+id/logout_acc"

@@ -85,12 +85,11 @@
                 <EditText
                     android:id="@+id/et_comentario"
                     android:layout_width="wrap_content"
-                    android:layout_height="38dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
-                    android:layout_weight="0.50"
-                    android:ems="10" >
+                    android:ems="10"
+                    android:inputType="textMultiLine" >
 
                     <requestFocus />
                 </EditText>
@@ -122,67 +121,12 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical" >
 
-                        <LinearLayout
+                        <ListView
+                            android:id="@+id/lv_comentarios"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" >
-
-                             <TextView
-                                android:id="@+id/tv2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_weight="1.09"
-                                android:text="No hay nada de cola. Vengan !!!"
-                                android:layout_marginLeft="5dip" />
-
-                            <ImageView
-                                android:id="@+id/iv_1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/check_user" />
-                        </LinearLayout>
-           <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" >
-
-                             <TextView
-                                android:id="@+id/tv1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_weight="1.09"
-                                android:text="No hay nada de cola. Vengan !!!"
-                                android:layout_marginLeft="5dip" />
-
-                            <ImageView
-                                android:id="@+id/iv_2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/check_user" />
-                        </LinearLayout>
-                                <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" >
-
-                             <TextView
-                                android:id="@+id/tv3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_weight="1.09"
-                                android:text="No hay nada de cola. Vengan !!!"
-                                android:layout_marginLeft="5dip" />
-
-                            <ImageView
-                                android:id="@+id/iv_3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/check_user" />
-                        </LinearLayout>
-        
+                            android:layout_height="wrap_content"
+                            android:padding="10dip" >
+                        </ListView>
 
                     </LinearLayout>
                 </ScrollView>
