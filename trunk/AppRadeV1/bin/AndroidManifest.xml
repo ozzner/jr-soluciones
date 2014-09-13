@@ -55,7 +55,7 @@
         <activity
              android:name="com.apprade.activity.Usuario_Registro_Activity"             
              android:windowSoftInputMode="stateHidden"
-             android:parentActivityName="com.apprade.activity.Usuario_Login_Activity">
+             >
             
         </activity>
         
@@ -65,7 +65,7 @@
         </activity>
         
         <activity android:name="com.apprade.activity.App_GPSMapa_Activity"
-            android:screenOrientation="portrait">
+           		  android:screenOrientation="portrait">
   
             
             
