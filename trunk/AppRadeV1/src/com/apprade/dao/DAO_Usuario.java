@@ -82,7 +82,6 @@ public class DAO_Usuario{
 					oUsuario.setRate(Integer.parseInt(oUserData.getString("rate")));
 					oUsuario.setUid(oUserData.getString("Api_key"));
 					
-											
 					bEstado = true;
 					
 				}else{
