@@ -73,11 +73,12 @@ public class DAO_Comentario {
 	}
 		
 	
-	public List<Entity_Comentario> listarTodoComentario(String establecimientoID){
+	@SuppressWarnings("null")
+	public List<Entity_Comentario> listarTodoComentarioPorID(String establecimientoID){
 		
 		URL= URI.create(conn.getUrl());
 		InputStream in = null;
-		JSONObject oJson = null;
+		JSONObject oJson = null,oData = null;
 
 	    List<Entity_Comentario> lista = new ArrayList<Entity_Comentario>();
 	    List<Entity_Usuario> listaUsu = new ArrayList<Entity_Usuario>();	
@@ -93,16 +94,19 @@ public class DAO_Comentario {
 		try {						
 			    in =  oHttp.httpGet(URL + "?" + paramsString);
 			    oJson =oParser.parserToJsonObject(in);
+			    JSONObject oComent = null;
 			    
 			    boolean bStatus = Boolean.parseBoolean(oJson.getString("error_status"));
 				
 				if(!bStatus){
-					JSONObject oData =  oJson.getJSONObject("data");
+					oData =  oJson.getJSONObject("data");
+					
+					
 					int iNum = oData.length();
 			
 						for (int i = 0; i < iNum; i++) {
 							
-							JSONObject oComent =  oData.getJSONObject("comment"+(i+1));	
+						    oComent =  oData.getJSONObject("comment"+(i+1));	
 							
 							int iIdCom = Integer.parseInt(oComent.getString("commentID"));
 							String sMenCom = oComent.getString("message");
@@ -129,11 +133,15 @@ public class DAO_Comentario {
 							
 							lista.add(ettCom); //Lista final
 						}
-					
+						Log.e("TAG-ERROR1", "Errrororor");
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
+					oJsonStatus.setError_status(Boolean.parseBoolean(oJson.getString("error_status")));
 					
 				}else{
-					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
+					oData =  oJson.getJSONObject("data");
+					oJsonStatus.setMessage(oData.getString("message"));
+					oJsonStatus.setInfo(oData.getString("info"));
+					oJsonStatus.setError_status(Boolean.parseBoolean(oJson.getString("error_status")));
 					lista=null; //Temporal
 				}
 			
@@ -142,7 +150,6 @@ public class DAO_Comentario {
 			}
 		
 		return lista;
-
 	}
 	
 	
