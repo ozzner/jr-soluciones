@@ -1,5 +1,9 @@
 package com.apprade.helper;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -13,6 +17,8 @@ public class Helper_SharedPreferences  {
 	private static final String Email = "apprade@apprade.com";
 	private static final int Status = -1;
 	private Context contexto;
+	
+	
 	
 	public void run() {
 		
@@ -32,16 +38,13 @@ public class Helper_SharedPreferences  {
 		
 		shaPreLogin = context.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
-		Log.e("Shared", shaPreLogin+"");
 		
 		if (!shaPreLogin.contains("userID")) {		
-//			Log.e("USERID", shaPreLogin.contains("userID")+"");
 			sChek = "registro";
 			run();
 				
 		} else {
 			int key = shaPreLogin.getInt("status", 0);
-//			Log.e("KEY",key+"");
 			
 			switch (key) {
 			case -1:
@@ -74,5 +77,30 @@ public class Helper_SharedPreferences  {
 		editorLogin.commit();
 
 	}
+	
+	public void storeStatus(int status,Context context) {
+		contexto=context;
+		
+		shaPreLogin = contexto.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+		SharedPreferences.Editor editorLogin = shaPreLogin.edit();
+		editorLogin.putInt("status", status);
+		editorLogin.commit();
+
+	}
+	
+	public ArrayList<String> getAlldataStore(Context context){
+		contexto=context;
+		ArrayList<String> lista = new ArrayList<String>();
+		
+		shaPreLogin = contexto.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+		
+		lista.add(shaPreLogin.getString("email", ""));
+		lista.add(shaPreLogin.getInt("userID", 0)+"");
+     	lista.add(shaPreLogin.getInt("status", 0)+"");
+		return lista;
+	}
+	
+	
 
 }
