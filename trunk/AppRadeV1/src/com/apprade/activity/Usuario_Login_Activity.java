@@ -60,8 +60,8 @@ public class Usuario_Login_Activity extends Activity {
 		password= (EditText)findViewById(R.id.txtPassword);
 		btnLogin = (Button)findViewById(R.id.btnLogin);
 		
-		ActionBar Bar = getActionBar();
-		Bar.setIcon(R.drawable.check_user);
+//		ActionBar Bar = getActionBar();
+//		Bar.setIcon(R.drawable.check_user);
 		
 		
 		
@@ -119,6 +119,7 @@ public class Usuario_Login_Activity extends Activity {
 		Intent mapa = new Intent(getApplicationContext(), App_GPSMapa_Activity.class);
 		Log.e("oUserID - login", dao.oUsuario.getUsuarioID()+"");
 		mapa.putExtra("user_id",dao.oUsuario.getUsuarioID());
+		mapa.putExtra("user",dao.oUsuario.getNombre());
 		startActivity(mapa);
 		finish();
 			
@@ -169,7 +170,7 @@ public class Usuario_Login_Activity extends Activity {
 				Helper_SharedPreferences oShared = new Helper_SharedPreferences();
 				oShared.getAlldataStore(getApplicationContext());
 				
-				oShared.storeLogin(1,dao.oUsuario.getEmail() ,dao.oUsuario.getUsuarioID(), getApplicationContext());
+				oShared.storeLogin(dao.oUsuario.getNombre(),dao.oUsuario.getEmail() ,dao.oUsuario.getUsuarioID(),1, getApplicationContext());
 				
 				
 				String sUser = dao.oUsuario.getNombre();
