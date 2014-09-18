@@ -199,7 +199,7 @@ public class Usuario_Registro_Activity extends Activity {
 					if (result) {
 						
 						Helper_SharedPreferences oShaPre =  new Helper_SharedPreferences();
-						oShaPre.storeLogin(1, sEmail, dao.oUsuario.getUsuarioID(),getApplicationContext());
+						oShaPre.storeLogin(sNombre, sEmail, dao.oUsuario.getUsuarioID(),1,getApplicationContext());
 						
 						Toast.makeText(getApplicationContext(),"Hola "+ sNombre+", ya puedes iniciar sesión con tus datos, presiona Login " , Toast.LENGTH_LONG).show();
 						Intent i = new Intent (getApplicationContext(),Usuario_Login_Activity.class);
