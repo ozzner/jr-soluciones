@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:id="@+id/RelativeLayout1"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:orientation="vertical">
+
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical" 
+       >
+
+       <LinearLayout
+           android:id="@+id/lay_btn_comen"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="right"
+           android:orientation="horizontal" 
+           >
+
+           <Button
+               android:id="@+id/btn_cancel_comen"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:background="@drawable/ic_action_cancel" />
+
+       </LinearLayout>
+
+       <LinearLayout
+           android:id="@+id/lay_est_datos"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:gravity="center"
+           android:layout_weight=".33"
+           android:orientation="vertical"
+           android:background="@color/transparente2" >
+
+           <TextView
+               android:id="@+id/textView1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Datos del establecimiento" />
+       </LinearLayout>
+
+       <LinearLayout
+           android:id="@+id/lay_comen_insertar"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:gravity="center"
+           android:orientation="horizontal"
+           android:layout_weight=".33" 
+           android:background="@color/transparente2">
+
+           <TextView
+               android:id="@+id/textView2"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Insertar Comentarios" />
+       </LinearLayout>
+
+       <LinearLayout
+           android:id="@+id/lay_comen_listar"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_weight=".33"
+           android:gravity="center"
+           android:orientation="vertical" >
+
+           <TextView
+               android:id="@+id/textView3"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Listar comentarios" />
+       </LinearLayout>
+
+   </LinearLayout>
+
+</RelativeLayout>
