@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/lay_mapa"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical"
-    >
-    
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lay_mapa"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:layout_weight="1"
+        class="com.google.android.gms.maps.SupportMapFragment" />
+
     <fragment 
-  android:id="@+id/map"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:layout_gravity="top"
-  android:layout_weight="1"
-  class="com.google.android.gms.maps.SupportMapFragment"
-  />
+    android:id="@+id/fragment_calificar"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    class="com.apprade.activity.FragmentCalificar"
+    tools:layout="@layout/fragment_calificar"/>
     
-    <fragment 
-      xmlns:tools="http://schemas.android.com/tools"
-      android:id="@+id/fragment2"
-	  android:layout_width="match_parent"
-	  android:layout_height="100dip"
-	  android:background="#b9b9b9"
-	  android:layout_weight="1"
-	  android:layout_gravity="bottom"
-	  class="com.apprade.activity.App_GPSMapa_Activity"
-      tools:layout="@layout/fragment_calificar"
-     />
-    
+
 </LinearLayout>
