@@ -1,10 +1,12 @@
 package com.apprade.activity;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import com.apprade.R;
+import com.apprade.dao.DAO_Calificacion;
 import com.apprade.dao.DAO_Establecimiento;
 import com.apprade.dao.DAO_Usuario;
 import com.apprade.entity.Entity_Coordenadas;
@@ -69,6 +71,9 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private Helper_JSONStatus status;
 	private DAO_Usuario daoUser;
 	private FragmentCalificar mFragment;
+	private DAO_Calificacion oCalificar;
+	
+	String arrParams[] = new String[4];
 	String[] arrNomEst = null;
 	String[] arrDirEst = null;
 	int[] arrIdEstt;
@@ -86,6 +91,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		ettEst = new Entity_Establecimiento();
 		status = new Helper_JSONStatus();
 		daoUser = new DAO_Usuario();
+		oCalificar =  new DAO_Calificacion();
 	}
 
 	@Override
@@ -105,7 +111,10 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(),"No hay cola!", Toast.LENGTH_LONG).show();
+				
+				arrParams[1]="No hay cola";
+				exeAsyncTask(arrParams);
+				
 			}
 		});
 
@@ -113,7 +122,9 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(),"Poca cola!", Toast.LENGTH_LONG).show();
+				arrParams[1]="Poca cola";
+				exeAsyncTask(arrParams);
+				
 			}
 		});
 
@@ -121,7 +132,9 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(),"Cola moderada!", Toast.LENGTH_LONG).show();
+				
+				arrParams[1]="Cola moderada";
+				exeAsyncTask(arrParams);
 			}
 		});
 
@@ -129,7 +142,9 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(),"alta cola!", Toast.LENGTH_LONG).show();
+				
+				arrParams[1]="Alta cola";
+				exeAsyncTask(arrParams);
 			}
 		});
 
@@ -233,7 +248,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 						map.addMarker(new MarkerOptions().position(
 								new LatLng(lat, lon)).title(nom + "  - " + dir) 
-								.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+								.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map)));
 					}
 				});
 			}
@@ -241,8 +256,85 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		}).start();
 	}
 
+	
+	
+	
 	/**
-	 * AsynTask class
+	 * @param arg[0] => No hay cola
+	 * @param arg[1] => Poca cola
+	 * @param arg[2] => Cola moderada
+	 * @param arg[3] => Alta cola
+	 */
+
+	public void exeAsyncTask(String... args) {
+		CalificarAsync task = new CalificarAsync();
+		task.execute(args);
+	}
+	
+	
+	class CalificarAsync extends AsyncTask<String, Void, Boolean>{
+
+		boolean bOk = false;
+		@Override
+		protected Boolean doInBackground(String... params) {
+			
+			if (oCalificar.registrarCalificacion(usuarioID+"", params[0], params[1])) 
+				bOk = true;
+			
+			return bOk;
+		}
+		
+		
+		@Override
+		protected void onPreExecute() {
+
+			showDialogo();
+
+			proDialog.setOnCancelListener(new OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					CalificarAsync.this.cancel(true);
+					Toast.makeText(getApplicationContext(), "Servicio en segundo plano",
+							Toast.LENGTH_SHORT).show();
+				}
+			
+			});
+			proDialog.setProgress(0);
+		}
+		
+		@Override
+		protected void onPostExecute(Boolean result) {
+			super.onPostExecute(result);
+			proDialog.dismiss();
+
+			if (result) {
+				actionBar.setSubtitle("Calificación OK");
+				Toast.makeText(getApplicationContext(), "¡Gracias!",
+						Toast.LENGTH_SHORT).show();
+			} else {
+				actionBar.setSubtitle("¡Error!");
+				Toast.makeText(getApplicationContext(),oCalificar.oJsonStatus.getInfo(),
+						Toast.LENGTH_SHORT).show();
+			}
+		}
+		
+		
+		public void showDialogo() {
+
+			proDialog = new ProgressDialog(App_GPSMapa_Activity.this);
+			proDialog.setProgressStyle(ProgressDialog.BUTTON_NEUTRAL);
+			proDialog.setMessage("Cargando...");
+			proDialog.show();
+
+		}
+		
+				
+	}
+	
+	
+	/**
+	 * AsynTask class listar establecimiento
 	 */
 
 	private void exeHttpAsync() {
@@ -251,8 +343,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	}
 
 	class TaskHttpMethodAsync extends AsyncTask<String, Void, Boolean> {
-		// String[] arrNomEst = null;
-		// String[] arrDirEst = null;
+
 		List<Entity_Establecimiento> lista_establecimiento = new ArrayList<Entity_Establecimiento>();
 
 		@Override
@@ -302,13 +393,14 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			showDialogo();
 
 			proDialog.setOnCancelListener(new OnCancelListener() {
-
+				
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					TaskHttpMethodAsync.this.cancel(true);
 					Toast.makeText(getApplicationContext(), "Cancelado!",
 							Toast.LENGTH_SHORT).show();
 				}
+			
 			});
 			proDialog.setProgress(0);
 		}
@@ -329,7 +421,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			}
 		}
 
-		private void showDialogo() {
+		public void showDialogo() {
 
 			proDialog = new ProgressDialog(App_GPSMapa_Activity.this);
 			proDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -387,16 +479,11 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	public void onInfoWindowClick(Marker marker) {
 		// abriendo y pasando datos al otro activity
 
-		Log.e("ID", marker.getId());
 		String identificador = marker.getId();
 
 		String contador = identificador.substring(1, identificador.length());
-		Log.e("ID-EXTRAC", contador);
 
 		int count = Integer.parseInt(contador);
-
-		Log.e("ESTABLECIMIENTO", arrNomEst[count]);
-		Log.e("ESTABLECIMIENTO", arrDirEst[count]);
 
 		hideFragment();
 
@@ -423,6 +510,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 	@Override
 	public boolean onMarkerClick(Marker arg0) {
+		
+		String identificador = arg0.getId();
+		String contador = identificador.substring(1, identificador.length());
+		int count = Integer.parseInt(contador);
+		
+		arrParams[0]= arrIdEstt[count]+"";
+		
 		showFragment();
 		return false;
 	}
