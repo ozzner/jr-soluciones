@@ -14,6 +14,7 @@ import android.util.Log;
 
 import com.apprade.entity.Entity_Calificacion;
 import com.apprade.helper.Helper_Http_Method;
+import com.apprade.helper.Helper_JSONParser;
 import com.apprade.helper.Helper_JSONStatus;
 
 /**
@@ -28,13 +29,14 @@ public class DAO_Calificacion {
 	public Entity_Calificacion oCali ;
 	public  Helper_JSONStatus oJsonStatus;
 	private Helper_Http_Method oHttp;
-		
+	private Helper_JSONParser oParser;	
 
 	public DAO_Calificacion() {
 		oCali = new Entity_Calificacion();
 		oJsonStatus =  new Helper_JSONStatus();
 		oHttp = new Helper_Http_Method();
 		conn = new DAO_Conexion();
+		oParser = new Helper_JSONParser();
 	}
 	
 	
@@ -51,20 +53,18 @@ public class DAO_Calificacion {
 		parametros.add( new BasicNameValuePair("establecimiento", establecimiento));
 		parametros.add( new BasicNameValuePair("cola", cola));
 		
-		String paramsString = URLEncodedUtils.format(parametros, "UTF-8");
 		try {						
-//			    in =  oHttp.httpPost(URL + "?" + paramsString);
-//			    oJson =oHttp.parserToJsonObject(in);
-//			    
-				boolean bEStatus = Boolean.parseBoolean(oJson.getString("error_status"));
-				
-				if(!bEStatus){
-					JSONObject oUserData =  oJson.getJSONObject("data");
-					oJsonStatus.setMessage(oUserData.getString("message"));						
+				in =  oHttp.httpPost(URL, parametros);
+			    oJson =oParser.parserToJsonObject(in);
+
+				  boolean bStatus = Boolean.parseBoolean(oJson.getString("error_status"));
+				  
+				if(!bStatus){
+					JSONObject oData =  oJson.getJSONObject("data");
+					oJsonStatus.setMessage(oData.getString("message"));						
 					bEstado = true;
 					
 				}else{
-					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
 					
 					JSONObject oErrorData=  oJson.getJSONObject("data");
 					oJsonStatus.setError_cod(Double.parseDouble(oErrorData.getString("error_cod")));
@@ -79,6 +79,9 @@ public class DAO_Calificacion {
 		return bEstado;
 		}
 
+	
+	
+	
 	public boolean listarCalificacion(String usuarioID)
 	{	
 		URL= URI.create(conn.getUrl());
@@ -102,18 +105,6 @@ public class DAO_Calificacion {
 					JSONObject oUserData =  oJson.getJSONObject("data").getJSONObject("rating1");
 					
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
-//					
-//					oUsuario.setUsuarioID(Integer.parseInt(oUserData.getString("userID")));
-//					oUsuario.setEmail(oUserData.getString("email"));
-//					oUsuario.setSexo(oUserData.getString("sex").charAt(0));
-//					oUsuario.setNombre(oUserData.getString("name"));
-//					oUsuario.setFechaNacimiento(oUserData.getString("date_birth"));
-//					oUsuario.setFechaRegistro(oUserData.getString("date_at"));
-//					oUsuario.setApPaterno(oUserData.getString("last_name1"));
-//					oUsuario.setApMaterno(oUserData.getString("last_name2"));
-//					oUsuario.setRate(Integer.parseInt(oUserData.getString("rate")));
-//					oUsuario.setUid(oUserData.getString("Api_key"));
-					
 											
 					bEstado = true;
 					
