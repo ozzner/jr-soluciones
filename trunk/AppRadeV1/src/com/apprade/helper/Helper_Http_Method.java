@@ -44,7 +44,7 @@ private static int TIMEOUT = 17000;/*milisegundos*/
 	}
 	
 	
-	public  InputStream httpGet(String url){
+	public InputStream httpGet(String url){
 	
 		InputStream in = null;
 	

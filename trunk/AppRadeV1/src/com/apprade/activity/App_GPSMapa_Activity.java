@@ -14,6 +14,7 @@ import com.apprade.entity.Entity_Establecimiento;
 import com.apprade.helper.Helper_GPS_Tracker;
 import com.apprade.helper.Helper_JSONStatus;
 import com.apprade.helper.Helper_SharedPreferences;
+import com.apprade.helper.Helper_SubRoutines;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -72,6 +73,9 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private DAO_Usuario daoUser;
 	private FragmentCalificar mFragment;
 	private DAO_Calificacion oCalificar;
+	private Helper_SubRoutines routine;	
+	
+	
 	
 	String arrParams[] = new String[4];
 	String[] arrNomEst = null;
@@ -92,6 +96,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		status = new Helper_JSONStatus();
 		daoUser = new DAO_Usuario();
 		oCalificar =  new DAO_Calificacion();
+		routine =  new Helper_SubRoutines();
 	}
 
 	@Override
@@ -114,7 +119,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				
 				arrParams[1]="No hay cola";
 				exeAsyncTask(arrParams);
-				
+				String s =routine.getCurrentTime();
+				routine.showToast(getApplicationContext(), s );
 			}
 		});
 
@@ -188,6 +194,17 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		fm.beginTransaction().hide(mFragment).commit();
 	}
 
+	private boolean chkCalificacion(){
+	
+		
+		
+		
+		return false;
+	}
+	
+	
+	
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -258,7 +275,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 	
 	
-	
 	/**
 	 * @param arg[0] => No hay cola
 	 * @param arg[1] => Poca cola
@@ -270,18 +286,21 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		CalificarAsync task = new CalificarAsync();
 		task.execute(args);
 	}
-	
-	
+
 	class CalificarAsync extends AsyncTask<String, Void, Boolean>{
 
 		boolean bOk = false;
 		@Override
 		protected Boolean doInBackground(String... params) {
 			
+			
+			
+			
 			if (oCalificar.registrarCalificacion(usuarioID+"", params[0], params[1])) 
 				bOk = true;
 			
 			return bOk;
+			
 		}
 		
 		
@@ -329,7 +348,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 		}
 		
-				
 	}
 	
 	
@@ -397,7 +415,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					TaskHttpMethodAsync.this.cancel(true);
-					Toast.makeText(getApplicationContext(), "Cancelado!",
+					Toast.makeText(getApplicationContext(), "Servicio en segundo plano",
 							Toast.LENGTH_SHORT).show();
 				}
 			
