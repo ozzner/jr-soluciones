@@ -73,7 +73,6 @@ public class DAO_Comentario {
 	}
 		
 	
-	@SuppressWarnings("null")
 	public List<Entity_Comentario> listarTodoComentarioPorID(String establecimientoID){
 		
 		URL= URI.create(conn.getUrl());

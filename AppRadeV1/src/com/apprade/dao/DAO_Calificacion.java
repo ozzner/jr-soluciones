@@ -13,6 +13,9 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import com.apprade.entity.Entity_Calificacion;
+import com.apprade.entity.Entity_Comentario;
+import com.apprade.entity.Entity_Ranking;
+import com.apprade.entity.Entity_Usuario;
 import com.apprade.helper.Helper_Http_Method;
 import com.apprade.helper.Helper_JSONParser;
 import com.apprade.helper.Helper_JSONStatus;
@@ -80,49 +83,64 @@ public class DAO_Calificacion {
 		}
 
 	
-	
-	
-	public boolean listarCalificacion(String usuarioID)
-	{	
+	public List<Entity_Calificacion> listarCalificacionPorEstabID(String establecimientoID){
+		
 		URL= URI.create(conn.getUrl());
 		InputStream in = null;
-		JSONObject oJson = null; 
-		boolean bEstado = false;
-				
+		JSONObject oJson = null,oData = null;
+		
+		/*Listas*/
+	    List<Entity_Calificacion> lista = new ArrayList<Entity_Calificacion>();
 		List<NameValuePair> parametros = new ArrayList<NameValuePair>();
 		
 		parametros.add( new BasicNameValuePair("entity", ENTITY));
-		parametros.add( new BasicNameValuePair("usuarioID", usuarioID));
-
+		parametros.add( new BasicNameValuePair("establecimientoID", establecimientoID));
 		String paramsString = URLEncodedUtils.format(parametros, "UTF-8");
+		
 		try {						
 			    in =  oHttp.httpGet(URL + "?" + paramsString);
-			   // oJson =oHttp.parserToJsonObject(in);
+			    oJson =oParser.parserToJsonObject(in);
+			    JSONObject oRating = null;
 			    
-				boolean bEStatus = Boolean.parseBoolean(oJson.getString("error_status"));
+			    boolean bStatus = Boolean.parseBoolean(oJson.getString("error_status"));
 				
-				if(!bEStatus){
-					JSONObject oUserData =  oJson.getJSONObject("data").getJSONObject("rating1");
+				if(!bStatus){
+					oData =  oJson.getJSONObject("data");
 					
+					
+					int iNum = oData.length();
+			
+						for (int i = 0; i < iNum; i++) {
+							
+						    oRating =  oData.getJSONObject("rating"+(i+1));	
+							
+							int iIdUser = Integer.parseInt(oRating.getString("userID"));
+							int iIdEsta = Integer.parseInt(oRating.getString("estaID"));
+							String sQueue = oRating.getString("queue");
+							String sDate = oRating.getString("create_at");
+		
+
+							Entity_Calificacion oCali = new Entity_Calificacion(
+									sQueue, sDate, iIdUser, iIdEsta);
+							
+							lista.add(oCali); //Lista final
+						}
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
-											
-					bEstado = true;
+					oJsonStatus.setError_status(Boolean.parseBoolean(oJson.getString("error_status")));
 					
 				}else{
-					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
-					
-					JSONObject oErrorData=  oJson.getJSONObject("data");
-					oJsonStatus.setMessage(oErrorData.getString("message"));
-					oJsonStatus.setInfo(oErrorData.getString("info"));
+					oData =  oJson.getJSONObject("data");
+					oJsonStatus.setMessage(oData.getString("message"));
+					oJsonStatus.setInfo(oData.getString("info"));
+					lista=null; //Temporal
 				}
 			
 		} catch (Exception e) {
 			Log.e("URL", e.getMessage());
 			}
 		
-		return bEstado;
+		return lista;
 	}
-
 		 		
 
 	

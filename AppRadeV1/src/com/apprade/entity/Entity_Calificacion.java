@@ -3,9 +3,6 @@
  */
 package com.apprade.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * @author Renzo
@@ -14,63 +11,105 @@ import java.util.List;
 public class Entity_Calificacion {
 
 	private String cola;
-	private String hora;
 	private String fecha;
+	private int usuarioID;
+	private int establecimientoID;
 	
-	private List<Entity_Usuario> usuario = new ArrayList<Entity_Usuario>();
-	private List<Entity_Establecimiento> establecimiento = new ArrayList<Entity_Establecimiento>() ;
 	
-	public Entity_Calificacion() {
-
-	}	
-
-	public Entity_Calificacion(String cola, String hora, String fecha,
-			Entity_Usuario oUsuario, Entity_Establecimiento oEstablecimiento) {
+	/**
+	 * @param cola
+	 * @param hora
+	 * @param fecha
+	 * @param usuarioID
+	 * @param establecimientoID
+	 */
+	public Entity_Calificacion(String cola, String fecha,
+			int usuarioID, int establecimientoID) {
 		super();
 		this.cola = cola;
-		this.hora = hora;
 		this.fecha = fecha;
+		this.usuarioID = usuarioID;
+		this.establecimientoID = establecimientoID;
 	}
-	
+
+
+	/**
+	 * 
+	 */
+	public Entity_Calificacion() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	/**
+	 * @return the cola
+	 */
 	public String getCola() {
 		return cola;
 	}
 
+
+	/**
+	 * @param cola the cola to set
+	 */
 	public void setCola(String cola) {
 		this.cola = cola;
 	}
 
-	public String getHora() {
-		return hora;
-	}
 
-	public void setHora(String hora) {
-		this.hora = hora;
-	}
-
+	/**
+	 * @return the fecha
+	 */
 	public String getFecha() {
 		return fecha;
 	}
 
+
+	/**
+	 * @param fecha the fecha to set
+	 */
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 
-	public List<Entity_Usuario> getUsuario() {
-		return usuario;
+
+	/**
+	 * @return the usuarioID
+	 */
+	public int getUsuarioID() {
+		return usuarioID;
 	}
 
-	public void setUsuario(List<Entity_Usuario> usuario) {
-		this.usuario = usuario;
+
+	/**
+	 * @param usuarioID the usuarioID to set
+	 */
+	public void setUsuarioID(int usuarioID) {
+		this.usuarioID = usuarioID;
 	}
 
-	public List<Entity_Establecimiento> getEstablecimiento() {
-		return establecimiento;
+
+	/**
+	 * @return the establecimientoID
+	 */
+	public int getEstablecimientoID() {
+		return establecimientoID;
 	}
 
-	public void setEstablecimiento(List<Entity_Establecimiento> establecimiento) {
-		this.establecimiento = establecimiento;
+
+	/**
+	 * @param establecimientoID the establecimientoID to set
+	 */
+	public void setEstablecimientoID(int establecimientoID) {
+		this.establecimientoID = establecimientoID;
 	}
+	
+//	private List<Entity_Usuario> usuario = new ArrayList<Entity_Usuario>();
+//	private List<Entity_Establecimiento> establecimiento = new ArrayList<Entity_Establecimiento>() ;
+//	
+
+	
 
 	
 
