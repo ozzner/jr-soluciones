@@ -279,14 +279,14 @@ public class Usuario_Comentar_Activity extends Activity {
 	private class CustomAdapter extends ArrayAdapter<Entity_Comentario> {
 		
 		public CustomAdapter() {
-			super(Usuario_Comentar_Activity.this, R.layout.list_row, oListaComment);
+			super(Usuario_Comentar_Activity.this, R.layout.adapter_list_row, oListaComment);
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View itemView = convertView;
 			if (itemView == null) {
-				itemView = getLayoutInflater().inflate(R.layout.list_row, parent, false);
+				itemView = getLayoutInflater().inflate(R.layout.adapter_list_row, parent, false);
 			}
 			
 			Entity_Comentario currentComment = oListaComment.get(position);

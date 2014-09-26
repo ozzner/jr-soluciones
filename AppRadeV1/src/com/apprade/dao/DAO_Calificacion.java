@@ -29,7 +29,7 @@ public class DAO_Calificacion {
 	private DAO_Conexion conn;
 	private static URI URL;
 	private static String ENTITY = "calificacion";
-	public Entity_Calificacion oCali ;
+	public  Entity_Calificacion oCali ;
 	public  Helper_JSONStatus oJsonStatus;
 	private Helper_Http_Method oHttp;
 	private Helper_JSONParser oParser;	
@@ -83,14 +83,14 @@ public class DAO_Calificacion {
 		}
 
 	
-	public List<Entity_Calificacion> listarCalificacionPorEstabID(String establecimientoID){
+	public boolean obtenerUltimaCalificacionPorEstabID(String establecimientoID){
 		
+		boolean bResult = false;
 		URL= URI.create(conn.getUrl());
 		InputStream in = null;
 		JSONObject oJson = null,oData = null;
 		
 		/*Listas*/
-	    List<Entity_Calificacion> lista = new ArrayList<Entity_Calificacion>();
 		List<NameValuePair> parametros = new ArrayList<NameValuePair>();
 		
 		parametros.add( new BasicNameValuePair("entity", ENTITY));
@@ -107,24 +107,21 @@ public class DAO_Calificacion {
 				if(!bStatus){
 					oData =  oJson.getJSONObject("data");
 					
-					
-					int iNum = oData.length();
-			
-						for (int i = 0; i < iNum; i++) {
-							
-						    oRating =  oData.getJSONObject("rating"+(i+1));	
+						    oRating =  oData.getJSONObject("rating1");	
 							
 							int iIdUser = Integer.parseInt(oRating.getString("userID"));
 							int iIdEsta = Integer.parseInt(oRating.getString("estaID"));
 							String sQueue = oRating.getString("queue");
 							String sDate = oRating.getString("create_at");
 		
-
-							Entity_Calificacion oCali = new Entity_Calificacion(
-									sQueue, sDate, iIdUser, iIdEsta);
+						    oCali = new Entity_Calificacion();
+							oCali.setUsuarioID(iIdUser);
+							oCali.setEstablecimientoID(iIdEsta);
+							oCali.setCola(sQueue);
+							oCali.setFecha(sDate);
+							Log.e("TAG-CALI", oCali.getCola());
+							bResult = true;
 							
-							lista.add(oCali); //Lista final
-						}
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
 					oJsonStatus.setError_status(Boolean.parseBoolean(oJson.getString("error_status")));
 					
@@ -132,14 +129,13 @@ public class DAO_Calificacion {
 					oData =  oJson.getJSONObject("data");
 					oJsonStatus.setMessage(oData.getString("message"));
 					oJsonStatus.setInfo(oData.getString("info"));
-					lista=null; //Temporal
 				}
 			
 		} catch (Exception e) {
 			Log.e("URL", e.getMessage());
 			}
+		return bResult;
 		
-		return lista;
 	}
 		 		
 
