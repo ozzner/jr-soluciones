@@ -168,7 +168,7 @@ public class Usuario_Login_Activity extends Activity {
 			if (result) {
 				llamarMapa();
 				Helper_SharedPreferences oShared = new Helper_SharedPreferences();
-				oShared.getAlldataStore(getApplicationContext());
+				oShared.getAllLoginDataStored(getApplicationContext());
 				
 				oShared.storeLogin(dao.oUsuario.getNombre(),dao.oUsuario.getEmail() ,dao.oUsuario.getUsuarioID(),1, getApplicationContext());
 				

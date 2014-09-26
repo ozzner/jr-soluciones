@@ -1,8 +1,7 @@
 package com.apprade.helper;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,8 +9,7 @@ import android.util.Log;
 
 public class Helper_SharedPreferences  {
 
-	private SharedPreferences shaPreLogin;
-
+	private SharedPreferences appRadeSharedPref;
 	private static final String MyPREFERENCES = "Login";
 	private static final int UserID = 103095;
 	private static final String Email = "apprade@apprade.com";
@@ -22,9 +20,9 @@ public class Helper_SharedPreferences  {
 	
 	public void run() {
 		
-		shaPreLogin = contexto.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+		appRadeSharedPref = contexto.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
-		SharedPreferences.Editor editorLogin = shaPreLogin.edit();
+		SharedPreferences.Editor editorLogin = appRadeSharedPref.edit();
 		editorLogin.putString("email", Email);
 		editorLogin.putInt("userID", UserID);
 		editorLogin.putInt("status", Status);
@@ -36,15 +34,15 @@ public class Helper_SharedPreferences  {
 		String sChek = null;
 		contexto=context;
 		
-		shaPreLogin = context.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+		appRadeSharedPref = context.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
 		
-		if (!shaPreLogin.contains("userID")) {		
+		if (!appRadeSharedPref.contains("userID")) {		
 			sChek = "registro";
 			run();
 				
 		} else {
-			int key = shaPreLogin.getInt("status", 0);
+			int key = appRadeSharedPref.getInt("status", 0);
 			
 			switch (key) {
 			case -1:
@@ -68,9 +66,9 @@ public class Helper_SharedPreferences  {
 	
 	public void storeLogin(String name, String email, int userID,int status,Context context) {
 		contexto=context;
-		shaPreLogin = contexto.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+		appRadeSharedPref = contexto.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
-		SharedPreferences.Editor editorLogin = shaPreLogin.edit();
+		SharedPreferences.Editor editorLogin = appRadeSharedPref.edit();
 		editorLogin.putString("name", name);
 		editorLogin.putString("email", email);
 		editorLogin.putInt("userID", userID);
@@ -82,27 +80,76 @@ public class Helper_SharedPreferences  {
 	public void storeStatus(int status,Context context) {
 		contexto=context;
 		
-		shaPreLogin = contexto.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+		appRadeSharedPref = contexto.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
-		SharedPreferences.Editor editorLogin = shaPreLogin.edit();
+		SharedPreferences.Editor editorLogin = appRadeSharedPref.edit();
 		editorLogin.putInt("status", status);
 		editorLogin.commit();
 
 	}
 	
-	public ArrayList<String> getAlldataStore(Context context){
+	public ArrayList<String> getAllLoginDataStored(Context context){
 		contexto=context;
 		ArrayList<String> lista = new ArrayList<String>();
 		
-		shaPreLogin = contexto.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-		lista.add(shaPreLogin.getString("name", ""));
-		lista.add(shaPreLogin.getString("email", ""));
-		lista.add(shaPreLogin.getInt("userID", 0)+"");
-     	lista.add(shaPreLogin.getInt("status", 0)+"");
+		appRadeSharedPref = contexto.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+		lista.add(appRadeSharedPref.getString("name", ""));
+		lista.add(appRadeSharedPref.getString("email", ""));
+		lista.add(appRadeSharedPref.getInt("userID", 0)+"");
+     	lista.add(appRadeSharedPref.getInt("status", 0)+"");
      	
 		return lista;
 	}
 	
+	public boolean checkMyCustomPreference(String customPreferences,Context context,String key){
+		boolean bResult = false;
+		
+		contexto=context;
+		appRadeSharedPref = contexto.getSharedPreferences(customPreferences, Context.MODE_PRIVATE);
+		
+		if(appRadeSharedPref.contains(key))
+			bResult = true;
+		
+		return bResult;
+	}
 	
+	
+	
+	public void storeMyCustomPreferences(String[] keys, String[] values, String customPreferences,Context context){
+		
+		contexto=context;
+		appRadeSharedPref = contexto.getSharedPreferences(customPreferences, Context.MODE_PRIVATE);
+		
+		
+		SharedPreferences.Editor editorLogin = appRadeSharedPref.edit();
+		
+		for (int i = 0; i < values.length; i++) {
+			editorLogin.putString(keys[i], values[i]);
+		}
+		
+		editorLogin.commit();
+		
+	}
+	
+	public String getAnyValueToMyCustomPreferences(Context context , String customPreferences, String key){
+		String sValue = new String();
+		
+		contexto=context;
+		appRadeSharedPref = contexto.getSharedPreferences(customPreferences, Context.MODE_PRIVATE);
+		
+		Map<String,?> keys = appRadeSharedPref.getAll();
+
+		for(Map.Entry<String,?> entry : keys.entrySet()){
+			
+			if(entry.getKey() != null)
+				 if(entry.getKey().toString().equals(key))
+				 {
+					 sValue = entry.getValue().toString();
+					 break;
+				 }
+		 }
+		
+		return sValue;
+	}
 
 }

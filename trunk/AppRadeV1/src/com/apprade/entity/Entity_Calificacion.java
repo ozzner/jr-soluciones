@@ -37,7 +37,6 @@ public class Entity_Calificacion {
 	 * 
 	 */
 	public Entity_Calificacion() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 

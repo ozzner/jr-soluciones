@@ -16,6 +16,11 @@ import android.widget.Toast;
  *
  */
 public class Helper_SubRoutines {
+	
+	public static final String TAG_DIAS = "dias";
+	public static final String TAG_HORAS = "horas";
+	public static final String TAG_MINUTOS = "minutos";
+	public static final String TAG_SEGUNDOS = "segundos";
 
 	/**
 	 * 
@@ -36,7 +41,7 @@ public class Helper_SubRoutines {
 		Toast.makeText(context, sms, Toast.LENGTH_SHORT).show();
 	}
 
-	public static int dateDiferent(String fecha_i, String fecha_f,
+	public int dateDiferent(String fecha_i, String fecha_f,
 			String dias_horas_minutos_segundos) {
 		
 		String tiempo = dias_horas_minutos_segundos;
