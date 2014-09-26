@@ -3,12 +3,12 @@
 
     <item
         android:id="@+id/cargar_establ_acc"
-        android:icon="@drawable/ic_action_place"
+        android:icon="@drawable/ic_action_refresh"
         android:showAsAction="withText|always"
-        android:title="Cargar"/>
+        android:title="Actualizar"/>
     <item
         android:id="@+id/logout_acc"
-        android:icon="@drawable/ic_action_cancel"
+        android:icon="@drawable/ic_action_remove"
         android:showAsAction="always|withText"
         android:title="Salir"/>
 
