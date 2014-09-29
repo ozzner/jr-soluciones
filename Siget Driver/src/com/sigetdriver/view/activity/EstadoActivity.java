@@ -90,44 +90,44 @@ public class EstadoActivity extends Activity {
 			}
 		});
 		
-		listaServicios = ServicioController.getInstance().obtenerServiciosPendientes();		
-		adapter = new ServicioAdapter(getApplicationContext(), R.layout.item_servicio, listaServicios);
-		lista.setAdapter(adapter);
-		lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                    int pos, long arg3) {
-            	// Recuperamos la lista de puntos y seteamos
-            	// el servicio en el working set
-            	servicio = listaServicios.get(pos);
-            	if (servicio.getAceptado().equals(ServicioBean.ACEPTADO_NO)) {            		
-            		servicio.setAceptado(ServicioBean.ACEPTADO_SI);
-            		boolean ok = ServicioController.getInstance().actualizarServicio(servicio);
-            		if (ok) {
-            			GPSTracker gps = new GPSTracker(getApplicationContext());
-            			lat = gps.getLatitude();
-            			lon = gps.getLongitude();
-            			new confirmarServicio().execute();
-            			Toast.makeText(getApplicationContext(), "Servicio Aceptado", Toast.LENGTH_SHORT).show();
-            		}
-            	}
-            	if (pos == 0) {
-            		ServicioWorkingSet.primerServicio = true;
-            	} else {
-            		ServicioWorkingSet.primerServicio = false;
-            	}
-            	listaPuntos = ServicioController
-            			.getInstance().obtenerPuntosPorServicio(servicio.getIdServicio());
-            	servicio.setPuntos(listaPuntos);            	
-            	ServicioWorkingSet.servicio = servicio;
-            	ServicioWorkingSet.puntoActual = Integer.parseInt(servicio.getPuntoActual());
-            	ServicioWorkingSet.puntoFinal = (listaPuntos.size()) * 2;
-            	System.out.println("Punto Final: "+ServicioWorkingSet.puntoFinal);
-            	Intent i = new Intent(EstadoActivity.this, ServicioActivity.class);
-            	startActivity(i);
-                return false;
-            }
-        });
+//		listaServicios = ServicioController.getInstance().obtenerServiciosPendientes();		
+//		adapter = new ServicioAdapter(getApplicationContext(), R.layout.item_servicio, listaServicios);
+//		lista.setAdapter(adapter);
+//		lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+//                    int pos, long arg3) {
+//            	// Recuperamos la lista de puntos y seteamos
+//            	// el servicio en el working set
+//            	servicio = listaServicios.get(pos);
+//            	if (servicio.getAceptado().equals(ServicioBean.ACEPTADO_NO)) {            		
+//            		servicio.setAceptado(ServicioBean.ACEPTADO_SI);
+//            		boolean ok = ServicioController.getInstance().actualizarServicio(servicio);
+//            		if (ok) {
+//            			GPSTracker gps = new GPSTracker(getApplicationContext());
+//            			lat = gps.getLatitude();
+//            			lon = gps.getLongitude();
+//            			new confirmarServicio().execute();
+//            			Toast.makeText(getApplicationContext(), "Servicio Aceptado", Toast.LENGTH_SHORT).show();
+//            		}
+//            	}
+//            	if (pos == 0) {
+//            		ServicioWorkingSet.primerServicio = true;
+//            	} else {
+//            		ServicioWorkingSet.primerServicio = false;
+//            	}
+//            	listaPuntos = ServicioController
+//            			.getInstance().obtenerPuntosPorServicio(servicio.getIdServicio());
+//            	servicio.setPuntos(listaPuntos);            	
+//            	ServicioWorkingSet.servicio = servicio;
+//            	ServicioWorkingSet.puntoActual = Integer.parseInt(servicio.getPuntoActual());
+//            	ServicioWorkingSet.puntoFinal = (listaPuntos.size()) * 2;
+//            	System.out.println("Punto Final: "+ServicioWorkingSet.puntoFinal);
+//            	Intent i = new Intent(EstadoActivity.this, ServicioActivity.class);
+//            	startActivity(i);
+//                return false;
+//            }
+//        });
 		popular();
 		
 		timer = new Timer();
@@ -197,8 +197,8 @@ public class EstadoActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		popular();
-		listaServicios = ServicioController.getInstance().obtenerServiciosPendientes();
-		adapter.notifyDataSetChanged();
+//		listaServicios = ServicioController.getInstance().obtenerServiciosPendientes();
+//		adapter.notifyDataSetChanged();
 	}
 	
 	@Override

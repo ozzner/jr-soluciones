@@ -152,7 +152,7 @@ public class LoginActivity extends Activity {
 			// TODO Auto-generated method stub
 			
 			String URL = ServerConstants.SERVER_IP + ServerConstants.LOGIN +
-						  "conductor" + "," + "20279a754ba32ba1d9559b7a88303fd873b15eee" + "," + "11";	
+						  "conductor" + "," + "20279a754ba32ba1d9559b7a88303fd873b15eee" + "," + "111";	
 			
 			
 			System.out.println("---URL---\n"+URL);
@@ -320,6 +320,7 @@ public class LoginActivity extends Activity {
 				return null;
 			}
 		
+		
 		@Override
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
@@ -396,19 +397,21 @@ public class LoginActivity extends Activity {
 			System.out.println("CONTADOR PROCESO = " + contadorProceso);
 
 			try {
-				
+				System.out.println("---TRY---");
 				StringReader stream = new StringReader(respuesta);
 				JsonFactory jfactory = new JsonFactory();
 				JsonParser jParser = jfactory.createJsonParser(stream);
 				
 				while (jParser.nextToken() != JsonToken.END_OBJECT) {
-							 
+					System.out.println("--- WHILE 1 ---");
 					String fieldname = jParser.getCurrentName();
 					
 					// [EMPRESAS]
 					if ("empresas".equals(fieldname)) {	
+						System.out.println("--- EMPRESAS ---");
 					    jParser.nextToken();
 					    while (jParser.nextToken() != JsonToken.END_ARRAY) {	
+					    	System.out.println("--- WHILE 2 ---");
 					    	if ("codEmpresa".equals(jParser.getCurrentName())) {
 					    		contaEmpresas++;	
 					    		EmpresaBean empresa = new EmpresaBean();
@@ -512,10 +515,10 @@ public class LoginActivity extends Activity {
 				    			jParser.nextToken();
 				    			empresa.setSobrecargaDesvio(jParser.getText());
 				    			
-				    			EmpresaController.getInstance().actualizarEmpresa(empresa);
+//				    			EmpresaController.getInstance().actualizarEmpresa(empresa);
 				    			
 				    			listaEmpresas.add(empresa);
-				    			
+//				    	dfdf		
 				    			contadorProceso++;
 				    			double proceso = ((double) contadorProceso / (double) contadorMaestro) * 100;
 				    			int porcentaje = (int) proceso;
@@ -527,6 +530,7 @@ public class LoginActivity extends Activity {
 					if ("pasajeros".equals(fieldname)) {	
 					    jParser.nextToken();
 					    while (jParser.nextToken() != JsonToken.END_ARRAY) {	
+					    	System.out.println("--- PASAJERO WHILE ---");
 					    	if ("codigo".equals(jParser.getCurrentName())) {
 					    		contaPasajeros++;
 					    		PasajeroBean pasajero = new PasajeroBean();
@@ -578,7 +582,7 @@ public class LoginActivity extends Activity {
 					    		jParser.nextToken();
 					    		pasajero.setTodosTelefonos(jParser.getText());
 					    		
-					    		PasajeroController.getInstance().actualizarPasajero(pasajero);
+//					    		PasajeroController.getInstance().actualizarPasajero(pasajero);
 					    		
 					    		listaPasajeros.add(pasajero);
 				    			
@@ -593,6 +597,7 @@ public class LoginActivity extends Activity {
 					if ("zonas".equals(fieldname)) {	
 					    jParser.nextToken();
 					    while (jParser.nextToken() != JsonToken.END_ARRAY) {	
+					    	System.out.println("--- ZONAS WHILE ---");
 					    	if ("id".equals(jParser.getCurrentName())) {
 					    		contaZonas++;
 					    		ZonaBean zona = new ZonaBean();
@@ -621,7 +626,7 @@ public class LoginActivity extends Activity {
 					    		jParser.nextToken();	
 					    		zona.setUrbana(jParser.getText());
 					    		
-					    		ZonaController.getInstance().actualizarZona(zona);
+//					    		ZonaController.getInstance().actualizarZona(zona);
 					    		
 					    		listaZonas.add(zona);
 				    			
@@ -636,6 +641,7 @@ public class LoginActivity extends Activity {
 					if ("sedes".equals(fieldname)) {	
 					    jParser.nextToken();
 					    while (jParser.nextToken() != JsonToken.END_ARRAY) {	
+					    	System.out.println("--- SEDES WHILE ---");
 					    	if ("id".equals(jParser.getCurrentName())) {
 					    		contaSedes++;
 					    		SedeBean sede = new SedeBean();
@@ -675,7 +681,7 @@ public class LoginActivity extends Activity {
 					    		jParser.nextToken();	
 					    		sede.setFlagBaja(jParser.getText());
 					    		
-					    		SedeController.getInstance().actualizarSede(sede);
+//					    		SedeController.getInstance().actualizarSede(sede);
 					    		
 					    		listaSedes.add(sede);
 				    			
@@ -689,7 +695,8 @@ public class LoginActivity extends Activity {
 					// [TARIFAS ZONAS]
 					if ("tarifasZonas".equals(fieldname)) {	
 					    jParser.nextToken();
-					    while (jParser.nextToken() != JsonToken.END_ARRAY) {	
+					    while (jParser.nextToken() != JsonToken.END_ARRAY) {
+					    	System.out.println("--- TARIFIAS WHILE ---");
 					    	if ("id".equals(jParser.getCurrentName())) {
 					    		contaTarifasZonas++;
 					    		TarifaZonaBean tarifaZona = new TarifaZonaBean();
@@ -717,7 +724,7 @@ public class LoginActivity extends Activity {
 					    		jParser.nextToken();
 					    		tarifaZona.setEmpresa(jParser.getText());
 					    		
-					    		TarifaZonaController.getInstance().actualizarTarifaZona(tarifaZona);
+//					    		TarifaZonaController.getInstance().actualizarTarifaZona(tarifaZona);
 					    		
 					    		listaTarifasZonas.add(tarifaZona);
 				    			
@@ -732,6 +739,7 @@ public class LoginActivity extends Activity {
 					if ("centroCostos".equals(fieldname)) {	
 					    jParser.nextToken();
 					    while (jParser.nextToken() != JsonToken.END_ARRAY) {	
+					    	System.out.println("--- CENTRO DE COSTOS ---");
 					    	if ("id".equals(jParser.getCurrentName())) {
 					    		contaCentroCostos++;
 					    		CentroCostoBean centroCosto = new CentroCostoBean();
@@ -755,7 +763,7 @@ public class LoginActivity extends Activity {
 					    		jParser.nextToken();	
 					    		centroCosto.setFlagBaja(jParser.getText());
 					    		
-					    		CentroCostoController.getInstance().actualizarCentroCosto(centroCosto);
+//					    		CentroCostoController.getInstance().actualizarCentroCosto(centroCosto);
 					    		
 					    		listaCentroCostos.add(centroCosto);
 				    			
@@ -813,14 +821,14 @@ public class LoginActivity extends Activity {
 			System.out.println("[CENTROS COSTOS] = " + listaCentroCostos.size());
 			System.out.println("-------------------------------\n");
 			
-			System.out.println("---SINCRONIZACION SQLITE---");
-			System.out.println("[EMPRESAS] = " + EmpresaBean.tableHelper.countAllRows());
-			System.out.println("[PASAJEROS] = " + PasajeroBean.tableHelper.countAllRows());
-			System.out.println("[ZONAS] = " + ZonaBean.tableHelper.countAllRows());
-			System.out.println("[SEDES] = " + SedeBean.tableHelper.countAllRows());
-			System.out.println("[TARIFAS ZONAS] = " + TarifaZonaBean.tableHelper.countAllRows());
-			System.out.println("[CENTROS COSTOS] = " + CentroCostoBean.tableHelper.countAllRows());
-			System.out.println("-------------------------------\n");
+//			System.out.println("---SINCRONIZACION SQLITE---");
+//			System.out.println("[EMPRESAS] = " + EmpresaBean.tableHelper.countAllRows());
+//			System.out.println("[PASAJEROS] = " + PasajeroBean.tableHelper.countAllRows());
+//			System.out.println("[ZONAS] = " + ZonaBean.tableHelper.countAllRows());
+//			System.out.println("[SEDES] = " + SedeBean.tableHelper.countAllRows());
+//			System.out.println("[TARIFAS ZONAS] = " + TarifaZonaBean.tableHelper.countAllRows());
+//			System.out.println("[CENTROS COSTOS] = " + CentroCostoBean.tableHelper.countAllRows());
+//			System.out.println("-------------------------------\n");
 						
 			return null;
 		}

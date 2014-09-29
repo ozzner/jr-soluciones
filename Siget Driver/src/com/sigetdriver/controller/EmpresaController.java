@@ -37,11 +37,15 @@ public class EmpresaController {
 //	}
 	
 	public void actualizarEmpresa(EmpresaBean empresa) {
-					
-		long result = EmpresaBean.tableHelper.updateEntity(
-				empresa, 
-					EmpresaBean.COD_EMPRESA_COLUMN_NAME + "=?", 
-						new String[] { empresa.getCodEmpresa() });			
+		
+		long result = 1;
+		try {
+			 result = EmpresaBean.tableHelper.updateEntity(empresa, EmpresaBean.COD_EMPRESA_COLUMN_NAME + "=?",new String[] { empresa.getCodEmpresa()});
+		} catch (Exception e) {
+			
+		}			
+		
+		
 		if (result == 0) {				
 			result = EmpresaBean.tableHelper.insertEntity(empresa);				
 		}	
