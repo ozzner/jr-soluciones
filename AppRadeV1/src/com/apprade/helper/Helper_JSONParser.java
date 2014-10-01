@@ -34,7 +34,7 @@ public class Helper_JSONParser {
 			  	    }
 			  	    inStream.close();//Cerramos el string
 			  	    sJson = sBuider.toString();
-			  	    Log.e("JSON-PARSER", sJson);
+			  	    Log.e("JSON-Parserr", sJson);
 			  	     isOk = true;
 					} catch (Exception e) {
 						Log.e("Error Buffer", "Error convirtiendo el resultado " + e.toString());

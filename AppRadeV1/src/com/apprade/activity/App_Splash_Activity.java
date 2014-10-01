@@ -41,9 +41,9 @@ public class App_Splash_Activity extends Activity {
 				switch (sStatus) {
 					
 				case "registro":
-					Intent register = new Intent().setClass(
-							App_Splash_Activity.this, Usuario_Registro_Activity.class);
-					startActivity(register);
+					Intent intro = new Intent().setClass(
+							App_Splash_Activity.this, Intro_Activity.class);
+					startActivity(intro);
 					break;
 					
 				case "login":

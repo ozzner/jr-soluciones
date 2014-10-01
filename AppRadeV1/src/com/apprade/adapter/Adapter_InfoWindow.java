@@ -18,11 +18,16 @@ public class Adapter_InfoWindow implements InfoWindowAdapter {
 	LayoutInflater inflater = null;
 	private static String cola;
 
-	
+	/**
+	 * @return the cola
+	 */
 	public String getCola() {
 		return cola;
 	}
 
+	/**
+	 * @param cola the cola to set
+	 */
 	public void setCola(String cola) {
 		this.cola = cola;
 	}
@@ -37,7 +42,6 @@ public class Adapter_InfoWindow implements InfoWindowAdapter {
 
 	public Adapter_InfoWindow() {
 		super();/*Default status*/
-		this.cola = "No hay cola";
 	}
 
 	@Override
