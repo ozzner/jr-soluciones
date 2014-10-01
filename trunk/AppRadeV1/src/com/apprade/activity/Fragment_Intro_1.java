@@ -3,7 +3,6 @@
  */
 package com.apprade.activity;
 
-
 import com.apprade.R;
 
 import android.os.Bundle;
@@ -13,28 +12,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * @author renzo santillán
+ * @author renzo
+ *
  */
+public class Fragment_Intro_1 extends Fragment {
 
-
-public class FragmentCalificar extends Fragment {
-
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onActivityCreated(savedInstanceState);
+	public Fragment_Intro_1() {
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		View v = inflater.inflate(R.layout.fragment_calificar, null);
+		View v = inflater.inflate(R.layout.fragment_intro_1,container,false);
 		
-		return  v;
+		return v;
 	}
+	
+	
+	
 
-	
-	
-	
 }

@@ -34,7 +34,7 @@ public class DAO_Establecimiento {
 	private static DAO_Conexion conn;
 	private static URI URL ;
 	private static final String ENTITY = "establecimiento";
-	
+	private static ArrayList<String> lsColas = new ArrayList<>();
 	
 	/**
 	 * @param oEstable
@@ -62,23 +62,35 @@ public class DAO_Establecimiento {
 		conn = new DAO_Conexion();
 	}
 
-
-	public List<Entity_Establecimiento> listarTodoEstablecimiento()
+	/**
+	 * @return the lsColas
+	 */
+	public  ArrayList<String> getLsColas() {
+		return lsColas;
+	}
+	/**
+	 * @param lsColas the lsColas to set
+	 */
+	public void setLsColas(ArrayList<String> lsColas) {
+		this.lsColas = lsColas;
+	}
+	
+	
+	public List<Entity_Establecimiento> listarTodoEstablecimiento(String categoriaID)
 	{	
 		URL= URI.create(conn.getUrl());
 		InputStream in = null;
 		JSONObject oJson = null;
-
 		
 	    List<Entity_Establecimiento> lista = new ArrayList<Entity_Establecimiento>();
 	    List<Entity_Distrito> listaDis = new ArrayList<Entity_Distrito>();	
 	    List<Entity_Coordenadas> listaCoo = new ArrayList<Entity_Coordenadas>();
 	    List<Entity_Categoria> listaCat = new ArrayList<Entity_Categoria>();	
-
 	    
 		List<NameValuePair> parametros = new ArrayList<NameValuePair>();
 		
 		parametros.add( new BasicNameValuePair("entity", ENTITY));
+		parametros.add( new BasicNameValuePair("categoriaID", categoriaID));
 		String paramsString = URLEncodedUtils.format(parametros, "UTF-8");
 		
 		try {						
@@ -90,7 +102,8 @@ public class DAO_Establecimiento {
 				if(!bStatus){
 					JSONObject oData =  oJson.getJSONObject("data");
 					int iNum = oData.length();
-			
+					lsColas.clear();
+					
 						for (int i = 0; i < iNum; i++) {
 							
 							JSONObject oEstabli =  oData.getJSONObject("establishment"+(i+1));	
@@ -123,6 +136,21 @@ public class DAO_Establecimiento {
 									(iIdEst, sNameEst, sDireccion, -1, listaCat, listaDis, listaCoo);
 							
 							lista.add(ettEst);//Lista final
+							
+							try {
+						
+								JSONObject oRate =  oEstabli.getJSONObject("rating");
+								if (!oRate.getString("cal_cola").toString().equals("")) {
+									lsColas.add(oRate.getString("cal_cola"));
+								}else{
+									lsColas.add(oRate.getString("No hay cola"));
+								}
+								
+							} catch (Exception e) {
+								lsColas.add("No hay cola");
+							}
+							
+							
 						}
 					
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
@@ -130,10 +158,6 @@ public class DAO_Establecimiento {
 				}else{
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
 					lista=null; //Temporal
-//					JSONObject oErrorData=  oJson.getJSONObject("data");
-//					oJsonStatus.setError_cod(Double.parseDouble(oErrorData.getString("error_cod")));
-//					oJsonStatus.setMessage(oErrorData.getString("message"));
-//					oJsonStatus.setInfo(oErrorData.getString("info"));
 				}
 			
 		} catch (Exception e) {

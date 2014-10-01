@@ -83,6 +83,8 @@ public class DAO_Calificacion {
 		}
 
 	
+	
+	
 	public boolean obtenerUltimaCalificacionPorEstabID(String establecimientoID){
 		
 		boolean bResult = false;
@@ -119,7 +121,6 @@ public class DAO_Calificacion {
 							oCali.setEstablecimientoID(iIdEsta);
 							oCali.setCola(sQueue);
 							oCali.setFecha(sDate);
-							Log.e("TAG-CALI", oCali.getCola());
 							bResult = true;
 							
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
