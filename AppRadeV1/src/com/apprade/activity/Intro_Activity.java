@@ -9,13 +9,16 @@ import android.support.v4.view.ViewPager;
 
 import com.apprade.R;
 import com.apprade.adapter.Adapter_ViewPage;
+import com.viewpagerindicator.CirclePageIndicator;
 
 /**
  * @author renzo
  *
  */
 public class Intro_Activity extends FragmentActivity {
-	ViewPager vp_Intro;
+	private ViewPager vp_Intro;
+	private CirclePageIndicator pi_Intros;
+	
 	
 	public Intro_Activity() {
 		// TODO Auto-generated constructor stub
@@ -33,6 +36,11 @@ public class Intro_Activity extends FragmentActivity {
 		
 		Adapter_ViewPage vpAdapter = new Adapter_ViewPage(getSupportFragmentManager());
 		vp_Intro.setAdapter(vpAdapter);
+		
+		pi_Intros = (CirclePageIndicator)findViewById(R.id.indicator);
+		pi_Intros.setViewPager(vp_Intro);
+
+		
 	}
 	
 	
