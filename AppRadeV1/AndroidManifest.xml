@@ -54,7 +54,8 @@
         </activity>
         <activity
             android:name="com.apprade.activity.Usuario_Login_Activity"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            >
         </activity>
         <activity
             android:name="com.apprade.activity.App_GPSMapa_Activity"
