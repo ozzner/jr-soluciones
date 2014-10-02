@@ -101,13 +101,13 @@ public class Intro_Activity extends FragmentActivity {
 		
 		if(sEmail.compareTo("")==0){
 			email.setError("Debes ingresar un Correo");
-			
-    	}else if(sPassword.compareTo("")==0){
-			password.setError("Debes ingresar un Password");
-    		
-    	}else{
-    		esError=true;
+			esError=true;
     	}
+		
+		if(sPassword.compareTo("")==0){
+			password.setError("Debes ingresar un Password");
+			esError=true;}
+    	
 		
 		return esError;
 		
@@ -202,7 +202,7 @@ public class Intro_Activity extends FragmentActivity {
 	
 		@Override
 		   public boolean onOptionsItemSelected(MenuItem item) {
-			  
+			final View v;
 			  actionBar = getActionBar();
 
 			  switch (item.getItemId()) {
@@ -211,36 +211,38 @@ public class Intro_Activity extends FragmentActivity {
 //					Intent login = new Intent(getApplicationContext(), Usuario_Login_Activity.class);
 //					startActivity(login);
 //					finish();
-			    	 
+			    	 actionBar.setSubtitle("Login");
 			    		 
 			    	 AlertDialog.Builder alertDialog = new AlertDialog.Builder(Intro_Activity.this);
 			 		LayoutInflater inflater = this.getLayoutInflater();
-			 		View v = inflater.inflate(R.layout.dialog_custom_login, null);
+			 	     v = inflater.inflate(R.layout.dialog_custom_login, null);
 			 		alertDialog.setView(v);
 
-		    		email = (EditText)v.findViewById(R.id.txtEmail);
-		    		password= (EditText)v.findViewById(R.id.txtPassword);
+		    		
 		    		
 			 		/* When positive (yes/ok) is clicked */
-					alertDialog.setPositiveButton("login", new DialogInterface.OnClickListener() {
+					alertDialog.setPositiveButton("Iniciar!", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog,int which) {
 						
-						if (validarCampos()) 
-				    		 new TaskHttpMethodAsync().execute();
-//					dialog.cancel(); // Your custom code
+						email = (EditText)v.findViewById(R.id.txtEmail);
+			    		password= (EditText)v.findViewById(R.id.txtPassword);
+			    		
+						if (!validarCampos()) 
+				    	 new TaskHttpMethodAsync().execute();
+						
 					}
 					});
 
 					/* When negative (No/cancel) button is clicked*/
-					alertDialog.setNegativeButton("exit", new DialogInterface.OnClickListener() {
+					alertDialog.setNegativeButton("Salir", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						dialog.cancel(); // Your custom code
+						dialog.cancel(); 
 					}
 					});
 					
-					alertDialog.show();			    	 
-			       break;
-	
+					alertDialog.show();		
+					
+				    break;  
 			     case R.id.reg_about_action:
 				   actionBar.setSubtitle("About app");
 			       break;      
