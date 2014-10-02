@@ -59,7 +59,7 @@ public class Usuario_Registro_Activity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activiy_usuario_registro);
+		setContentView(R.layout.fragment_intro_3);
 				
 		btnSend = (Button)findViewById(R.id.btn_enviar);
 		etNombres = (EditText)findViewById(R.id.et_nombres);
