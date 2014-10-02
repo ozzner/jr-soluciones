@@ -10,7 +10,7 @@ import android.util.Log;
 public class Helper_SharedPreferences  {
 
 	private SharedPreferences appRadeSharedPref;
-	private static final String MyPREFERENCES = "Login";
+	private static final String MyPREFERENCES = "Apprade";
 	private static final int UserID = 103095;
 	private static final String Email = "apprade@apprade.com";
 	private static final int Status = -1;
@@ -38,7 +38,7 @@ public class Helper_SharedPreferences  {
 
 		
 		if (!appRadeSharedPref.contains("userID")) {		
-			sChek = "registro";
+			sChek = "intro";
 			run();
 				
 		} else {
@@ -46,7 +46,7 @@ public class Helper_SharedPreferences  {
 			
 			switch (key) {
 			case -1:
-				sChek = "registro";
+				sChek = "intro";
 				break;
 			case 0:
 				sChek = "login";

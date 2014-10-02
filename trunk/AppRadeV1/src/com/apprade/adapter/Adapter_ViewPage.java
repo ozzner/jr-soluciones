@@ -5,6 +5,7 @@ package com.apprade.adapter;
 
 import com.apprade.activity.Fragment_Intro_1;
 import com.apprade.activity.Fragment_Intro_2;
+import com.apprade.activity.Fragment_Intro_3;
 
 import android.R;
 import android.support.v4.app.Fragment;
@@ -17,7 +18,7 @@ import android.support.v4.app.FragmentPagerAdapter;
  */
 
 public class Adapter_ViewPage extends FragmentPagerAdapter {
-	private static final int TAG_PAGINAS = 2;
+	private static final int TAG_NUM_PAGINAS = 3;
 
 	public Adapter_ViewPage(FragmentManager fm) {
 		super(fm);
@@ -32,6 +33,8 @@ public class Adapter_ViewPage extends FragmentPagerAdapter {
 			return new Fragment_Intro_1();
 		case 1:
 			return new Fragment_Intro_2();
+		case 2:
+			return new Fragment_Intro_3();
 		default:
 			break;
 		}
@@ -41,7 +44,7 @@ public class Adapter_ViewPage extends FragmentPagerAdapter {
 
 	@Override
 	public int getCount() {
-		return TAG_PAGINAS;
+		return TAG_NUM_PAGINAS;
 	}
 
 }

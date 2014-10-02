@@ -63,8 +63,6 @@ public class Usuario_Login_Activity extends Activity {
 //		ActionBar Bar = getActionBar();
 //		Bar.setIcon(R.drawable.check_user);
 		
-		
-		
 		email.setText(getIntent().getStringExtra("correo"));
 		password.setText(getIntent().getStringExtra("password"));
 		
@@ -218,7 +216,7 @@ public class Usuario_Login_Activity extends Activity {
 	    	 
 		       Intent i = new Intent(getApplicationContext(),Usuario_Registro_Activity.class);
 		       startActivity(i);
-			   finish();
+//			   finish();
 		       break;
 	       
 	       

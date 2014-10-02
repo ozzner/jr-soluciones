@@ -40,7 +40,7 @@ public class App_Splash_Activity extends Activity {
 			 
 				switch (sStatus) {
 					
-				case "registro":
+				case "intro":
 					Intent intro = new Intent().setClass(
 							App_Splash_Activity.this, Intro_Activity.class);
 					startActivity(intro);
