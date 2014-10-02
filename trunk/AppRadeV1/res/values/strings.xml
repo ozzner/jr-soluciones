@@ -4,5 +4,7 @@
     <string name="app_name">Apprade</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="intro_1">¡Paso #1!</string>
+    <string name="intro_2">¡Paso #2!</string>
 
 </resources>
