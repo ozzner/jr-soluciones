@@ -44,10 +44,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nombres"
-                    android:inputType="textPersonName"
+                    android:inputType="textAutoComplete"
                     android:textSize="15dip" >
-
-                    <requestFocus />
                 </EditText>
 
                 <LinearLayout
@@ -144,7 +142,8 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/boton_formato_estandar"
-                android:text="Enviar" />
+                android:text="Enviar"
+                android:textSize="14dp" />
         </LinearLayout>
     </ScrollView>
 

@@ -180,7 +180,7 @@ public class Intro_Activity extends FragmentActivity {
 						Toast.makeText(getApplicationContext(),"Bienvenid@_"+sUser, Toast.LENGTH_SHORT).show();
 
 					}else{
-						Toast.makeText(getApplicationContext(),dao.oJsonStatus.getMessage()+" Info: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(),dao.oJsonStatus.getMessage()+". "+dao.oJsonStatus.getInfo()+".",Toast.LENGTH_SHORT).show();
 					}
 				}
 		    

@@ -7,6 +7,7 @@ import com.apprade.R;
 import com.apprade.activity.Usuario_Login_Activity.TaskHttpMethodAsync;
 import com.apprade.dao.DAO_Usuario;
 import com.apprade.helper.Helper_SharedPreferences;
+import com.apprade.helper.Helper_SubRoutines;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -47,13 +48,15 @@ public class Usuario_Registro_Activity extends Activity {
 	private int year;
 	private ProgressDialog proDialog;
 	private String sFecha="2006-05-18",sNombre,sEmail,sPassword,sPassword2,sSexo;
-	private  ActionBar actionBar;
+	private ActionBar actionBar;
 	private DAO_Usuario dao;
-	
+	private Helper_SubRoutines oRoutine;
+	private static final String TAG_VACIO = "";
 	
 	public Usuario_Registro_Activity() {
 		super();
 		dao = new DAO_Usuario();
+		oRoutine = new Helper_SubRoutines();
 	}
 
 	@Override
@@ -91,61 +94,80 @@ public class Usuario_Registro_Activity extends Activity {
 	 });
 	
 }
-			public void EnviarRegistro() {
+	
+	
+	private boolean validarRegistro(){
+
+		 boolean esError=false;
+		 RadioButton selectRadio = (RadioButton) findViewById(rgSexo
+	             .getCheckedRadioButtonId());
+		  String sexo = selectRadio.getText().toString();
+		  
+		  sSexo = sexo;
+		  
+		  if(sNombre.compareTo("")==0){
+				etNombres.setError("Debes ingresar tu nombre");
+	    		esError=true;
+	    	}
+		  
+			if(sEmail.compareTo("")==0){
+				etCorreo.setError("Debes ingresar un Correo");
+	    		esError=true;
+	    	}
+			
+			if(sPassword.compareTo("")==0){
+				etPassword.setError("Debes ingresar un Password");
+	    		esError=true;
+	    	}
+			
+			if(sPassword2.compareTo("")==0){
+				etConfPassword.setError("Debes confirmar tu Password");
+	    		esError=true;
+	    	}
+			
+			if (sFecha.equals("2006-05-18")) {
+				oRoutine.showToast(getApplicationContext(), "Ingrese fecha nacimiento");
+				esError =  true;
+			}else{
 				
-				 RadioButton selectRadio = (RadioButton) findViewById(rgSexo
-			             .getCheckedRadioButtonId());
-				 
+				if (sFecha.equals(oRoutine.getCurrentTimeShort())) {
+					esError=true;
+					oRoutine.showToast(getApplicationContext(), "Ingrese fecha correcta");
+				}
+			}
+			
+			return esError;
+	}
+	
+	
+			public void EnviarRegistro() {
 
 				  sNombre = etNombres.getText().toString();
 				  sEmail = etCorreo.getText().toString();
 				  sPassword = etPassword.getText().toString();
 				  sPassword2 = etConfPassword.getText().toString();				 
-				  String sexo = selectRadio.getText().toString();
-
-				 boolean esError=false;
-					
-				 	if (sexo == "Masculino") 
-						sSexo = "M";
-					 else
-						sSexo = "F";
 				 
-					if(sEmail.compareTo("")==0){
-						etCorreo.setError("Debes ingresar un Correo");
-			    		esError=true;
-			    	}
-					
-					if(sPassword.compareTo("")==0){
-						etPassword.setError("Debes ingresar un Password");
-			    		esError=true;
-			    	}
-					
-					if(sPassword2.compareTo("")==0){
-						etConfPassword.setError("Debes confirmar tu Password");
-			    		esError=true;
-			    	}
-					
-					if(sNombre.compareTo("")==0){
-						etNombres.setError("Debes ingresar un nombre");
-			    		esError=true;
-			    	}
-					
-					if(sPassword.equals(sPassword2)){
-						exeHttpAsync();
-					}
-					else{
-						Toast.makeText(getApplicationContext(),"Las contraseñas no coinciden", Toast.LENGTH_LONG).show();
-						etPassword.setText("");
-						etConfPassword.setText("");
-					}
-										
-					if(esError)
-						return;
-								 
-				
+				  if (!validarRegistro())
+					  if(sPassword.equals(sPassword2))
+							new TaskHttpMethodAsync().execute();
+					  else{
+							Toast.makeText(getApplicationContext(),"Las contraseñas no coinciden", Toast.LENGTH_LONG).show();
+							etPassword.setText(TAG_VACIO);
+							etConfPassword.setText(TAG_VACIO);
+						}
 	}
 			
 			 protected Dialog onCreateDialog(int id) {
+				 
+				 
+				 // Use the current date as the default date in the picker
+			        final Calendar c = Calendar.getInstance();
+			        int year = c.get(Calendar.YEAR);
+			        int month = c.get(Calendar.MONTH);
+			        int day = c.get(Calendar.DAY_OF_MONTH);
+
+			        // Create a new instance of DatePickerDialog and return it
+				 
 				  return new DatePickerDialog(this, datePickerListener, year, month, day);
 				 }
 		    
@@ -153,17 +175,13 @@ public class Usuario_Registro_Activity extends Activity {
 				  public void onDateSet(DatePicker view, int selectedYear,
 				    int selectedMonth, int selectedDay) {
 						sFecha = (selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDay);
-			  		Toast.makeText(getApplicationContext(),(sFecha), Toast.LENGTH_LONG).show();
+			  		Toast.makeText(getApplicationContext(),(sFecha), Toast.LENGTH_SHORT).show();
 					  return;
-					  			  }
+				}
 				   };	 
 				 
 
-			private void exeHttpAsync(){
-				TaskHttpMethodAsync task =  new TaskHttpMethodAsync();
-				task.execute();
-			}
-			
+		
 		    class TaskHttpMethodAsync extends AsyncTask<String, Void,Boolean>{
 
 		    @Override
