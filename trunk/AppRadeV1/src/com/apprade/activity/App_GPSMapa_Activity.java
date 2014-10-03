@@ -60,7 +60,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private static final String TAG_COLA_MODERADA = "Cola moderada";
 	private static final String TAG_ALTA_COLA = "Alta cola";
 	private static GoogleMap map;
-	private static final MarkerOptions markerOptions = new MarkerOptions();
+	private static MarkerOptions markerOptions = new MarkerOptions();
 	private MenuItem refreshMenuItem;
 	Helper_GPS_Tracker gps;
 	private ArrayList<Adapter_SpinnerItem> arrAdpSpinner;
@@ -83,7 +83,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private Adapter_InfoWindow oInfoWindow;
 	private Helper_SubRoutines oRoutine;
 	private String arrValue[];
-	private int count1;
+	private int count1, marker_count= 0, marker_count2=0;
 	private Adapter_InfoWindow adpInWin ;
 	private static String mensaje;
 	private static final String TAG_ONCREATE = "oncreate";
@@ -92,6 +92,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private static Marker myMarker;
 	public static List<String> ls_Colas =  new ArrayList<String>();
 	String arrParams[] = new String[4];
+	String arrCategory[] = new String[2];
 	String arrKeys[] = new String[10];
 	String arrValues[] = new String[10];
 	String[] arrNomEst = null;
@@ -177,7 +178,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			myMarker.hideInfoWindow();
 			exeHttpAsync();
 			
-			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -197,8 +197,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 		actionBar = getActionBar();
 
-		setMensaje(TAG_ONCREATE);
-//		exeHttpAsync();
 		hideFragment();
 		loadSpinnerNav();
 		
@@ -568,8 +566,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				if(bResult)
 					ls_Colas.set(position, cola);
 					
-					
-				
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
@@ -679,16 +675,18 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			
 			App_GPSMapa_Activity oApp = new App_GPSMapa_Activity();
 			String sMensaje = oApp.getMensaje();
+		
+		try {
 			
 			if (sMensaje.equals("update")) {
 				refreshMenuItem.setActionView(R.layout.action_progressbar_refresh);
 				refreshMenuItem.expandActionView();
-
-			} else if (sMensaje.equals("oncreate")) {
-				showDialogo();
-			} else {
-
-			}
+			} 
+			
+		} catch (Exception e) {
+			showDialogo();
+			proDialog.setProgress(0);
+		}	
 			
 				try {
 
@@ -707,6 +705,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 					});
 					proDialog.setProgress(0);
 				} catch (Exception e) {
+					
 				}
 		}
 
@@ -717,7 +716,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 			try {
 
-				lista_establecimiento = dao.listarTodoEstablecimiento(params[0]);
+				lista_establecimiento = dao.listarEstablecimientoPorCategoriaID(params[0]);
 				
 				bRequest = status.getError_status();
 
@@ -728,7 +727,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 					arrIdEstt = new int[lista_establecimiento.size()];
 					
 					ls_Colas =  dao.getLsColas();
-					Log.e("ARRAY-SIZE", ls_Colas.size()+"");
+					
 					int a = 0;
 					for (Entity_Establecimiento esta : lista_establecimiento) {
 						lista_coordenadas = esta.getCoordenadas();
@@ -765,7 +764,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			try {
 				proDialog.dismiss();
 			} catch (Exception e) {
-				Log.e("TAG-PROGGRESS", "No se pudo cerrar");
+				Log.e("TAG-PROGGRESS", "No se pudo cerrar el dialogo");
 			}
 
 			if (!result) {
@@ -781,6 +780,14 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				Toast.makeText(getApplicationContext(), "¡Listo!",
 						Toast.LENGTH_SHORT).show();
 			} else {
+				
+				try {
+					refreshMenuItem.collapseActionView();
+					refreshMenuItem.setActionView(null);
+				} catch (Exception e) {
+
+				}
+				
 				actionBar.setSubtitle("Error!");
 				Toast.makeText(getApplicationContext(), "¡Oops!",
 						Toast.LENGTH_SHORT).show();
@@ -791,7 +798,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 			proDialog = new ProgressDialog(App_GPSMapa_Activity.this);
 			proDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			proDialog.setMessage("Iniciando...");
+			proDialog.setMessage("Buscando...");
 			proDialog.show();
 
 		}
@@ -816,23 +823,28 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		actionBar = getActionBar();
-
+		
+		
+		Log.e("MENU ITEM", item.getItemId()+"");
+		Log.e("ITEM", item+"");
+		
 		switch (item.getItemId()) {
+		
 		case R.id.cargar_establ_acc:
-			arrParams[0]="1";
+			setMensaje(TAG_UPDATE);
+			contadorMarker();
 			
 			try {
 				refreshMenuItem = item;
-				setMensaje(TAG_UPDATE);
 				hideFragment();
 				myMarker.hideInfoWindow();
 				map.clear();
 				
-				exeHttpAsync(arrParams);
+				new EstablecimientoAsync().execute(arrCategory);
 		
 			} catch (Exception e) {
 				map.clear();
-				exeHttpAsync(arrParams);
+				new EstablecimientoAsync().execute(arrCategory);
 			}
 			
 			
@@ -843,7 +855,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			Helper_SharedPreferences oShared = new Helper_SharedPreferences();
 			oShared.storeStatus(0, getApplicationContext());// 0 => Inicia desde
 															// el login
-
 			Intent i = new Intent(getApplicationContext(),
 					Usuario_Login_Activity.class);
 			startActivity(i);
@@ -880,6 +891,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 	}
 
+	
 //	public void clearApplicationData() 
 //	{
 //	    File cache = getCacheDir();
@@ -909,16 +921,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 //	}
 	
 	
-	
-	
 	public final boolean onMarkerClick(Marker arg0) {
 		
 		String identificador = arg0.getId();
-		LatLng a =arg0.getPosition();
-		Log.e(TAG_UPDATE+"aaa", identificador);
+
 		String contador = identificador.substring(1, identificador.length());
-		int count = Integer.parseInt(contador);
-		Log.e(TAG_UPDATE, contador.toString());
+		int count = Integer.parseInt(contador) - marker_count;
+		
 		arrParams[0] = arrIdEstt[count] + "";
 		
 	    adpInWin = new Adapter_InfoWindow();
@@ -931,6 +940,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	
 		runAsyncGetLasRate(arrIdEstt[count]);
 		showFragment(arg0);
+		
+	
 		
 		return false;
 	}
@@ -956,43 +967,52 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		actionBar.setListNavigationCallbacks(oAdpSpinner, this);
 	}
 	
+	private void contadorMarker(){
+		
+		marker_count2 = marker_count + ls_Colas.size();
+		marker_count = marker_count2;
+	}
+	
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 	
 		String sCatagoria = new String();
 		map.clear();
+		contadorMarker();
+		
+		setMensaje(TAG_UPDATE);
 		
 		sCatagoria = arrAdpSpinner.get(itemPosition).getCategory();
 		
 		switch (sCatagoria) {
 		case "Fast foods":
-			arrParams[0]=String.valueOf(1);
-			new EstablecimientoAsync().execute(arrParams);
+			arrCategory[0]=String.valueOf(1);
+			new EstablecimientoAsync().execute(arrCategory);
 			break;
 			
 		case "Cines":
-			arrParams[0]=String.valueOf(2);
-			new EstablecimientoAsync().execute(arrParams);
+			arrCategory[0]=String.valueOf(2);
+			new EstablecimientoAsync().execute(arrCategory);
 			break;
 			
 		case "Cafes":
-			arrParams[0]=String.valueOf(3);
-			new EstablecimientoAsync().execute(arrParams);
+			arrCategory[0]=String.valueOf(3);
+			new EstablecimientoAsync().execute(arrCategory);
 			break;
 			
 		case "Restaurantes":
-			arrParams[0]=String.valueOf(4);
-			new EstablecimientoAsync().execute(arrParams);
+			arrCategory[0]=String.valueOf(4);
+			new EstablecimientoAsync().execute(arrCategory);
 			break;
 			
 		case "Bancos":
-			arrParams[0]=String.valueOf(5);
-			new EstablecimientoAsync().execute(arrParams);
+			arrCategory[0]=String.valueOf(5);
+			new EstablecimientoAsync().execute(arrCategory);
 			break;
 			
 		case "Organismos":
-			arrParams[0]=String.valueOf(6);
-			new EstablecimientoAsync().execute(arrParams);
+			arrCategory[0]=String.valueOf(6);
+			new EstablecimientoAsync().execute(arrCategory);
 			break;
 			
 		default:

@@ -76,7 +76,7 @@ public class DAO_Establecimiento {
 	}
 	
 	
-	public List<Entity_Establecimiento> listarTodoEstablecimiento(String categoriaID)
+	public List<Entity_Establecimiento> listarEstablecimientoPorCategoriaID(String categoriaID)
 	{	
 		URL= URI.create(conn.getUrl());
 		InputStream in = null;
