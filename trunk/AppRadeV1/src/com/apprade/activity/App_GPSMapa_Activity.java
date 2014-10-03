@@ -1,5 +1,6 @@
 package com.apprade.activity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -58,7 +59,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private static final String TAG_POCA_COLA = "Poca cola";
 	private static final String TAG_COLA_MODERADA = "Cola moderada";
 	private static final String TAG_ALTA_COLA = "Alta cola";
-	private GoogleMap map;
+	private static GoogleMap map;
+	private static final MarkerOptions markerOptions = new MarkerOptions();
 	private MenuItem refreshMenuItem;
 	Helper_GPS_Tracker gps;
 	private ArrayList<Adapter_SpinnerItem> arrAdpSpinner;
@@ -81,7 +83,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private Adapter_InfoWindow oInfoWindow;
 	private Helper_SubRoutines oRoutine;
 	private String arrValue[];
-	private int count;
+	private int count1;
 	private Adapter_InfoWindow adpInWin ;
 	private static String mensaje;
 	private static final String TAG_ONCREATE = "oncreate";
@@ -94,7 +96,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	String arrValues[] = new String[10];
 	String[] arrNomEst = null;
 	String[] arrDirEst = null;
-	int[] arrIdEstt;
+	private static int[] arrIdEstt ;
 	int arraymapas[] = new int[1000];
 	String titulo;
 
@@ -441,7 +443,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 					@Override
 					public void run() {
 
-						map.addMarker(new MarkerOptions()
+						map.addMarker(markerOptions
 								.position(new LatLng(lat, lon))
 								.title(nom)
 								.snippet(dir)
@@ -449,6 +451,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 								.alpha(0.8f)
 								.icon(BitmapDescriptorFactory
 								.fromResource(R.drawable.ic_map)));
+						
 					}
 				});
 			}
@@ -676,7 +679,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			
 			App_GPSMapa_Activity oApp = new App_GPSMapa_Activity();
 			String sMensaje = oApp.getMensaje();
-
+			
 			if (sMensaje.equals("update")) {
 				refreshMenuItem.setActionView(R.layout.action_progressbar_refresh);
 				refreshMenuItem.expandActionView();
@@ -725,7 +728,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 					arrIdEstt = new int[lista_establecimiento.size()];
 					
 					ls_Colas =  dao.getLsColas();
-					
+					Log.e("ARRAY-SIZE", ls_Colas.size()+"");
 					int a = 0;
 					for (Entity_Establecimiento esta : lista_establecimiento) {
 						lista_coordenadas = esta.getCoordenadas();
@@ -743,7 +746,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 						lon = coor.getLongitud();
 						
 						setUpMap(lat, lon, arrNomEst[c], arrDirEst[c]);
-
+						Log.e("contador1: ", +c+"");
 						c++;
 					}
 				}
@@ -862,30 +865,62 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 		String contador = identificador.substring(1, identificador.length());
 
-		count = Integer.parseInt(contador);
+		count1 = Integer.parseInt(contador);
 
 		// hideFragment();
 
 		Intent intent = new Intent(getApplicationContext(),
 				Usuario_Comentar_Activity.class);
 
-		intent.putExtra("establecimientoID", arrIdEstt[count]);
-		intent.putExtra("nomEstablecimiento", arrNomEst[count]);
-		intent.putExtra("direccion", arrDirEst[count]);
+		intent.putExtra("establecimientoID", arrIdEstt[count1]);
+		intent.putExtra("nomEstablecimiento", arrNomEst[count1]);
+		intent.putExtra("direccion", arrDirEst[count1]);
 		intent.putExtra("usuarioID", usuarioID);
 		startActivity(intent);
 
 	}
 
-	@Override
-	public boolean onMarkerClick(Marker arg0) {
-
+//	public void clearApplicationData() 
+//	{
+//	    File cache = getCacheDir();
+//	    File appDir = new File(cache.getParent());
+//	    if (appDir.exists()) {
+//	        String[] children = appDir.list();
+//	        for (String s : children) {
+//	            if (!s.equals("lib")) {
+//	                deleteDir(new File(appDir, s));Log.i("TAG", "**************** File /data/data/APP_PACKAGE/" + s + " DELETED *******************");
+//	            }
+//	        }
+//	    }
+//	}
+//
+//	public static boolean deleteDir(File dir) 
+//	{
+//	    if (dir != null && dir.isDirectory()) {
+//	        String[] children = dir.list();
+//	        for (int i = 0; i < children.length; i++) {
+//	            boolean success = deleteDir(new File(dir, children[i]));
+//	            if (!success) {
+//	                return false;
+//	            }
+//	        }
+//	    }
+//	    return dir.delete();
+//	}
+	
+	
+	
+	
+	public final boolean onMarkerClick(Marker arg0) {
+		
 		String identificador = arg0.getId();
+		LatLng a =arg0.getPosition();
+		Log.e(TAG_UPDATE+"aaa", identificador);
 		String contador = identificador.substring(1, identificador.length());
 		int count = Integer.parseInt(contador);
-
+		Log.e(TAG_UPDATE, contador.toString());
 		arrParams[0] = arrIdEstt[count] + "";
-
+		
 	    adpInWin = new Adapter_InfoWindow();
 	    adpInWin.setCola(ls_Colas.get(count));
 	    
@@ -915,7 +950,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.cafes, "Cafes"));
 		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.restaurantes, "Restaurantes"));
 		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.banco, "Bancos"));
-		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.organismos, "Organismos"));
+		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.organismos, "Organización"));
 		
 		oAdpSpinner =  new Adapter_SpinnerNavActionBar(getApplicationContext(), arrAdpSpinner);
 		actionBar.setListNavigationCallbacks(oAdpSpinner, this);
@@ -927,7 +962,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		String sCatagoria = new String();
 		map.clear();
 		
-		
 		sCatagoria = arrAdpSpinner.get(itemPosition).getCategory();
 		
 		switch (sCatagoria) {
@@ -935,30 +969,35 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			arrParams[0]=String.valueOf(1);
 			new EstablecimientoAsync().execute(arrParams);
 			break;
+			
 		case "Cines":
 			arrParams[0]=String.valueOf(2);
 			new EstablecimientoAsync().execute(arrParams);
 			break;
+			
 		case "Cafes":
 			arrParams[0]=String.valueOf(3);
 			new EstablecimientoAsync().execute(arrParams);
 			break;
+			
 		case "Restaurantes":
 			arrParams[0]=String.valueOf(4);
 			new EstablecimientoAsync().execute(arrParams);
 			break;
+			
 		case "Bancos":
 			arrParams[0]=String.valueOf(5);
 			new EstablecimientoAsync().execute(arrParams);
 			break;
+			
 		case "Organismos":
 			arrParams[0]=String.valueOf(6);
 			new EstablecimientoAsync().execute(arrParams);
-			break;			
+			break;
+			
 		default:
 			break;
 		}
-		
 		
 		return false;
 	}

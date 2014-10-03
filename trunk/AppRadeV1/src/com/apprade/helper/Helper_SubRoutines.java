@@ -37,6 +37,14 @@ public class Helper_SubRoutines {
 		return strDate;
 	}
 
+	public String getCurrentTimeShort() {
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String strDate = sdf.format(c.getTime());
+
+		return strDate;
+	}
+	
 	public void showToast(Context context, String sms) {
 		Toast.makeText(context, sms, Toast.LENGTH_SHORT).show();
 	}
