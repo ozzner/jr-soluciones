@@ -12,6 +12,13 @@
         <item name="centered">true</item>
     </style>
 
+    <style name="CustomLinePageIndicator">
+        <item name="strokeWidth">4dp</item>
+        <item name="lineWidth">30dp</item>
+        <item name="unselectedColor">#90888888</item>
+        <item name="selectedColor">#FF3399ff</item>
+    </style>
+
     <style name="CustomTitlePageIndicator">
 
         <!-- color de fondo de toda la barra en la que se muestra el nombre -->
@@ -35,7 +42,7 @@
     <style name="AppDialog" parent="android:style/Theme.Dialog">
 
         <!-- <item name="android:background">@color/transparente</item> -->
-        <item name="android:windowBackground">@color/transparente</item>
+         <item name="android:windowBackground">@color/transparente</item>
         <item name="android:colorForeground">#fff</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
@@ -43,8 +50,11 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <color name="transparente">#0000ff00</color>
-    <color name="transparente2">#90BDDEDB</color>
+    <style name="AlertDialogCustom" parent="@android:style/Holo.Light.ButtonBar.AlertDialog">
+        <item name="android:textColor">#FFFF00</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 
     <style name="button_text">
         <item name="android:layout_width">fill_parent</item>
@@ -59,5 +69,8 @@
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">2</item>
     </style>
+
+    <color name="transparente">#0000ff00</color>
+    <color name="transparente2">#90BDDEDB</color>
 
 </resources>

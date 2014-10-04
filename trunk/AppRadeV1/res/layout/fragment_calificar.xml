@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="#ccc"
+        android:background="#80e3e0d7"
         android:orientation="horizontal" >
 
         <LinearLayout
