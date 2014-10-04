@@ -40,6 +40,7 @@ import com.apprade.entity.Entity_Ranking;
 import com.apprade.helper.Helper_SharedPreferences;
 import com.google.android.gms.games.multiplayer.turnbased.TurnBasedMultiplayer.InitiateMatchResult;
 import com.viewpagerindicator.CirclePageIndicator;
+import com.viewpagerindicator.LinePageIndicator;
 
 /**
  * @author renzo
@@ -50,7 +51,7 @@ public class Intro_Activity extends FragmentActivity {
 	
 	
 	private ViewPager vp_Intro;
-	private CirclePageIndicator pi_Intros;
+	private LinePageIndicator pi_Intros;
 	private  ActionBar actionBar;
 	private EditText password,email;	
 	private Button btnLogin;
@@ -81,7 +82,7 @@ public class Intro_Activity extends FragmentActivity {
 		Adapter_ViewPage vpAdapter = new Adapter_ViewPage(getSupportFragmentManager());
 		vp_Intro.setAdapter(vpAdapter);
 		
-		pi_Intros = (CirclePageIndicator)findViewById(R.id.indicator);
+		pi_Intros = (LinePageIndicator)findViewById(R.id.indicator);
 		pi_Intros.setViewPager(vp_Intro);
 
 		/*PARTE 2*/

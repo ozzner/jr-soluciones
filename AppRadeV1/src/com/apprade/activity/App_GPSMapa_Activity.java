@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -17,6 +18,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,11 +26,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.apprade.R;
+import com.apprade.activity.Intro_Activity.TaskHttpMethodAsync;
 import com.apprade.adapter.Adapter_InfoWindow;
 import com.apprade.adapter.Adapter_SpinnerItem;
 import com.apprade.adapter.Adapter_SpinnerNavActionBar;
@@ -97,7 +101,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	String arrValues[] = new String[10];
 	String[] arrNomEst = null;
 	String[] arrDirEst = null;
-	private static int[] arrIdEstt ;
+	private int[] arrIdEstt ;
 	int arraymapas[] = new int[1000];
 	String titulo;
 
@@ -199,6 +203,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 		hideFragment();
 		loadSpinnerNav();
+		clearVars();
 		
 		ivNoCola.setOnClickListener(new OnClickListener() {
 
@@ -527,15 +532,11 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 						//TODO
 					}
 
-
 				}else{
 					Log.e(TAG_UPDATE, "NO HAY CALIFICACIONES");
 					sCola = oCalificar.oJsonStatus.getInfo();
 				}
 				
-				
-				
-
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
@@ -819,20 +820,22 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		return true;
 	}
 
+	private void clearVars(){
+		marker_count = 0;
+		marker_count2 = 0;
+		ls_Colas.clear();
+	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		actionBar = getActionBar();
 		
-		
-		Log.e("MENU ITEM", item.getItemId()+"");
-		Log.e("ITEM", item+"");
-		
 		switch (item.getItemId()) {
 		
 		case R.id.cargar_establ_acc:
+			
 			setMensaje(TAG_UPDATE);
-			contadorMarker();
+			sumadorMarker();
 			
 			try {
 				refreshMenuItem = item;
@@ -854,10 +857,11 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			actionBar.setSubtitle("Chau");
 			Helper_SharedPreferences oShared = new Helper_SharedPreferences();
 			oShared.storeStatus(0, getApplicationContext());// 0 => Inicia desde
-															// el login
+			clearVars();									// el login
 			Intent i = new Intent(getApplicationContext(),
 					Usuario_Login_Activity.class);
 			startActivity(i);
+			
 			finish();
 			break;
 
@@ -871,24 +875,48 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	@Override
 	public void onInfoWindowClick(Marker marker) {
 		// abriendo y pasando datos al otro activity
-
+		final View v;
 		String identificador = marker.getId();
 
 		String contador = identificador.substring(1, identificador.length());
 
-		count1 = Integer.parseInt(contador);
+		int count = Integer.parseInt(contador) - marker_count;
 
 		// hideFragment();
-
-		Intent intent = new Intent(getApplicationContext(),
-				Usuario_Comentar_Activity.class);
-
-		intent.putExtra("establecimientoID", arrIdEstt[count1]);
-		intent.putExtra("nomEstablecimiento", arrNomEst[count1]);
-		intent.putExtra("direccion", arrDirEst[count1]);
-		intent.putExtra("usuarioID", usuarioID);
-		startActivity(intent);
-
+		try {
+		
+			Intent intent = new Intent(getApplicationContext(),
+					Usuario_Comentar_Activity.class);
+		
+			intent.putExtra("establecimientoID", arrIdEstt[count]);
+			intent.putExtra("nomEstablecimiento", arrNomEst[count]);
+			intent.putExtra("direccion", arrDirEst[count]);
+			intent.putExtra("usuarioID", usuarioID);
+			startActivity(intent);
+			
+//			 AlertDialog.Builder alertDialog = new AlertDialog.Builder(App_GPSMapa_Activity.this);
+//		 		LayoutInflater inflater = this.getLayoutInflater();
+//		 	     v = inflater.inflate(R.layout.popup, null);
+//		 		alertDialog.setView(v);
+//		 		
+//		 		/* When positive (yes/ok) is clicked */
+//				alertDialog.setPositiveButton("Iniciar!", new DialogInterface.OnClickListener() {
+//				public void onClick(DialogInterface dialog,int which) {
+//					
+//				}
+//				});
+//
+//				/* When negative (No/cancel) button is clicked*/
+//				alertDialog.setNegativeButton("Salir", new DialogInterface.OnClickListener() {
+//				public void onClick(DialogInterface dialog, int which) {
+//					dialog.cancel(); 
+//				}
+//				});
+//				alertDialog.show();	
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	
@@ -922,25 +950,30 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	
 	
 	public final boolean onMarkerClick(Marker arg0) {
-		
+	
 		String identificador = arg0.getId();
-
 		String contador = identificador.substring(1, identificador.length());
+		Log.e("MARKER", marker_count+"");
 		int count = Integer.parseInt(contador) - marker_count;
+		position = count;
 		
-		arrParams[0] = arrIdEstt[count] + "";
+		try {
+			
+			arrParams[0] = arrIdEstt[count] + "";
+			
+			 adpInWin = new Adapter_InfoWindow();
+			 adpInWin.setCola(ls_Colas.get(count));
+			 
+			runAsyncGetLasRate(arrIdEstt[count]);
+				
+		} catch (Exception e) {
+		}
 		
-	    adpInWin = new Adapter_InfoWindow();
-	    adpInWin.setCola(ls_Colas.get(count));
-	    
+		showFragment(arg0);
 		position = count;
 		
 		map.setInfoWindowAdapter(new Adapter_InfoWindow(
 				getLayoutInflater()));
-	
-		runAsyncGetLasRate(arrIdEstt[count]);
-		showFragment(arg0);
-		
 	
 		
 		return false;
@@ -955,7 +988,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		
 		arrAdpSpinner = new ArrayList<Adapter_SpinnerItem>();
-		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.ic_action_place, "-- Catagorias --"));
+		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.ic_action_place, "-- Seleccione --"));
 		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.fast_foods, "Fast foods"));
 		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.cines, "Cines"));
 		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.cafes, "Cafes"));
@@ -967,23 +1000,27 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		actionBar.setListNavigationCallbacks(oAdpSpinner, this);
 	}
 	
-	private void contadorMarker(){
+	private void sumadorMarker(){
 		
 		marker_count2 = marker_count + ls_Colas.size();
 		marker_count = marker_count2;
+		
+		Log.e("COUNT", marker_count+"");
+		Log.e("COUNT2", marker_count2+"");
 	}
 	
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 	
 		String sCatagoria = new String();
-		map.clear();
-		contadorMarker();
-		
-		setMensaje(TAG_UPDATE);
-		
 		sCatagoria = arrAdpSpinner.get(itemPosition).getCategory();
 		
+	if (!sCatagoria.equals("-- Seleccione --")) {
+			map.clear();
+			sumadorMarker();
+			setMensaje(TAG_UPDATE);
+		}
+	
 		switch (sCatagoria) {
 		case "Fast foods":
 			arrCategory[0]=String.valueOf(1);
@@ -1010,12 +1047,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			new EstablecimientoAsync().execute(arrCategory);
 			break;
 			
-		case "Organismos":
+		case "Organización":
 			arrCategory[0]=String.valueOf(6);
 			new EstablecimientoAsync().execute(arrCategory);
 			break;
 			
 		default:
+//			oRoutine.showToast(getApplicationContext(), "Seleccione una catagoría");
 			break;
 		}
 		
