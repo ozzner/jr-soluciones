@@ -7,29 +7,16 @@ package com.apprade.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.apprade.R;
-import com.apprade.activity.Usuario_Login_Activity.TaskHttpMethodAsync;
-import com.apprade.dao.DAO_Comentario;
-import com.apprade.entity.Entity_Comentario;
-import com.apprade.entity.Entity_Coordenadas;
-import com.apprade.entity.Entity_Establecimiento;
-import com.apprade.entity.Entity_Usuario;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import android.R.string;
-import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,7 +24,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toast;
+
+import com.apprade.R;
+import com.apprade.dao.DAO_Comentario;
+import com.apprade.entity.Entity_Comentario;
+import com.apprade.entity.Entity_Usuario;
 
 
 /**
