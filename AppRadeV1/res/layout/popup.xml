@@ -1,50 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="360dp"
+    android:background="@drawable/edit_text_shape"
     android:orientation="vertical" 
     >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="4"
+        android:layout_height="360dp"
         android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.65"
-            android:orientation="vertical" >
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.6"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <LinearLayout
                 android:id="@+id/lay_btn_comen"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/transparente2"
                 android:gravity="right"
                 android:orientation="horizontal" >
 
                 <Button
                     android:id="@+id/btn_cancel_comen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/ic_action_cancel"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/lay_est_datos"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight=".33"
-                android:background="@color/transparente2"
+                android:layout_height="100dp"
                 android:gravity="center"
                 android:orientation="vertical" >
 
@@ -54,12 +43,14 @@
                     android:layout_height="wrap_content"
                     android:text="PARDOS CHICKEN S. A."
                     android:textStyle="bold"
+                    android:textSize="18dp"
                     android:textColor="#000" />
 
                 <TextView
                     android:id="@+id/txt_distrito"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="14dp"
                     android:text="San Borja"
                     android:textColor="#000" />
 
@@ -75,28 +66,28 @@
             <LinearLayout
                 android:id="@+id/lay_comen_insertar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight=".33"
-                android:background="@color/transparente2"
                 android:gravity="center"
                 android:orientation="horizontal" >
 
                 <EditText
                     android:id="@+id/et_comentario"
-                    android:layout_width="wrap_content"
+                    android:layout_width="254dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="10dip"
                     android:ems="10"
-                    android:inputType="textMultiLine" >
+                    android:inputType="textMultiLine"
+                    android:background="@drawable/edit_text_shape"
+                     android:drawableLeft="@drawable/registro" >
 
                     <requestFocus />
                 </EditText>
 
                 <ImageView
                     android:id="@+id/iv_enviar_comentario"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/registro" />
@@ -105,9 +96,7 @@
             <LinearLayout
                 android:id="@+id/lay_comen_listar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight=".33"
-                android:background="@color/transparente2"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical" >
 
@@ -125,20 +114,14 @@
                             android:id="@+id/lv_comentarios"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dip" >
+                             >
+
                         </ListView>
 
                     </LinearLayout>
                 </ScrollView>
 
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.75"
-            android:orientation="vertical" >
         </LinearLayout>
     </LinearLayout>
 
