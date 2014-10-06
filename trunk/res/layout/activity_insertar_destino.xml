@@ -1,0 +1,119 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".InsertarDestinoActivity" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:text="@string/INSERTAR_DESTINO" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="2dp" >
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/string_empty"
+            android:src="@drawable/line_gris" />
+
+    </LinearLayout>
+    
+    <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:visibility="gone"
+         android:padding="2dp" >
+
+         <TextView
+             android:layout_width="105dp"
+             android:layout_height="wrap_content"
+             android:text="@string/Direccion" />
+
+         <ImageView
+             android:layout_width="0.7dp"
+             android:layout_height="match_parent"
+             android:layout_marginLeft="5dp"
+             android:layout_marginRight="5dp"
+             android:contentDescription="@string/string_empty"
+             android:src="@drawable/line_gris" />
+
+         <EditText
+             android:id="@+id/edtZona"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="1" />
+
+     </LinearLayout>
+    
+    <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:padding="2dp" >
+
+         <TextView
+             android:layout_width="105dp"
+             android:layout_height="wrap_content"
+             android:text="@string/Direccion" />
+
+         <ImageView
+             android:layout_width="0.7dp"
+             android:layout_height="match_parent"
+             android:layout_marginLeft="5dp"
+             android:layout_marginRight="5dp"
+             android:contentDescription="@string/string_empty"
+             android:src="@drawable/line_gris" />
+
+         <EditText
+             android:id="@+id/edtDireccion"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="1" />
+
+     </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="@string/string_empty"
+        android:src="@drawable/line_gris" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        
+        <fragment
+	        android:id="@+id/map"
+	        android:name="com.google.android.gms.maps.MapFragment"
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="0.85" />      
+    
+	    <Button
+	        android:id="@+id/btnGrabar"
+	        android:layout_gravity="bottom|center_horizontal"
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="0.15"
+	        android:text="@string/GRABAR" />
+        
+    </LinearLayout>   
+
+</LinearLayout>
