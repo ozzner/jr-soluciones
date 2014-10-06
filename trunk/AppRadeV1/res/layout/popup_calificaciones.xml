@@ -114,6 +114,7 @@
                             android:layout_marginLeft="7dp"
                             android:layout_marginRight="7dp"
                             android:background="@drawable/edit_text_shape"
+                            android:listSelector="@android:color/transparent"
                             android:paddingTop="5dp" >
                         </ListView>
                     </LinearLayout>
