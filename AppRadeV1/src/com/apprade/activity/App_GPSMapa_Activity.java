@@ -301,7 +301,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	protected boolean enviarCalificacion() {
 		boolean bMsj = false;
 
-		String currentTime = routine.getCurrentTime();
+		String currentTime = routine.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_SHORT);
 		/* KEYS - VALUES */
 		arrKeys[0] = "currentTime";
 		arrValues[0] = currentTime;
@@ -338,7 +338,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 	private void chkTimeCalificacion() {
 
-		String currentTime = routine.getCurrentTime();
+		String currentTime = routine.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_SHORT);
 		String sValue[] = new String[arrKeys.length];
 		String sMsj = "";
 
@@ -478,7 +478,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 					sCola = oCalificar.oCali.getCola();
 					sFecha = oCalificar.oCali.getFecha();
 
-					int iMin = oRoutine.dateDiferent(oRoutine.getCurrentTime(),
+					int iMin = oRoutine.dateDiferent(oRoutine.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_SHORT),
 							sFecha, Helper_SubRoutines.TAG_MINUTOS);
 
 					ls_Colas.set(position, sCola);
