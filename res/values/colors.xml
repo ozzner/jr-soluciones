@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="fondo_base_amarillo">#F7FE2E</color>
+    <color name="gris">#B6B6B6</color>
+    <color name="black">#000</color>
+    <color name="red">#FF1234</color>
+    <color name="white">#FFF</color>
+</resources>
