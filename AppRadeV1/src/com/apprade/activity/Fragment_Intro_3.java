@@ -29,8 +29,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Fragment_Intro_3 extends Fragment {
 
+public class Fragment_Intro_3 extends Fragment{
+	private static final int DATE_DIALOG_ID = 1;
 	private Button btnSend;
 	private EditText etNombres;
 	private EditText etCorreo;
@@ -69,12 +70,13 @@ public class Fragment_Intro_3 extends Fragment {
 		rgSexo = (RadioGroup) v.findViewById(R.id.rg_sexo);
 		selectRadio = (RadioButton) v.findViewById(rgSexo.getCheckedRadioButtonId());
 		
+
 		
 		ib.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				getActivity().showDialog(0);
+				
 			}
 		});
 
@@ -91,9 +93,10 @@ public class Fragment_Intro_3 extends Fragment {
 		return v;
 	}
 
-	public void EnviarRegistro() {
-
 	
+	
+	
+	public void EnviarRegistro() {
 
 		sNombre = etNombres.getText().toString();
 		sEmail = etCorreo.getText().toString();

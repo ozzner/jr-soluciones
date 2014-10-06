@@ -76,6 +76,7 @@ public class Usuario_Registro_Activity extends Activity {
 		
 		 ib.setOnClickListener( new OnClickListener() {
 			
+			@SuppressWarnings("deprecation")
 			@Override
 			public void onClick(View v) {
 				  showDialog(0);
