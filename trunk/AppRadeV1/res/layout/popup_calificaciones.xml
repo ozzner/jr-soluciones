@@ -70,24 +70,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_margin="7dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:orientation="horizontal" >
 
                 <EditText
                     android:id="@+id/et_comentario"
-                    android:layout_width="match_parent"
+                    android:layout_width="250dp"
                     android:layout_height="49dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="7dp"
+                    android:layout_weight="0.56"
                     android:background="@drawable/edit_text_shape"
                     android:drawableLeft="@drawable/ic_action_email"
                     android:ems="10"
-                    android:textColor="#dfdbdb"
-                    android:inputType="textMultiLine" >
+                    android:inputType="textMultiLine"
+                    android:textColor="#dfdbdb" >
 
                     <requestFocus />
                 </EditText>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edit_text_shape" >
+
+                    <ImageView
+                        android:id="@+id/iv_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|left"
+                        android:src="@drawable/ic_action_send_now" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout

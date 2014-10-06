@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nombres"
-                    android:inputType="textAutoComplete"
+                    android:inputType="textCapWords"
                     android:textSize="15dip" >
                 </EditText>
 
@@ -95,6 +95,7 @@
                             android:background="#0000"
                             android:cropToPadding="true"
                             android:scaleType="fitCenter"
+                            android:onClick="showTimePickerDialog"
                             android:src="@drawable/date" />
                     </LinearLayout>
                 </LinearLayout>
@@ -143,6 +144,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/boton_formato_estandar"
                 android:text="Enviar"
+                android:imeOptions="actionSend"
                 android:textSize="14dp" />
         </LinearLayout>
     </ScrollView>
