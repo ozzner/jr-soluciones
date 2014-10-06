@@ -874,8 +874,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 	@Override
 	public void onInfoWindowClick(Marker marker) {
-		// abriendo y pasando datos al otro activity
-		final View v;
+
 		String identificador = marker.getId();
 
 		String contador = identificador.substring(1, identificador.length());
@@ -892,61 +891,15 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			intent.putExtra("nomEstablecimiento", arrNomEst[count]);
 			intent.putExtra("direccion", arrDirEst[count]);
 			intent.putExtra("usuarioID", usuarioID);
+			intent.putExtra("cola", oInfoWindow.getCola());
 			startActivity(intent);
 			
-//			 AlertDialog.Builder alertDialog = new AlertDialog.Builder(App_GPSMapa_Activity.this);
-//		 		LayoutInflater inflater = this.getLayoutInflater();
-//		 	     v = inflater.inflate(R.layout.popup, null);
-//		 		alertDialog.setView(v);
-//		 		
-//		 		/* When positive (yes/ok) is clicked */
-//				alertDialog.setPositiveButton("Iniciar!", new DialogInterface.OnClickListener() {
-//				public void onClick(DialogInterface dialog,int which) {
-//					
-//				}
-//				});
-//
-//				/* When negative (No/cancel) button is clicked*/
-//				alertDialog.setNegativeButton("Salir", new DialogInterface.OnClickListener() {
-//				public void onClick(DialogInterface dialog, int which) {
-//					dialog.cancel(); 
-//				}
-//				});
-//				alertDialog.show();	
-		
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
 
-	
-//	public void clearApplicationData() 
-//	{
-//	    File cache = getCacheDir();
-//	    File appDir = new File(cache.getParent());
-//	    if (appDir.exists()) {
-//	        String[] children = appDir.list();
-//	        for (String s : children) {
-//	            if (!s.equals("lib")) {
-//	                deleteDir(new File(appDir, s));Log.i("TAG", "**************** File /data/data/APP_PACKAGE/" + s + " DELETED *******************");
-//	            }
-//	        }
-//	    }
-//	}
-//
-//	public static boolean deleteDir(File dir) 
-//	{
-//	    if (dir != null && dir.isDirectory()) {
-//	        String[] children = dir.list();
-//	        for (int i = 0; i < children.length; i++) {
-//	            boolean success = deleteDir(new File(dir, children[i]));
-//	            if (!success) {
-//	                return false;
-//	            }
-//	        }
-//	    }
-//	    return dir.delete();
-//	}
+
 	
 	
 	public final boolean onMarkerClick(Marker arg0) {
@@ -1061,3 +1014,33 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	}
 
 }
+
+
+
+//public void clearApplicationData() 
+//{
+//    File cache = getCacheDir();
+//    File appDir = new File(cache.getParent());
+//    if (appDir.exists()) {
+//        String[] children = appDir.list();
+//        for (String s : children) {
+//            if (!s.equals("lib")) {
+//                deleteDir(new File(appDir, s));Log.i("TAG", "**************** File /data/data/APP_PACKAGE/" + s + " DELETED *******************");
+//            }
+//        }
+//    }
+//}
+//
+//public static boolean deleteDir(File dir) 
+//{
+//    if (dir != null && dir.isDirectory()) {
+//        String[] children = dir.list();
+//        for (int i = 0; i < children.length; i++) {
+//            boolean success = deleteDir(new File(dir, children[i]));
+//            if (!success) {
+//                return false;
+//            }
+//        }
+//    }
+//    return dir.delete();
+//}

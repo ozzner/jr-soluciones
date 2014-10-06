@@ -15,6 +15,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,6 +60,7 @@ public class Intro_Activity extends FragmentActivity {
 	public Entity_Ranking rank;
 	private String sEmail="",sPassword="";
 	private ProgressDialog proDialogo;
+	private ImageButton ib;
 	
 	
 	public Intro_Activity() {
@@ -89,7 +91,7 @@ public class Intro_Activity extends FragmentActivity {
 		
 //		email.setText(getIntent().getStringExtra("correo"));
 //		password.setText(getIntent().getStringExtra("password"));
-		
+
 	}
 	
 	
