@@ -16,11 +16,16 @@ import android.widget.Toast;
  *
  */
 public class Helper_SubRoutines {
-	
+
 	public static final String TAG_DIAS = "dias";
 	public static final String TAG_HORAS = "horas";
 	public static final String TAG_MINUTOS = "minutos";
 	public static final String TAG_SEGUNDOS = "segundos";
+	public static final String TAG_FORMAT_FULL = "yyyy-MM-dd HH:mm:ss:SSS";
+	public static final String TAG_FORMAT_SHORT = "yyyy-MM-dd HH:mm:ss";
+	public static final String TAG_FORMAT_DATE_MM = "yyyy-MM-dd";
+	public static final String TAG_FORMAT_DATE_MMM = "yyyy-MMM-dd";
+	public static final String TAG_FORMAT_TIME = "HH:mm:ss";
 
 	/**
 	 * 
@@ -29,35 +34,42 @@ public class Helper_SubRoutines {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getCurrentTime() {
+	public String getCurrentTime(String Myformat) {
+		
 		Calendar c = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat(Myformat);
 		String strDate = sdf.format(c.getTime());
 
 		return strDate;
 	}
 
-	public String getCurrentTimeShort() {
-		Calendar c = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String strDate = sdf.format(c.getTime());
+	public String customDateConverter(String Mydate, String Myformat) {
+		String inputStringDate = Mydate;
+		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date inputDate = null;
+		
+		try {
+			inputDate = inputFormat.parse(inputStringDate);
+		} catch (ParseException ex) {
+		}
 
-		return strDate;
+		SimpleDateFormat outputFormat = new SimpleDateFormat(
+				Myformat);
+		String outputStringDate = outputFormat.format(inputDate);
+
+		return outputStringDate;
 	}
+
 	
-	public void showToast(Context context, String sms) {
-		Toast.makeText(context, sms, Toast.LENGTH_SHORT).show();
-	}
-
 	public int dateDiferent(String fecha_i, String fecha_f,
 			String dias_horas_minutos_segundos) {
-		
+
 		String tiempo = dias_horas_minutos_segundos;
 		Date date_i = null;
 		Date date_f = null;
 		long time = (long) 0.0;
 
-		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat formato = new SimpleDateFormat(TAG_FORMAT_SHORT);
 
 		try {
 			date_i = formato.parse(fecha_i);
@@ -91,7 +103,7 @@ public class Helper_SubRoutines {
 			time = (result_ms / (60 * 60 * 1000));
 			break;
 		case "dias":
-			 time = Math.abs(result_ms / (24 * 60 * 60 * 1000));
+			time = Math.abs(result_ms / (24 * 60 * 60 * 1000));
 			break;
 		default:
 			time = result_ms;
@@ -100,5 +112,11 @@ public class Helper_SubRoutines {
 
 		return ((int) time);
 	}
+	
+	
+	public void showToast(Context context, String sms) {
+		Toast.makeText(context, sms, Toast.LENGTH_SHORT).show();
+	}
+	
 
 }

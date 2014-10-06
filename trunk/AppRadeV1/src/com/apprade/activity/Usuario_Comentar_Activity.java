@@ -29,6 +29,7 @@ import com.apprade.R;
 import com.apprade.dao.DAO_Comentario;
 import com.apprade.entity.Entity_Comentario;
 import com.apprade.entity.Entity_Usuario;
+import com.apprade.helper.Helper_SubRoutines;
 
 
 /**
@@ -45,6 +46,7 @@ public class Usuario_Comentar_Activity extends Activity {
 	private String sNombre,sDireccion;
 	private TextView tvNombreEsta, tvDistrito;
 	private int iUsuarioID, iIdEstable;
+	private Helper_SubRoutines oRoutine;
 	private List<Entity_Comentario> oListaComment = new ArrayList<Entity_Comentario>();
 	
 	/**
@@ -53,16 +55,17 @@ public class Usuario_Comentar_Activity extends Activity {
 	public Usuario_Comentar_Activity() {
 		super();
 		dao = new DAO_Comentario();
+		oRoutine = new Helper_SubRoutines();
 	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.popup);
+		setContentView(R.layout.popup_calificaciones);
 		
 		btnCancel = (Button)findViewById(R.id.btn_cancel_comen);
-	    ivEnviarComentario = (ImageView)findViewById(R.id.iv_enviar_comentario);
+	    ivEnviarComentario = (ImageView)findViewById(R.id.iv_estado);
 	    etComentario = (EditText)findViewById(R.id.et_comentario);
 	    tvDistrito = (TextView)findViewById(R.id.txt_distrito);
 	    tvNombreEsta= (TextView)findViewById(R.id.txt_nom_establecimiento);
@@ -77,7 +80,7 @@ public class Usuario_Comentar_Activity extends Activity {
 	    sDireccion = oBundle.getString("direccion");
 
 	    tvDistrito.setText(sDireccion);
-	    tvNombreEsta.setText(sNombre);
+	    tvNombreEsta.setText(sNombre.toUpperCase());
 	    
 		
 	    btnCancel.setOnClickListener((android.view.View.OnClickListener) cancel_button_click_listener);
@@ -293,20 +296,19 @@ public class Usuario_Comentar_Activity extends Activity {
 			tvComment.setText("" + currentComment.getMensaje());
 			
 			// Condition:
-			TextView tvFecha = (TextView) itemView.findViewById(R.id.row_date);
-			tvFecha.setText(currentComment.getFecha());
-
+			TextView tvFecha = (TextView) itemView.findViewById(R.id.row_date1);
+			TextView tvFecha2 = (TextView) itemView.findViewById(R.id.row_date2);
+			tvFecha.setText(oRoutine.customDateConverter(currentComment.getFecha(),"yyyy-MMM-dd"));
+			tvFecha2.setText(oRoutine.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_TIME));
 			return itemView;
 		}				
 	}
 	
 	
-	
-	
 	private OnClickListener cancel_button_click_listener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			finish();
+	    finish();
 		}
 	};
 	

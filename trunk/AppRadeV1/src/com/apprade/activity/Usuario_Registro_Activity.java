@@ -130,7 +130,7 @@ public class Usuario_Registro_Activity extends Activity {
 				esError =  true;
 			}else{
 				
-				if (sFecha.equals(oRoutine.getCurrentTimeShort())) {
+				if (sFecha.equals(oRoutine.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_DATE_MM))) {
 					esError=true;
 					oRoutine.showToast(getApplicationContext(), "Ingrese fecha correcta");
 				}

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="360dp"
-    android:background="@drawable/edit_text_shape"
-    android:orientation="vertical" 
-    >
+    android:layout_height="370dp"
+    android:background="@drawable/popup_calificacion_shape"
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="370dp"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -27,13 +26,14 @@
                     android:id="@+id/btn_cancel_comen"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/ic_action_cancel"/>
+                    android:background="@drawable/ic_action_cancel" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/lay_est_datos"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:orientation="vertical" >
 
@@ -41,62 +41,59 @@
                     android:id="@+id/txt_nom_establecimiento"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:shadowColor="#f2000000"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
                     android:text="PARDOS CHICKEN S. A."
-                    android:textStyle="bold"
-                    android:textSize="18dp"
-                    android:textColor="#000" />
+                    android:textColor="#fff"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_distrito"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
                     android:text="San Borja"
-                    android:textColor="#000" />
+                    android:textColor="#f0f0f0"
+                    android:textSize="15dp" />
 
                 <ImageView
-                    android:id="@+id/iv_no_hay_cola"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/check_user"
-                    android:layout_marginTop="10dip" />
-
+                    android:id="@+id/iv_estado"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/img4" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/lay_comen_insertar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:orientation="horizontal" >
 
                 <EditText
                     android:id="@+id/et_comentario"
-                    android:layout_width="254dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="49dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="10dip"
-                    android:ems="10"
-                    android:inputType="textMultiLine"
+                    android:layout_margin="7dp"
                     android:background="@drawable/edit_text_shape"
-                     android:drawableLeft="@drawable/registro" >
+                    android:drawableLeft="@drawable/ic_action_email"
+                    android:ems="10"
+                    android:textColor="#dfdbdb"
+                    android:inputType="textMultiLine" >
 
                     <requestFocus />
                 </EditText>
-
-                <ImageView
-                    android:id="@+id/iv_enviar_comentario"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/registro" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/lay_comen_listar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:gravity="center"
                 android:orientation="vertical" >
 
@@ -113,14 +110,14 @@
                         <ListView
                             android:id="@+id/lv_comentarios"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                             >
-
+                            android:layout_height="145dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:background="@drawable/edit_text_shape"
+                            android:paddingTop="5dp" >
                         </ListView>
-
                     </LinearLayout>
                 </ScrollView>
-
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
