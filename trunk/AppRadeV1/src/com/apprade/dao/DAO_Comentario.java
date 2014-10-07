@@ -132,7 +132,7 @@ public class DAO_Comentario {
 							
 							lista.add(ettCom); //Lista final
 						}
-						Log.e("TAG-ERROR1", "Errrororor");
+					
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
 					oJsonStatus.setError_status(Boolean.parseBoolean(oJson.getString("error_status")));
 					

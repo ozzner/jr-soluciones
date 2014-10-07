@@ -3,24 +3,19 @@ package com.apprade.activity;
 
 import java.util.Calendar;
 
-import com.apprade.R;
-import com.apprade.activity.Usuario_Login_Activity.TaskHttpMethodAsync;
-import com.apprade.dao.DAO_Usuario;
-import com.apprade.helper.Helper_SharedPreferences;
-import com.apprade.helper.Helper_SubRoutines;
-
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,21 +27,36 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class Usuario_Registro_Activity extends Activity {
+import com.apprade.R;
+import com.apprade.dao.DAO_Usuario;
+import com.apprade.helper.Helper_SharedPreferences;
+import com.apprade.helper.Helper_SubRoutines;
+import com.mobsandgeeks.saripaar.Rule;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.Validator.ValidationListener;
+import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
+import com.mobsandgeeks.saripaar.annotation.Email;
+import com.mobsandgeeks.saripaar.annotation.Password;
+import com.mobsandgeeks.saripaar.annotation.Required;
+import com.mobsandgeeks.saripaar.annotation.TextRule;
+
+public class Usuario_Registro_Activity extends Activity implements ValidationListener {
+	
+	private Validator validator ;
 	private Button btnSend;
 	private EditText etNombres;
+	@Required(order = 1, message = "Este campo es requerido.")
+	@TextRule(order = 2, minLength = 3,trim = true)
 	private EditText etCorreo;
+	@Password(order = 3, message = "Debe ingresar un password")
+	@TextRule(order = 4, minLength = 3, message = "Ingrese min 3 caracteres.",trim = true)
 	private EditText etPassword;
+	@ConfirmPassword(order = 5, message = "Las contraseñas no son iguales")
 	private EditText etConfPassword;
 	private RadioGroup rgSexo;
-	private TextView txFecha;
 	private ImageButton ib;
-	private int day;
-	private int month;
-	private int year;
 	private ProgressDialog proDialog;
 	private String sFecha="2006-05-18",sNombre,sEmail,sPassword,sPassword2,sSexo;
 	private ActionBar actionBar;
@@ -72,8 +82,10 @@ public class Usuario_Registro_Activity extends Activity {
 		etCorreo = (EditText)findViewById(R.id.et_correo);
 		ib = (ImageButton) findViewById(R.id.imb_date);
 		rgSexo = (RadioGroup)findViewById(R.id.rg_sexo);
-//		txFecha= (TextView) findViewById(R.id.txtFecha);
-	
+		
+		validator = new Validator(this);
+		validator.setValidationListener(this);
+		
 		
 		 ib.setOnClickListener( new OnClickListener() {
 			
@@ -88,10 +100,7 @@ public class Usuario_Registro_Activity extends Activity {
 			
 		@Override
 		public void onClick(View v) {
-			
-			EnviarRegistro();
-//			exeHttpAsync();
-				
+			validator.validate();
 		}
 	 });
 	
@@ -104,30 +113,8 @@ public class Usuario_Registro_Activity extends Activity {
 		 RadioButton selectRadio = (RadioButton) findViewById(rgSexo
 	             .getCheckedRadioButtonId());
 		  String sexo = selectRadio.getText().toString();
-		  Log.e("FECHA-MM", oRoutine
-					.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_DATE_MM));
 		  sSexo = sexo;
 		  
-		  if(sNombre.compareTo("")==0){
-				etNombres.setError("Debes ingresar tu nombre");
-	    		esError=true;
-	    	}
-		  
-			if(sEmail.compareTo("")==0){
-				etCorreo.setError("Debes ingresar un Correo");
-	    		esError=true;
-	    	}
-			
-			if(sPassword.compareTo("")==0){
-				etPassword.setError("Debes ingresar un Password");
-	    		esError=true;
-	    	}
-			
-			if(sPassword2.compareTo("")==0){
-				etConfPassword.setError("Debes confirmar tu Password");
-	    		esError=true;
-	    	}
-			
 			if (sFecha.equals("2006-05-18")) {
 				oRoutine.showToast(getApplicationContext(), "Ingrese fecha nacimiento");
 				esError =  true;
@@ -142,28 +129,8 @@ public class Usuario_Registro_Activity extends Activity {
 			return esError;
 	}
 	
-	
-			public void EnviarRegistro() {
-
-				  sNombre = etNombres.getText().toString();
-				  sEmail = etCorreo.getText().toString();
-				  sPassword = etPassword.getText().toString();
-				  sPassword2 = etConfPassword.getText().toString();				 
-				 
-				  if (!validarRegistro())
-					  if(sPassword.equals(sPassword2))
-							new TaskHttpMethodAsync().execute();
-					  else{
-							Toast.makeText(getApplicationContext(),"Las contraseñas no coinciden", Toast.LENGTH_LONG).show();
-							etPassword.setText(TAG_VACIO);
-							etConfPassword.setText(TAG_VACIO);
-						}
-	}
-			
 			 protected Dialog onCreateDialog(int id) {
 				 
-				 
-				 // Use the current date as the default date in the picker
 			        final Calendar c = Calendar.getInstance();
 			        int year = c.get(Calendar.YEAR);
 			        int month = c.get(Calendar.MONTH);
@@ -233,17 +200,10 @@ public class Usuario_Registro_Activity extends Activity {
 						Toast.makeText(getApplicationContext(),dao.oJsonStatus.getMessage()+"\nInfo: "+dao.oJsonStatus.getInfo(),Toast.LENGTH_LONG).show();
 					}
 					
-					
 				}
 								
 			}		
 			
-//			protected void llamarMapa() {
-//				
-//				Intent i = new Intent(this, App_GPSMapa_Activity.class);
-//				startActivity(i);
-//				finish();				
-//			}		 
 
 		 @Override
 		   public boolean onCreateOptionsMenu(Menu menu) {
@@ -277,6 +237,7 @@ public class Usuario_Registro_Activity extends Activity {
 	
 			     case R.id.reg_about_action:
 				   actionBar.setSubtitle("About app");
+				   LoadInfo();
 			       break;      
 			       
 			     default:
@@ -284,8 +245,57 @@ public class Usuario_Registro_Activity extends Activity {
 		     }
 
 		     return true;
-		   } 	 
+		   }
+
+		@Override
+		public void onValidationSucceeded() {
+			
+			 if (!validarRegistro()){
+				 sNombre = etNombres.getText().toString().trim();
+				 sEmail = etCorreo.getText().toString().trim();
+				 sPassword = etConfPassword.getText().toString().trim();
+				 
+				 new TaskHttpMethodAsync().execute();
+			 }
+					
+		}
+		
+
+		@Override
+		public void onValidationFailed(View failedView, Rule<?> failedRule) {
+			String message = failedRule.getFailureMessage();
+
+	        if (failedView instanceof EditText) {
+	            failedView.requestFocus();
+	            ((EditText) failedView).setError(message);
+	        } else {
+	            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+	        }
+		} 	 
 		 
+		
+		
+		
+		private void LoadInfo() {
+			final View v;
+			
+			AlertDialog.Builder adInfo = new AlertDialog.Builder(Usuario_Registro_Activity.this);
+			
+			LayoutInflater layInfo = this.getLayoutInflater();
+			v = layInfo.inflate(R.layout.dialog_custom_about, null);
+			adInfo.setView(v);
+			
+			adInfo.setNeutralButton("Okay",new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();
+					
+				}
+			});
+			
+			adInfo.show();
+		}
 		 
 }
 

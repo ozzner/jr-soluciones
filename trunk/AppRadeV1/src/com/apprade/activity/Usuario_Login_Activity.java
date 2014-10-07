@@ -12,10 +12,16 @@ import com.apprade.entity.Entity_Ranking;
 import com.apprade.entity.Entity_Usuario;
 import com.apprade.helper.Helper_JSONStatus;
 import com.apprade.helper.Helper_SharedPreferences;
+import com.mobsandgeeks.saripaar.Rule;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.Validator.ValidationListener;
+import com.mobsandgeeks.saripaar.annotation.Required;
+import com.mobsandgeeks.saripaar.annotation.TextRule;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -23,6 +29,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,8 +41,11 @@ import android.widget.Toast;
 
 
 @SuppressLint("NewApi")
-public class Usuario_Login_Activity extends Activity {
+public class Usuario_Login_Activity extends Activity implements ValidationListener {
 	
+	private Validator validator;
+	@TextRule(order = 2, minLength = 3, message = "Ingrese min 3 caracteres.")
+	@Required(order = 1, message = "Este campo es requerido.")
 	private EditText password,email;	
 	private Button btnLogin;
 	private DAO_Usuario dao;
@@ -66,16 +76,15 @@ public class Usuario_Login_Activity extends Activity {
 		email.setText(getIntent().getStringExtra("correo"));
 		password.setText(getIntent().getStringExtra("password"));
 		
+		validator = new Validator(this);
+		validator.setValidationListener(this);
 		
 		btnLogin.setOnClickListener( new OnClickListener() {			
 			
 			@Override
 			public void onClick(View v) {
 				
-				if (validarCampos()) 
-					exeHttpAsync();
-					
-					 
+				validator.validate();
 			}
 		});			
 	}
@@ -102,8 +111,6 @@ public class Usuario_Login_Activity extends Activity {
 		
 	}
 	
-	
-	
 	protected void showDialogo(){
 		proDialogo = new ProgressDialog(Usuario_Login_Activity.this);
 		proDialogo.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -123,10 +130,6 @@ public class Usuario_Login_Activity extends Activity {
 			
 	}
 
-	private void exeHttpAsync(){
-		TaskHttpMethodAsync task =  new TaskHttpMethodAsync();
-		task.execute();
-	}
 	
     class TaskHttpMethodAsync extends AsyncTask<String, Void,Boolean>{
 
@@ -206,12 +209,14 @@ public class Usuario_Login_Activity extends Activity {
 	
 	     case R.id.log_login_action:
 	    	 actionBar.setSubtitle("Login");
-	    	 if (validarCampos()) 
-					exeHttpAsync();
+	    	 validator.validate();
 	       break;
 	       
 	     case R.id.log_about_action:
+	    	 
 		   actionBar.setSubtitle("Acerca de");
+		   LoadInfo();
+		   
 	       break;
 	       
 	     case R.id.log_registro_action:
@@ -229,11 +234,50 @@ public class Usuario_Login_Activity extends Activity {
 	     return true;
 	   } 
 	
+	
+	private void LoadInfo() {
+		final View v;
+		AlertDialog.Builder adInfo = new AlertDialog.Builder(Usuario_Login_Activity.this);
+		
+		LayoutInflater layInfo = this.getLayoutInflater();
+		v = layInfo.inflate(R.layout.dialog_custom_about, null);
+		adInfo.setView(v);
+		
+		adInfo.setNeutralButton("Okay",new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+				
+			}
+		});
+		
+		adInfo.show();
+	}
+	
 	public void tvRegistrar_onClick (View v){
 		
 		Intent i = new Intent (this, Usuario_Registro_Activity.class);
 		startActivity(i);
 		finish();
+	}
+
+	@Override
+	public void onValidationSucceeded() {
+		new TaskHttpMethodAsync().execute();		
+	}
+
+	@Override
+	public void onValidationFailed(View failedView, Rule<?> failedRule) {
+		
+		String message = failedRule.getFailureMessage();
+
+        if (failedView instanceof EditText) {
+            failedView.requestFocus();
+            ((EditText) failedView).setError(message);
+        } else {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        }		
 	}
 	
 	
