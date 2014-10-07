@@ -11,5 +11,11 @@
         android:icon="@drawable/ic_action_remove"
         android:showAsAction="always|withText"
         android:title="Salir"/>
+    
+      <item
+        android:id="@+id/about_acc"
+        android:icon="@drawable/ic_action_about"
+        android:showAsAction="withText"
+        android:title="Info"/>
 
 </menu>
