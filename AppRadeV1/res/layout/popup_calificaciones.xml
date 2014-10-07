@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="370dp"
+    android:layout_height="385dp"
     android:background="@drawable/popup_calificacion_shape"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="370dp"
+        android:layout_height="385dp"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -24,17 +24,18 @@
 
                 <Button
                     android:id="@+id/btn_cancel_comen"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:background="@drawable/ic_action_cancel" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/lay_est_datos"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginBottom="10dp"
+                android:layout_height="115dp"
+                android:layout_marginBottom="5dp"
                 android:gravity="center"
+                android:padding="5dp"
                 android:orientation="vertical" >
 
                 <TextView
@@ -47,14 +48,16 @@
                     android:shadowRadius="2"
                     android:text="PARDOS CHICKEN S. A."
                     android:textColor="#fff"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_distrito"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="San Borja"
+                    android:maxWidth="450dp"
+                    android:gravity="center"
+                    android:text="Esto es una pruebagdfxcvxcvxvxcvxvxfgdfg dg fg dg dfg dgdg fdf "
                     android:textColor="#f0f0f0"
                     android:textSize="15dp" />
 
@@ -70,7 +73,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginLeft="7dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:orientation="horizontal" >
@@ -107,7 +111,7 @@
             <LinearLayout
                 android:id="@+id/lay_comen_listar"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="165dp"
                 android:gravity="center"
                 android:orientation="vertical" >
 
@@ -124,7 +128,7 @@
                         <ListView
                             android:id="@+id/lv_comentarios"
                             android:layout_width="match_parent"
-                            android:layout_height="145dp"
+                            android:layout_height="165dp"
                             android:layout_marginLeft="7dp"
                             android:layout_marginRight="7dp"
                             android:background="@drawable/edit_text_shape"
