@@ -360,9 +360,9 @@ public class Usuario_Comentar_Activity extends Activity {
 			TextView tvFecha2 = (TextView) itemView
 					.findViewById(R.id.row_date2);
 			tvFecha.setText(oRoutine.customDateConverter(
-					currentComment.getFecha(), "yyyy-MMM-dd"));
+					currentComment.getFecha(), "yyyy-MM-dd HH:mm:ss", "yyyy-MMM-dd"));
 			tvFecha2.setText(oRoutine.customDateConverter(
-					currentComment.getFecha(),
+					currentComment.getFecha(),"yyyy-MM-dd HH:mm:ss",
 					Helper_SubRoutines.TAG_FORMAT_TIME));
 			return itemView;
 		}

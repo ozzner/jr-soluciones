@@ -20,6 +20,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -103,7 +104,8 @@ public class Usuario_Registro_Activity extends Activity {
 		 RadioButton selectRadio = (RadioButton) findViewById(rgSexo
 	             .getCheckedRadioButtonId());
 		  String sexo = selectRadio.getText().toString();
-		  
+		  Log.e("FECHA-MM", oRoutine
+					.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_DATE_MM));
 		  sSexo = sexo;
 		  
 		  if(sNombre.compareTo("")==0){
@@ -130,8 +132,8 @@ public class Usuario_Registro_Activity extends Activity {
 				oRoutine.showToast(getApplicationContext(), "Ingrese fecha nacimiento");
 				esError =  true;
 			}else{
-				
-				if (sFecha.equals(oRoutine.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_DATE_MM))) {
+				if (sFecha.equals(oRoutine
+						.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_DATE_MM))) {
 					esError=true;
 					oRoutine.showToast(getApplicationContext(), "Ingrese fecha correcta");
 				}
@@ -176,6 +178,7 @@ public class Usuario_Registro_Activity extends Activity {
 				  public void onDateSet(DatePicker view, int selectedYear,
 				    int selectedMonth, int selectedDay) {
 						sFecha = (selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDay);
+						sFecha = oRoutine.customDateConverter(sFecha, "yyyy-MM-dd", "yyyy-MM-dd");
 			  		Toast.makeText(getApplicationContext(),(sFecha), Toast.LENGTH_SHORT).show();
 					  return;
 				}

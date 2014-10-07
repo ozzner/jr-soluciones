@@ -43,9 +43,9 @@ public class Helper_SubRoutines {
 		return strDate;
 	}
 
-	public String customDateConverter(String Mydate, String Myformat) {
+	public String customDateConverter(String Mydate, String MyformatIn, String MyformatOut) {
 		String inputStringDate = Mydate;
-		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat inputFormat = new SimpleDateFormat(MyformatIn);
 		Date inputDate = null;
 		
 		try {
@@ -54,7 +54,7 @@ public class Helper_SubRoutines {
 		}
 
 		SimpleDateFormat outputFormat = new SimpleDateFormat(
-				Myformat);
+				MyformatOut);
 		String outputStringDate = outputFormat.format(inputDate);
 
 		return outputStringDate;
