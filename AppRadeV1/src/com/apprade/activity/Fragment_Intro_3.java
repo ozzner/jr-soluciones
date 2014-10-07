@@ -28,38 +28,49 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apprade.R;
+import com.apprade.activity.Usuario_Registro_Activity.TaskHttpMethodAsync;
 import com.apprade.adapter.Adapter_Dialog_Fragment;
 import com.apprade.dao.DAO_Usuario;
 import com.apprade.helper.Helper_SharedPreferences;
 import com.apprade.helper.Helper_SubRoutines;
+import com.mobsandgeeks.saripaar.Rule;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.Validator.ValidationListener;
+import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
+import com.mobsandgeeks.saripaar.annotation.Password;
+import com.mobsandgeeks.saripaar.annotation.Required;
+import com.mobsandgeeks.saripaar.annotation.TextRule;
 
-public class Fragment_Intro_3 extends Fragment {
+public class Fragment_Intro_3 extends Fragment implements ValidationListener {
 
 	private static final CharSequence TAG_VACIO = "";
 	private Helper_SubRoutines oRoutine;
+	private Validator validator;
 	Adapter_Dialog_Fragment oDialFrag;
 	private Button btnSend;
+	@Required(order = 1, message = "Ingrese un nombre.")
+	@TextRule(order = 2,trim = true)
 	private EditText etNombres;
+	@Required(order = 3, message = "Este campo es requerido.")
+	@TextRule(order = 5,trim = true)
 	private EditText etCorreo;
+	@Password(order = 6,message = "Ingrese un password")
+	@TextRule(order = 7, minLength = 3, message = "Ingrese min 3 caracteres.",trim = true)
 	private EditText etPassword;
+	@ConfirmPassword(order = 8, message = "Las contraseñas no son iguales")
 	private EditText etConfPassword;
 	private RadioGroup rgSexo;
 	private RadioButton selectRadio;
-	private TextView txFecha;
 	private ImageButton ib;
-	private int day;
-	private int month;
-	private int year;
 	private ProgressDialog proDialog;
 	private String sFecha = "2006-05-18", sNombre, sEmail, sPassword,
 			sPassword2, sSexo;
-	private ActionBar actionBar;
 	private DAO_Usuario dao;
 
 	public Fragment_Intro_3() {
 		dao = new DAO_Usuario();
 		oRoutine = new Helper_SubRoutines();
-		oDialFrag =  new Adapter_Dialog_Fragment();
+		oDialFrag = new Adapter_Dialog_Fragment();
 	}
 
 	@Override
@@ -77,13 +88,18 @@ public class Fragment_Intro_3 extends Fragment {
 		selectRadio = (RadioButton) v.findViewById(rgSexo
 				.getCheckedRadioButtonId());
 
+		validator = new Validator(this);
+		validator.setValidationListener(this);
+		
 		ib.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 
-			    oDialFrag = new Adapter_Dialog_Fragment();
+				oDialFrag = new Adapter_Dialog_Fragment();
 				oDialFrag.show(getChildFragmentManager(), "MyDataPiker");
+
+				validator.validate();
 
 			}
 		});
@@ -92,8 +108,8 @@ public class Fragment_Intro_3 extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-
 				EnviarRegistro();
+				validator.validate();
 
 			}
 		});
@@ -108,29 +124,8 @@ public class Fragment_Intro_3 extends Fragment {
 		String sexo = selectRadio.getText().toString();
 
 		sSexo = sexo;
-Log.e("FECHA-MM", oRoutine
-		.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_DATE_MM));
-		if (sNombre.compareTo("") == 0) {
-			etNombres.setError("Debes ingresar tu nombre");
-			esError = true;
-		}
 
-		if (sEmail.compareTo("") == 0) {
-			etCorreo.setError("Debes ingresar un Correo");
-			esError = true;
-		}
-
-		if (sPassword.compareTo("") == 0) {
-			etPassword.setError("Debes ingresar un Password");
-			esError = true;
-		}
-
-		if (sPassword2.compareTo("") == 0) {
-			etConfPassword.setError("Debes confirmar tu Password");
-			esError = true;
-		}
-
-		if (sFecha==null) {
+		if (sFecha == null) {
 			oRoutine.showToast(getActivity(), "Ingrese fecha nacimiento");
 			esError = true;
 		} else {
@@ -145,27 +140,16 @@ Log.e("FECHA-MM", oRoutine
 		return esError;
 	}
 
-	public void EnviarRegistro() {
-
-		sNombre = etNombres.getText().toString();
-		sEmail = etCorreo.getText().toString();
-		sPassword = etPassword.getText().toString();
-		sPassword2 = etConfPassword.getText().toString();
+	 public void EnviarRegistro() {
+	
+		 sNombre = etNombres.getText().toString();
+		 sEmail = etCorreo.getText().toString();
+		 sPassword = etPassword.getText().toString();
+		 sPassword2 = etConfPassword.getText().toString();
 		
-	    oDialFrag = new Adapter_Dialog_Fragment();
-		sFecha = oDialFrag.getsFecha();
-
-		if (!validarRegistro())
-			if (sPassword.equals(sPassword2))
-				new TaskHttpMethodAsync().execute();
-			else {
-				Toast.makeText(getActivity(), "Las contraseñas no coinciden",
-						Toast.LENGTH_LONG).show();
-				etPassword.setText(TAG_VACIO);
-				etConfPassword.setText(TAG_VACIO);
-			}
-
-	}
+		 oDialFrag = new Adapter_Dialog_Fragment();
+		 sFecha = oDialFrag.getsFecha();
+	 }
 
 	class TaskHttpMethodAsync extends AsyncTask<String, Void, Boolean> {
 
@@ -233,6 +217,26 @@ Log.e("FECHA-MM", oRoutine
 		proDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		proDialog.setMessage("Enviando...");
 		proDialog.show();
+	}
+
+	@Override
+	public void onValidationSucceeded() {
+		
+		if (!validarRegistro())
+			new TaskHttpMethodAsync().execute();
+	}
+
+	@Override
+	public void onValidationFailed(View failedView, Rule<?> failedRule) {
+
+		String message = failedRule.getFailureMessage();
+
+		if (failedView instanceof EditText) {
+			failedView.requestFocus();
+			((EditText) failedView).setError(message);
+		} else {
+			Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+		}
 	}
 
 }// End class

@@ -108,20 +108,20 @@ public class DAO_Establecimiento {
 							
 							JSONObject oEstabli =  oData.getJSONObject("establishment"+(i+1));	
 							
-							int iIdEst = Integer.parseInt(oEstabli.getString("establishmentID"));
-							String sNameEst = oEstabli.getString("name");
-							String sDireccion = oEstabli.getString("address");
+							int iIdEst = Integer.parseInt(oEstabli.getString("establishmentID").trim());
+							String sNameEst = oEstabli.getString("name").trim();
+							String sDireccion = oEstabli.getString("address").trim();
 //							int iRUC = Integer.parseInt(oEstabli.getString("ruc"));
 							
 							JSONObject oDistric =  oEstabli.getJSONObject("district");							
-							int iIdDis = Integer.parseInt(oDistric.getString("districtID"));
-							String sNameDis = oDistric.getString("name");
+							int iIdDis = Integer.parseInt(oDistric.getString("districtID").trim());
+							String sNameDis = oDistric.getString("name").trim();
 							Entity_Distrito ettDis = new Entity_Distrito(iIdDis, sNameDis, null);
 							listaDis.add(ettDis);
 							
 							JSONObject oCateg =  oEstabli.getJSONObject("category");
-							String sNameCat = oCateg.getString("name");
-							int iIdCat = Integer.parseInt(oCateg.getString("categoryID"));
+							String sNameCat = oCateg.getString("name").trim();
+							int iIdCat = Integer.parseInt(oCateg.getString("categoryID").trim());
 							Entity_Categoria ettCat = new Entity_Categoria(iIdCat, sNameCat);
 							listaCat.add(ettCat);
 																										

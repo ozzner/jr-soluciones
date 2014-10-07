@@ -1,11 +1,7 @@
 package com.apprade.activity;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -24,15 +20,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.apprade.R;
-import com.apprade.activity.Intro_Activity.TaskHttpMethodAsync;
 import com.apprade.adapter.Adapter_InfoWindow;
 import com.apprade.adapter.Adapter_SpinnerItem;
 import com.apprade.adapter.Adapter_SpinnerNavActionBar;
@@ -57,7 +50,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class App_GPSMapa_Activity extends FragmentActivity implements
-		OnMarkerClickListener, OnInfoWindowClickListener,ActionBar.OnNavigationListener {
+		OnMarkerClickListener, OnInfoWindowClickListener,
+		ActionBar.OnNavigationListener {
 
 	private static final String TAG_NO_HAY_COLA = "No hay cola";
 	private static final String TAG_POCA_COLA = "Poca cola";
@@ -87,21 +81,21 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private Adapter_InfoWindow oInfoWindow;
 	private Helper_SubRoutines oRoutine;
 	private String arrValue[];
-	private int count1, marker_count= 0, marker_count2=0;
-	private Adapter_InfoWindow adpInWin ;
+	private int count1, marker_count = 0, marker_count2 = 0;
+	private Adapter_InfoWindow adpInWin;
 	private static String mensaje;
 	private static final String TAG_ONCREATE = "oncreate";
 	private static final String TAG_ONRESTART = "onrestart";
 	private static final String TAG_UPDATE = "update";
 	private static Marker myMarker;
-	public static List<String> ls_Colas =  new ArrayList<String>();
+	public static List<String> ls_Colas = new ArrayList<String>();
 	String arrParams[] = new String[4];
 	String arrCategory[] = new String[2];
 	String arrKeys[] = new String[10];
 	String arrValues[] = new String[10];
 	String[] arrNomEst = null;
 	String[] arrDirEst = null;
-	private int[] arrIdEstt ;
+	private int[] arrIdEstt;
 	int arraymapas[] = new int[1000];
 	String titulo;
 
@@ -175,13 +169,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	 */
 	@Override
 	protected void onRestart() {
-		
+
 		try {
 			hideFragment();
 			setMensaje(TAG_ONRESTART);
 			myMarker.hideInfoWindow();
 			exeHttpAsync();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -204,7 +198,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		hideFragment();
 		loadSpinnerNav();
 		clearVars();
-		
+
 		ivNoCola.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -275,6 +269,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			}
 		});
 
+		
 		try {
 
 			Bundle oBundle = getIntent().getExtras();
@@ -283,6 +278,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			actionBar.setTitle(user);
 
 		} catch (Exception e) {
+			
 			ArrayList<String> datos = new ArrayList<String>();
 
 			Helper_SharedPreferences oShared = new Helper_SharedPreferences();
@@ -301,7 +297,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	protected boolean enviarCalificacion() {
 		boolean bMsj = false;
 
-		String currentTime = routine.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_SHORT);
+		String currentTime = routine
+				.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_SHORT);
 		/* KEYS - VALUES */
 		arrKeys[0] = "currentTime";
 		arrValues[0] = currentTime;
@@ -309,6 +306,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		arrValues[1] = String.valueOf(arrParams[0]);
 		arrKeys[2] = "userID";
 		arrValues[2] = String.valueOf(usuarioID);
+
+		Log.e("CALIFICACION", "Cal:" + arrValues[1]+":" + usuarioID+":"+arrKeys[0]);
 
 		/* Valida si existe la preferencia almacenada (False) */
 		if (!oPrefe.checkMyCustomPreference("Cal" + arrValues[1] + usuarioID,
@@ -328,6 +327,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				sValue[i] = oPrefe.getAnyValueToMyCustomPreferences(
 						getApplicationContext(), "Cal" + arrValues[1]
 								+ usuarioID, arrKeys[i]);
+				Log.e("for_get_any_sha", 	sValue[i]);
 			}
 			setArrValue(sValue);
 
@@ -337,30 +337,32 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	}
 
 	private void chkTimeCalificacion() {
-
-		String currentTime = routine.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_SHORT);
+		
+		String sMySharedPref = "Cal" + arrValues[1] + usuarioID;
+		String sCurrentTime = routine
+				.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_SHORT);
 		String sValue[] = new String[arrKeys.length];
 		String sMsj = "";
 
 		sValue = getArrValue();
 		/* Valido que los datos sean del mismo establecimiento y usuario */
 		if (sValue[1].equals(arrValues[1]) && sValue[2].equals(arrValues[2])) {
-
-			/*
-			 * Obtengo la diferencia en minutos (tiempo_alamcenado -
+				Log.e("VAL_EST_USU", "OK");
+			/* Obtengo la diferencia en minutos (tiempo_alamcenado -
 			 * tiempo_actual)
 			 */
 
-			int min_dif = oRoutine.dateDiferent(sValue[0], currentTime,
+			int min_dif = oRoutine.dateDiferent(sValue[0], sCurrentTime,
 					"minutos");
+			
+			Log.e("VAL_MIN", "OK-"+min_dif);
 			/* Evaluo cuanto tiempo ha pasado */
 			if (min_dif < 5) {
 				sMsj = "En " + (5 - min_dif)
 						+ " min podrá volver a calificar este establecimiento.";
 				routine.showToast(getApplicationContext(), sMsj);
 			} else {
-				
-				ls_Colas.set(position, arrParams[1]);
+				oPrefe.updateMyCurretTime(sMySharedPref, getApplicationContext(), sCurrentTime);
 				getMyMarker().hideInfoWindow();
 				exeAsyncTask(arrParams);
 			}
@@ -369,6 +371,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			/* Actualizo mi preferencia personalizada con otro establecimiento */
 			oPrefe.storeMyCustomPreferences(arrKeys, arrValues, "Cal"
 					+ arrValues[1] + usuarioID, getApplicationContext());
+			Log.e("STORE NEW", "Cal"
+					+ arrValues[1] + usuarioID);
 		}
 	}
 
@@ -453,8 +457,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 								.flat(true)
 								.alpha(0.8f)
 								.icon(BitmapDescriptorFactory
-								.fromResource(R.drawable.ic_map)));
-						
+										.fromResource(R.drawable.ic_map)));
+
 					}
 				});
 			}
@@ -478,25 +482,25 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 					sCola = oCalificar.oCali.getCola();
 					sFecha = oCalificar.oCali.getFecha();
 
-					int iMin = oRoutine.dateDiferent(oRoutine.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_SHORT),
+					int iMin = oRoutine.dateDiferent(
+							oRoutine.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_SHORT),
 							sFecha, Helper_SubRoutines.TAG_MINUTOS);
 
 					ls_Colas.set(position, sCola);
-					
+
 					/* Evaluo cuanto tiempo ha pasado */
 					if (iMin > 15) {
 
 						switch (sCola) {
-						
+
 						case "No hay cola":
-							//TODO no hace nada
+							// TODO no hace nada
 							break;
 						default:
 							updateRating("No hay cola", establishmentID);
 							break;
 						}
-						
-						
+
 					} else if (iMin >= 10 && iMin <= 15) {
 
 						switch (sCola) {
@@ -527,16 +531,16 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 							Log.e(TAG_UPDATE, "Entre 5 y 10");
 							break;
 						}
-					}else{
+					} else {
 						Log.e(TAG_UPDATE, "Menor de 5 min" + iMin);
-						//TODO
+						// TODO
 					}
 
-				}else{
+				} else {
 					Log.e(TAG_UPDATE, "NO HAY CALIFICACIONES");
 					sCola = oCalificar.oJsonStatus.getInfo();
 				}
-				
+
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
@@ -550,10 +554,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 	}
 
-	
-	
-	
-	
 	public void updateRating(final String cola, final int establishmentID) {
 
 		new Thread(new Runnable() {
@@ -561,17 +561,18 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			@Override
 			public void run() {
 
-				boolean bResult =oCalificar.registrarCalificacion(String.valueOf(usuarioID),
+				boolean bResult = oCalificar.registrarCalificacion(
+						String.valueOf(usuarioID),
 						String.valueOf(establishmentID), cola);
 
-				if(bResult)
+				if (bResult)
 					ls_Colas.set(position, cola);
-					
+
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						oRoutine.showToast(getApplicationContext(),
-								oCalificar.oJsonStatus.getMessage());
+						// oRoutine.showToast(getApplicationContext(),
+						// oCalificar.oJsonStatus.getMessage());
 					}
 				});
 
@@ -638,8 +639,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 			if (result) {
 				actionBar.setSubtitle("Calificación OK");
-				Toast.makeText(getApplicationContext(), "¡Gracias!",
-						Toast.LENGTH_SHORT).show();
 				hideFragment();
 			} else {
 				actionBar.setSubtitle("¡Error!");
@@ -673,41 +672,42 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 		@Override
 		protected void onPreExecute() {
-			
+
 			App_GPSMapa_Activity oApp = new App_GPSMapa_Activity();
 			String sMensaje = oApp.getMensaje();
-		
-		try {
-			
-			if (sMensaje.equals("update")) {
-				refreshMenuItem.setActionView(R.layout.action_progressbar_refresh);
-				refreshMenuItem.expandActionView();
-			} 
-			
-		} catch (Exception e) {
-			showDialogo();
-			proDialog.setProgress(0);
-		}	
-			
-				try {
 
-					proDialog.setOnCancelListener(new OnCancelListener() {
+			try {
 
-						@Override
-						public void onCancel(DialogInterface dialog) {
-
-							EstablecimientoAsync.this.cancel(true);
-
-							Toast.makeText(getApplicationContext(),
-									"Servicio en segundo plano", Toast.LENGTH_SHORT)
-									.show();
-						}
-
-					});
-					proDialog.setProgress(0);
-				} catch (Exception e) {
-					
+				if (sMensaje.equals("update")) {
+					refreshMenuItem
+							.setActionView(R.layout.action_progressbar_refresh);
+					refreshMenuItem.expandActionView();
 				}
+
+			} catch (Exception e) {
+				showDialogo();
+				proDialog.setProgress(0);
+			}
+
+			try {
+
+				proDialog.setOnCancelListener(new OnCancelListener() {
+
+					@Override
+					public void onCancel(DialogInterface dialog) {
+
+						EstablecimientoAsync.this.cancel(true);
+
+						Toast.makeText(getApplicationContext(),
+								"Servicio en segundo plano", Toast.LENGTH_SHORT)
+								.show();
+					}
+
+				});
+				proDialog.setProgress(0);
+			} catch (Exception e) {
+
+			}
 		}
 
 		@Override
@@ -717,8 +717,9 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 			try {
 
-				lista_establecimiento = dao.listarEstablecimientoPorCategoriaID(params[0]);
-				
+				lista_establecimiento = dao
+						.listarEstablecimientoPorCategoriaID(params[0]);
+
 				bRequest = status.getError_status();
 
 				if (!bRequest) {
@@ -726,9 +727,9 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 					arrNomEst = new String[lista_establecimiento.size()];
 					arrDirEst = new String[lista_establecimiento.size()];
 					arrIdEstt = new int[lista_establecimiento.size()];
-					
-					ls_Colas =  dao.getLsColas();
-					
+
+					ls_Colas = dao.getLsColas();
+
 					int a = 0;
 					for (Entity_Establecimiento esta : lista_establecimiento) {
 						lista_coordenadas = esta.getCoordenadas();
@@ -744,9 +745,9 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 						lat = coor.getLatitud();
 						lon = coor.getLongitud();
-						
-						setUpMap(lat, lon, arrNomEst[c], arrDirEst[c]);
-						Log.e("contador1: ", +c+"");
+//						
+						setUpMap(lat, lon,arrNomEst[c], arrDirEst[c]);
+						Log.e("contador1: ", +c + "");
 						c++;
 					}
 				}
@@ -754,7 +755,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			} catch (Exception e) {
 				bRequest = true; // Hubo error
 			}
-
 			return bRequest;
 		}
 
@@ -781,14 +781,14 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				Toast.makeText(getApplicationContext(), "¡Listo!",
 						Toast.LENGTH_SHORT).show();
 			} else {
-				
+
 				try {
 					refreshMenuItem.collapseActionView();
 					refreshMenuItem.setActionView(null);
 				} catch (Exception e) {
 
 				}
-				
+
 				actionBar.setSubtitle("Error!");
 				Toast.makeText(getApplicationContext(), "¡Oops!",
 						Toast.LENGTH_SHORT).show();
@@ -820,49 +820,46 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		return true;
 	}
 
-	private void clearVars(){
+	private void clearVars() {
 		marker_count = 0;
 		marker_count2 = 0;
 		ls_Colas.clear();
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		actionBar = getActionBar();
-		
+
 		switch (item.getItemId()) {
-		
+
 		case R.id.cargar_establ_acc:
-			
+
 			setMensaje(TAG_UPDATE);
 			sumadorMarker();
-			
+
 			try {
 				refreshMenuItem = item;
 				hideFragment();
 				myMarker.hideInfoWindow();
 				map.clear();
-				
+
 				new EstablecimientoAsync().execute(arrCategory);
-		
+
 			} catch (Exception e) {
 				map.clear();
 				new EstablecimientoAsync().execute(arrCategory);
 			}
-			
-			
+
 			break;
 
 		case R.id.logout_acc:
-			actionBar.setSubtitle("Chau");
-			Helper_SharedPreferences oShared = new Helper_SharedPreferences();
-			oShared.storeStatus(0, getApplicationContext());// 0 => Inicia desde
-			clearVars();									// el login
-			Intent i = new Intent(getApplicationContext(),
-					Usuario_Login_Activity.class);
-			startActivity(i);
-			
-			finish();
+			logout();
+			break;
+
+		case R.id.about_acc:
+
+			LoadInfo();
 			break;
 
 		default:
@@ -870,6 +867,27 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		}
 
 		return true;
+	}
+
+	private void LoadInfo() {
+		final View v;
+		AlertDialog.Builder adInfo = new AlertDialog.Builder(
+				App_GPSMapa_Activity.this);
+
+		LayoutInflater layInfo = this.getLayoutInflater();
+		v = layInfo.inflate(R.layout.dialog_custom_info, null);
+		adInfo.setView(v);
+
+		adInfo.setNeutralButton("Okay", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+
+			}
+		});
+
+		adInfo.show();
 	}
 
 	@Override
@@ -883,164 +901,207 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 		// hideFragment();
 		try {
-		
+
 			Intent intent = new Intent(getApplicationContext(),
 					Usuario_Comentar_Activity.class);
-		
+
 			intent.putExtra("establecimientoID", arrIdEstt[count]);
 			intent.putExtra("nomEstablecimiento", arrNomEst[count]);
 			intent.putExtra("direccion", arrDirEst[count]);
 			intent.putExtra("usuarioID", usuarioID);
 			intent.putExtra("cola", oInfoWindow.getCola());
 			startActivity(intent);
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
 
-
-	
-	
 	public final boolean onMarkerClick(Marker arg0) {
-	
+
 		String identificador = arg0.getId();
 		String contador = identificador.substring(1, identificador.length());
-		Log.e("MARKER", marker_count+"");
+		Log.e("MARKER", marker_count + "");
 		int count = Integer.parseInt(contador) - marker_count;
 		position = count;
-		
+
 		try {
-			
+
 			arrParams[0] = arrIdEstt[count] + "";
-			
-			 adpInWin = new Adapter_InfoWindow();
-			 adpInWin.setCola(ls_Colas.get(count));
-			 
+
+			adpInWin = new Adapter_InfoWindow();
+			adpInWin.setCola(ls_Colas.get(count));
+
 			runAsyncGetLasRate(arrIdEstt[count]);
-				
+
 		} catch (Exception e) {
 		}
-		
+
 		showFragment(arg0);
 		position = count;
-		
-		map.setInfoWindowAdapter(new Adapter_InfoWindow(
-				getLayoutInflater()));
-	
-		
+
+		map.setInfoWindowAdapter(new Adapter_InfoWindow(getLayoutInflater()));
+
 		return false;
 	}
 
-	private void loadSpinnerNav(){
-		
+	private void loadSpinnerNav() {
+
 		actionBar = getActionBar();
-		
+
 		actionBar.setDisplayShowTitleEnabled(false);
-		
+
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		
+
 		arrAdpSpinner = new ArrayList<Adapter_SpinnerItem>();
-		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.ic_action_place, "-- Seleccione --"));
-		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.fast_foods, "Fast foods"));
+		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.ic_action_place,
+				"-- Seleccione --"));
+		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.fast_foods,
+				"Fast foods"));
 		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.cines, "Cines"));
 		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.cafes, "Cafes"));
-		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.restaurantes, "Restaurantes"));
+		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.restaurantes,
+				"Restaurantes"));
 		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.banco, "Bancos"));
-		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.organismos, "Organización"));
-		
-		oAdpSpinner =  new Adapter_SpinnerNavActionBar(getApplicationContext(), arrAdpSpinner);
+		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.organismos,
+				"Organización"));
+
+		oAdpSpinner = new Adapter_SpinnerNavActionBar(getApplicationContext(),
+				arrAdpSpinner);
 		actionBar.setListNavigationCallbacks(oAdpSpinner, this);
 	}
-	
-	private void sumadorMarker(){
-		
+
+	private void sumadorMarker() {
+
 		marker_count2 = marker_count + ls_Colas.size();
 		marker_count = marker_count2;
-		
-		Log.e("COUNT", marker_count+"");
-		Log.e("COUNT2", marker_count2+"");
+
+		Log.e("COUNT", marker_count + "");
+		Log.e("COUNT2", marker_count2 + "");
 	}
-	
+
+	public void logout() {
+		final View v;
+
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+				App_GPSMapa_Activity.this);
+
+		LayoutInflater layInflater = this.getLayoutInflater();
+		v = layInflater.inflate(R.layout.dialog_custom_logout, null);
+		alertDialog.setView(v);
+
+		/* When positive (yes/ok) is clicked */
+		alertDialog.setPositiveButton("Afirma",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+
+						actionBar.setSubtitle("Chau");
+						Helper_SharedPreferences oShared = new Helper_SharedPreferences();
+						oShared.storeStatus(0, getApplicationContext());// 0 =>
+																		// Inicia
+																		// desde
+						clearVars(); // el login
+						Intent i = new Intent(getApplicationContext(),
+								Usuario_Login_Activity.class);
+						startActivity(i);
+
+						finish();
+
+						Toast.makeText(getApplicationContext(), "Bye!",
+								Toast.LENGTH_LONG).show();
+					}
+				});
+
+		/* When negative (No/cancel) button is clicked */
+		alertDialog.setNegativeButton("No",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				});
+		alertDialog.show();
+	}
+
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-	
+
 		String sCatagoria = new String();
 		sCatagoria = arrAdpSpinner.get(itemPosition).getCategory();
-		
-	if (!sCatagoria.equals("-- Seleccione --")) {
+
+		if (!sCatagoria.equals("-- Seleccione --")) {
 			map.clear();
 			sumadorMarker();
 			setMensaje(TAG_UPDATE);
 		}
-	
+
 		switch (sCatagoria) {
 		case "Fast foods":
-			arrCategory[0]=String.valueOf(1);
+			arrCategory[0] = String.valueOf(1);
 			new EstablecimientoAsync().execute(arrCategory);
 			break;
-			
+
 		case "Cines":
-			arrCategory[0]=String.valueOf(2);
+			arrCategory[0] = String.valueOf(2);
 			new EstablecimientoAsync().execute(arrCategory);
 			break;
-			
+
 		case "Cafes":
-			arrCategory[0]=String.valueOf(3);
+			arrCategory[0] = String.valueOf(3);
 			new EstablecimientoAsync().execute(arrCategory);
 			break;
-			
+
 		case "Restaurantes":
-			arrCategory[0]=String.valueOf(4);
+			arrCategory[0] = String.valueOf(4);
 			new EstablecimientoAsync().execute(arrCategory);
 			break;
-			
+
 		case "Bancos":
-			arrCategory[0]=String.valueOf(5);
+			arrCategory[0] = String.valueOf(5);
 			new EstablecimientoAsync().execute(arrCategory);
 			break;
-			
+
 		case "Organización":
-			arrCategory[0]=String.valueOf(6);
+			arrCategory[0] = String.valueOf(6);
 			new EstablecimientoAsync().execute(arrCategory);
 			break;
-			
+
 		default:
-//			oRoutine.showToast(getApplicationContext(), "Seleccione una catagoría");
+			// oRoutine.showToast(getApplicationContext(),
+			// "Seleccione una catagoría");
 			break;
 		}
-		
+
 		return false;
 	}
 
 }
 
-
-
-//public void clearApplicationData() 
-//{
-//    File cache = getCacheDir();
-//    File appDir = new File(cache.getParent());
-//    if (appDir.exists()) {
-//        String[] children = appDir.list();
-//        for (String s : children) {
-//            if (!s.equals("lib")) {
-//                deleteDir(new File(appDir, s));Log.i("TAG", "**************** File /data/data/APP_PACKAGE/" + s + " DELETED *******************");
-//            }
-//        }
-//    }
-//}
+// public void clearApplicationData()
+// {
+// File cache = getCacheDir();
+// File appDir = new File(cache.getParent());
+// if (appDir.exists()) {
+// String[] children = appDir.list();
+// for (String s : children) {
+// if (!s.equals("lib")) {
+// deleteDir(new File(appDir, s));Log.i("TAG",
+// "**************** File /data/data/APP_PACKAGE/" + s +
+// " DELETED *******************");
+// }
+// }
+// }
+// }
 //
-//public static boolean deleteDir(File dir) 
-//{
-//    if (dir != null && dir.isDirectory()) {
-//        String[] children = dir.list();
-//        for (int i = 0; i < children.length; i++) {
-//            boolean success = deleteDir(new File(dir, children[i]));
-//            if (!success) {
-//                return false;
-//            }
-//        }
-//    }
-//    return dir.delete();
-//}
+// public static boolean deleteDir(File dir)
+// {
+// if (dir != null && dir.isDirectory()) {
+// String[] children = dir.list();
+// for (int i = 0; i < children.length; i++) {
+// boolean success = deleteDir(new File(dir, children[i]));
+// if (!success) {
+// return false;
+// }
+// }
+// }
+// return dir.delete();
+// }

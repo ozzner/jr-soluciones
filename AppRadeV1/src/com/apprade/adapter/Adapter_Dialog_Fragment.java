@@ -5,6 +5,7 @@ package com.apprade.adapter;
 
 import java.util.Calendar;
 
+import com.apprade.activity.Intro_Activity;
 import com.apprade.helper.Helper_SubRoutines;
 
 import android.app.DatePickerDialog;
@@ -58,8 +59,9 @@ public class Adapter_Dialog_Fragment extends DialogFragment implements OnDateSet
 	public void onDateSet(DatePicker view, int year, int monthOfYear,
 			int dayOfMonth) {
 		sFecha = (year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+		String sFechaMMM = oRoutine.customDateConverter(sFecha,Helper_SubRoutines.TAG_FORMAT_DATE_MM, Helper_SubRoutines.TAG_FORMAT_DATE_MMM);
 		sFecha = oRoutine.customDateConverter(sFecha, "yyyy-MM-dd", "yyyy-MM-dd");
-		Toast.makeText(getActivity(), (oRoutine.customDateConverter(sFecha,Helper_SubRoutines.TAG_FORMAT_DATE_MM, Helper_SubRoutines.TAG_FORMAT_DATE_MMM)), Toast.LENGTH_LONG).show();
+		oRoutine.showToast(getActivity(), sFechaMMM);
 		setsFecha(sFecha);
 	}
 

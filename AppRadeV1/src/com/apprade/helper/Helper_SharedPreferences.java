@@ -103,17 +103,29 @@ public class Helper_SharedPreferences  {
 	
 	public boolean checkMyCustomPreference(String customPreferences,Context context,String key){
 		boolean bResult = false;
-		
+	
 		contexto=context;
 		appRadeSharedPref = contexto.getSharedPreferences(customPreferences, Context.MODE_PRIVATE);
 		
 		if(appRadeSharedPref.contains(key))
 			bResult = true;
 		
+		Log.e("Shared_", customPreferences + ":"+bResult);
 		return bResult;
 	}
 	
 	
+	
+	public void updateMyCurretTime(String customPreferences,Context context,String currentTime){
+		contexto=context;
+		
+		appRadeSharedPref = contexto.getSharedPreferences(customPreferences, Context.MODE_PRIVATE);
+
+		SharedPreferences.Editor editorLogin = appRadeSharedPref.edit();
+		editorLogin.putString("currentTime", currentTime);
+		editorLogin.commit();
+		
+	}
 	
 	public void storeMyCustomPreferences(String[] keys, String[] values, String customPreferences,Context context){
 		
@@ -133,7 +145,7 @@ public class Helper_SharedPreferences  {
 	
 	public String getAnyValueToMyCustomPreferences(Context context , String customPreferences, String key){
 		String sValue = new String();
-		
+		Log.e("Shared_2_get", customPreferences + ":"+key);
 		contexto=context;
 		appRadeSharedPref = contexto.getSharedPreferences(customPreferences, Context.MODE_PRIVATE);
 		
