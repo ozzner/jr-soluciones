@@ -6,16 +6,17 @@
         android:icon="@drawable/ic_action_refresh"
         android:showAsAction="withText|always"
         android:title="Actualizar"/>
+    
+    <item
+        android:id="@+id/about_acc"
+        android:icon="@drawable/ic_action_about"
+        android:showAsAction="always|withText"
+        android:title="Info"/>
+    
     <item
         android:id="@+id/logout_acc"
         android:icon="@drawable/ic_action_remove"
-        android:showAsAction="always|withText"
-        android:title="Salir"/>
-    
-      <item
-        android:id="@+id/about_acc"
-        android:icon="@drawable/ic_action_about"
         android:showAsAction="withText"
-        android:title="Info"/>
+        android:title="Salir"/>
 
 </menu>
