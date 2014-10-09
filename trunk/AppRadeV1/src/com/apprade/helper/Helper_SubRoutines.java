@@ -7,7 +7,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -33,7 +36,8 @@ public class Helper_SubRoutines {
 	public Helper_SubRoutines() {
 		// TODO Auto-generated constructor stub
 	}
-
+/****************** Working with the time *********************/
+	
 	public String getCurrentTime(String Myformat) {
 		
 		Calendar c = Calendar.getInstance();
@@ -112,6 +116,21 @@ public class Helper_SubRoutines {
 
 		return ((int) time);
 	}
+	
+	/****************** Working Phone propeties *********************/
+	
+	public boolean isOnline(Context ctx) {
+		
+	    ConnectivityManager cm =
+	        (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+	        return true;
+	    }
+	    
+	    return false;
+	}
+	
 	
 	
 	public void showToast(Context context, String sms) {

@@ -30,6 +30,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.apprade.R;
+import com.apprade.activity.Usuario_Login_Activity.TaskHttpMethodAsync;
 import com.apprade.dao.DAO_Usuario;
 import com.apprade.helper.Helper_SharedPreferences;
 import com.apprade.helper.Helper_SubRoutines;
@@ -255,9 +256,11 @@ public class Usuario_Registro_Activity extends Activity implements ValidationLis
 				 sEmail = etCorreo.getText().toString().trim();
 				 sPassword = etConfPassword.getText().toString().trim();
 				 
-				 new TaskHttpMethodAsync().execute();
+					if (oRoutine.isOnline(getApplicationContext())) 
+						Toast.makeText(getApplicationContext(), "Necesita tener conexión a Internet.", Toast.LENGTH_SHORT).show();
+					else
+						 new TaskHttpMethodAsync().execute();
 			 }
-					
 		}
 		
 
