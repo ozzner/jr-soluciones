@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apprade.R;
+import com.apprade.adapter.Adapter_ListView;
 import com.apprade.dao.DAO_Comentario;
 import com.apprade.entity.Entity_Comentario;
 import com.apprade.entity.Entity_Usuario;
@@ -321,52 +322,11 @@ public class Usuario_Comentar_Activity extends Activity {
 	}
 
 	private void populateListView() {
-		ArrayAdapter<Entity_Comentario> adapter = new CustomAdapter();
-		ListView list = (ListView) findViewById(R.id.lv_comentarios);
-		list.setAdapter(adapter);
+		ArrayAdapter<Entity_Comentario> adapter = new  Adapter_ListView(getApplicationContext(), oListaComment);
+		ListView lv_comment = (ListView)findViewById(R.id.lv_comentarios);
+		lv_comment.setAdapter(adapter);
 	}
 
-	private class CustomAdapter extends ArrayAdapter<Entity_Comentario> {
-
-		public CustomAdapter() {
-			super(Usuario_Comentar_Activity.this, R.layout.adapter_list_row,
-					oListaComment);
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View itemView = convertView;
-			if (itemView == null) {
-				itemView = getLayoutInflater().inflate(
-						R.layout.adapter_list_row, parent, false);
-			}
-
-			Entity_Comentario currentComment = oListaComment.get(position);
-			TextView tvUsuario = (TextView) itemView
-					.findViewById(R.id.row_usuario);
-
-			Entity_Usuario oUser = new Entity_Usuario();
-
-			oUser = currentComment.getUsuario().get(position);
-			String sNombre = oUser.getNombre();
-			tvUsuario.setText(sNombre);
-
-			TextView tvComment = (TextView) itemView
-					.findViewById(R.id.row_comentario);
-			tvComment.setText("" + currentComment.getMensaje());
-
-			// Condition:
-			TextView tvFecha = (TextView) itemView.findViewById(R.id.row_date1);
-			TextView tvFecha2 = (TextView) itemView
-					.findViewById(R.id.row_date2);
-			tvFecha.setText(oRoutine.customDateConverter(
-					currentComment.getFecha(), "yyyy-MM-dd HH:mm:ss", "yyyy-MMM-dd"));
-			tvFecha2.setText(oRoutine.customDateConverter(
-					currentComment.getFecha(),"yyyy-MM-dd HH:mm:ss",
-					Helper_SubRoutines.TAG_FORMAT_TIME));
-			return itemView;
-		}
-	}
 
 	private OnClickListener cancel_button_click_listener = new OnClickListener() {
 		@Override
