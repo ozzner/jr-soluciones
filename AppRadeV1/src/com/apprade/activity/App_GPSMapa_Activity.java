@@ -835,31 +835,38 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 		case R.id.cargar_establ_acc:
 
-			setMensaje(TAG_UPDATE);
-			sumadorMarker();
+			
+			if (oRoutine.isOnline(getApplicationContext())) 
+				Toast.makeText(getApplicationContext(), "Necesita tener conexión a Internet.", Toast.LENGTH_SHORT).show();
+			else
+			{
+				
+				setMensaje(TAG_UPDATE);
+				sumadorMarker();
 
-			try {
-				refreshMenuItem = item;
-				hideFragment();
-				myMarker.hideInfoWindow();
-				map.clear();
+				try {
+					refreshMenuItem = item;
+					hideFragment();
+					myMarker.hideInfoWindow();
+					map.clear();
 
-				new EstablecimientoAsync().execute(arrCategory);
+					new EstablecimientoAsync().execute(arrCategory);
 
-			} catch (Exception e) {
-				map.clear();
-				new EstablecimientoAsync().execute(arrCategory);
+				} catch (Exception e) {
+					map.clear();
+					new EstablecimientoAsync().execute(arrCategory);
+				}
+				
 			}
 
 			break;
 
-		case R.id.logout_acc:
-			logout();
+		case R.id.about_acc:
+			LoadInfo();
 			break;
 
-		case R.id.about_acc:
-
-			LoadInfo();
+		case R.id.logout_acc:
+			logout();
 			break;
 
 		default:
@@ -1033,42 +1040,48 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			sumadorMarker();
 			setMensaje(TAG_UPDATE);
 		}
+		
+		if (oRoutine.isOnline(getApplicationContext())) 
+			Toast.makeText(getApplicationContext(), "Necesita tener conexión a Internet.", Toast.LENGTH_SHORT).show();
+		else
+		{
 
-		switch (sCatagoria) {
-		case "Fast foods":
-			arrCategory[0] = String.valueOf(1);
-			new EstablecimientoAsync().execute(arrCategory);
-			break;
+			switch (sCatagoria) {
+			case "Fast foods":
+				arrCategory[0] = String.valueOf(1);
+				new EstablecimientoAsync().execute(arrCategory);
+				break;
 
-		case "Cines":
-			arrCategory[0] = String.valueOf(2);
-			new EstablecimientoAsync().execute(arrCategory);
-			break;
+			case "Cines":
+				arrCategory[0] = String.valueOf(2);
+				new EstablecimientoAsync().execute(arrCategory);
+				break;
 
-		case "Cafes":
-			arrCategory[0] = String.valueOf(3);
-			new EstablecimientoAsync().execute(arrCategory);
-			break;
+			case "Cafes":
+				arrCategory[0] = String.valueOf(3);
+				new EstablecimientoAsync().execute(arrCategory);
+				break;
 
-		case "Restaurantes":
-			arrCategory[0] = String.valueOf(4);
-			new EstablecimientoAsync().execute(arrCategory);
-			break;
+			case "Restaurantes":
+				arrCategory[0] = String.valueOf(4);
+				new EstablecimientoAsync().execute(arrCategory);
+				break;
 
-		case "Bancos":
-			arrCategory[0] = String.valueOf(5);
-			new EstablecimientoAsync().execute(arrCategory);
-			break;
+			case "Bancos":
+				arrCategory[0] = String.valueOf(5);
+				new EstablecimientoAsync().execute(arrCategory);
+				break;
 
-		case "Organización":
-			arrCategory[0] = String.valueOf(6);
-			new EstablecimientoAsync().execute(arrCategory);
-			break;
+			case "Organización":
+				arrCategory[0] = String.valueOf(6);
+				new EstablecimientoAsync().execute(arrCategory);
+				break;
 
-		default:
-			// oRoutine.showToast(getApplicationContext(),
-			// "Seleccione una catagoría");
-			break;
+			default:
+				// oRoutine.showToast(getApplicationContext(),
+				// "Seleccione una catagoría");
+				break;
+			}
 		}
 
 		return false;

@@ -12,6 +12,7 @@ import com.apprade.entity.Entity_Ranking;
 import com.apprade.entity.Entity_Usuario;
 import com.apprade.helper.Helper_JSONStatus;
 import com.apprade.helper.Helper_SharedPreferences;
+import com.apprade.helper.Helper_SubRoutines;
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.Validator.ValidationListener;
@@ -53,10 +54,12 @@ public class Usuario_Login_Activity extends Activity implements ValidationListen
 	private String sEmail="",sPassword="";
     private ActionBar actionBar;
 	private ProgressDialog proDialogo;
+	private Helper_SubRoutines oRoutine;
 	private static final String TAG_VACIO = "";
 	
 	public Usuario_Login_Activity() {
 		super();
+		oRoutine = new Helper_SubRoutines();
 		dao= new DAO_Usuario();
 		rank = new Entity_Ranking();
 	}
@@ -223,7 +226,7 @@ public class Usuario_Login_Activity extends Activity implements ValidationListen
 	    	 
 		       Intent i = new Intent(getApplicationContext(),Usuario_Registro_Activity.class);
 		       startActivity(i);
-//			   finish();
+			   finish();
 		       break;
 	       
 	       
@@ -264,6 +267,10 @@ public class Usuario_Login_Activity extends Activity implements ValidationListen
 
 	@Override
 	public void onValidationSucceeded() {
+		
+		if (oRoutine.isOnline(getApplicationContext())) 
+			Toast.makeText(getApplicationContext(), "Necesita tener conexión a Internet.", Toast.LENGTH_SHORT).show();
+		else
 		new TaskHttpMethodAsync().execute();		
 	}
 

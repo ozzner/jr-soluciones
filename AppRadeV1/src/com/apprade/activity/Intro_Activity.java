@@ -27,6 +27,7 @@ import com.apprade.adapter.Adapter_ViewPage;
 import com.apprade.dao.DAO_Usuario;
 import com.apprade.entity.Entity_Ranking;
 import com.apprade.helper.Helper_SharedPreferences;
+import com.apprade.helper.Helper_SubRoutines;
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.Validator.ValidationListener;
@@ -54,9 +55,11 @@ public class Intro_Activity extends FragmentActivity implements
 	public Entity_Ranking rank;
 	private String sEmail = "", sPassword = "";
 	private ProgressDialog proDialogo;
+	private Helper_SubRoutines oRoutine;
 
 	public Intro_Activity() {
-
+		
+		oRoutine  = new Helper_SubRoutines();
 		dao = new DAO_Usuario();
 		rank = new Entity_Ranking();
 
@@ -66,6 +69,11 @@ public class Intro_Activity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		
+		if (oRoutine.isOnline(getApplicationContext())) 
+			Toast.makeText(getApplicationContext(), "No tiene conexión a internet.", Toast.LENGTH_SHORT).show();
+		
+		
 		/* PARTE 1 */
 		setContentView(R.layout.activity_intro);
 		vp_Intro = (ViewPager) findViewById(R.id.vp_intro);
@@ -260,8 +268,15 @@ public class Intro_Activity extends FragmentActivity implements
 		
 		if (sEmail.isEmpty()||sPassword.isEmpty()) {
 			Toast.makeText(getApplicationContext(), "Debe completar todos los campos!", Toast.LENGTH_SHORT);
-		}else
-			new TaskHttpMethodAsync().execute();
+		}else{
+			
+			if (oRoutine.isOnline(getApplicationContext())) {
+				new TaskHttpMethodAsync().execute();
+			} else {
+				Toast.makeText(getApplicationContext(), "Necesita tener conexión a internet.", Toast.LENGTH_SHORT).show();
+			} 
+		}
+			
 	}
 
 	@Override

@@ -223,6 +223,9 @@ public class Fragment_Intro_3 extends Fragment implements ValidationListener {
 	public void onValidationSucceeded() {
 		
 		if (!validarRegistro())
+			if (oRoutine.isOnline(getActivity())) 
+				Toast.makeText(getActivity(), "Necesita tener conexión a Internet.", Toast.LENGTH_SHORT).show();
+			else
 			new TaskHttpMethodAsync().execute();
 	}
 
