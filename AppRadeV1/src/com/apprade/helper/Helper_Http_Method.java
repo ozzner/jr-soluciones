@@ -38,9 +38,25 @@ import android.util.Log;
 public class Helper_Http_Method {
 	
 private static int TIMEOUT = 10000; /*milisegundos*/
-    
+private static boolean bTimeout;
+
+
+	/**
+ * @return the bTimeout
+ */
+public boolean isbTimeout() {
+	return bTimeout;
+}
+/**
+ * @param bTimeout the bTimeout to set
+ */
+public void setbTimeout(boolean bTimeout) {
+	Helper_Http_Method.bTimeout = bTimeout;
+}
+
+
 	public Helper_Http_Method() {
-		// TODO Auto-generated constructor stub
+		bTimeout = false;
 	}
 	
 	
@@ -62,7 +78,8 @@ private static int TIMEOUT = 10000; /*milisegundos*/
 			    		in = response.getEntity().getContent();		    		
 	    		
 	        } catch(ConnectTimeoutException e){
-	            Log.e("Exception: Timeout", e.toString());
+	        	setbTimeout(true);
+	            Log.e("Exception: Timeout", e.toString()+":"+isbTimeout());
 	        } catch (Exception e) {
 	            Log.e("log_tag", "Error in http connection "+e.toString());
 	        }
@@ -90,6 +107,7 @@ private static int TIMEOUT = 10000; /*milisegundos*/
 		    		in = response.getEntity().getContent();
 		    	
         } catch(ConnectTimeoutException e){
+        	setbTimeout(true);
             Log.e("Exception: Timeout", e.toString());
         } catch (Exception e) {
             Log.e("log_tag", "Error in http connection "+e.toString());

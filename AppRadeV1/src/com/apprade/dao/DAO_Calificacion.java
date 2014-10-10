@@ -70,7 +70,7 @@ public class DAO_Calificacion {
 				}else{
 					
 					JSONObject oErrorData=  oJson.getJSONObject("data");
-					oJsonStatus.setError_cod(Double.parseDouble(oErrorData.getString("error_cod")));
+//					oJsonStatus.setError_cod(Double.parseDouble(oErrorData.getString("error_cod")));
 					oJsonStatus.setMessage(oErrorData.getString("message"));
 					oJsonStatus.setInfo(oErrorData.getString("info"));
 				}
@@ -82,8 +82,6 @@ public class DAO_Calificacion {
 		return bEstado;
 		}
 
-	
-	
 	
 	public boolean obtenerUltimaCalificacionPorEstabID(String establecimientoID){
 		
@@ -123,6 +121,8 @@ public class DAO_Calificacion {
 							oCali.setFecha(sDate);
 							bResult = true;
 							
+					oJsonStatus.setMessage("Estado");		
+					oJsonStatus.setInfo(sQueue);		
 					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
 					oJsonStatus.setError_status(Boolean.parseBoolean(oJson.getString("error_status")));
 					

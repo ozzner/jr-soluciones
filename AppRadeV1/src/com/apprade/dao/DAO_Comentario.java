@@ -140,6 +140,7 @@ public class DAO_Comentario {
 					oData =  oJson.getJSONObject("data");
 					oJsonStatus.setMessage(oData.getString("message"));
 					oJsonStatus.setInfo(oData.getString("info"));
+					Log.e("COMERNT-ID", bStatus+"");
 					oJsonStatus.setError_status(Boolean.parseBoolean(oJson.getString("error_status")));
 					lista=null; //Temporal
 				}
@@ -178,10 +179,9 @@ public class DAO_Comentario {
 					bEstado = true;
 					
 				}else{
-					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
 					
 					JSONObject oErrorData=  oJson.getJSONObject("data");
-					oJsonStatus.setError_cod(Double.parseDouble(oErrorData.getString("error_cod")));
+//					oJsonStatus.setError_cod(Double.parseDouble(oErrorData.getString("error_cod")));
 					oJsonStatus.setMessage(oErrorData.getString("message"));
 					oJsonStatus.setInfo(oErrorData.getString("info"));
 				}

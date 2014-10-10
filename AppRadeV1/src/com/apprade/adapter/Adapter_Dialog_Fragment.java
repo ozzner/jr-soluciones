@@ -24,6 +24,7 @@ public class Adapter_Dialog_Fragment extends DialogFragment implements OnDateSet
 {
 	private static String sFecha ;
 	private Helper_SubRoutines oRoutine;
+	public static String sFechaMMM;
 	/**
 	 * @return the sFecha
 	 */
@@ -61,7 +62,7 @@ public class Adapter_Dialog_Fragment extends DialogFragment implements OnDateSet
 		sFecha = (year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 		String sFechaMMM = oRoutine.customDateConverter(sFecha,Helper_SubRoutines.TAG_FORMAT_DATE_MM, Helper_SubRoutines.TAG_FORMAT_DATE_MMM);
 		sFecha = oRoutine.customDateConverter(sFecha, "yyyy-MM-dd", "yyyy-MM-dd");
-		oRoutine.showToast(getActivity(), sFechaMMM);
+		Toast.makeText(getActivity(), sFechaMMM, Toast.LENGTH_SHORT).show();
 		setsFecha(sFecha);
 	}
 

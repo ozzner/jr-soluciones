@@ -105,8 +105,13 @@ public class Usuario_Comentar_Activity extends Activity {
 		tvDistrito.setText(sDireccion);
 		tvNombreEsta.setText(sNombre.toUpperCase());
 
-		btnCancel
-				.setOnClickListener((android.view.View.OnClickListener) cancel_button_click_listener);
+		btnCancel.setOnClickListener( new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 
 		exeHttpAsync2();
 
@@ -194,7 +199,7 @@ public class Usuario_Comentar_Activity extends Activity {
 			} else {
 				Toast.makeText(
 						getApplicationContext(),
-						dao.oJsonStatus.getMessage() + " Info: "
+						dao.oJsonStatus.getMessage() + ". "
 								+ dao.oJsonStatus.getInfo(), Toast.LENGTH_LONG)
 						.show();
 			}
@@ -219,22 +224,7 @@ public class Usuario_Comentar_Activity extends Activity {
 			AsyncTask<String, Void, Boolean> {
 
 		List<Entity_Comentario> lista_comentarios = new ArrayList<Entity_Comentario>();
-
-		@Override
-		protected Boolean doInBackground(String... params) {
-			boolean bRequest = false;
-
-			lista_comentarios = dao.listarTodoComentarioPorID(iIdEstable + "");
-
-			bRequest = dao.oJsonStatus.getError_status();
-
-			if (!bRequest) {
-				oListaComment = lista_comentarios;
-			}
-
-			return bRequest;
-		}
-
+		
 		@Override
 		protected void onPreExecute() {
 
@@ -252,6 +242,22 @@ public class Usuario_Comentar_Activity extends Activity {
 			});
 			proDialog2.setProgress(0);
 		}
+		
+		@Override
+		protected Boolean doInBackground(String... params) {
+			boolean bRequest = false;
+
+			lista_comentarios = dao.listarTodoComentarioPorID(String.valueOf(iIdEstable));
+
+			bRequest = dao.oJsonStatus.getError_status();
+
+			if (!bRequest) {
+				oListaComment = lista_comentarios;
+			}
+
+			return bRequest;
+		}
+
 
 		@Override
 		protected void onPostExecute(Boolean result) {
@@ -260,11 +266,9 @@ public class Usuario_Comentar_Activity extends Activity {
 
 			if (!result) {
 				populateListView();// Llena el listView
-				Toast.makeText(getApplicationContext(), "¡Listo!",
-						Toast.LENGTH_SHORT).show();
 			} else {
-				Toast.makeText(getApplicationContext(),
-						"Puede ser el 1ro en comentar! ", Toast.LENGTH_SHORT)
+				Toast.makeText(getApplicationContext(),dao.oJsonStatus.getMessage()+
+						". "+dao.oJsonStatus.getInfo(), Toast.LENGTH_SHORT)
 						.show();
 			}
 		}
@@ -282,13 +286,13 @@ public class Usuario_Comentar_Activity extends Activity {
 	
 	
 	private boolean validarComentario(){
+		
 		boolean bResult= false;
 		String sComentario = etComentario.getText().toString();
 		
 		if (sComentario.isEmpty() || sComentario==null) {
 			bResult = true;
 		}
-		
 		return bResult;
 	}
 	
@@ -322,9 +326,14 @@ public class Usuario_Comentar_Activity extends Activity {
 	}
 
 	private void populateListView() {
-		ArrayAdapter<Entity_Comentario> adapter = new  Adapter_ListView(getApplicationContext(), oListaComment);
-		ListView lv_comment = (ListView)findViewById(R.id.lv_comentarios);
-		lv_comment.setAdapter(adapter);
+		
+		try {
+			ArrayAdapter<Entity_Comentario> adapter = new  Adapter_ListView(getApplicationContext(), oListaComment);
+			ListView lv_comment = (ListView)findViewById(R.id.lv_comentarios);
+			lv_comment.setAdapter(adapter);
+		} catch (Exception e) {
+		}
+		
 	}
 
 

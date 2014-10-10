@@ -398,7 +398,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		setUpMapIfNeeded();
+//		setUpMapIfNeeded();
 	}
 
 	private void setUpMapIfNeeded() {
@@ -545,13 +545,12 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 					@Override
 					public void run() {
 
-						oRoutine.showToast(getApplicationContext(), sCola);
+						oRoutine.showToast(getApplicationContext(),oCalificar.oJsonStatus.getMessage()+": "+ sCola);
 					}
 				});
 			}
 
 		}).start();
-
 	}
 
 	public void updateRating(final String cola, final int establishmentID) {
@@ -571,8 +570,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						// oRoutine.showToast(getApplicationContext(),
-						// oCalificar.oJsonStatus.getMessage());
+//						 oRoutine.showToast(getApplicationContext(),
+//						 oCalificar.oJsonStatus.getMessage());
 					}
 				});
 
@@ -638,11 +637,11 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			proDialog.dismiss();
 
 			if (result) {
-				actionBar.setSubtitle("Calificación OK");
+				oRoutine.showToast(getApplicationContext(), oCalificar.oJsonStatus.getMessage());
 				hideFragment();
 			} else {
 				actionBar.setSubtitle("¡Error!");
-				Toast.makeText(getApplicationContext(),
+				Toast.makeText(getApplicationContext(),oCalificar.oJsonStatus.getMessage()+". "+
 						oCalificar.oJsonStatus.getInfo(), Toast.LENGTH_SHORT)
 						.show();
 			}
@@ -790,7 +789,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				}
 
 				actionBar.setSubtitle("Error!");
-				Toast.makeText(getApplicationContext(), "¡Oops!",
+				Toast.makeText(getApplicationContext(), "¡Oops! " + dao.oJsonStatus.getMessage()+". "+dao.oJsonStatus.getInfo(),
 						Toast.LENGTH_SHORT).show();
 			}
 		}
@@ -805,12 +804,12 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		}
 	} // End Async
 
-	private OnClickListener cancel_button_click_listener = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			popWin.dismiss();
-		}
-	};
+//	private OnClickListener cancel_button_click_listener = new OnClickListener() {
+//		@Override
+//		public void onClick(View v) {
+//			popWin.dismiss();
+//		}
+//	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -836,7 +835,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		case R.id.cargar_establ_acc:
 
 			
-			if (oRoutine.isOnline(getApplicationContext())) 
+			if (!oRoutine.isOnline(getApplicationContext())) 
 				Toast.makeText(getApplicationContext(), "Necesita tener conexión a Internet.", Toast.LENGTH_SHORT).show();
 			else
 			{
@@ -856,7 +855,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 					map.clear();
 					new EstablecimientoAsync().execute(arrCategory);
 				}
-				
 			}
 
 			break;
@@ -898,32 +896,31 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	}
 
 	@Override
-	public void onInfoWindowClick(Marker marker) {
+	public void onInfoWindowClick(final Marker marker) {
 
-		String identificador = marker.getId();
-
-		String contador = identificador.substring(1, identificador.length());
-
-		int count = Integer.parseInt(contador) - marker_count;
-
+		Log.e("MARKER", marker_count + "");
 		// hideFragment();
-		try {
 
-			Intent intent = new Intent(getApplicationContext(),
-					Usuario_Comentar_Activity.class);
+						String identificador = marker.getId();
 
-			intent.putExtra("establecimientoID", arrIdEstt[count]);
-			intent.putExtra("nomEstablecimiento", arrNomEst[count]);
-			intent.putExtra("direccion", arrDirEst[count]);
-			intent.putExtra("usuarioID", usuarioID);
-			intent.putExtra("cola", oInfoWindow.getCola());
-			startActivity(intent);
+						String contador = identificador.substring(1, identificador.length());
 
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+						int count = Integer.parseInt(contador) - marker_count;
+						Intent intent = new Intent(getApplicationContext(),
+								Usuario_Comentar_Activity.class);
+
+						intent.putExtra("establecimientoID", arrIdEstt[count]);
+						intent.putExtra("nomEstablecimiento", arrNomEst[count]);
+						intent.putExtra("direccion", arrDirEst[count]);
+						intent.putExtra("usuarioID", usuarioID);
+						intent.putExtra("cola", oInfoWindow.getCola());
+						startActivity(intent);
+
+						Log.e("ESTA_ID_2", arrIdEstt[count]+"");
 	}
 
+	
+	
 	public final boolean onMarkerClick(Marker arg0) {
 
 		String identificador = arg0.getId();
@@ -932,17 +929,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		int count = Integer.parseInt(contador) - marker_count;
 		position = count;
 
-		try {
-
 			arrParams[0] = arrIdEstt[count] + "";
 
 			adpInWin = new Adapter_InfoWindow();
 			adpInWin.setCola(ls_Colas.get(count));
-
+			Log.e("ESTA_ID_1", arrIdEstt[count]+"");
 			runAsyncGetLasRate(arrIdEstt[count]);
 
-		} catch (Exception e) {
-		}
 
 		showFragment(arg0);
 		position = count;
@@ -1041,7 +1034,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			setMensaje(TAG_UPDATE);
 		}
 		
-		if (oRoutine.isOnline(getApplicationContext())) 
+		if (!oRoutine.isOnline(getApplicationContext())) 
 			Toast.makeText(getApplicationContext(), "Necesita tener conexión a Internet.", Toast.LENGTH_SHORT).show();
 		else
 		{

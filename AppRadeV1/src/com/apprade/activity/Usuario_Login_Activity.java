@@ -269,9 +269,10 @@ public class Usuario_Login_Activity extends Activity implements ValidationListen
 	public void onValidationSucceeded() {
 		
 		if (oRoutine.isOnline(getApplicationContext())) 
-			Toast.makeText(getApplicationContext(), "Necesita tener conexión a Internet.", Toast.LENGTH_SHORT).show();
+			new TaskHttpMethodAsync().execute();	
 		else
-		new TaskHttpMethodAsync().execute();		
+			Toast.makeText(getApplicationContext(), "Necesita tener conexión a Internet.", Toast.LENGTH_SHORT).show();
+			
 	}
 
 	@Override
