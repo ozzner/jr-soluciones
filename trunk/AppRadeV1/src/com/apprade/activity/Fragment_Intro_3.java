@@ -96,11 +96,8 @@ public class Fragment_Intro_3 extends Fragment implements ValidationListener {
 			@Override
 			public void onClick(View v) {
 
-				oDialFrag = new Adapter_Dialog_Fragment();
 				oDialFrag.show(getChildFragmentManager(), "MyDataPiker");
-
-				validator.validate();
-
+				
 			}
 		});
 
@@ -203,7 +200,7 @@ public class Fragment_Intro_3 extends Fragment implements ValidationListener {
 			} else {
 				Toast.makeText(
 						getActivity(),
-						dao.oJsonStatus.getMessage() + "\nInfo: "
+						dao.oJsonStatus.getMessage() + ". "
 								+ dao.oJsonStatus.getInfo(), Toast.LENGTH_LONG)
 						.show();
 			}
@@ -222,11 +219,16 @@ public class Fragment_Intro_3 extends Fragment implements ValidationListener {
 	@Override
 	public void onValidationSucceeded() {
 		
-		if (!validarRegistro())
+		if (!validarRegistro()){
+			
 			if (oRoutine.isOnline(getActivity())) 
-				Toast.makeText(getActivity(), "Necesita tener conexión a Internet.", Toast.LENGTH_SHORT).show();
-			else
-			new TaskHttpMethodAsync().execute();
+				new TaskHttpMethodAsync().execute();
+			 else 
+				Toast.makeText(getActivity(), "Necesita tener conexión a internet.", Toast.LENGTH_SHORT).show();
+			
+			
+		}
+			
 	}
 
 	@Override

@@ -97,72 +97,74 @@ public class DAO_Establecimiento {
 			    in =  oHttp.httpGet(URL + "?" + paramsString);
 			    oJson =oParser.parserToJsonObject(in);
 			    
-			    boolean bStatus = Boolean.parseBoolean(oJson.getString("error_status"));
-				
-				if(!bStatus){
-					JSONObject oData =  oJson.getJSONObject("data");
-					int iNum = oData.length();
-					lsColas.clear();
-					
-						for (int i = 0; i < iNum; i++) {
-							
-							JSONObject oEstabli =  oData.getJSONObject("establishment"+(i+1));	
-							
-							int iIdEst = Integer.parseInt(oEstabli.getString("establishmentID").trim());
-							String sNameEst = oEstabli.getString("name").trim();
-							String sDireccion = oEstabli.getString("address").trim();
-//							int iRUC = Integer.parseInt(oEstabli.getString("ruc"));
-							
-							JSONObject oDistric =  oEstabli.getJSONObject("district");							
-							int iIdDis = Integer.parseInt(oDistric.getString("districtID").trim());
-							String sNameDis = oDistric.getString("name").trim();
-							Entity_Distrito ettDis = new Entity_Distrito(iIdDis, sNameDis, null);
-							listaDis.add(ettDis);
-							
-							JSONObject oCateg =  oEstabli.getJSONObject("category");
-							String sNameCat = oCateg.getString("name").trim();
-							int iIdCat = Integer.parseInt(oCateg.getString("categoryID").trim());
-							Entity_Categoria ettCat = new Entity_Categoria(iIdCat, sNameCat);
-							listaCat.add(ettCat);
-																										
-							JSONObject oCoodin =  oEstabli.getJSONObject("coordinates");
-							int iIdCoo = Integer.parseInt(oCoodin.getString("coordinatesID"));
-							float fLatit = Float.parseFloat(oCoodin.getString("latitude"));
-							float fLongi = Float.parseFloat(oCoodin.getString("longitude"));							
-							Entity_Coordenadas ettCoor = new Entity_Coordenadas(iIdCoo, fLatit, fLongi, null);
-							listaCoo.add(ettCoor);
+				    boolean bStatus = Boolean.parseBoolean(oJson.getString("error_status"));
+				    JSONObject oData =  oJson.getJSONObject("data");
+				    
+					if(!bStatus){
 						
-							Entity_Establecimiento ettEst = new Entity_Establecimiento
-									(iIdEst, sNameEst, sDireccion, -1, listaCat, listaDis, listaCoo);
-							
-							lista.add(ettEst);//Lista final
-							
-							try {
+						int iNum = oData.length();
+						lsColas.clear();
 						
-								JSONObject oRate =  oEstabli.getJSONObject("rating");
-								if (!oRate.getString("cal_cola").toString().equals("")) {
-									lsColas.add(oRate.getString("cal_cola"));
-								}else{
-									lsColas.add(oRate.getString("No hay cola"));
-								}
+							for (int i = 0; i < iNum; i++) {
 								
-							} catch (Exception e) {
-								lsColas.add("No hay cola");
+								JSONObject oEstabli =  oData.getJSONObject("establishment"+(i+1));	
+								
+								int iIdEst = Integer.parseInt(oEstabli.getString("establishmentID").trim());
+								String sNameEst = oEstabli.getString("name").trim();
+								String sDireccion = oEstabli.getString("address").trim();
+//								int iRUC = Integer.parseInt(oEstabli.getString("ruc"));
+								
+								JSONObject oDistric =  oEstabli.getJSONObject("district");							
+								int iIdDis = Integer.parseInt(oDistric.getString("districtID").trim());
+								String sNameDis = oDistric.getString("name").trim();
+								Entity_Distrito ettDis = new Entity_Distrito(iIdDis, sNameDis, null);
+								listaDis.add(ettDis);
+								
+								JSONObject oCateg =  oEstabli.getJSONObject("category");
+								String sNameCat = oCateg.getString("name").trim();
+								int iIdCat = Integer.parseInt(oCateg.getString("categoryID").trim());
+								Entity_Categoria ettCat = new Entity_Categoria(iIdCat, sNameCat);
+								listaCat.add(ettCat);
+																											
+								JSONObject oCoodin =  oEstabli.getJSONObject("coordinates");
+								int iIdCoo = Integer.parseInt(oCoodin.getString("coordinatesID"));
+								float fLatit = Float.parseFloat(oCoodin.getString("latitude"));
+								float fLongi = Float.parseFloat(oCoodin.getString("longitude"));							
+								Entity_Coordenadas ettCoor = new Entity_Coordenadas(iIdCoo, fLatit, fLongi, null);
+								listaCoo.add(ettCoor);
+							
+								Entity_Establecimiento ettEst = new Entity_Establecimiento
+										(iIdEst, sNameEst, sDireccion, -1, listaCat, listaDis, listaCoo);
+								
+								lista.add(ettEst);//Lista final
+								
+								try {
+							
+									JSONObject oRate =  oEstabli.getJSONObject("rating");
+									if (!oRate.getString("cal_cola").toString().equals("")) {
+										lsColas.add(oRate.getString("cal_cola"));
+									}else{
+										lsColas.add(oRate.getString("No hay cola"));
+									}
+									
+								} catch (Exception e) {
+									lsColas.add("No hay cola");
+								}
 							}
-							
-							
-						}
-					
-					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
-					
-				}else{
-					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
-					lista=null; //Temporal
-				}
+						
+						oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
+						
+					}else{
+						oJsonStatus.setMessage(oData.getString("message"));
+						oJsonStatus.setInfo(oData.getString("info"));
+						oJsonStatus.setError_status(Boolean.parseBoolean(oJson.getString("error_status")));
+						lista=null; //Temporal
+					}
+			    
 			
 		} catch (Exception e) {
 			Log.e("URL", e.getMessage());
-			}
+		}
 		
 		return lista;
 	}

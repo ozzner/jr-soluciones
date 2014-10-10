@@ -70,8 +70,8 @@ public class Intro_Activity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 
 		
-		if (oRoutine.isOnline(getApplicationContext())) 
-			Toast.makeText(getApplicationContext(), "No tiene conexión a internet.", Toast.LENGTH_SHORT).show();
+		if (!oRoutine.isOnline(getApplicationContext())) 
+			Toast.makeText(getApplicationContext(), "Necesita tener conexión a internet.", Toast.LENGTH_SHORT).show();
 		
 		
 		/* PARTE 1 */
@@ -263,6 +263,7 @@ public class Intro_Activity extends FragmentActivity implements
 	
 	@Override
 	public void onValidationSucceeded() {
+		
 		sEmail = email.getText().toString().trim();
 		sPassword = password.getText().toString().trim();
 		
