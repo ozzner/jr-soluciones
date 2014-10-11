@@ -1,7 +1,9 @@
 package com.apprade.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.android.gms.ads.*;
 
@@ -86,7 +88,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private Helper_SubRoutines oRoutine;
 	private String arrValue[];
 	private int count1, marker_count = 0, marker_count2 = 0;
-	private Adapter_InfoWindow adpInWin;
 	private static String mensaje;
 	private static final String TAG_ONCREATE = "oncreate";
 	private static final String TAG_ONRESTART = "onrestart";
@@ -95,6 +96,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private static final String TEST_DEVICE_ID = "B58F8443FD40945F763B77E7BC6B2A2F";
 	private static Marker myMarker;
 	public static List<String> ls_Colas = new ArrayList<String>();
+	private static Map<Integer, String> map2_IdEs_Cola = new HashMap<Integer,String>();
 	String arrParams[] = new String[4];
 	String arrCategory[] = new String[2];
 	String arrKeys[] = new String[10];
@@ -168,27 +170,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		oInfoWindow = new Adapter_InfoWindow();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onRestart()
-	 */
-//	@Override
-//	protected void onRestart() {
-//
-//		try {
-//			hideFragment();
-//			setMensaje(TAG_ONRESTART);
-//			myMarker.hideInfoWindow();
-//			exeHttpAsync();
-//
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//
-//		super.onRestart();
-//	}
-
+	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -216,7 +199,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-					ls_Colas.set(position, arrParams[1]);
+					ls_Colas.set(oInfoWindow.getIdEst(), arrParams[1]);
 					hideFragment();
 					exeAsyncTask(arrParams);
 				}
@@ -232,7 +215,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-					ls_Colas.set(position, arrParams[1]);
+					ls_Colas.set(oInfoWindow.getIdEst(), arrParams[1]);
 					hideFragment();
 					exeAsyncTask(arrParams);
 				}
@@ -250,7 +233,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-					ls_Colas.set(position, arrParams[1]);
+					ls_Colas.set(oInfoWindow.getIdEst(), arrParams[1]);
 					hideFragment();
 					exeAsyncTask(arrParams);
 				}
@@ -268,7 +251,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-					ls_Colas.set(position, arrParams[1]);
+					ls_Colas.set(oInfoWindow.getIdEst(), arrParams[1]);
 					hideFragment();
 					exeAsyncTask(arrParams);
 				}
@@ -297,6 +280,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 	} // End onCreate
 
+	
 	  @Override
 	  public void onResume() {
 	    super.onResume();
@@ -477,7 +461,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	}
 
 	public void setUpMap(final float lat, final float lon, final String nom,
-			final String dir) {
+			final String dir, final int idEst) {
 
 		new Thread(new Runnable() {
 
@@ -491,7 +475,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 						map.addMarker(markerOptions
 								.position(new LatLng(lat, lon))
 								.title(nom)
-								.snippet(dir)
+								.snippet(dir + idEst)
 								.flat(true)
 								.alpha(0.8f)
 								.icon(BitmapDescriptorFactory
@@ -524,7 +508,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 							oRoutine.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_SHORT),
 							sFecha, Helper_SubRoutines.TAG_MINUTOS);
 
-					ls_Colas.set(position, sCola);
+					ls_Colas.set(oInfoWindow.getIdEst(), sCola);
 
 					/* Evaluo cuanto tiempo ha pasado */
 					if (iMin > 15) {
@@ -605,7 +589,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 						String.valueOf(establishmentID), cola);
 
 				if (bResult)
-					ls_Colas.set(position, cola);
+					ls_Colas.set(oInfoWindow.getIdEst(), cola);
 
 				runOnUiThread(new Runnable() {
 					@Override
@@ -696,10 +680,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	 * AsynTask class listar establecimiento
 	 */
 
-	private void exeHttpAsync(String... strings) {
-		EstablecimientoAsync task = new EstablecimientoAsync();
-		task.execute(strings);
-	}
 
 	class EstablecimientoAsync extends AsyncTask<String, Void, Boolean> {
 
@@ -707,7 +687,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 		@Override
 		protected void onPreExecute() {
-
+			
+			lista_establecimiento.clear();
 			App_GPSMapa_Activity oApp = new App_GPSMapa_Activity();
 			String sMensaje = oApp.getMensaje();
 
@@ -758,12 +739,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				bRequest = status.getError_status();
 
 				if (!bRequest) {
+					
 					List<Entity_Coordenadas> lista_coordenadas = new ArrayList<Entity_Coordenadas>();
 					arrNomEst = new String[lista_establecimiento.size()];
 					arrDirEst = new String[lista_establecimiento.size()];
 					arrIdEstt = new int[lista_establecimiento.size()];
-
-					ls_Colas = dao.getLsColas();
+					
+					map2_IdEs_Cola = dao.getMap_IdEs_Cola();
 
 					int a = 0;
 					for (Entity_Establecimiento esta : lista_establecimiento) {
@@ -780,9 +762,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 						lat = coor.getLatitud();
 						lon = coor.getLongitud();
-						//
-						setUpMap(lat, lon, arrNomEst[c], arrDirEst[c]);
-						Log.e("contador1: ", +c + "");
+						
+						setUpMap(lat, lon, arrNomEst[c], arrDirEst[c] , arrIdEstt[c]);
 						c++;
 					}
 				}
@@ -793,6 +774,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			return bRequest;
 		}
 
+		
 		@Override
 		protected void onPostExecute(Boolean result) {
 			super.onPostExecute(result);
@@ -827,7 +809,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				actionBar.setSubtitle("Error!");
 				Toast.makeText(
 						getApplicationContext(),
-						"¡Oops! " + dao.oJsonStatus.getMessage() + ". "
+						 dao.oJsonStatus.getMessage() + ". "
 								+ dao.oJsonStatus.getInfo(), Toast.LENGTH_SHORT)
 						.show();
 			}
@@ -930,50 +912,68 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 	@Override
 	public void onInfoWindowClick(final Marker marker) {
-
+		
+		map.setInfoWindowAdapter(new Adapter_InfoWindow(getLayoutInflater()));
+		
 		Log.e("MARKER", marker_count + "");
-
-		String identificador = marker.getId();
-
+//		Log.e("ESTA_ID_2", marker.getPosition()+ "");
+		String identificador = String.valueOf(marker.getId());
+//
 		String contador = identificador.substring(1, identificador.length());
 
 		int count = Integer.parseInt(contador) - marker_count;
+//		int count = Integer.parseInt(identificador);
+		
 		Intent intent = new Intent(getApplicationContext(),
 				Usuario_Comentar_Activity.class);
 
-		intent.putExtra("establecimientoID", arrIdEstt[count]);
-		intent.putExtra("nomEstablecimiento", arrNomEst[count]);
-		intent.putExtra("direccion", arrDirEst[count]);
+		intent.putExtra("establecimientoID", oInfoWindow.getIdEst());
+		intent.putExtra("nomEstablecimiento", oInfoWindow.getNombre());
+		intent.putExtra("direccion", oInfoWindow.getDireccion());
 		intent.putExtra("usuarioID", usuarioID);
 		intent.putExtra("cola", oInfoWindow.getCola());
+		
 		startActivity(intent);
 
-		Log.e("ESTA_ID_2", arrIdEstt[count] + "");
+		Log.e("ESTA_ID_2", marker.getPosition()+ "");
 	}
 
-	public final boolean onMarkerClick(Marker arg0) {
 
-		String identificador = arg0.getId();
-		String contador = identificador.substring(1, identificador.length());
-		Log.e("MARKER", marker_count + "");
-		int count = Integer.parseInt(contador) - marker_count;
-		position = count;
+	public final boolean onMarkerClick(final Marker arg0) {
 
-		arrParams[0] = arrIdEstt[count] + "";
-
-		adpInWin = new Adapter_InfoWindow();
-		adpInWin.setCola(ls_Colas.get(count));
-		Log.e("ESTA_ID_1", arrIdEstt[count] + "");
-		runAsyncGetLasRate(arrIdEstt[count]);
-
+	map.setInfoWindowAdapter(new Adapter_InfoWindow(getLayoutInflater()));
+		
+		String sAll = arg0.getSnippet();
+		String sIdEst = sAll.substring(sAll.length() - 4);
+		String sDirec = sAll.substring(1, sAll.length() - 4);
+		
+		oInfoWindow.setDireccion(sDirec);
+		oInfoWindow.setNombre(arg0.getTitle());
+		oInfoWindow.setCola(map2_IdEs_Cola.get(Integer.parseInt(sIdEst)));
+		
+//		String identificador = arg0.getId();
+//		Log.e("ESTA_ID_2", arg0.getPosition()+ "");
+//		String identificador = String.valueOf(arg0.getPosition());
+//		String contador = identificador.substring(1, identificador.length());
+//		
+//		int count = Integer.parseInt(contador) - marker_count;
+//		int count = Integer.parseInt(identificador) ;
+//		position = count;
+//		
+//		arrParams[0] = arrIdEstt[count] + "";
+//
+		
+//		
+//		Log.e("ESTA_ID_1", arrIdEstt[count] + "");
+		
+//		runAsyncGetLasRate(arrIdEstt[count]);
 		showFragment(arg0);
-		position = count;
-
-		map.setInfoWindowAdapter(new Adapter_InfoWindow(getLayoutInflater()));
+		
 
 		return false;
 	}
 
+	
 	private void loadSpinnerNav() {
 
 		actionBar = getActionBar();
@@ -999,6 +999,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				arrAdpSpinner);
 		actionBar.setListNavigationCallbacks(oAdpSpinner, this);
 	}
+	
 
 	private void sumadorMarker() {
 
