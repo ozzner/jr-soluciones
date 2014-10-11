@@ -3,8 +3,10 @@ package com.apprade.dao;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -34,7 +36,7 @@ public class DAO_Establecimiento {
 	private static DAO_Conexion conn;
 	private static URI URL ;
 	private static final String ENTITY = "establecimiento";
-	private static ArrayList<String> lsColas = new ArrayList<>();
+	private static Map<Integer, String> map_IdEs_Cola = new HashMap<Integer,String>();
 	
 	/**
 	 * @param oEstable
@@ -62,18 +64,20 @@ public class DAO_Establecimiento {
 		conn = new DAO_Conexion();
 	}
 
+	
 	/**
-	 * @return the lsColas
+	 * @return the map_IdEs_Cola
 	 */
-	public  ArrayList<String> getLsColas() {
-		return lsColas;
+	public static Map<Integer, String> getMap_IdEs_Cola() {
+		return map_IdEs_Cola;
 	}
 	/**
-	 * @param lsColas the lsColas to set
+	 * @param map_IdEs_Cola the map_IdEs_Cola to set
 	 */
-	public void setLsColas(ArrayList<String> lsColas) {
-		this.lsColas = lsColas;
+	public static void setMap_IdEs_Cola(Map<Integer, String> map_IdEs_Cola) {
+		DAO_Establecimiento.map_IdEs_Cola = map_IdEs_Cola;
 	}
+	
 	
 	
 	public List<Entity_Establecimiento> listarEstablecimientoPorCategoriaID(String categoriaID)
@@ -103,7 +107,7 @@ public class DAO_Establecimiento {
 					if(!bStatus){
 						
 						int iNum = oData.length();
-						lsColas.clear();
+						map_IdEs_Cola.clear();
 						
 							for (int i = 0; i < iNum; i++) {
 								
@@ -142,16 +146,16 @@ public class DAO_Establecimiento {
 							
 									JSONObject oRate =  oEstabli.getJSONObject("rating");
 									if (!oRate.getString("cal_cola").toString().equals("")) {
-										lsColas.add(oRate.getString("cal_cola"));
+										map_IdEs_Cola.put(iIdEst,oRate.getString("cal_cola"));
 									}else{
-										lsColas.add(oRate.getString("No hay cola"));
+										map_IdEs_Cola.put(iIdEst,oRate.getString("No hay cola"));
 									}
 									
 								} catch (Exception e) {
-									lsColas.add("No hay cola");
+									map_IdEs_Cola.put(iIdEst,"No hay cola");
 								}
 							}
-						
+						Log.e("LISTA", map_IdEs_Cola+"");
 						oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
 						
 					}else{
@@ -168,7 +172,7 @@ public class DAO_Establecimiento {
 		
 		return lista;
 	}
-	
+
 	
 
 	
