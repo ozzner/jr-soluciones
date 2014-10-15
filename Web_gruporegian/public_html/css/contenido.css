@@ -1,0 +1,14 @@
+
+.main_container{
+    /*    background: red;*/
+/*    background: yellow;*/
+    min-width: 420px;
+    width:95%;
+    margin: 0 auto;
+}
+
+#contenido{
+ /* border: solid 3px red;*/
+/*    background: red;*/
+    height: 400px;
+}

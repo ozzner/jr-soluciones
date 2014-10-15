@@ -1,0 +1,73 @@
+
+/* 
+    Created on : 17/09/2014, 01:19:18 PM
+    Author     : renzo
+border-bottom: solid 1px #428BCA;
+*/
+
+header{
+    background: #ddd;
+/*    height: 135px; */
+/*    box-shadow: 3px 3px 1px #ccc; */
+}
+
+div#header_contenedor1{
+    /*    background: blue;*/
+    height:80px;
+    width: 200px;
+    display: inline-block;
+    text-align: center;
+}
+
+div#header_contenedor1, .sociales{
+    display: inline-block;
+    text-decoration: none;
+}
+
+.sociales{
+    /*    background: blue;*/
+    width:25%;
+    height: auto;
+    text-align: center;     
+    text-decoration: none;
+    float: right;
+    min-width: 200px;
+}
+
+.link_widget:hover{
+    text-decoration: none;
+}
+
+.social_a, .social_b, .social_c{
+    margin-top: 1px;
+    display: inline-block;
+    /*    background: yellow;*/
+    height: 38px;    
+    width: 38px;
+    border-radius: 1em;
+    margin: 18px 0px 0px 10px;
+    -webkit-filter:grayscale(1) !important;
+    transition: all 0.5s;
+    box-shadow: 5px 5px 2.5px #888;  
+
+}
+
+.social_c:hover,.social_a:hover, .social_b:hover{
+    box-shadow: 2px 2px 1px #888;  
+    -webkit-filter:grayscale(0) !important;
+    transition: all 0.3s ease;
+}
+
+section#slide{
+    margin-top: -17px;
+    border-top: solid 1px #ccc;
+    border-bottom: solid 1px #ccc;
+    width: 100%;
+}
+
+div#nav_collapse{
+    
+    margin-top: 4px;
+}
+
+

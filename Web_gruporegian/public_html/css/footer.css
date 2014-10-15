@@ -1,0 +1,158 @@
+/* 
+    Created on : 13/10/2014, 05:43:21 PM
+    Author     : Renzo Santillán
+*/
+
+@font-face {
+    font-family: 'myndraineregular';
+    src: url('../font/myndraine-webfont.eot');
+    src: url('../font/myndraine-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../font/myndraine-webfont.woff2') format('woff2'),
+        url('../font/myndraine-webfont.woff') format('woff'),
+        url('../font/myndraine-webfont.ttf') format('truetype'),
+        url('../font/myndraine-webfont.svg#myndraineregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'jockey_oneregular';
+    src: url('../font/jockeyone-regular-webfont.eot');
+    src: url('../font/jockeyone-regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../font/jockeyone-regular-webfont.woff2') format('woff2'),
+        url('../font/jockeyone-regular-webfont.woff') format('woff'),
+        url('../font/jockeyone-regular-webfont.ttf') format('truetype'),
+        url('../font/jockeyone-regular-webfont.svg#jockey_oneregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+footer{  
+    background: #428bca;
+    height: 50px;
+    width: 100%;
+}
+
+.foo_contacto{
+    top:5px;
+    margin-left: 20px;
+    position: relative;
+    min-width: 250px;
+    /*background: yellow;*/
+    height: 40px;
+    width: 20%;
+}
+
+.foo_cont_imgs1{
+    height: 20px;
+    float: left;
+    /*background: red;*/
+    width: 200px;
+}
+
+.foo_cont_imgs2{
+    height: 20px;
+    float: left;
+    /*background: blue;*/
+    width: 250px;
+}
+
+.img_cont{
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+}
+
+.foo_text0_label{
+    font-family: 'Tahoma';
+    font-size:12px; 
+    display: inline-block;
+    font-weight: normal;
+    color: #fff;
+}
+
+.foo_text1_label{
+    font-family: 'Tahoma';
+    display: inline-block;
+    color: #fff;
+
+}
+
+.outlook{
+    font-family: 'Tahoma';
+    font-size:12px;
+    display: inline-block;
+    font-weight: normal;
+    color: #fff;
+    text-decoration: none;
+}
+
+.outlook:hover{
+    text-decoration: none;
+}
+
+.foo_ubicacion, .foo_contacto{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.foo_ubicacion{
+    position:relative;
+    top:5px;
+    /*background:red;*/
+    height:40px;
+    width: 250px;
+}
+.ubicacion_img_cont{
+    display: inline-block;
+    margin-top: 7px;
+    height: 25px;
+    width: 25px;
+}
+
+.ubicacion_dir{
+    margin-top: 2px;
+    /*    background: blue;*/
+    font-family: 'Tahoma';
+    font-size:12px;
+    width:180px;
+    color: #fff;
+    display: inline-block;
+    text-justify: distribute;
+    vertical-align: top;
+}
+
+.ubicacion_dir:hover{
+    text-decoration: none;
+}
+
+.foo_sociales{
+    /*background: blue;*/
+    width:25%;
+    height: 50px;
+    text-align: center;     
+    text-decoration: none;
+    float: right;
+    min-width: 200px;
+}
+
+.foo_social_a, .foo_social_b, .foo_social_c{
+/*    background: yellow;*/
+    display: inline-block;
+    vertical-align: top;
+    height: 30px;    
+    width: 30px;
+    border-radius: 1em;
+    margin: 8px 0px 0px 10px;
+    -webkit-filter:grayscale(1) !important;
+    transition: all 0.5s;
+    box-shadow: 3px 3px 1.5px #888;  
+
+}
+
+.foo_social_c:hover,.foo_social_a:hover, .foo_social_b:hover{
+    box-shadow: 2px 2px 1px #888;  
+    -webkit-filter:grayscale(0) !important;
+    transition: all 0.3s ease;
+}

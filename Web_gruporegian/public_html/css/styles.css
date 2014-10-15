@@ -1,0 +1,79 @@
+/* 
+    Created on : 17/09/2014, 01:18:38 PM
+    Author     : renzo
+*/
+
+
+@font-face {
+    font-family: 'jockey_oneregular';
+    src: url('../font/jockeyone-regular-webfont.eot');
+    src: url('../font/jockeyone-regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../font/jockeyone-regular-webfont.woff2') format('woff2'),
+        url('../font/jockeyone-regular-webfont.woff') format('woff'),
+        url('../font/jockeyone-regular-webfont.ttf') format('truetype'),
+        url('../font/jockeyone-regular-webfont.svg#jockey_oneregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'myndraineregular';
+    src: url('../font/myndraine-webfont.eot');
+    src: url('../font/myndraine-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../font/myndraine-webfont.woff2') format('woff2'),
+        url('../font/myndraine-webfont.woff') format('woff'),
+        url('../font/myndraine-webfont.ttf') format('truetype'),
+        url('../font/myndraine-webfont.svg#myndraineregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+body{
+
+    font-family: 'myndraineregular';
+    /*    border-radius: 2em;*/
+    /*    padding:5px;*/
+    /*   background-image: url(../img/backgr.jpg);*/
+}
+section{
+    margin: 0 auto;
+    /*    background: red;*/
+    /*height: auto;*/
+    width: 100%;
+}
+
+img ,video ,image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+h1, h2, h3 , h4 ,h5 ,h6{
+    color: #428bca;
+    font-family: 'jockey_oneregular'; 
+}
+h2#controles{
+    margin-left: 90px;
+}
+
+section#grupo_regian{
+    text-align: center;
+    height: 50px;
+    margin-bottom: 5px;
+    margin-top:5px;
+/*    background: #3399ff;*/
+}
+
+h2#tit_1{
+    
+    margin: 0 auto;
+    padding: 5px;
+    font-size:34px;
+}
