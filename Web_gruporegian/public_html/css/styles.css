@@ -27,7 +27,6 @@
         url('../font/myndraine-webfont.svg#myndraineregular') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
 *{
@@ -36,12 +35,13 @@
     font-size: 14px;
 }
 
+
 body{
 
     font-family: 'myndraineregular';
     /*    border-radius: 2em;*/
-    /*    padding:5px;*/
-    /*   background-image: url(../img/backgr.jpg);*/
+    /*    padding:25px;*/
+       background:#fff;
 }
 section{
     margin: 0 auto;
@@ -59,6 +59,19 @@ h1, h2, h3 , h4 ,h5 ,h6{
     color: #428bca;
     font-family: 'jockey_oneregular'; 
 }
+
+h1{
+    font-size: 20px;
+    color:#888;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #ccc;
+    font-family: 'myndraineregular';
+}
+.logo{
+   height: 80px;
+   width: 80px;
+}
+
 h2#controles{
     margin-left: 90px;
 }
@@ -68,12 +81,17 @@ section#grupo_regian{
     height: 50px;
     margin-bottom: 5px;
     margin-top:5px;
-/*    background: #3399ff;*/
+    /*    background: #3399ff;*/
+}
+.grupo_regian_name{
+    margin-top:14px;
 }
 
 h2#tit_1{
-    
+    color:#fff;
     margin: 0 auto;
-    padding: 5px;
+    padding: 25px;
     font-size:34px;
+    text-shadow: 2px 2px 2px #ccc;
+   background: rgba(66,139,202, 0.7);
 }

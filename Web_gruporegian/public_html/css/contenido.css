@@ -1,14 +1,16 @@
 
 .main_container{
-    /*    background: red;*/
-/*    background: yellow;*/
+
     min-width: 420px;
-    width:95%;
+    width:98%;
     margin: 0 auto;
+    /*background: blue;*/
+    margin-top: 45px;
+    height: 500px;
 }
 
 #contenido{
  /* border: solid 3px red;*/
-/*    background: red;*/
-    height: 400px;
+    /*background: red;*/
+    height: 480px;
 }

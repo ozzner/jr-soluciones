@@ -147,7 +147,7 @@ footer{
     margin: 8px 0px 0px 10px;
     -webkit-filter:grayscale(1) !important;
     transition: all 0.5s;
-    box-shadow: 3px 3px 1.5px #888;  
+    box-shadow: 1px 1px 1.5px #fff;  
 
 }
 
