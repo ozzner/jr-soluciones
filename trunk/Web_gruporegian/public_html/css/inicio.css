@@ -8,10 +8,10 @@
     font-family: 'jockey_oneregular';
     src: url('../font/jockeyone-regular-webfont.eot');
     src: url('../font/jockeyone-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/jockeyone-regular-webfont.woff2') format('woff2'),
-         url('../font/jockeyone-regular-webfont.woff') format('woff'),
-         url('../font/jockeyone-regular-webfont.ttf') format('truetype'),
-         url('../font/jockeyone-regular-webfont.svg#jockey_oneregular') format('svg');
+        url('../font/jockeyone-regular-webfont.woff2') format('woff2'),
+        url('../font/jockeyone-regular-webfont.woff') format('woff'),
+        url('../font/jockeyone-regular-webfont.ttf') format('truetype'),
+        url('../font/jockeyone-regular-webfont.svg#jockey_oneregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -20,32 +20,41 @@
     font-family: 'myndraineregular';
     src: url('../font/myndraine-webfont.eot');
     src: url('../font/myndraine-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/myndraine-webfont.woff2') format('woff2'),
-         url('../font/myndraine-webfont.woff') format('woff'),
-         url('../font/myndraine-webfont.ttf') format('truetype'),
-         url('../font/myndraine-webfont.svg#myndraineregular') format('svg');
+        url('../font/myndraine-webfont.woff2') format('woff2'),
+        url('../font/myndraine-webfont.woff') format('woff'),
+        url('../font/myndraine-webfont.ttf') format('truetype'),
+        url('../font/myndraine-webfont.svg#myndraineregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 .principal{
-    background: blue;
+    /*background: green;*/  
+    height: 460px;
+    padding: 5px;
 }
 
 .controles{
+    margin-top: 5px;
     width: 20%;
     min-width: 250px;
     float: left;
 }
 
+.list-group{
+    box-shadow: 2px 2px 2px #888;
+    border-radius: 5px;
+}
 .contenido{
-   float: right;
-   width: 78%;
-   border:solid 1px #428bca;
-   height: auto;
-   vertical-align: top;
-   border-radius: 3px;
-   padding: 2em;
+    background:#fff;
+    float: right;
+    width: 78%;
+    border:solid 1px #ccc;
+    height:auto;
+    vertical-align: top;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #888888;
+    padding:7px;
 }
 
 .contenido , .controles {
@@ -54,22 +63,45 @@
 }
 
 .banners{
-        background: rgba(51,173,219, 0.7);
-	border-left: 4px solid rgba(255,255,255,0.7);
-	height: auto;
-        width: 100%;
-        color: red;
-        
-	-webkit-transition: all 200ms;
-	-moz-transition: all 200ms;
-	-o-transition: all 200ms;
-	-ms-transition: all 200ms;
-	transition: all 200ms;
+    background: rgba(51,173,219, 0.7);
+    border-left: 4px solid rgba(255,255,255,0.7);
+    height: auto;
+    width: 100%;
+    color: red;
+
+    -webkit-transition: all 200ms;
+    -moz-transition: all 200ms;
+    -o-transition: all 200ms;
+    -ms-transition: all 200ms;
+    transition: all 200ms;
 }
 
 div#titulos_inicio{
     width: 100%;
     height: auto;
-/*    background: red;*/
+    /*    background: red;*/
 }
+
+.contenido_acerca{
+    position:relative;
+    margin:0 auto;
+    background: #428bca;
+    color:#fff;
+    height: 42px;
+    text-align: left;
+    padding: 12px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+}
+.contenido_texto{
+    text-align: justify;
+    padding:20px;
+}
+.conte_negr_razons{
+    font-family: 'jockey_oneregular';
+    font-size: 16px;
+
+}
+
 
