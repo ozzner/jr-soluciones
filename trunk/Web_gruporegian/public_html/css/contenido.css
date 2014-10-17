@@ -1,16 +1,15 @@
 
 .main_container{
-
     min-width: 420px;
     width:98%;
     margin: 0 auto;
-    /*background: blue;*/
+    background: blue;
     margin-top: 45px;
-    height: 500px;
+    height: auto;
 }
 
 #contenido{
- /* border: solid 3px red;*/
-    /*background: red;*/
-    height: 480px;
+  border: solid 3px red;
+    background: red;
+    height: 800px;
 }
