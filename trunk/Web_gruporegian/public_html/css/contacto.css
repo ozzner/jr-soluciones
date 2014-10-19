@@ -1,0 +1,28 @@
+/* 
+    Created on : 19/10/2014, 11:37:32 AM
+    Author     : Renzo Santillán
+*/
+.body_contacto{
+    /*background: blue;*/
+    padding-bottom: 20px;
+    height: auto;
+}
+
+.contacto_box{
+    height: auto;
+    width: 50%;
+    /*background: #269abc;*/
+    border-radius:1em;
+    padding: 20px;
+    border:solid 1px #269abc;
+    box-shadow: 1px 1px 5px #ccc;
+       
+}
+.contacto_box:hover{
+    
+    
+}
+
+#lblAsunto,#lblEmail, #lblNombres{
+    color:#3399ff;
+}
