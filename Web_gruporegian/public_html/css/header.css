@@ -58,11 +58,9 @@ div#header_contenedor1, .sociales{
     transition: all 0.3s ease;
 }
 
-section#slide{
-    margin-top: -20px;
-    border-top: solid 1px #ccc;
-    border-bottom: solid 1px #ccc;
-    width: 100%;
+
+#slide{
+margin-bottom: 20px;
 }
 
 div#nav_collapse{

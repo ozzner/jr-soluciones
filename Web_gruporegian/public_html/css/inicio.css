@@ -27,13 +27,19 @@
     font-weight: normal;
     font-style: normal;
 }
-body{
-    height: auto !important;
+.inicio_body{
+    /*height: 100% !important;*/
+    background:pink;
+    padding-top:5px;
+    padding-bottom: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
+    /*margin-bottom: 20px;*/
 }
 .principal{
-    /*background: green;*/  
-    height: 460px;
-    padding: 5px;
+    /*    background: green;  
+        height: 890px !important;
+        padding: 5px;*/
 }
 
 .controles{
@@ -50,21 +56,24 @@ body{
 .contenido{
     /*    min-height: 200px;
         max-height: 800px;*/
-    background:#000;
+    /*position:absolute;*/
+    /*background:#000;*/
+
     float: right;
     width: 78%;
     border:solid 1px #ccc;
-    height:auto;
+    /*height:auto;*/
     vertical-align: top;
     border-radius: 5px;
     box-shadow: 2px 2px 2px #888888;
-    padding:7px;
 }
 
 .contenido , .controles {
     display: inline-block;
-    margin: 0 auto;
-}
+    margin-top: 10px;
+    margin-bottom: 10px;
+}   
+
 
 .banners{
     background: rgba(51,173,219, 0.7);
@@ -81,43 +90,49 @@ body{
 }
 
 #iframe_inicio{
-
+    /*    padding: 20px;*/
     width: 100%;
-    /*min-height: 200px;*/
-    max-height: 800px;
-    height: auto !important;
-    padding:10px;
-    background: red;
+    max-height: 100%;
+    height:auto!important;
+    /*background: cyan;*/
 }
 
 #tabframe{
-    
-    height:auto !important;
     width:100% !important;
     /*min-height: 300px;*/
-    background: blue;
+    /*background: blue;*/
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    padding:10px;
+    /*padding:5px;*/
 
 }
-.body_inicio{
-    padding: 0px;
+.html_inicio{
     margin: 0px;
-    background: hotpink;
+    /*padding: 5px;*/
+    height: auto!important;
+}
+
+.body_inicio{
+
+    /*margin: 10px !important;*/
+    /*padding: 5px;*/
+    /*height: auto !important;*/
+    /*background: crimson;*/
 }
 
 .contenedor_inicio{
     /*max-height: 550px;*/
-    box-shadow: 2px 2px 2px #888888;
-    border: solid 2px #888;
-    height: max-content !important;
+    /*    box-shadow: 2px 2px 2px #888888;*/
+    /*    border: solid 2px #888;*/
+    /*height: auto !important;*/
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    background: yellow;
+    padding: 5px;
+    /*background: yellow;*/ 
 }
 
 .contenido_acerca{
+
     position:relative;
     margin:0 auto;
     background: #428bca;
@@ -144,4 +159,8 @@ body{
 
 }
 
+.base_inicio{
+    height: 20px;
+    background:#d9534f;
+}
 

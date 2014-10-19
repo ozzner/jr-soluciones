@@ -14,7 +14,7 @@
 
     </head>
 
-    <body>
+    <body class="inicio_body">
         <script>
             $(function() {
                 $('div.list-group a').on('click', function() {
@@ -24,30 +24,97 @@
             });
         </script>
 
-        <section class="principal">
+        <script language="javascript" type="text/javascript">
+            function resizeIframe(obj) {
+                obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+            }
+        </script>
 
-            <section class="controles">
+        <section id="slide">
 
-                <div class="list-group">
-                    <a href="inicio_bienvenida.html" target="inicio_iframe" class="list-group-item active">Bienvenida</a>
-                    <a href="inicio_mision.html" target="inicio_iframe" class="list-group-item">Misión</a>
-                    <a href="inicio_vision.html" target="inicio_iframe" class="list-group-item">Visión</a>
-                    <a href="inicio_exitos.html" target="inicio_iframe" class="list-group-item">Casos de exito</a>
-                    <a href="inicio_alianzas.html" target="inicio_iframe" class="list-group-item">Alianzas estratégicas</a>
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                </ol>
+
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="img/m1.jpg" alt="...">
+                        <div class="carousel-caption">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="img/m2.png" alt="...">
+                        <div class="carousel-caption">
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img src="img/m3.jpg" alt="...">
+                        <div class="carousel-caption">
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img src="img/m4.png" alt="...">
+                        <div class="carousel-caption">
+                            Lo mejor para ud.
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img src="img/m5.jpg" alt="...">
+                        <div class="carousel-caption ">
+                            The best of best
+                        </div>
+                    </div>
+
+
                 </div>
 
-            </section>
-
-            <section class="contenido">
-
-                <div id="iframe_inicio"> 
-                    <iframe name="inicio_iframe" id="tabframe" frameborder="0"  src="inicio_bienvenida.html">
-                    <!--se aloja todo el contenido-->
-                    </iframe> 
-                </div>       
-            </section>
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
 
         </section>
+
+        <!--        <section class="principal">-->
+
+        <section class="controles">
+
+            <div class="list-group">
+                <a href="inicio_bienvenida.html" target="inicio_iframe" class="list-group-item active">Bienvenida</a>
+                <a href="inicio_mision.html" target="inicio_iframe" class="list-group-item">Misión</a>
+                <a href="inicio_vision.html" target="inicio_iframe" class="list-group-item">Visión</a>
+                <a href="inicio_exitos.html" target="inicio_iframe" class="list-group-item">Casos de exito</a>
+                <a href="inicio_alianzas.html" target="inicio_iframe" class="list-group-item">Alianzas estratégicas</a>
+            </div>
+
+        </section>
+
+        <section class="contenido">
+
+            <div id="iframe_inicio"> 
+                <iframe name="inicio_iframe" id="tabframe" frameborder="0" scrolling="no" onload='javascript:resizeIframe(this);' src="inicio_bienvenida.html">
+                <!--se aloja todo el contenido-->
+
+                </iframe> 
+                <section class="base_inicio">
+
+                </section>
+            </div>  
+
+        </section>
+
+        <!--</section>-->
 
     </body>
 

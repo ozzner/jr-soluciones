@@ -144,15 +144,15 @@ footer{
     height: 30px;    
     width: 30px;
     border-radius: 1em;
-    margin: 8px 0px 0px 10px;
+    margin: 12px 0px 0px 10px;
     -webkit-filter:grayscale(1) !important;
     transition: all 0.5s;
-    box-shadow: 1px 1px 1.5px #fff;  
+    /*box-shadow: 1px 1px 1.5px #fff;*/  
 
 }
 
 .foo_social_c:hover,.foo_social_a:hover, .foo_social_b:hover{
-    box-shadow: 2px 2px 1px #888;  
+    box-shadow:1px 1px 1px #fff;  
     -webkit-filter:grayscale(0) !important;
     transition: all 0.3s ease;
 }

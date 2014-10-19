@@ -79,13 +79,10 @@ h2#controles{
 section#grupo_regian{
     text-align: center;
     height: 50px;
-    margin-bottom: 5px;
-    margin-top:5px;
+    margin-bottom: 55px;
     /*    background: #3399ff;*/
 }
-.grupo_regian_name{
-    margin-top:14px;
-}
+
 
 h2#tit_1{
     color:#fff;
