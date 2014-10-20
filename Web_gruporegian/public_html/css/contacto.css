@@ -2,27 +2,141 @@
     Created on : 19/10/2014, 11:37:32 AM
     Author     : Renzo Santillán
 */
+
+
+@font-face {
+    font-family: 'jockey_oneregular';
+    src: url('../font/jockeyone-regular-webfont.eot');
+    src: url('../font/jockeyone-regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../font/jockeyone-regular-webfont.woff2') format('woff2'),
+        url('../font/jockeyone-regular-webfont.woff') format('woff'),
+        url('../font/jockeyone-regular-webfont.ttf') format('truetype'),
+        url('../font/jockeyone-regular-webfont.svg#jockey_oneregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'myndraineregular';
+    src: url('../font/myndraine-webfont.eot');
+    src: url('../font/myndraine-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../font/myndraine-webfont.woff2') format('woff2'),
+        url('../font/myndraine-webfont.woff') format('woff'),
+        url('../font/myndraine-webfont.ttf') format('truetype'),
+        url('../font/myndraine-webfont.svg#myndraineregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 .body_contacto{
     /*background: blue;*/
+    font-family: 'myndraineregular';
+    font-weight: normal;
     padding-bottom: 20px;
     height: auto;
 }
 
+#grupo_regian_contacto{
+
+    /*text-shadow: 1px 1px 2px #888;*/
+    width: 100%;
+    /*background: orangered;*/
+    font-family: 'jockey_oneregular';
+    text-align: center;
+    height: 46px;  
+    margin-top:20px;
+}
+
+#grupo{
+    
+    /*background: pink;*/
+    text-align: center;
+    height: 46px;
+    width: 37%;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+}
+
+#grupo2{
+    
+    width: 63%;
+    display: inline-block;
+    height: 46px;
+    vertical-align: top;
+    /*float: right;*/
+    float: right;
+    /*background: greenyellow;*/
+}
+
+#tit_cont2{
+    
+    color:rgba(66,139,202, 1);
+    font-size:24px;
+    padding: 8px;
+    margin: 0 auto;
+
+}
+
+h2#tit_cont{
+
+    color:rgba(66,139,202, 1);
+    font-size:24px;
+    text-shadow: 1px 1x 2px #888;
+    margin: 0 auto;
+    padding: 8px;
+
+    /*background: rgba(66,139,202, 0.7);*/
+}
+
 .contacto_box{
+
     height: auto;
-    width: 50%;
-    /*background: #269abc;*/
+    width: 35%;
     border-radius:1em;
     padding: 20px;
     border:solid 1px #269abc;
     box-shadow: 1px 1px 5px #ccc;
-       
-}
-.contacto_box:hover{
-    
-    
+    display: inline-block;
+    vertical-align: top; 
+    margin-left: 15px;
 }
 
+.box_map, .contacto_box{
+    margin-top:20px;
+}
+
+.box_map{
+
+    margin-left: 20px;
+    overflow:hidden;
+    width:61%;
+    display: inline-block;
+    vertical-align: top; 
+
+
+}
+#gmap_canvas{
+
+    border:solid 1px #888;
+    border-radius:1em;
+    width:100%;
+    box-shadow: 1px 1px 5px #ccc;
+}
+#gmap_canvas,.box_map{
+    height:338px;
+
+}
+
+#gmap_canvas img{
+    max-width:none!important;
+    background:none!important
+}
+
+
 #lblAsunto,#lblEmail, #lblNombres{
-    color:#3399ff;
+    color:#428bca;
+    font-weight: normal;
 }
