@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Actualizar"
-        android:onClick="btnActualizar_onClick" />
+        android:onClick="btnActualizar_onClick" 
+        android:visibility="visible"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
             android:layout_height="wrap_content"
             android:textOn="@string/ON"
             android:textOff="@string/OFF"
-            android:checked="false"
+            android:checked="true"
             android:layout_marginBottom="10dp"
             android:text="@string/RECIBIR_SERVICIOS" />
 

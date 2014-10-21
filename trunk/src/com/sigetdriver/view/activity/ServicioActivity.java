@@ -374,7 +374,9 @@ public class ServicioActivity extends Activity {
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			System.out.println("---DESTINO FINAL---");
-			String respuesta = SigetDriverUtil.connect("http://54.69.22.121:8080/taxis/rest/unidadMovil/7/destinoFinal");
+			String URL = "http://54.69.22.121:8080/taxis/rest/unidadMovil/";
+			
+			String respuesta = SigetDriverUtil.connect(URL+"9"+"/destinoFinal");
 			System.out.println("---RESPUESTA---\n"+respuesta);
 			return null;
 		}
@@ -406,7 +408,9 @@ public class ServicioActivity extends Activity {
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			System.out.println("---NO DESTINO FINAL---");
-			String respuesta = SigetDriverUtil.connect("http://54.69.22.121:8080/taxis/rest/unidadMovil/7/deshacerDestinoFinal");
+			String URL = "http://54.69.22.121:8080/taxis/rest/unidadMovil/";
+			
+			String respuesta = SigetDriverUtil.connect(URL + "9" + "/deshacerDestinoFinal");
 			System.out.println("---RESPUESTA---\n"+respuesta);
 			return null;
 		}

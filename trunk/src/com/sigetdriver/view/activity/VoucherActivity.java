@@ -14,6 +14,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -173,6 +174,26 @@ public class VoucherActivity extends Activity {
 		} else if (servicio.getTipoPago().equals(ServicioBean.TIPO_PAGO_CONTADO)) {
 			spnTipoPago.setSelection(1);
 		}
+		
+		spnTipoPago.setOnItemSelectedListener(new OnItemSelectedListener() {
+		    @Override
+		    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+		        
+		    if(servicio.getTipoPago().equals(ServicioBean.TIPO_PAGO_CONTADO)){
+		    		if(spnTipoPago.getSelectedItemPosition()==0){
+		    			Toast.makeText(getApplicationContext(), "No puede seleccionar Tipo de pago crédito", Toast.LENGTH_LONG).show();
+		    			Log.e("ENTROOOOOOO", spnTipoPago.getSelectedItemPosition()+"");
+		    			spnTipoPago.setSelection(1);
+		    		}	
+		    }
+		    adapter.notifyDataSetChanged();
+		        
+		    }
+		    @Override
+		    public void onNothingSelected(AdapterView<?> parentView) {		        
+		    }
+		});
+		
 		
 		spnTipoServicio.setOnItemSelectedListener(new OnItemSelectedListener() {
 		    @Override
