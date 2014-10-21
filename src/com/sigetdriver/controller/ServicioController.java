@@ -1,36 +1,18 @@
 package com.sigetdriver.controller;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
-
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.dsbmobile.dsbframework.controller.persistence.Entity;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonParser;
 import com.sigetdriver.ServerConstants;
 import com.sigetdriver.ServicioWorkingSet;
 import com.sigetdriver.SigetDriver;
 import com.sigetdriver.entities.PuntoBean;
 import com.sigetdriver.entities.ServicioBean;
-import com.sigetdriver.util.AppController;
 import com.sigetdriver.util.SigetDriverUtil;
-import com.sigetdriver.view.activity.LoginActivity;
+
 
 public class ServicioController {
 
@@ -49,7 +31,7 @@ public class ServicioController {
 
 		if (listaServicios.size() > 0) {
 			listaServicios.clear();
-			descargarServicio("96");
+
 		}
 
 		ArrayList<Entity> entities = ServicioBean.tableHelper.getEntities(
@@ -132,7 +114,7 @@ public class ServicioController {
 		String respuesta = SigetDriverUtil
 				.connect(URL);
 		System.out.println("---RESPUESTA---\n" + respuesta);
-
+		
 		try {
 
 			JSONObject jsonPadre = new JSONObject(respuesta);
@@ -141,10 +123,19 @@ public class ServicioController {
 			servicio.setIdServicio(jsonPadre.getString("numReserva"));
 			String fecha = jsonPadre.getString("fechaServicio");
 			String hora = jsonPadre.getString("fechaServicio");
+			String tipo_pago = jsonPadre.getString("tipoPago");
 			// Date dateFecha = new Date(Long.parseLong(fecha));
 			// Date dateHora = new Date(Long.parseLong(hora));
 			// DateFormat formatFecha = new SimpleDateFormat("dd/MM/yy");
 			// DateFormat formatHora = new SimpleDateFormat("HH:mm");
+			
+			// Validar Tipo de Pago
+			String TIPO_PAGO = "";
+			if(tipo_pago.equals("credito"))
+				TIPO_PAGO = ServicioBean.TIPO_PAGO_CREDITO;
+			else
+				TIPO_PAGO = ServicioBean.TIPO_PAGO_CONTADO;
+			
 			servicio.setFecha(fecha);
 			servicio.setHora(hora);
 			servicio.setEmpresa(jsonPadre.getString("empresaRazonSocial"));
@@ -153,16 +144,19 @@ public class ServicioController {
 			servicio.setCelular(jsonPadre.getString("pasajeroTelefonos"));
 			servicio.setObservaciones(jsonPadre.getString("observacion"));
 			servicio.setCodigo(jsonPadre.getString("codigoVerificacion"));
+			
 
 			servicio.setEstado(ServicioBean.ESTADO_PENDIENTE);
 			servicio.setEnviado(ServicioBean.ENVIADO_SI);
 			servicio.setAceptado(ServicioBean.ACEPTADO_NO);
-			servicio.setTipoPago(ServicioBean.TIPO_PAGO_CREDITO);
+			servicio.setTipoPago(TIPO_PAGO);
 			servicio.setTipoServicio(ServicioBean.TIPO_SERVICIO_PTO_A_PTO);
 			ServicioBean.tableHelper.insertEntity(servicio);
 
 			listServicio.add(servicio);
-
+			Log.e("Código de verificación", jsonPadre.getString("codigoVerificacion"));
+			Log.e("Tipo de Pago", TIPO_PAGO);
+			
 			int orden = 1;
 
 			// Punto Origen
@@ -200,6 +194,7 @@ public class ServicioController {
 		}
 
 		return listServicio;
+		
 	}
 
 	public static boolean crearDatosPrueba() {

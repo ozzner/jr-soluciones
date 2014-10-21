@@ -20,6 +20,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 
     public GCMIntentService() {
         //super(SENDER_ID);
+    	Log.e(TAG, "Received message");
     }
 
 	@Override
@@ -59,6 +60,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         	System.out.println("usuarioLogin: "+ServicioWorkingSet.usuarioLogin);
         	System.out.println("passwordLogin: "+ServicioWorkingSet.passwordLogin);
         	System.out.println("------");
+
         	
         } catch (Exception e) {
         	System.out.println("ERROR JSON PUSH");
@@ -88,6 +90,10 @@ public class GCMIntentService extends GCMBaseIntentService {
         String title = context.getString(R.string.app_name);
          
         Intent notificationIntent = new Intent(context, EstadoActivity.class);
+        //Start Activity
+        notificationIntent.setAction(Intent.ACTION_MAIN);
+    	notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+    	
         // set intent so it does not start a new activity
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);

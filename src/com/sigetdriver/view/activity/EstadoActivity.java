@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
@@ -28,7 +26,6 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.Toast;
-
 import com.dsbmobile.dsbframework.util.GPSTracker;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.google.android.gcm.GCMRegistrar;
@@ -61,7 +58,7 @@ public class EstadoActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+				
 		if (!ServicioController.getInstance().verificarLogin()) {
         	Intent i = new Intent(getApplicationContext(), LoginActivity.class);
         	i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -77,7 +74,9 @@ public class EstadoActivity extends Activity {
 		
 		lista = (ListView) findViewById(R.id.listaServicios);
 		
-		swtServicios = (Switch) findViewById(R.id.swtServicios);		
+		
+		swtServicios = (Switch) findViewById(R.id.swtServicios);
+				
 		swtServicios.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
 			@Override
@@ -98,7 +97,9 @@ public class EstadoActivity extends Activity {
 		listaServicios = ServicioController.getInstance().obtenerServiciosPendientes();		
 		adapter = new ServicioAdapter(getApplicationContext(), R.layout.item_servicio, listaServicios);
 		lista.setAdapter(adapter);
-		lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+		
+		
+		lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {		
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                     int pos, long arg3) {
@@ -278,11 +279,12 @@ public class EstadoActivity extends Activity {
 	}
 	
 	public void btnActualizar_onClick (View v) {
-		
-		listaServicios = ServicioController.getInstance().descargarServicio("96");		
+
+		listaServicios = ServicioController.getInstance().obtenerServiciosPendientes();		
 		adapter = new ServicioAdapter(getApplicationContext(), R.layout.item_servicio, listaServicios);
 		lista.setAdapter(adapter);
 		Log.e("LISTA", listaServicios+"");
+		
 	}
 		
 		

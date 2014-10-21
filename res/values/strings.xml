@@ -9,6 +9,10 @@
     <string name="title_activity_estado">EstadoActivity</string>
     <string name="title_activity_servicio">ServicioActivity</string>
     <string name="title_activity_voucher">VoucherActivity</string>
+    
+    <string name="action_search">Search</string>
+    <string name="search_hint">Search Places</string>
+    <string name="search_settings">Search Places</string>
 
     <!-- MIS STRINGS -->
     <string name="SIGET_DRIVER">SIGET DRIVER</string>
