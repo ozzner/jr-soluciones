@@ -97,8 +97,8 @@ h2#tit_cont{
     width: 35%;
     border-radius:1em;
     padding: 20px;
-    border:solid 1px #269abc;
-    box-shadow: 1px 1px 5px #ccc;
+    border:solid 1px #42ABCA;
+    box-shadow: 2px 2px 2px #ccc;
     display: inline-block;
     vertical-align: top; 
     margin-left: 15px;
@@ -120,7 +120,7 @@ h2#tit_cont{
 }
 #gmap_canvas{
 
-    border:solid 1px #888;
+    border:solid 1px #ddd;
     border-radius:1em;
     width:100%;
     box-shadow: 1px 1px 5px #ccc;
