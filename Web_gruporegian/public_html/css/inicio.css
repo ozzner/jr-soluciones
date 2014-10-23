@@ -29,11 +29,13 @@
 }
 .inicio_body{
     /*height: 100% !important;*/
-    background:pink;
+    /*background:pink;*/
+    overflow: hidden;
     padding-top:5px;
     padding-bottom: 5px;
     padding-left: 3px;
     padding-right: 3px;
+    height: auto;
     /*margin-bottom: 20px;*/
 }
 .principal{
@@ -43,11 +45,16 @@
 }
 
 .controles{
-    margin-top: 5px;
-    width: 20%;
+
+    /*margin-top: 5px;*/
+    width: 100%;
     min-width: 250px;
-    float: left;
-}
+    margin-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    /*    padding-right:5px;
+        padding-left:5px;*/
+}                     
 
 .list-group{
     box-shadow: 2px 2px 2px #888;
@@ -59,19 +66,19 @@
     /*position:absolute;*/
     /*background:#000;*/
 
-    float: right;
-    width: 78%;
-    border:solid 1px #ccc;
-    /*height:auto;*/
-    vertical-align: top;
-    border-radius: 5px;
-    box-shadow: 2px 2px 2px #888888;
+    /*    float: right;
+        width: 100%;
+        border:solid 1px #ccc;
+        height:auto;
+        vertical-align: top;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px #888888;*/
 }
 
-.contenido , .controles {
+.contenido {
     display: inline-block;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }   
 
 
@@ -91,6 +98,7 @@
 
 #iframe_inicio{
     /*    padding: 20px;*/
+    overflow: hidden;
     width: 100%;
     max-height: 100%;
     height:auto!important;
@@ -98,6 +106,7 @@
 }
 
 #tabframe{
+    overflow: hidden;
     width:100% !important;
     /*min-height: 300px;*/
     /*background: blue;*/
@@ -112,6 +121,9 @@
     height: auto!important;
 }
 
+.thumbnail{
+border: solid 1px #428bca;
+}
 .body_inicio{
 
     /*margin: 10px !important;*/
@@ -131,13 +143,74 @@
     /*background: yellow;*/ 
 }
 
-.contenido_acerca{
+.bienvenida{
+    overflow: hidden;
+    background: rgba(221,221,221,0.3);
+    height: 40%;
+    padding: 20px;
+    padding-left: 60px;
+    border:solid 1px #ddd;
+}
 
+.tit_bienvenido{  
+    /*    margin-top: -20px;*/
+    font-size: 40px;
+    color:gray;
+    width: 70%;
+    /*background: yellow;*/
+}
+
+
+.bienvenida #p1{
+    width: 65%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+
+
+    /*background: pink;*/
+}
+
+
+#titulo{
+    width:65%;
+    /*background: palevioletred;*/
+}
+
+#regian{
+    color: #428bca;
+}
+
+#titulo, #logo_inicio{
+
+    display: inline-block;
+    vertical-align: top;
+}
+
+#logo_inicio{
+
+    height: 120px;
+    float: right;
+    width: 30%;
+    text-align: center;
+    /*background: red;*/
+    margin-top: 35px;
+}
+
+
+.caption .btn {
+    width: 70%;
+}
+
+.contenido_acerca{
+  font-family: 'jockey_oneregular';
     position:relative;
     margin:0 auto;
-    background: #428bca;
-    color:#fff;
-    height: 42px;
+    background: rgba(221,221,221,0.3);
+    color:gray;
+    
+    /*text-shadow: 1px 1px 2px #888;*/
+    height: 55px;
     text-align: left;
     padding: 12px;
     border-top-left-radius: 5px;
@@ -149,9 +222,7 @@
     padding:20px;
     height: 100%;
 }
-/*.contenido_texto p{
-    height: max-content !important;
-}*/
+
 
 .conte_negr_razons{
     font-family: 'jockey_oneregular';
@@ -159,8 +230,35 @@
 
 }
 
+.row{
+    padding: 10px;
+    text-align: center;
+    /*background: red;*/
+    margin-top: 20px;
+}
+
+
+
+.thumbnail img{
+    background: blue;
+    border-radius: 4px;
+    margin-top:20px;
+    margin-bottom: -10px;
+}
+
 .base_inicio{
     height: 20px;
-    background:#d9534f;
+    background:#ddd;
+    border-bottom-left-radius: 4px; 
+    border-bottom-right-radius: 4px; 
+}
+
+.main_inicio_mision,.main_inicio_exitos{
+    padding: 20px;
+}
+
+.panel-title{
+    color:#428bca;
+    font-size:20px;
 }
 

@@ -19,6 +19,7 @@ div#header_contenedor1{
     width:25%;
     display: inline-block;
     text-align: center;
+    padding: 5px;
 }
 
 #grupo_regian_div{

@@ -2,15 +2,17 @@
 .main_container{
     min-width: 420px;
     width:98%;
-/*    margin-top: 20px;
-    background: blue;*/
+    overflow: hidden;
+    /*    margin-top: 20px;
+        background: blue;*/
     /*margin-top: 45px;*/
     /*padding: 10px;*/
     /*height: auto;*/
 }
 
 #contenido{
-  height: auto;
-  /*padding: 10px;*/
-  /*background: orange;*/
+    overflow: hidden;
+    /* height: 100%; */
+    /*padding: 10px;*/
+    /*background: orange;*/
 }
