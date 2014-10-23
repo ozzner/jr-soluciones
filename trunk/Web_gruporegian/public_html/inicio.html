@@ -15,14 +15,54 @@
     </head>
 
     <body class="inicio_body">
+
+        <!--        <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>
+                <script type='text/javascript'>
+        
+                    $(function() {
+        
+                        var iFrames = $('iframe');
+        
+                        function iResize() {
+        
+                            for (var i = 0, j = iFrames.length; i < j; i++) {
+                                iFrames[i].style.height = iFrames[i].contentWindow.document.body.offsetHeight + 'px';
+                            }
+                        }
+        
+                        if ($.browser.safari || $.browser.opera) {
+        
+                            iFrames.load(function() {
+                                setTimeout(iResize, 0);
+                            });
+        
+                            for (var i = 0, j = iFrames.length; i < j; i++) {
+                                var iSource = iFrames[i].src;
+                                iFrames[i].src = '';
+                                iFrames[i].src = iSource;
+                            }
+        
+                        } else {
+                            iFrames.load(function() {
+                                this.style.height = this.contentWindow.document.body.offsetHeight + 'px';
+                              
+                            });
+                        }
+        
+                    });
+        
+                </script>-->
+
+
         <script>
             $(function() {
-                $('div.list-group a').on('click', function() {
-                    $(this).parent().find('a.list-group-item').removeClass('a.list-group-item active');
-                    $(this).addClass('list-group-item active');
+                $('ul.nav li').on('click', function() {
+                    $(this).parent().find('li').removeClass('li active');
+                    $(this).addClass('li active');
                 });
             });
         </script>
+
 
         <script language="javascript" type="text/javascript">
             function resizeIframe(obj) {
@@ -37,8 +77,6 @@
                     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                     <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
                 </ol>
 
                 <div class="carousel-inner">
@@ -47,11 +85,7 @@
                         <div class="carousel-caption">
                         </div>
                     </div>
-                    <div class="item">
-                        <img src="img/m2.png" alt="...">
-                        <div class="carousel-caption">
-                        </div>
-                    </div>
+
 
                     <div class="item">
                         <img src="img/m3.jpg" alt="...">
@@ -59,12 +93,6 @@
                         </div>
                     </div>
 
-                    <div class="item">
-                        <img src="img/m4.png" alt="...">
-                        <div class="carousel-caption">
-                            Lo mejor para ud.
-                        </div>
-                    </div>
 
                     <div class="item">
                         <img src="img/m5.jpg" alt="...">
@@ -72,7 +100,6 @@
                             The best of best
                         </div>
                     </div>
-
 
                 </div>
 
@@ -86,27 +113,27 @@
 
         </section>
 
-        <!--        <section class="principal">-->
 
-        <section class="controles">
-
-            <div class="list-group">
-                <a href="inicio_bienvenida.html" target="inicio_iframe" class="list-group-item active">Bienvenida</a>
-                <a href="inicio_mision.html" target="inicio_iframe" class="list-group-item">Misión</a>
-                <a href="inicio_vision.html" target="inicio_iframe" class="list-group-item">Visión</a>
-                <a href="inicio_exitos.html" target="inicio_iframe" class="list-group-item">Casos de exito</a>
-                <a href="inicio_alianzas.html" target="inicio_iframe" class="list-group-item">Alianzas estratégicas</a>
-            </div>
-
-        </section>
 
         <section class="contenido">
 
+            <section class="controles">
+
+                <ul class="nav nav-tabs" role="tablist">              
+                    <li class="active"><a href="inicio_bienvenida.html" target="inicio_iframe">Bienvenido</a></li>
+                    <li><a href="inicio_exitos.html" target="inicio_iframe">Proyectos</a></li>
+                    <li><a href="inicio_mision.html" target="inicio_iframe">Valores</a></li>
+                    <li><a href="inicio_alianzas.html" target="inicio_iframe">Alianzas</a></li>
+                </ul>
+
+            </section>
+
             <div id="iframe_inicio"> 
-                <iframe name="inicio_iframe" id="tabframe" frameborder="0" scrolling="no" onload='javascript:resizeIframe(this);' src="inicio_bienvenida.html">
+                <iframe name="inicio_iframe" id="tabframe" frameborder="0" class="iframe" onload='javascript:resizeIframe(this);'scrolling="no"  src="inicio_bienvenida.html">
                 <!--se aloja todo el contenido-->
 
                 </iframe> 
+
                 <section class="base_inicio">
 
                 </section>
