@@ -52,7 +52,7 @@
             android:hint="info@apprade.com"
             android:inputType="textMultiLine"
             android:textStyle="bold"
-            android:text="Estas apunto de cerrar sesión. ¿Seguro que deseas salir?"
+            android:text="@string/logout"
             android:textColor="#80000000"
             android:textSize="15dip" />
     </LinearLayout>

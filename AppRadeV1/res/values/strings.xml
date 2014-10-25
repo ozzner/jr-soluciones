@@ -13,5 +13,6 @@
     <string name="about">Apprade [versión 1.0], tiene como finalidad ayudar a los usuarios en la elección de un lugar (Establecimiento),
         que tenga baja cola o aforo de personas.
        Developed by: nullPoint.pe</string>
+    <string name="logout">¿Seguro que deseas salir?</string>
 
 </resources>
