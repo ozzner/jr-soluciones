@@ -7,14 +7,17 @@ import java.util.Map;
 
 import com.google.android.gms.ads.*;
 
+import android.R.color;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.CalendarContract.Colors;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -95,7 +98,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private static final String AD_UNIT_ID = "ca-app-pub-0771856019955508/3441120220";
 	private static final String TEST_DEVICE_ID = "B58F8443FD40945F763B77E7BC6B2A2F";
 	private static Marker myMarker;
-	public static List<String> ls_Colas = new ArrayList<String>();
 	private static Map<Integer, String> map2_IdEs_Cola = new HashMap<Integer,String>();
 	String arrParams[] = new String[4];
 	String arrCategory[] = new String[2];
@@ -186,20 +188,22 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 		hideFragment();
 		loadSpinnerNav();
-		clearVars();
-		loadAdView();
+		
+		if (oRoutine.isOnline(getApplicationContext())) 
+			loadAdView();
+		
+	
 
 		ivNoCola.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-
+				arrParams[0] = String.valueOf(oInfoWindow.getIdEst());
 				arrParams[1] = TAG_NO_HAY_COLA;
 
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-					ls_Colas.set(oInfoWindow.getIdEst(), arrParams[1]);
 					hideFragment();
 					exeAsyncTask(arrParams);
 				}
@@ -210,12 +214,12 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 			@Override
 			public void onClick(View v) {
+				arrParams[0] = String.valueOf(oInfoWindow.getIdEst());
 				arrParams[1] = TAG_POCA_COLA;
 
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-					ls_Colas.set(oInfoWindow.getIdEst(), arrParams[1]);
 					hideFragment();
 					exeAsyncTask(arrParams);
 				}
@@ -227,13 +231,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 			@Override
 			public void onClick(View v) {
-
+				
+				arrParams[0] = String.valueOf(oInfoWindow.getIdEst());
 				arrParams[1] = TAG_COLA_MODERADA;
 
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-					ls_Colas.set(oInfoWindow.getIdEst(), arrParams[1]);
 					hideFragment();
 					exeAsyncTask(arrParams);
 				}
@@ -245,13 +249,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 			@Override
 			public void onClick(View v) {
-
+				
+				arrParams[0] = String.valueOf(oInfoWindow.getIdEst());
 				arrParams[1] = TAG_ALTA_COLA;
 
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-					ls_Colas.set(oInfoWindow.getIdEst(), arrParams[1]);
 					hideFragment();
 					exeAsyncTask(arrParams);
 				}
@@ -312,7 +316,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		 	adView = new AdView(this);
 		    adView.setAdSize(AdSize.SMART_BANNER);
 		    adView.setAdUnitId(AD_UNIT_ID);
-		
+		    adView.setBackgroundColor(Color.parseColor("#000000"));
+		    
 		    LinearLayout layout = (LinearLayout) findViewById(R.id.lay_mapa);
 		    layout.addView(adView);
 		
@@ -508,7 +513,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 							oRoutine.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_SHORT),
 							sFecha, Helper_SubRoutines.TAG_MINUTOS);
 
-					ls_Colas.set(oInfoWindow.getIdEst(), sCola);
 
 					/* Evaluo cuanto tiempo ha pasado */
 					if (iMin > 15) {
@@ -589,7 +593,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 						String.valueOf(establishmentID), cola);
 
 				if (bResult)
-					ls_Colas.set(oInfoWindow.getIdEst(), cola);
+					map2_IdEs_Cola.put(oInfoWindow.getIdEst(), cola);
 
 				runOnUiThread(new Runnable() {
 					@Override
@@ -654,6 +658,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			proDialog.dismiss();
 
 			if (result) {
+				map2_IdEs_Cola.put(oInfoWindow.getIdEst(), arrParams[1]);
 				oRoutine.showToast(getApplicationContext(),
 						oCalificar.oJsonStatus.getMessage());
 				hideFragment();
@@ -834,11 +839,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		return true;
 	}
 
-	private void clearVars() {
-		marker_count = 0;
-		marker_count2 = 0;
-		ls_Colas.clear();
-	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -856,7 +856,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			else {
 
 				setMensaje(TAG_UPDATE);
-				sumadorMarker();
 
 				try {
 					refreshMenuItem = item;
@@ -891,6 +890,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 	private void LoadInfo() {
 		final View v;
+		
 		AlertDialog.Builder adInfo = new AlertDialog.Builder(
 				App_GPSMapa_Activity.this);
 
@@ -915,14 +915,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		
 		map.setInfoWindowAdapter(new Adapter_InfoWindow(getLayoutInflater()));
 		
-		Log.e("MARKER", marker_count + "");
-//		Log.e("ESTA_ID_2", marker.getPosition()+ "");
-		String identificador = String.valueOf(marker.getId());
-//
-		String contador = identificador.substring(1, identificador.length());
-
-		int count = Integer.parseInt(contador) - marker_count;
-//		int count = Integer.parseInt(identificador);
 		
 		Intent intent = new Intent(getApplicationContext(),
 				Usuario_Comentar_Activity.class);
@@ -935,7 +927,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		
 		startActivity(intent);
 
-		Log.e("ESTA_ID_2", marker.getPosition()+ "");
 	}
 
 
@@ -945,7 +936,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		
 		String sAll = arg0.getSnippet();
 		String sIdEst = sAll.substring(sAll.length() - 4);
-		String sDirec = sAll.substring(1, sAll.length() - 4);
+		String sDirec = sAll.substring(0, sAll.length() - 4);
 		
 		oInfoWindow.setDireccion(sDirec);
 		oInfoWindow.setNombre(arg0.getTitle());
@@ -955,21 +946,16 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 //		Log.e("ESTA_ID_2", arg0.getPosition()+ "");
 //		String identificador = String.valueOf(arg0.getPosition());
 //		String contador = identificador.substring(1, identificador.length());
-//		
 //		int count = Integer.parseInt(contador) - marker_count;
 //		int count = Integer.parseInt(identificador) ;
 //		position = count;
-//		
 //		arrParams[0] = arrIdEstt[count] + "";
-//
-		
-//		
 //		Log.e("ESTA_ID_1", arrIdEstt[count] + "");
 		
-//		runAsyncGetLasRate(arrIdEstt[count]);
+		runAsyncGetLasRate(Integer.parseInt(sIdEst));
+		
 		showFragment(arg0);
 		
-
 		return false;
 	}
 
@@ -1001,15 +987,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	}
 	
 
-	private void sumadorMarker() {
 
-		marker_count2 = marker_count + ls_Colas.size();
-		marker_count = marker_count2;
-
-		Log.e("COUNT", marker_count + "");
-		Log.e("COUNT2", marker_count2 + "");
-	}
-
+	
 	public void logout() {
 		final View v;
 
@@ -1030,7 +1009,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 						oShared.storeStatus(0, getApplicationContext());// 0 =>
 																		// Inicia
 																		// desde
-						clearVars(); // el login
 						Intent i = new Intent(getApplicationContext(),
 								Usuario_Login_Activity.class);
 						startActivity(i);
@@ -1052,6 +1030,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		alertDialog.show();
 	}
 
+	
+	
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 
@@ -1060,7 +1040,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 		if (!sCatagoria.equals("-- Seleccione --")) {
 			map.clear();
-			sumadorMarker();
 			setMensaje(TAG_UPDATE);
 		}
 
