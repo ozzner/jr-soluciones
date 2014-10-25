@@ -50,7 +50,7 @@ public class Adapter_InfoWindow implements InfoWindowAdapter {
 
 		String sAll = arg0.getSnippet();
 		String sIdEst = sAll.substring(sAll.length() - 4);
-		String sDirec = sAll.substring(1, sAll.length() - 4);
+		String sDirec = sAll.substring(0, sAll.length() - 4);
 		
 		
 		tvNombre.setText(arg0.getTitle());

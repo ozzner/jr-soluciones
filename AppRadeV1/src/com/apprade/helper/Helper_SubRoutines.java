@@ -30,12 +30,11 @@ public class Helper_SubRoutines {
 	public static final String TAG_FORMAT_DATE_MMM = "yyyy-MMM-dd";
 	public static final String TAG_FORMAT_TIME = "HH:mm:ss";
 
-	/**
-	 * 
-	 */
+	
 	public Helper_SubRoutines() {
 		// TODO Auto-generated constructor stub
 	}
+	
 /****************** Working with the time *********************/
 	
 	public String getCurrentTime(String Myformat) {

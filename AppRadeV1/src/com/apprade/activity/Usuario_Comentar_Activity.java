@@ -78,7 +78,9 @@ public class Usuario_Comentar_Activity extends Activity {
 		sNombre = oBundle.getString("nomEstablecimiento");
 		sDireccion = oBundle.getString("direccion");
 		sCola = oBundle.getString("cola");
-
+			
+		new TaskHttpMethodAsyncCargarComentarios().execute();
+		
 		switch (sCola) {
 
 		case "Alta cola":
@@ -101,7 +103,7 @@ public class Usuario_Comentar_Activity extends Activity {
 			ivEstado.setImageResource(R.drawable.img1);
 			break;
 		}
-
+		
 		tvDistrito.setText(sDireccion);
 		tvNombreEsta.setText(sNombre.toUpperCase());
 
@@ -113,7 +115,7 @@ public class Usuario_Comentar_Activity extends Activity {
 			}
 		});
 
-		exeHttpAsync2();
+	
 
 		ivEnviarComentario.setOnClickListener(new OnClickListener() {
 
@@ -121,23 +123,20 @@ public class Usuario_Comentar_Activity extends Activity {
 			public void onClick(View v) {
 				
 				if (!validarComentario()) 
-					exeHttpAsync();
+					new AsyncTaskEnviarComentario().execute();
 				else{
 					oRoutine.showToast(getApplicationContext(), "Escriba un comentario");
 				}
 			}
 		});
 
-		ivEstado
-				.setOnLongClickListener(new OnLongClickListener() {
+		ivEstado.setOnLongClickListener(new OnLongClickListener() {
 
 					@Override
 					public boolean onLongClick(View v) {
-						if (!validarComentario()) 
-							exeHttpAsync();
-						else{
-							oRoutine.showToast(getApplicationContext(), "Escriba un comentario");
-						}
+						
+						new TaskHttpMethodAsyncCargarComentarios().execute();
+						
 						return false;
 					}
 				});
@@ -151,11 +150,6 @@ public class Usuario_Comentar_Activity extends Activity {
 		proDialogo.show();
 	}
 
-	protected void exeHttpAsync() {
-
-		AsyncTaskEnviarComentario task = new AsyncTaskEnviarComentario();
-		task.execute();
-	}
 
 	class AsyncTaskEnviarComentario extends AsyncTask<String, Void, Boolean> {
 
@@ -214,11 +208,6 @@ public class Usuario_Comentar_Activity extends Activity {
 	}// End ClassAs
 
 	/* ASYNC TASK 2 */
-
-	private void exeHttpAsync2() {
-		TaskHttpMethodAsyncCargarComentarios task = new TaskHttpMethodAsyncCargarComentarios();
-		task.execute();
-	}
 
 	class TaskHttpMethodAsyncCargarComentarios extends
 			AsyncTask<String, Void, Boolean> {
