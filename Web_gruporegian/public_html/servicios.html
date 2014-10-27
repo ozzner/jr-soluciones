@@ -6,83 +6,326 @@ and open the template in the editor.
 -->
 <html>
     <head>
+
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/camera.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>   
+        <link href="css/servicio.css" rel="stylesheet" type="text/css"/>
+        <link href="css/styles.css" rel="stylesheet" type="text/css"/>
 
-
-        <style>
-            body {
-                margin: 0;
-                padding: 0;
-            }
-            a {
-                color: #09f;
-            }
-            a:hover {
-                text-decoration: none;
-            }
-            #back_to_camera {
-                clear: both;
-                display: block;
-                height: 80px;
-                line-height: 40px;
-                padding: 20px;
-            }
-            .fluid_container {
-                margin: 0 auto;
-                max-width: 1000px;
-                width: 90%;
-            }
-        </style>
     </head>
 
     <body>
 
+        <div>
 
- 
-        <div>TODO write content</div>
+            <div class="servicio_titulo">
+
+                <div class="servicio_contenido">
+                    <div class="servicio_t1"><h2>Grupo Regian SAC presenta los siguientes servicios:</h2></div>
+                    <p> proporciona soluciones integrales a los problemas tecnológicos que presentan los diferentes sectores empresariales, orientando nuestras soluciones de negocios a una excelente Gestión de Servicios, en las siguientes áreas:</p>
+                </div>
+
+            </div>
+
+            <!-- Servicio de UTP -->
+            <div class="modal fade" id="miVentana1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+                        <div class="modal-header"  style="background: rgba(221,221,221,0.4);">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4>Servicio de infraestructura de red UTP</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div style="padding: 20px;">   
+
+                                <div style="margin-bottom: 20px;" id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carousel-example-generic1" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carousel-example-generic1" data-slide-to="1"></li>
+                                        <li data-target="#carousel-example-generic1" data-slide-to="2"></li>
+                                    </ol>
+
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner">
+
+                                        <div class="item active">
+                                            <img src="img/utp_4.jpg" alt="...">
+                                        </div>
+
+                                        <div class="item">
+                                            <img src="img/utp_2.jpg" alt="...">
+                                        </div>
+
+                                        <div class="item">
+                                            <img src="img/utp_3.jpg" alt="...">
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Controls -->
+                                    <a class="left carousel-control" href="#carousel-example-generic1" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                    </a>
+                                    <a class="right carousel-control" href="#carousel-example-generic1" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                    </a>
+                                </div>
 
 
-        <div class="fluid_container">
-    	<p>Pagination circles with the height relative to the width</p>
-        <div class="camera_wrap camera_azure_skin" id="camera_wrap_1">
-            <div data-thumb="../images/slides/thumbs/bridge.jpg" data-src="../images/slides/bridge.jpg">
-                <div class="camera_caption fadeFromBottom">
-                    <!--Camera is a responsive/adaptive slideshow. <em>Try to resize the browser window</em>-->
-                </div>
-            </div>
-            <div data-thumb="../images/slides/thumbs/leaf.jpg" data-src="../images/slides/leaf.jpg">
-                <div class="camera_caption fadeFromBottom">
-                    <!--It uses a light version of jQuery mobile, <em>navigate the slides by swiping with your fingers</em>-->
-                </div>
-            </div>
-            <div data-thumb="../images/slides/thumbs/road.jpg" data-src="../images/slides/road.jpg">
-                <div class="camera_caption fadeFromBottom">
-                    <!--<em>It's completely free</em> (even if a donation is appreciated)-->
-                </div>
-            </div>
-            <div data-thumb="../images/slides/thumbs/sea.jpg" data-src="../images/slides/sea.jpg">
-                <div class="camera_caption fadeFromBottom">
-                    <!--Camera slideshow provides many options <em>to customize your project</em> as more as possible-->
-                </div>
-            </div>
-            <div data-thumb="../images/slides/thumbs/shelter.jpg" data-src="../images/slides/shelter.jpg">
-                <div class="camera_caption fadeFromBottom">
-                    <!--It supports captions, HTML elements and videos and <em>it's validated in HTML5</em> (<a href="http://validator.w3.org/check?uri=http%3A%2F%2Fwww.pixedelic.com%2Fplugins%2Fcamera%2F&amp;charset=%28detect+automatically%29&amp;doctype=Inline&amp;group=0&amp;user-agent=W3C_Validator%2F1.2" target="_blank">have a look</a>)-->
-                </div>
-            </div>
-            <div data-thumb="../images/slides/thumbs/tree.jpg" data-src="../images/slides/tree.jpg">
-                <div class="camera_caption fadeFromBottom">
-                    <!--Different color skins and layouts available, <em>fullscreen ready too</em>-->
-                </div>
-            </div>
-        </div><!-- #camera_wrap_1 -->
+                                <strong>Implementación</strong><br>
+                                <ul>
+                                    <li>Cableado estructurado en fibra o cobre.</li>
+                                    <li>Instalación, configuración y parametrización de dispositivos de Hardware y Software.</li>
+                                    <li>Acceso remoto a redes.</li>
+                                    <li>Instalación de redes de datos y comunicaciones unificadas.</li>
+                                    <li>Certificación de Puntos.</li>
+                                </ul><br>
 
-    	<p>Thumbnails with fixed height</p>
-        
-    </div><!-- .fluid_container -->
+                                <strong>Soporte Técnico</strong><br>
+                                <ul>
+                                    <li>Corrección de situaciones anómalas.</li>
+                                    <li> Soporte Técnico Correctivo: 8x5 y 24x7.</li>
+                                    <li>Soporte Técnico Integral: Correctivo y Preventivo.</li>
+                                </ul><br>
+
+                                <strong>Capacitación</strong><br>
+                                <ul>
+                                    <li>Asesoría en el mantenimiento de las redes de cableado.</li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer"  style="background: rgba(221,221,221,0.4);">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                            <!--<button type="button" class="btn btn-primary">ok</button>-->
+                        </div>
+
+                    </div>                    
+                </div>
+            </div>
+
+            <!-- Servicio de FIBRA -->
+            <div class="modal fade" id="miVentana2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+                        <div class="modal-header" style="background: rgba(221,221,221,0.4);">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4>Servicio de infraestructura de red con fibra óptica</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div style="padding: 20px;">    
+
+                                <div style="margin-bottom: 20px;" id="carousel-example-generic2" class="carousel slide" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carousel-example-generic2" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carousel-example-generic2" data-slide-to="1"></li>
+                                        <li data-target="#carousel-example-generic2" data-slide-to="2"></li>
+                                    </ol>
+
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner">
+
+                                        <div class="item active">
+                                            <img src="img/fibra_1.png" alt="...">
+                                        </div>
+
+                                        <div class="item">
+                                            <img src="img/fibra_2.jpeg" alt="...">
+                                        </div>
+
+                                        <div class="item">
+                                            <img src="img/fibra_4.jpeg" alt="...">
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Controls -->
+                                    <a class="left carousel-control" href="#carousel-example-generic2" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                    </a>
+                                    <a class="right carousel-control" href="#carousel-example-generic2" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                    </a>
+                                </div>
+
+
+
+                                <strong>Implementación</strong>
+                                <ul>
+                                    <li>Implementación de los dispositivos de comunicación LAN.</li>
+                                    <li>Configuración de protocolos de ruteo y segmentación de redes LAN.</li>
+                                    <li> Configuración de conmutadores (L2 y L3) de core, distribución y de acceso.</li>
+                                    <li>Configuración de redes inalámbricas, VLAN de voz y VLAN de datos.</li>
+                                    <li> Implementación de dispositivos (cámaras de vigilancia, scaners, impresoras, etc.) que requieran uso compartido o privado.</li>
+                                </ul>
+
+                                <strong>Soporte Técnico</strong>
+                                <ul>
+                                    <li>Helpdesk y Troubleshooting remoto y/o presencial.</li>
+                                    <li>Reingeniería de la topología LAN.</li>
+                                    <li>Soporte Técnico Correctivo: 8x5 y 24x7.</li>
+                                    <li>Soporte Técnico Integral: Correctivo y Preventivo.</li>
+                                </ul>
+
+                                <strong>Capacitación</strong>
+
+                                Capacitación en la administración, uso, optimización y mantenimiento de las redes de comunicaciones.
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer"  style="background: rgba(221,221,221,0.4);">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                            <!--<button type="button" class="btn btn-primary">ok</button>-->
+                        </div>
+
+                    </div>                    
+                </div>
+            </div>
+
+
+            <!-- Servicio de SUPERVICIÓN -->
+            <div class="modal fade" id="miVentana3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+                        <div class="modal-header" style="background: rgba(221,221,221,0.4);">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4>Servicio de supervición de la implementación de infraestructuras</h4>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <div style="padding: 20px;">    
+
+                                <div style="margin-bottom: 20px;" id="carousel-example-generic3" class="carousel slide" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carousel-example-generic3" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carousel-example-generic3" data-slide-to="1"></li>
+                                        <li data-target="#carousel-example-generic3" data-slide-to="2"></li>
+                                        <li data-target="#carousel-example-generic3" data-slide-to="3"></li>
+                                        <li data-target="#carousel-example-generic3" data-slide-to="4"></li>
+                                    </ol>
+
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner">
+
+                                        <div class="item active">
+                                            <img src="img/super_1.jpg" alt="...">
+                                        </div>
+
+                                        <div class="item">
+                                            <img src="img/super_2.JPG" alt="...">
+                                        </div>
+
+                                        <div class="item">
+                                            <img src="img/super_3.jpg" alt="...">
+                                        </div>
+
+                                        <div class="item">
+                                            <img src="img/super_4.jpg" alt="...">
+                                        </div>
+
+                                        <div class="item ">
+                                            <img src="img/super_5.jpg" alt="...">
+                                        </div>
+
+
+                                    </div>
+
+                                    <!-- Controls -->
+                                    <a class="left carousel-control" href="#carousel-example-generic3" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                    </a>
+                                    <a class="right carousel-control" href="#carousel-example-generic3" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                    </a>
+                                </div>
+                                <strong>Consultoría</strong>
+                                <ul>
+                                    <li> Evaluación del entorno de la infraestructura para la construcción de redes de comunicaciones.</li>
+                                    <li>Lineamientos básicos para la construcción de redes convergentes de alta disponibilidad.</li>
+                                    <li>Análisis de componentes disponibles y necesarios para la construcción de una LAN.</li>
+                                    <li>Evaluación de la integración de los componentes de seguridad, respaldo, aplicación y funcionabilidad entre las redes WAN y LAN.</li>
+                                </ul>
+                                
+                                <strong>Consultoría y Auditoría</strong> <br/>
+                                <ul>
+                                    <li>Asesoramiento y Consultoría para el Diseño, Construcción, Aprovisionamiento y Operación de de cualquier estructura y topología de red (datos, voz, v/d).</li>
+                                    <li>Diagnóstico y resolución de problemas.</li>
+                                    <li>Dimensionamiento de proyecto.</li>
+                                </ul><br>
+                                <strong>Capacitación</strong><br>
+                                <ul>
+                                    <li>Asesoría en el mantenimiento de las redes de cableado.</li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer"  style="background: rgba(221,221,221,0.4);">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                            <!--<button type="button" class="btn btn-primary">ok</button>-->
+                        </div>
+
+                    </div>                    
+                </div>
+            </div>
+
+
+            <!--<br><button class="btn btn-success" data-toggle="modal" data-target="#miVentana"> Click here!</button>-->
+
+
+            <div class="row_servicio">
+
+                <div class="col-sm-6 col-md-4">
+                    <button class="btn btn-success" data-toggle="modal" data-target="#miVentana1">¡Ver aquí!</button>
+                    <div class="thumbnail">
+                        <img class="img_top" src="img/red_utp2_180.jpg" alt="...">
+                        <div class="caption">
+                            <h3 class="click_h3" data-toggle="modal" data-target="#miVentana1">1.- Infraestructuda de red UTP</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <button class="btn btn-success" data-toggle="modal" data-target="#miVentana2">¡Ver aquí!</button>
+                    <div class="thumbnail">
+                        <img class="img_top" src="img/fibra_180_1.jpg" alt="...">
+                        <div class="caption">
+                            <h3 class="click_h3" data-toggle="modal" data-target="#miVentana2">2.- Infraestructura con fibra óptica</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <button class="btn btn-success" data-toggle="modal" data-target="#miVentana3">¡Ver aquí!</button>
+                    <div class="thumbnail">
+                        <img class="img_top" src="img/super2_180.png" alt="...">
+                        <div class="caption">
+                            <h3 class="click_h3" data-target="#miVentana3" data-toggle="modal">3.- Supervisión</h3>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
 
     </body>
 </html>

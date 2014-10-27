@@ -50,7 +50,7 @@
 }
 
 #grupo{
-    
+
     /*background: pink;*/
     text-align: center;
     height: 46px;
@@ -61,8 +61,8 @@
 }
 
 #grupo2{
-    
-    width: 63%;
+
+    width: 40%;
     display: inline-block;
     height: 46px;
     vertical-align: top;
@@ -72,11 +72,13 @@
 }
 
 #tit_cont2{
-    
+
     color:rgba(66,139,202, 1);
     font-size:24px;
     padding: 8px;
     margin: 0 auto;
+    /*background: red;*/
+    text-align: center;
 
 }
 
@@ -94,29 +96,31 @@ h2#tit_cont{
 .contacto_box{
 
     height: auto;
-    width: 35%;
+    width: 61%;
     border-radius:1em;
     padding: 20px;
-    border:solid 1px #42ABCA;
-    box-shadow: 2px 2px 2px #ccc;
+
     display: inline-block;
     vertical-align: top; 
     margin-left: 15px;
+    /*background: blue;*/
 }
 
-.box_map, .contacto_box{
+.box_map, .contacto_box, .contacto_info{
     margin-top:20px;
+    border:solid 1px #42ABCA;
+    box-shadow: 2px 2px 2px #ccc;
 }
 
 .box_map{
-
-    margin-left: 20px;
+    margin-left: 15px;
     overflow:hidden;
-    width:61%;
+    width:98%;
     display: inline-block;
     vertical-align: top; 
-
-
+    border:solid 1px #ddd;
+    border-radius:1em;
+    height:450px;
 }
 #gmap_canvas{
 
@@ -124,11 +128,9 @@ h2#tit_cont{
     border-radius:1em;
     width:100%;
     box-shadow: 1px 1px 5px #ccc;
+    height:450px;
 }
-#gmap_canvas,.box_map{
-    height:338px;
 
-}
 
 #gmap_canvas img{
     max-width:none!important;
@@ -139,4 +141,17 @@ h2#tit_cont{
 #lblAsunto,#lblEmail, #lblNombres{
     color:#428bca;
     font-weight: normal;
+}
+
+.contacto_info{
+
+    height: auto;
+    width: 35%;
+    border-radius:1em;
+    /*background: red;*/
+    display: inline-block;
+    padding:20px;
+    vertical-align: top;
+    height: 338px;
+    margin-left: 20px;
 }

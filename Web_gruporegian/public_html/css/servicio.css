@@ -1,0 +1,50 @@
+/* 
+    Created on : 24/10/2014, 12:28:16 PM
+    Author     : Renzo Santillán
+*/
+.servicio_titulo{
+
+    /*background: red;*/
+    margin-top:30px;
+}
+
+.servicio_contenido{
+
+    /*    overflow: hidden;*/
+    background: rgba(221,221,221,0.3);
+    height: 40%;
+    padding: 20px;
+    padding-left: 30px;
+    border:solid 1px #ddd;
+
+}    
+.servicio_dasboard1{
+    overflow: hidden;
+    height: 400px;
+    width: 50%;
+    background: rgba(221,221,221,0.3);
+    padding: 20px;
+}
+
+.servicio_t1 h2 {
+    font-size: 25px;
+    color:gray;
+    width: 70%;
+}
+.row_servicio{
+    margin-top:20px;
+}
+
+.img_top{
+    margin-top: 20px;
+    box-shadow: 2px 2px 2px #888;
+    border-radius: 5px;
+}
+.thumbnail{
+    margin-top:3px;
+    text-align: center;
+}
+
+.click_h3:hover{
+    cursor: pointer;
+}
