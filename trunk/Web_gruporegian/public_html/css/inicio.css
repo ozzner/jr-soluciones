@@ -122,7 +122,7 @@
 }
 
 .thumbnail{
-border: solid 1px #428bca;
+border: solid 1px #ccc;
 }
 .body_inicio{
 
@@ -144,6 +144,7 @@ border: solid 1px #428bca;
 }
 
 .bienvenida{
+    
     overflow: hidden;
     background: rgba(221,221,221,0.3);
     height: 40%;
@@ -240,7 +241,7 @@ border: solid 1px #428bca;
 
 
 .thumbnail img{
-    background: blue;
+    /*background: blue;*/
     border-radius: 4px;
     margin-top:20px;
     margin-bottom: -10px;
