@@ -21,28 +21,28 @@
             </div>
 
             <div id="grupo2">
-                <h2 id="tit_cont2">Nos encontramos en</h2>
+                <h2 id="tit_cont2">Información de contacto</h2>
             </div>
         </section>
 
         <div class="contacto_box">
-            <form role="form">
+            <form role="form" action="php/enviar_email.php" method="post">
                 <div class="form-group">
                     <label  id="lblNombres">Nombres personales</label>
-                    <input type="text" class="form-control" id="ejemplo_email_1"
+                    <input type="text" class="form-control" name="nombres" id="ejemplo_email_1"
                            placeholder="Nombres">
                 </div>
 
                 <div class="form-group">
                     <label for="ejemplo_email_1" id="lblEmail" >Correo electronico</label>
-                    <input type="email" class="form-control" id="ejemplo_password_1" 
+                    <input type="email" class="form-control" name="correo" id="ejemplo_password_1" 
                            placeholder="Correo">
                 </div>
 
                 <div class="form-group">
                     <label for="ejemplo_archivo_1" id="lblAsunto">Escriba su consulta</label>
 
-                    <textarea class="form-control" rows="3"></textarea>
+                    <textarea class="form-control" rows="3" name="mensaje"></textarea>
                     <!--                 
                                         <input type="file" id="ejemplo_archivo_1">-->
                     <!--<p class="help-block">Ejemplo de texto de ayuda.</p>-->
