@@ -20,12 +20,6 @@ import com.apprade.helper.Helper_Http_Method;
 import com.apprade.helper.Helper_JSONParser;
 import com.apprade.helper.Helper_JSONStatus;
 
-/**
- * @author renzo
- *
- */
-
-
 public class DAO_Comentario {
 
 
@@ -36,12 +30,7 @@ public class DAO_Comentario {
 	private static DAO_Conexion conn;
 	private static URI URL ;
 	private static final String ENTITY = "comentario";
-	/**
-	 * @param ettEstab
-	 * @param oJsonStatus
-	 * @param oParser
-	 * @param oHttp
-	 */
+
 	public DAO_Comentario(Entity_Establecimiento ettEstab,
 			Helper_JSONStatus oJsonStatus, Helper_JSONParser oParser,
 			Helper_Http_Method oHttp) {
@@ -52,10 +41,7 @@ public class DAO_Comentario {
 		this.oHttp = oHttp;
 	}
 
-	/**
-	 * ozzner
-	 */
-	
+
 	public DAO_Comentario() {
 		super();
 		ettEstab = new Entity_Establecimiento();

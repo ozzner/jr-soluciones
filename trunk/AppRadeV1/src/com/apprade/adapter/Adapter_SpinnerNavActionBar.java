@@ -65,11 +65,7 @@ public class Adapter_SpinnerNavActionBar extends BaseAdapter{
 		
 		return convertView;
 	}
-	
-	/* (non-Javadoc)
-	 * @see android.widget.BaseAdapter#getDropDownView(int, android.view.View, android.view.ViewGroup)
-	 */
-	
+
 	@Override
 	public View getDropDownView(int position, View convertView, ViewGroup parent) {
 		

@@ -179,10 +179,7 @@ public class Intro_Activity extends FragmentActivity implements
 		switch (item.getItemId()) {
 
 		case R.id.reg_login_action:
-			// Intent login = new Intent(getApplicationContext(),
-			// Usuario_Login_Activity.class);
-			// startActivity(login);
-			// finish();
+
 			actionBar.setSubtitle("Login");
 			
 			AlertDialog.Builder alertDialog = new AlertDialog.Builder(
