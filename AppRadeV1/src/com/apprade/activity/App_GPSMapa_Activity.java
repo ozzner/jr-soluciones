@@ -556,15 +556,15 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 					sCola = oCalificar.oJsonStatus.getInfo();
 				}
 
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-
-						oRoutine.showToast(getApplicationContext(),
-								oCalificar.oJsonStatus.getMessage() + ": "
-										+ sCola);
-					}
-				});
+//				runOnUiThread(new Runnable() {
+//					@Override
+//					public void run() {
+//
+//						oRoutine.showToast(getApplicationContext(),
+//								oCalificar.oJsonStatus.getMessage() + ": "
+//										+ sCola);
+//					}
+//				});
 			}
 
 		}).start();
