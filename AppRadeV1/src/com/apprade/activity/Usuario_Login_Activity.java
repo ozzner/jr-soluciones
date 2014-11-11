@@ -167,7 +167,6 @@ public class Usuario_Login_Activity extends Activity implements ValidationListen
 				oShared.getAllLoginDataStored(getApplicationContext());
 				
 				oShared.storeLogin(dao.oUsuario.getNombre(),dao.oUsuario.getEmail() ,dao.oUsuario.getUsuarioID(),1, getApplicationContext());
-				String sUser = dao.oUsuario.getNombre();
 
 			}else{
 				Toast.makeText(getApplicationContext(),dao.oJsonStatus.getMessage()+". "+dao.oJsonStatus.getInfo()+".",Toast.LENGTH_SHORT).show();
@@ -215,7 +214,6 @@ public class Usuario_Login_Activity extends Activity implements ValidationListen
 		       startActivity(i);
 			   finish();
 		       break;
-	       
 	       
 	     default:
 	       break;
