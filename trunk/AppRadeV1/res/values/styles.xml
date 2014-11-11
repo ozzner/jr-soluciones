@@ -11,6 +11,13 @@
         <item name="radius">5dp</item>
         <item name="centered">true</item>
     </style>
+    
+    <style name="comentario" parent="android:Widget.EditText">
+    	<item name="android:textColorHint">#B8B8B8</item>
+    	<item name="android:textSize">15sp</item>
+    	<item name="android:layout_height">45dp</item>
+    	<item name="android:shadowColor">#FFFFFF</item>
+	</style>
 
     <style name="CustomLinePageIndicator">
         <item name="strokeWidth">4dp</item>
