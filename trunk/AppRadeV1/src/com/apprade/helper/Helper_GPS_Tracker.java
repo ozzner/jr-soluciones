@@ -160,7 +160,8 @@ public class Helper_GPS_Tracker extends Service implements LocationListener {
  
         // On pressing Settings button
         alertDialog.setPositiveButton("Activar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int which) {
+            @Override
+			public void onClick(DialogInterface dialog,int which) {
             	Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             	mContext.startActivity(intent);
             }
@@ -168,7 +169,8 @@ public class Helper_GPS_Tracker extends Service implements LocationListener {
  
         // on pressing cancel button
         alertDialog.setNegativeButton("No Activar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
+            @Override
+			public void onClick(DialogInterface dialog, int which) {
             dialog.cancel();
             }
         });

@@ -5,8 +5,6 @@ package com.apprade.entity;
 
 import java.text.DecimalFormat;
 
-import org.xml.sax.Parser;
-
 /**
  * @author Renzo
  *

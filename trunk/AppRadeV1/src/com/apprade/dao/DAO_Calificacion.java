@@ -13,9 +13,6 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import com.apprade.entity.Entity_Calificacion;
-import com.apprade.entity.Entity_Comentario;
-import com.apprade.entity.Entity_Ranking;
-import com.apprade.entity.Entity_Usuario;
 import com.apprade.helper.Helper_Http_Method;
 import com.apprade.helper.Helper_JSONParser;
 import com.apprade.helper.Helper_JSONStatus;

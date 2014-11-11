@@ -16,7 +16,7 @@ public class DAO_Conexion {
 	
 	public DAO_Conexion(String url) {
 		super();
-		this.URL = url;
+		DAO_Conexion.URL = url;
 	}
 	
 	public DAO_Conexion() {
@@ -28,7 +28,7 @@ public class DAO_Conexion {
 	}
 	
 	public void setUrl(String url) {
-		this.URL = url;
+		DAO_Conexion.URL = url;
 	}
 		
 }

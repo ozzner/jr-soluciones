@@ -7,7 +7,6 @@ import java.util.Map;
 
 import com.google.android.gms.ads.*;
 
-import android.R.color;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -17,7 +16,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.CalendarContract.Colors;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -27,10 +25,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.apprade.R;
@@ -39,7 +35,6 @@ import com.apprade.adapter.Adapter_SpinnerItem;
 import com.apprade.adapter.Adapter_SpinnerNavActionBar;
 import com.apprade.dao.DAO_Calificacion;
 import com.apprade.dao.DAO_Establecimiento;
-import com.apprade.dao.DAO_Usuario;
 import com.apprade.entity.Entity_Coordenadas;
 import com.apprade.entity.Entity_Establecimiento;
 import com.apprade.helper.Helper_GPS_Tracker;
@@ -73,16 +68,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private Adapter_SpinnerNavActionBar oAdpSpinner;
 	private double latitude;
 	private double longitude;
-	private int usuarioID, position;
+	private int usuarioID;
 	private ActionBar actionBar;
-	private PopupWindow popWin;
 	private AdView adView;
-	private Button btnCancel;
 	private DAO_Establecimiento dao;
 	private ProgressDialog proDialog;
 	public Entity_Establecimiento ettEst;
 	private Helper_JSONStatus status;
-	private DAO_Usuario daoUser;
 	private Fragment_Calificar mFragment;
 	private DAO_Calificacion oCalificar;
 	private Helper_SubRoutines routine;
@@ -90,10 +82,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private Adapter_InfoWindow oInfoWindow;
 	private Helper_SubRoutines oRoutine;
 	private String arrValue[];
-	private int count1, marker_count = 0, marker_count2 = 0;
 	private static String mensaje;
-	private static final String TAG_ONCREATE = "oncreate";
-	private static final String TAG_ONRESTART = "onrestart";
 	private static final String TAG_UPDATE = "update";
 	private static final String AD_UNIT_ID = "ca-app-pub-0771856019955508/3441120220";
 	private static final String TEST_DEVICE_ID = "B58F8443FD40945F763B77E7BC6B2A2F";
@@ -137,7 +126,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	 *            the mensaje to set
 	 */
 	public void setMensaje(String mensaje) {
-		this.mensaje = mensaje;
+		App_GPSMapa_Activity.mensaje = mensaje;
 	}
 
 	/**
@@ -152,7 +141,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	 *            the myMarker to set
 	 */
 	public void setMyMarker(Marker myMarker) {
-		this.myMarker = myMarker;
+		App_GPSMapa_Activity.myMarker = myMarker;
 	}
 
 	/**
@@ -164,7 +153,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		dao = new DAO_Establecimiento();
 		ettEst = new Entity_Establecimiento();
 		status = new Helper_JSONStatus();
-		daoUser = new DAO_Usuario();
 		oCalificar = new DAO_Calificacion();
 		routine = new Helper_SubRoutines();
 		oPrefe = new Helper_SharedPreferences();
@@ -675,7 +663,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		public void showDialogo() {
 
 			proDialog = new ProgressDialog(App_GPSMapa_Activity.this);
-			proDialog.setProgressStyle(ProgressDialog.BUTTON_NEUTRAL);
+			proDialog.setProgressStyle(DialogInterface.BUTTON_NEUTRAL);
 			proDialog.setMessage("Calificando...");
 			proDialog.show();
 		}
@@ -750,7 +738,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 					arrDirEst = new String[lista_establecimiento.size()];
 					arrIdEstt = new int[lista_establecimiento.size()];
 					
-					map2_IdEs_Cola = dao.getMap_IdEs_Cola();
+					map2_IdEs_Cola = DAO_Establecimiento.getMap_IdEs_Cola();
 
 					int a = 0;
 					for (Entity_Establecimiento esta : lista_establecimiento) {
@@ -930,6 +918,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	}
 
 
+	@Override
 	public final boolean onMarkerClick(final Marker arg0) {
 
 	map.setInfoWindowAdapter(new Adapter_InfoWindow(getLayoutInflater()));
@@ -1002,6 +991,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		/* When positive (yes/ok) is clicked */
 		alertDialog.setPositiveButton("Bye",
 				new DialogInterface.OnClickListener() {
+					@Override
 					public void onClick(DialogInterface dialog, int which) {
 
 						actionBar.setSubtitle("Chau");
@@ -1023,6 +1013,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		/* When negative (No/cancel) button is clicked */
 		alertDialog.setNegativeButton("No",
 				new DialogInterface.OnClickListener() {
+					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.cancel();
 					}

@@ -7,7 +7,6 @@ package com.apprade.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.apprade.R;
@@ -97,7 +96,7 @@ public class Adapter_InfoWindow implements InfoWindowAdapter {
 	 *            the cola to set
 	 */
 	public void setCola(String cola) {
-		this.cola = cola;
+		Adapter_InfoWindow.cola = cola;
 	}
 
 	/**
