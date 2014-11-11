@@ -148,11 +148,6 @@ public class Intro_Activity extends FragmentActivity implements
 				oShared.storeLogin(dao.oUsuario.getNombre(),
 						dao.oUsuario.getEmail(), dao.oUsuario.getUsuarioID(),
 						1, getApplicationContext());
-
-				String sUser = dao.oUsuario.getNombre();
-				Toast.makeText(getApplicationContext(), "Bienvenid@_" + sUser,
-						Toast.LENGTH_SHORT).show();
-
 			} else {
 				Toast.makeText(
 						getApplicationContext(),
@@ -164,8 +159,6 @@ public class Intro_Activity extends FragmentActivity implements
 
 		@Override
 		protected void onCancelled() {
-			Toast.makeText(getApplicationContext(), "Acción cancelada!",
-					Toast.LENGTH_SHORT).show();
 		}
 
 	}// End ClassAsync

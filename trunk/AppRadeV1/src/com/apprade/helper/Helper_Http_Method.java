@@ -3,7 +3,6 @@ package com.apprade.helper;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.List;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;

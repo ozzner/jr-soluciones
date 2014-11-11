@@ -6,14 +6,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
-
 import android.util.Log;
-
 import com.apprade.entity.Entity_Categoria;
 import com.apprade.entity.Entity_Coordenadas;
 import com.apprade.entity.Entity_Distrito;

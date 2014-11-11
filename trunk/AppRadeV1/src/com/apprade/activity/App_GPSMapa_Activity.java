@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.android.gms.ads.*;
-
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -41,6 +39,9 @@ import com.apprade.helper.Helper_GPS_Tracker;
 import com.apprade.helper.Helper_JSONStatus;
 import com.apprade.helper.Helper_SharedPreferences;
 import com.apprade.helper.Helper_SubRoutines;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -631,9 +632,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					CalificarAsync.this.cancel(true);
-					Toast.makeText(getApplicationContext(),
-							"Servicio en segundo plano", Toast.LENGTH_SHORT)
-							.show();
 				}
 
 			});
@@ -652,11 +650,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				hideFragment();
 			} else {
 				actionBar.setSubtitle("¡Error!");
-				Toast.makeText(
-						getApplicationContext(),
-						oCalificar.oJsonStatus.getMessage() + ". "
-								+ oCalificar.oJsonStatus.getInfo(),
-						Toast.LENGTH_SHORT).show();
 			}
 		}
 
@@ -707,9 +700,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 						EstablecimientoAsync.this.cancel(true);
 
-						Toast.makeText(getApplicationContext(),
-								"Servicio en segundo plano", Toast.LENGTH_SHORT)
-								.show();
 					}
 
 				});
@@ -788,8 +778,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				}
 
 				actionBar.setSubtitle("Ok!");
-				Toast.makeText(getApplicationContext(), "¡Listo!",
-						Toast.LENGTH_SHORT).show();
 			} else {
 
 				try {
@@ -800,11 +788,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				}
 
 				actionBar.setSubtitle("Error!");
-				Toast.makeText(
-						getApplicationContext(),
-						 dao.oJsonStatus.getMessage() + ". "
-								+ dao.oJsonStatus.getInfo(), Toast.LENGTH_SHORT)
-						.show();
 			}
 		}
 
@@ -1005,8 +988,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 						finish();
 
-						Toast.makeText(getApplicationContext(), "Bye!",
-								Toast.LENGTH_LONG).show();
 					}
 				});
 

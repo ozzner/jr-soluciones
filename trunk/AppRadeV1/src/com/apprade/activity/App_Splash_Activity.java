@@ -2,10 +2,8 @@ package com.apprade.activity;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
 import com.apprade.R;
 import com.apprade.helper.Helper_SharedPreferences;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;

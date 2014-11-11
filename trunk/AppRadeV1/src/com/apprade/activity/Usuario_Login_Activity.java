@@ -1,22 +1,5 @@
 package com.apprade.activity;
 
-import com.apprade.R;
-
-
-
-
-
-
-import com.apprade.dao.DAO_Usuario;
-import com.apprade.entity.Entity_Ranking;
-import com.apprade.helper.Helper_SharedPreferences;
-import com.apprade.helper.Helper_SubRoutines;
-import com.mobsandgeeks.saripaar.Rule;
-import com.mobsandgeeks.saripaar.Validator;
-import com.mobsandgeeks.saripaar.Validator.ValidationListener;
-import com.mobsandgeeks.saripaar.annotation.Required;
-import com.mobsandgeeks.saripaar.annotation.TextRule;
-
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -37,6 +20,17 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.apprade.R;
+import com.apprade.dao.DAO_Usuario;
+import com.apprade.entity.Entity_Ranking;
+import com.apprade.helper.Helper_SharedPreferences;
+import com.apprade.helper.Helper_SubRoutines;
+import com.mobsandgeeks.saripaar.Rule;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.Validator.ValidationListener;
+import com.mobsandgeeks.saripaar.annotation.Required;
+import com.mobsandgeeks.saripaar.annotation.TextRule;
 
 
 @SuppressLint("NewApi")
@@ -173,10 +167,7 @@ public class Usuario_Login_Activity extends Activity implements ValidationListen
 				oShared.getAllLoginDataStored(getApplicationContext());
 				
 				oShared.storeLogin(dao.oUsuario.getNombre(),dao.oUsuario.getEmail() ,dao.oUsuario.getUsuarioID(),1, getApplicationContext());
-				
-				
 				String sUser = dao.oUsuario.getNombre();
-				Toast.makeText(getApplicationContext(),"Bienvenid@_"+sUser, Toast.LENGTH_LONG).show();
 
 			}else{
 				Toast.makeText(getApplicationContext(),dao.oJsonStatus.getMessage()+". "+dao.oJsonStatus.getInfo()+".",Toast.LENGTH_SHORT).show();
@@ -187,8 +178,6 @@ public class Usuario_Login_Activity extends Activity implements ValidationListen
     
     @Override
     protected void onCancelled() {
-    Toast.makeText(getApplicationContext(), "Acción cancelada!",
-    Toast.LENGTH_SHORT).show();
     }
 			
 }//End ClassAsync
