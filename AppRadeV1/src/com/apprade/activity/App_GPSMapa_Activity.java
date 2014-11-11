@@ -292,7 +292,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	  /** Called before the activity is destroyed. */
 	  @Override
 	  public void onDestroy() {
-	    // Destroy the AdView.
 	    if (adView != null) {
 	      adView.destroy();
 	    }
@@ -443,7 +442,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 						new LatLng(latitude, longitude), 15f);
 				map.animateCamera(camera1);
 
-				// setUpMap();
 			} else {
 				gps.showSettingsAlert();
 			}
@@ -854,16 +852,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		oInfoWindow.setDireccion(sDirec);
 		oInfoWindow.setNombre(arg0.getTitle());
 		oInfoWindow.setCola(map2_IdEs_Cola.get(Integer.parseInt(sIdEst)));
-		
-//		String identificador = arg0.getId();
-//		Log.e("ESTA_ID_2", arg0.getPosition()+ "");
-//		String identificador = String.valueOf(arg0.getPosition());
-//		String contador = identificador.substring(1, identificador.length());
-//		int count = Integer.parseInt(contador) - marker_count;
-//		int count = Integer.parseInt(identificador) ;
-//		position = count;
-//		arrParams[0] = arrIdEstt[count] + "";
-//		Log.e("ESTA_ID_1", arrIdEstt[count] + "");
 		
 		runAsyncGetLasRate(Integer.parseInt(sIdEst));
 		
