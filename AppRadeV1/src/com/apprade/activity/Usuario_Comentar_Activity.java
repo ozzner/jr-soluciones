@@ -36,7 +36,6 @@ public class Usuario_Comentar_Activity extends Activity {
 	private ImageView ivEnviarComentario, ivEstado;
 	private EditText etComentario;
 	private DAO_Comentario dao;
-	private ProgressDialog proDialogo, proDialog2;
 	private String sNombre, sDireccion, sCola;
 	private TextView tvNombreEsta, tvDistrito;
 	private int iUsuarioID, iIdEstable;
@@ -137,12 +136,6 @@ public class Usuario_Comentar_Activity extends Activity {
 
 	}
 
-	protected void showDialogo() {
-		proDialogo = new ProgressDialog(Usuario_Comentar_Activity.this);
-		proDialogo.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		proDialogo.setMessage("Comentando...");
-		proDialogo.show();
-	}
 
 
 	class AsyncTaskEnviarComentario extends AsyncTask<String, Void, Boolean> {
@@ -159,25 +152,10 @@ public class Usuario_Comentar_Activity extends Activity {
 			return bRequest;
 		}
 
-		@Override
-		protected void onPreExecute() {
-			showDialogo();
-
-			proDialogo.setOnCancelListener(new OnCancelListener() {
-
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					AsyncTaskEnviarComentario.this.cancel(true);
-				}
-			});
-			proDialogo.setProgress(0);
-
-		}
 
 		@Override
 		protected void onPostExecute(Boolean result) {
 			super.onPostExecute(result);
-			proDialogo.dismiss();
 
 			if (result) {
 				refreshComment();
@@ -199,20 +177,6 @@ public class Usuario_Comentar_Activity extends Activity {
 
 		List<Entity_Comentario> lista_comentarios = new ArrayList<Entity_Comentario>();
 		
-		@Override
-		protected void onPreExecute() {
-
-			showDialogo();
-
-			proDialog2.setOnCancelListener(new OnCancelListener() {
-
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					TaskHttpMethodAsyncCargarComentarios.this.cancel(true);
-				}
-			});
-			proDialog2.setProgress(0);
-		}
 		
 		@Override
 		protected Boolean doInBackground(String... params) {
@@ -233,21 +197,12 @@ public class Usuario_Comentar_Activity extends Activity {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			super.onPostExecute(result);
-			proDialog2.dismiss();
 
 			if (!result) {
 				populateListView();// Llena el listView
 			} 
 		}
 
-		private void showDialogo() {
-
-			proDialog2 = new ProgressDialog(Usuario_Comentar_Activity.this);
-			proDialog2.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			proDialog2.setMessage("Cargando...");
-			proDialog2.show();
-
-		}
 	}
 
 	

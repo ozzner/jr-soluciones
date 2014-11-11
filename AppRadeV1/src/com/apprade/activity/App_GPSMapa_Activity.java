@@ -73,7 +73,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private ActionBar actionBar;
 	private AdView adView;
 	private DAO_Establecimiento dao;
-	private ProgressDialog proDialog;
 	public Entity_Establecimiento ettEst;
 	private Helper_JSONStatus status;
 	private Fragment_Calificar mFragment;
@@ -622,26 +621,10 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			return bOk;
 		}
 
-		@Override
-		protected void onPreExecute() {
-
-			showDialogo();
-
-			proDialog.setOnCancelListener(new OnCancelListener() {
-
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					CalificarAsync.this.cancel(true);
-				}
-
-			});
-			proDialog.setProgress(0);
-		}
 
 		@Override
 		protected void onPostExecute(Boolean result) {
 			super.onPostExecute(result);
-			proDialog.dismiss();
 
 			if (result) {
 				map2_IdEs_Cola.put(oInfoWindow.getIdEst(), arrParams[1]);
@@ -653,13 +636,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			}
 		}
 
-		public void showDialogo() {
-
-			proDialog = new ProgressDialog(App_GPSMapa_Activity.this);
-			proDialog.setProgressStyle(DialogInterface.BUTTON_NEUTRAL);
-			proDialog.setMessage("Calificando...");
-			proDialog.show();
-		}
 	}
 
 	/**
@@ -687,26 +663,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				}
 
 			} catch (Exception e) {
-				showDialogo();
-				proDialog.setProgress(0);
 			}
 
-			try {
-
-				proDialog.setOnCancelListener(new OnCancelListener() {
-
-					@Override
-					public void onCancel(DialogInterface dialog) {
-
-						EstablecimientoAsync.this.cancel(true);
-
-					}
-
-				});
-				proDialog.setProgress(0);
-			} catch (Exception e) {
-
-			}
 		}
 
 		@Override
@@ -763,7 +721,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			super.onPostExecute(result);
 
 			try {
-				proDialog.dismiss();
 			} catch (Exception e) {
 				Log.e("TAG-PROGGRESS", "No se pudo cerrar el dialogo");
 			}
@@ -791,14 +748,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			}
 		}
 
-		public void showDialogo() {
-
-			proDialog = new ProgressDialog(App_GPSMapa_Activity.this);
-			proDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			proDialog.setMessage("Buscando...");
-			proDialog.show();
-
-		}
 	} // End Async
 
 
@@ -951,7 +900,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				"Restaurantes"));
 		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.banco, "Bancos"));
 		arrAdpSpinner.add(new Adapter_SpinnerItem(R.drawable.organismos,
-				"Organización"));
+				"Organizaciones"));
 
 		oAdpSpinner = new Adapter_SpinnerNavActionBar(getApplicationContext(),
 				arrAdpSpinner);
