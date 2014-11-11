@@ -5,7 +5,6 @@ package com.apprade.activity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -21,8 +20,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.apprade.R;
 import com.apprade.adapter.Adapter_ListView;
 import com.apprade.dao.DAO_Comentario;
@@ -183,23 +180,14 @@ public class Usuario_Comentar_Activity extends Activity {
 			proDialogo.dismiss();
 
 			if (result) {
-				Toast.makeText(getApplicationContext(),
-						dao.oJsonStatus.getMessage(), Toast.LENGTH_LONG).show();
 				refreshComment();
 				etComentario.setText("");
 			} else {
-				Toast.makeText(
-						getApplicationContext(),
-						dao.oJsonStatus.getMessage() + ". "
-								+ dao.oJsonStatus.getInfo(), Toast.LENGTH_LONG)
-						.show();
 			}
 		}
 
 		@Override
 		protected void onCancelled() {
-			Toast.makeText(getApplicationContext(), "¡Proceso ocultado!",
-					Toast.LENGTH_SHORT).show();
 		}
 
 	}// End ClassAs
@@ -221,9 +209,6 @@ public class Usuario_Comentar_Activity extends Activity {
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					TaskHttpMethodAsyncCargarComentarios.this.cancel(true);
-					Toast.makeText(getApplicationContext(),
-							"Se ha ocultado el proceso", Toast.LENGTH_SHORT)
-							.show();
 				}
 			});
 			proDialog2.setProgress(0);
@@ -252,11 +237,7 @@ public class Usuario_Comentar_Activity extends Activity {
 
 			if (!result) {
 				populateListView();// Llena el listView
-			} else {
-				Toast.makeText(getApplicationContext(),dao.oJsonStatus.getMessage()+
-						". "+dao.oJsonStatus.getInfo(), Toast.LENGTH_SHORT)
-						.show();
-			}
+			} 
 		}
 
 		private void showDialogo() {

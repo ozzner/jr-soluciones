@@ -5,8 +5,6 @@ package com.apprade.adapter;
 
 import java.util.Calendar;
 
-import com.apprade.helper.Helper_SubRoutines;
-
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
@@ -14,6 +12,8 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 import android.widget.Toast;
+
+import com.apprade.helper.Helper_SubRoutines;
 
 /**
  * @author Renzo Santillán

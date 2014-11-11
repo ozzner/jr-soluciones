@@ -7,7 +7,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;

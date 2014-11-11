@@ -7,7 +7,6 @@ import com.apprade.activity.Fragment_Intro_1;
 import com.apprade.activity.Fragment_Intro_2;
 import com.apprade.activity.Fragment_Intro_3;
 import com.apprade.activity.Fragment_Intro_4;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;

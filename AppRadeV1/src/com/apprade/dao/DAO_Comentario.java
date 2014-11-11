@@ -7,14 +7,11 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
-
 import android.util.Log;
-
 import com.apprade.entity.Entity_Comentario;
 import com.apprade.entity.Entity_Establecimiento;
 import com.apprade.entity.Entity_Ranking;
