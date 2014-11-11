@@ -11,10 +11,12 @@ import android.util.Log;
 public class Helper_JSONParser {
 
 private static final String MAIN_ERROR_STATUS = "error_status";
+@SuppressWarnings("unused")
 private static final String MAIN_HTTP_CODE = "httpCode";
 private static final String MAIN_DATA = "data";
 private static final String DATA_MESSAGE = "message";
 private static final String DATA_INFO = "info";
+@SuppressWarnings("unused")
 private static final String DATA_ERROR_COD = "error_cod";
 
 

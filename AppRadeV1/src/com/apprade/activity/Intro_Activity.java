@@ -13,7 +13,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -205,6 +204,7 @@ public class Intro_Activity extends FragmentActivity implements
 			alertDialog.setPositiveButton("Iniciar!",
 					new DialogInterface.OnClickListener() {
 				
+						@Override
 						public void onClick(DialogInterface dialog, int which) {
 
 							email = (EditText) v.findViewById(R.id.txtEmail);
@@ -218,6 +218,7 @@ public class Intro_Activity extends FragmentActivity implements
 			/* When negative (No/cancel) button is clicked */
 			alertDialog.setNegativeButton("Salir",
 					new DialogInterface.OnClickListener() {
+						@Override
 						public void onClick(DialogInterface dialog, int which) {
 //							dialog.cancel();
 						}

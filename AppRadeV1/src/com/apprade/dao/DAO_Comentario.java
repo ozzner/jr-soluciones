@@ -15,17 +15,13 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-import com.apprade.entity.Entity_Categoria;
 import com.apprade.entity.Entity_Comentario;
-import com.apprade.entity.Entity_Coordenadas;
-import com.apprade.entity.Entity_Distrito;
 import com.apprade.entity.Entity_Establecimiento;
 import com.apprade.entity.Entity_Ranking;
 import com.apprade.entity.Entity_Usuario;
 import com.apprade.helper.Helper_Http_Method;
 import com.apprade.helper.Helper_JSONParser;
 import com.apprade.helper.Helper_JSONStatus;
-import com.google.android.gms.internal.ee;
 
 /**
  * @author renzo

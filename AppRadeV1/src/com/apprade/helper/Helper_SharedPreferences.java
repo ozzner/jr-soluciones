@@ -85,8 +85,8 @@ public class Helper_SharedPreferences  {
 		SharedPreferences.Editor editorLogin = appRadeSharedPref.edit();
 		editorLogin.putInt("status", status);
 		editorLogin.commit();
-
 	}
+	
 	
 	public ArrayList<String> getAllLoginDataStored(Context context){
 		contexto=context;
@@ -126,6 +126,8 @@ public class Helper_SharedPreferences  {
 		editorLogin.commit();
 		
 	}
+	
+	
 	
 	public void storeMyCustomPreferences(String[] keys, String[] values, String customPreferences,Context context){
 		

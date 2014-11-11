@@ -9,8 +9,6 @@ import com.apprade.R;
 
 import com.apprade.dao.DAO_Usuario;
 import com.apprade.entity.Entity_Ranking;
-import com.apprade.entity.Entity_Usuario;
-import com.apprade.helper.Helper_JSONStatus;
 import com.apprade.helper.Helper_SharedPreferences;
 import com.apprade.helper.Helper_SubRoutines;
 import com.mobsandgeeks.saripaar.Rule;

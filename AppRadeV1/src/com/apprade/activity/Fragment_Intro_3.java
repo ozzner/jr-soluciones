@@ -1,34 +1,24 @@
 package com.apprade.activity;
 
-import java.util.Calendar;
-
-import android.app.ActionBar;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apprade.R;
-import com.apprade.activity.Usuario_Registro_Activity.TaskHttpMethodAsync;
 import com.apprade.adapter.Adapter_Dialog_Fragment;
 import com.apprade.dao.DAO_Usuario;
 import com.apprade.helper.Helper_SharedPreferences;
@@ -43,7 +33,7 @@ import com.mobsandgeeks.saripaar.annotation.TextRule;
 
 public class Fragment_Intro_3 extends Fragment implements ValidationListener {
 
-	private static final CharSequence TAG_VACIO = "";
+
 	private Helper_SubRoutines oRoutine;
 	private Validator validator;
 	Adapter_Dialog_Fragment oDialFrag;
@@ -63,8 +53,7 @@ public class Fragment_Intro_3 extends Fragment implements ValidationListener {
 	private RadioButton selectRadio;
 	private ImageButton ib;
 	private ProgressDialog proDialog;
-	private String sFecha = "2006-05-18", sNombre, sEmail, sPassword,
-			sPassword2, sSexo;
+	private String sFecha = "2006-05-18", sNombre, sEmail, sPassword, sSexo;
 	private DAO_Usuario dao;
 
 	public Fragment_Intro_3() {
@@ -142,7 +131,6 @@ public class Fragment_Intro_3 extends Fragment implements ValidationListener {
 		 sNombre = etNombres.getText().toString();
 		 sEmail = etCorreo.getText().toString();
 		 sPassword = etPassword.getText().toString();
-		 sPassword2 = etConfPassword.getText().toString();
 		
 		 oDialFrag = new Adapter_Dialog_Fragment();
 		 sFecha = oDialFrag.getsFecha();
@@ -160,6 +148,7 @@ public class Fragment_Intro_3 extends Fragment implements ValidationListener {
 			return bRequest;
 		}
 
+		@Override
 		protected void onPreExecute() {
 
 			showDialogo();

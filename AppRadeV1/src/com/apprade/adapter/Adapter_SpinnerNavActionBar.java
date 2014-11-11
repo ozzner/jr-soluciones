@@ -7,13 +7,10 @@ import java.util.ArrayList;
 
 import com.apprade.R;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,7 +50,7 @@ public class Adapter_SpinnerNavActionBar extends BaseAdapter{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
 		if (convertView == null) {
-			LayoutInflater layInf = (LayoutInflater)contexto.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+			LayoutInflater layInf = (LayoutInflater)contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = layInf.inflate(R.layout.adapter_spinner_actionbar,null);
 		}
 		
@@ -77,7 +74,7 @@ public class Adapter_SpinnerNavActionBar extends BaseAdapter{
 	public View getDropDownView(int position, View convertView, ViewGroup parent) {
 		
 		if (convertView == null) {
-			LayoutInflater layInf = (LayoutInflater)contexto.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+			LayoutInflater layInf = (LayoutInflater)contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = layInf.inflate(R.layout.adapter_spinner_actionbar,null);
 		}
 		

@@ -1,27 +1,21 @@
 package com.apprade.dao;
 
 import java.io.InputStream;
-import java.io.Writer;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.HttpParams;
 import org.json.JSONObject;
 
-import com.apprade.entity.Entity_Ranking;
 import com.apprade.entity.Entity_Usuario;
 import com.apprade.helper.Helper_Http_Method;
 import com.apprade.helper.Helper_JSONParser;
 import com.apprade.helper.Helper_JSONStatus;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 /**
  * @author Renzo Santillan
@@ -44,6 +38,7 @@ public class DAO_Usuario{
 		oHttp = new Helper_Http_Method();
 		conn = new DAO_Conexion();
 	}
+
 	
 	public boolean loginUsuario(String email , String password)
 	{	

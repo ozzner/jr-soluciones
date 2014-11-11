@@ -1,12 +1,7 @@
 package com.apprade.activity;
 
-import java.util.Calendar;
-
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -21,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -59,12 +53,12 @@ public class Usuario_Registro_Activity extends FragmentActivity implements
 	private ImageButton ib;
 	private ProgressDialog proDialog;
 	private String sFecha = "2006-05-18", sNombre, sEmail, sPassword,
-			sPassword2, sSexo;
+			 sSexo;
 	private ActionBar actionBar;
 	private DAO_Usuario dao;
 	Adapter_Dialog_Fragment oDialFrag;
 	private Helper_SubRoutines oRoutine;
-	private static final String TAG_VACIO = "";
+
 
 	public Usuario_Registro_Activity() {
 		super();
@@ -145,6 +139,7 @@ public class Usuario_Registro_Activity extends FragmentActivity implements
 			return bRequest;
 		}
 
+		@Override
 		protected void onPreExecute() {
 
 			showDialogo();

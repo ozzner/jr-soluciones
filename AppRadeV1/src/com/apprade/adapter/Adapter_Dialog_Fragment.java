@@ -5,7 +5,6 @@ package com.apprade.adapter;
 
 import java.util.Calendar;
 
-import com.apprade.activity.Intro_Activity;
 import com.apprade.helper.Helper_SubRoutines;
 
 import android.app.DatePickerDialog;

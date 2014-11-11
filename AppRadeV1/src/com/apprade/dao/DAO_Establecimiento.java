@@ -4,13 +4,11 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.conn.params.ConnConnectionParamBean;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
@@ -20,7 +18,6 @@ import com.apprade.entity.Entity_Categoria;
 import com.apprade.entity.Entity_Coordenadas;
 import com.apprade.entity.Entity_Distrito;
 import com.apprade.entity.Entity_Establecimiento;
-import com.apprade.entity.Entity_Usuario;
 import com.apprade.helper.Helper_Http_Method;
 import com.apprade.helper.Helper_JSONParser;
 import com.apprade.helper.Helper_JSONStatus;

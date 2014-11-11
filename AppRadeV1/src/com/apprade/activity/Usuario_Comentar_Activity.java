@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -16,7 +15,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,7 +27,6 @@ import com.apprade.R;
 import com.apprade.adapter.Adapter_ListView;
 import com.apprade.dao.DAO_Comentario;
 import com.apprade.entity.Entity_Comentario;
-import com.apprade.entity.Entity_Usuario;
 import com.apprade.helper.Helper_SubRoutines;
 
 /**
@@ -292,6 +289,7 @@ public class Usuario_Comentar_Activity extends Activity {
 		new Thread(new Runnable() {
 			boolean bRequest;
 
+			@Override
 			public void run() {
 
 				List<Entity_Comentario> lista_comentarios = new ArrayList<Entity_Comentario>();
@@ -305,6 +303,7 @@ public class Usuario_Comentar_Activity extends Activity {
 				}
 
 				runOnUiThread(new Runnable() {
+					@Override
 					public void run() {
 						populateListView();
 					}
@@ -324,13 +323,5 @@ public class Usuario_Comentar_Activity extends Activity {
 		}
 		
 	}
-
-
-	private OnClickListener cancel_button_click_listener = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			finish();
-		}
-	};
 
 }
