@@ -997,7 +997,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				new EstablecimientoAsync().execute(arrCategory);
 				break;
 
-			case "Organización":
+			case "Organizaciones":
 				arrCategory[0] = String.valueOf(6);
 				new EstablecimientoAsync().execute(arrCategory);
 				break;

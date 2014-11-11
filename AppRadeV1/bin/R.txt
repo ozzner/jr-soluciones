@@ -384,13 +384,13 @@ int string logout 0x7f0b002a
 int string no_hay_cola 0x7f0b0028
 int string poca_cola 0x7f0b0027
 int string wallet_buy_button_place_holder 0x7f0b001f
-int style AlertDialogCustom 0x7f0a0010
+int style AlertDialogCustom 0x7f0a0011
 int style AppBaseTheme 0x7f0a000a
-int style AppDialog 0x7f0a000f
+int style AppDialog 0x7f0a0010
 int style AppTheme 0x7f0a000b
 int style CustomCirclePageIndicator 0x7f0a000c
-int style CustomLinePageIndicator 0x7f0a000d
-int style CustomTitlePageIndicator 0x7f0a000e
+int style CustomLinePageIndicator 0x7f0a000e
+int style CustomTitlePageIndicator 0x7f0a000f
 int style TextAppearance_TabPageIndicator 0x7f0a0003
 int style Theme_IAPTheme 0x7f0a0005
 int style Theme_PageIndicatorDefaults 0x7f0a0000
@@ -401,7 +401,8 @@ int style WalletFragmentDefaultStyle 0x7f0a0009
 int style Widget 0x7f0a0001
 int style Widget_IconPageIndicator 0x7f0a0004
 int style Widget_TabPageIndicator 0x7f0a0002
-int style button_text 0x7f0a0011
+int style button_text 0x7f0a0012
+int style comentario 0x7f0a000d
 int[] styleable AdsAttrs { 0x7f01001f, 0x7f010020, 0x7f010021 }
 int styleable AdsAttrs_adSize 0
 int styleable AdsAttrs_adSizes 1
