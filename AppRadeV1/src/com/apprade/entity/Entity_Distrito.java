@@ -14,7 +14,6 @@ public class Entity_Distrito {
 	private String zipcode;
 	
 	public Entity_Distrito() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Entity_Distrito(int distritoID, String nombre, String zipcode) {

@@ -32,7 +32,6 @@ public class Helper_SubRoutines {
 
 	
 	public Helper_SubRoutines() {
-		// TODO Auto-generated constructor stub
 	}
 	
 /****************** Working with the time *********************/

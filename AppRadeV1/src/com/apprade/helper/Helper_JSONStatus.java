@@ -16,7 +16,6 @@ public class Helper_JSONStatus {
 	private String info;
 	
 	public Helper_JSONStatus() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	
