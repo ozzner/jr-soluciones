@@ -972,11 +972,21 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		alertDialog.setView(v);
 
 		/* When positive (yes/ok) is clicked */
-		alertDialog.setPositiveButton("Bye",
+		alertDialog.setPositiveButton("No",
 				new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+						
+						
+					}
+				});
 
+		/* When negative (No/cancel) button is clicked */
+		alertDialog.setNegativeButton("Si",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
 						actionBar.setSubtitle("Chau");
 						Helper_SharedPreferences oShared = new Helper_SharedPreferences();
 						oShared.storeStatus(0, getApplicationContext());// 0 =>
@@ -988,15 +998,6 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 						finish();
 
-					}
-				});
-
-		/* When negative (No/cancel) button is clicked */
-		alertDialog.setNegativeButton("No",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.cancel();
 					}
 				});
 		alertDialog.show();
