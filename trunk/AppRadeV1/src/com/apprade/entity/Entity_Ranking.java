@@ -13,7 +13,6 @@ public class Entity_Ranking {
 	private String nombre;
 	
 	public Entity_Ranking() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Entity_Ranking(int rankingID, String nombre) {

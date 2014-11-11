@@ -37,7 +37,6 @@ public class Entity_Calificacion {
 	 * 
 	 */
 	public Entity_Calificacion() {
-		// TODO Auto-generated constructor stub
 	}
 
 
@@ -104,9 +103,6 @@ public class Entity_Calificacion {
 		this.establecimientoID = establecimientoID;
 	}
 	
-//	private List<Entity_Usuario> usuario = new ArrayList<Entity_Usuario>();
-//	private List<Entity_Establecimiento> establecimiento = new ArrayList<Entity_Establecimiento>() ;
-//	
 
 	
 

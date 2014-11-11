@@ -113,7 +113,6 @@ public class DAO_Establecimiento {
 								int iIdEst = Integer.parseInt(oEstabli.getString("establishmentID").trim());
 								String sNameEst = oEstabli.getString("name").trim();
 								String sDireccion = oEstabli.getString("address").trim();
-//								int iRUC = Integer.parseInt(oEstabli.getString("ruc"));
 								
 								JSONObject oDistric =  oEstabli.getJSONObject("district");							
 								int iIdDis = Integer.parseInt(oDistric.getString("districtID").trim());

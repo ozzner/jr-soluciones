@@ -67,7 +67,6 @@ public class DAO_Calificacion {
 				}else{
 					
 					JSONObject oErrorData=  oJson.getJSONObject("data");
-//					oJsonStatus.setError_cod(Double.parseDouble(oErrorData.getString("error_cod")));
 					oJsonStatus.setMessage(oErrorData.getString("message"));
 					oJsonStatus.setInfo(oErrorData.getString("info"));
 				}

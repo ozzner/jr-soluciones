@@ -18,7 +18,6 @@ public class Entity_Establecimiento {
 
 	public Entity_Establecimiento() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**

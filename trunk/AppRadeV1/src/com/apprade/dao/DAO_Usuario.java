@@ -82,7 +82,6 @@ public class DAO_Usuario{
 				}else{
 					
 					JSONObject oErrorData=  oJson.getJSONObject("data");
-//					oJsonStatus.setError_cod(Double.parseDouble(oErrorData.getString("error_cod")));
 					oJsonStatus.setMessage(oErrorData.getString("message"));
 					oJsonStatus.setInfo(oErrorData.getString("info"));
 				}
@@ -123,10 +122,8 @@ public class DAO_Usuario{
 					bEstado = true;
 					
 				}else{
-//					oJsonStatus.setHttpCode(Integer.parseInt(oJson.getString("httpCode")));
 					
 					JSONObject oErrorData=  oJson.getJSONObject("data");
-//					oJsonStatus.setError_cod(Double.parseDouble(oErrorData.getString("error_cod")));
 					oJsonStatus.setMessage(oErrorData.getString("message"));
 					oJsonStatus.setInfo(oErrorData.getString("info"));
 				}

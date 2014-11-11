@@ -13,7 +13,6 @@ public class Entity_Categoria {
 	private String nombre;
 		
 	public Entity_Categoria() {
-		// TODO Auto-generated constructor stub
 	}
 
 	

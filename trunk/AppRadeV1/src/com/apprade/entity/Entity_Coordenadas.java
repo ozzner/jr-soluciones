@@ -17,7 +17,6 @@ public class Entity_Coordenadas {
 	private String referencia;
 	
 	public Entity_Coordenadas() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Entity_Coordenadas(int coordenadasID, float latitud, float longitud,
