@@ -64,10 +64,7 @@ public class Usuario_Login_Activity extends Activity implements ValidationListen
 		email = (EditText)findViewById(R.id.txtEmail);
 		password= (EditText)findViewById(R.id.txtPassword);
 		btnLogin = (Button)findViewById(R.id.btnLogin);
-		
-//		ActionBar Bar = getActionBar();
-//		Bar.setIcon(R.drawable.check_user);
-		
+
 		email.setText(getIntent().getStringExtra("correo"));
 		password.setText(getIntent().getStringExtra("password"));
 		
@@ -272,23 +269,6 @@ public class Usuario_Login_Activity extends Activity implements ValidationListen
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }		
 	}
-	
-	
-//	setContentView(R.layout.activity_usuario_login);		
-//	email = (EditText) findViewById(R.id.txtEmail);		
-//	SharedPreferences prefe=getSharedPreferences("datos",Context.MODE_PRIVATE);
-//	email.setText(prefe.getString("mail",""))
-//	
-//	SharedPreferences preferencias=getSharedPreferences("datos",Context.MODE_PRIVATE);
-//    Editor editor=preferencias.edit();
-//    editor.putString("mail", email.getText().toString());
-//    editor.commit();
-//    
-//    Intent i = new Intent(this, App_GPSMapa_Activity.class);
-//    startActivity(i);
-//    finish();
-//	
-	
 	
 }
 

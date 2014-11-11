@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.apprade.adapter;
 
 import com.apprade.activity.Fragment_Intro_1;
@@ -11,10 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-/**
- * @author renzo
- *
- */
 
 public class Adapter_ViewPage extends FragmentPagerAdapter {
 	private static final int TAG_NUM_PAGINAS = 4;

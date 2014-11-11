@@ -22,8 +22,6 @@ public class App_Splash_Activity extends Activity {
 		setContentView(R.layout.activity_splash);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
-		// requestWindowFeature(Window.FEATURE_NO_TITLE);
-		
 		TimerTask task = new TimerTask() {
 		  
 			@Override
@@ -31,7 +29,6 @@ public class App_Splash_Activity extends Activity {
 				
 				 dao = new Helper_SharedPreferences();
 				 sStatus = dao.checkLogin(getApplicationContext());
-//				 Log.e("ESTADO", sStatus+"");
 			 
 				switch (sStatus) {
 					

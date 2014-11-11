@@ -15,10 +15,6 @@ import com.apprade.helper.Helper_JSONStatus;
 
 import android.util.Log;
 
-/**
- * @author Renzo Santillan
- *
- */
 public class DAO_Usuario{
 	
 	private DAO_Conexion conn;

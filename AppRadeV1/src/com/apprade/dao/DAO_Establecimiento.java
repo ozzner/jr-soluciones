@@ -31,13 +31,7 @@ public class DAO_Establecimiento {
 	private static URI URL ;
 	private static final String ENTITY = "establecimiento";
 	private static Map<Integer, String> map_IdEs_Cola = new HashMap<Integer,String>();
-	
-	/**
-	 * @param oEstable
-	 * @param oJsonStatus
-	 * @param oParser
-	 * @param oHttp
-	 */
+
 	public DAO_Establecimiento(Entity_Establecimiento oEstable,
 			Helper_JSONStatus oJsonStatus, Helper_JSONParser oParser,
 			Helper_Http_Method oHttp) {
@@ -58,16 +52,10 @@ public class DAO_Establecimiento {
 		conn = new DAO_Conexion();
 	}
 
-	
-	/**
-	 * @return the map_IdEs_Cola
-	 */
 	public static Map<Integer, String> getMap_IdEs_Cola() {
 		return map_IdEs_Cola;
 	}
-	/**
-	 * @param map_IdEs_Cola the map_IdEs_Cola to set
-	 */
+
 	public static void setMap_IdEs_Cola(Map<Integer, String> map_IdEs_Cola) {
 		DAO_Establecimiento.map_IdEs_Cola = map_IdEs_Cola;
 	}
