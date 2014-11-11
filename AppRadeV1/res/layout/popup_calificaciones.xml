@@ -88,11 +88,13 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="0.56"
                     android:background="@drawable/edit_text_shape"
-                    android:drawableLeft="@drawable/ic_action_email"
-                    android:ems="10"
+                   	android:hint="Escriba un comentario"
+                   	style="@style/comentario"
+                   	android:paddingLeft="8dp"
+                   	android:ems="10"
                     android:inputType="textMultiLine"
                     android:textColor="#dfdbdb" >
-
+					
                     <requestFocus />
                 </EditText>
 
