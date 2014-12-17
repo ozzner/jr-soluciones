@@ -40,14 +40,16 @@ public class Usuario_Registro_Activity extends FragmentActivity implements
 
 	private Validator validator;
 	private Button btnSend;
+	@Required(order = 1, message = "Ingrese nombres")
+	@TextRule(order = 2, minLength = 2, trim = true)
 	private EditText etNombres;
-	@Required(order = 1, message = "Este campo es requerido.")
-	@TextRule(order = 2, minLength = 3, trim = true)
+	@Required(order = 3, message = "Este campo es requerido.")
+	@TextRule(order = 4, minLength = 3, trim = true)
 	private EditText etCorreo;
-	@Password(order = 3, message = "Debe ingresar un password")
-	@TextRule(order = 4, minLength = 3, message = "Ingrese min 3 caracteres.", trim = true)
+	@Password(order = 5, message = "Debe ingresar un password")
+	@TextRule(order = 6, minLength = 3, message = "Ingrese min 3 caracteres.", trim = true)
 	private EditText etPassword;
-	@ConfirmPassword(order = 5, message = "Las contraseñas no son iguales")
+	@ConfirmPassword(order = 7, message = "Las contraseñas no son iguales")
 	private EditText etConfPassword;
 	private RadioGroup rgSexo;
 	private ImageButton ib;

@@ -163,7 +163,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gps_mapa);
 
-		ImageView ivNoCola = (ImageView) findViewById(R.id.iv_no_hay_cola);
+		ImageView ivNoHayCola = (ImageView) findViewById(R.id.iv_no_hay_cola);
 		ImageView ivPocaCola = (ImageView) findViewById(R.id.iv_poca_cola);
 		ImageView ivColaModerada = (ImageView) findViewById(R.id.iv_cola_moderada);
 		ImageView ivAltaCola = (ImageView) findViewById(R.id.iv_alta_cola);
@@ -178,7 +178,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		
 	
 
-		ivNoCola.setOnClickListener(new OnClickListener() {
+		ivNoHayCola.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
