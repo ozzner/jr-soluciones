@@ -22,7 +22,6 @@
               $array["mensaje"] = "Error con la consuta";
               $utils->setJsonResponse($array,TRUE);
           }
-        
   
         ?>
     </body>
