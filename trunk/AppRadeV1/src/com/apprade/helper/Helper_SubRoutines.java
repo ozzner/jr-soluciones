@@ -121,6 +121,7 @@ public class Helper_SubRoutines {
 	    ConnectivityManager cm =
 	        (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
 	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    
 	    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
 	        return true;
 	    }

@@ -24,28 +24,25 @@ public class Adapter_ListView extends ArrayAdapter<Entity_Comentario> {
 	private List<Entity_Comentario> oComments;
 	private LayoutInflater layInf;
 	private Helper_SubRoutines oRoutine;
-	
-	
-	
+
 	public Adapter_ListView(Context context,
 			List<Entity_Comentario> oListaComment) {
+
 		super(context, R.layout.adapter_list_row, oListaComment);
-		this.oComments =  oListaComment;
+		this.oComments = oListaComment;
 		this.layInf = LayoutInflater.from(context);
-		oRoutine =  new Helper_SubRoutines();
+		oRoutine = new Helper_SubRoutines();
 	}
-	
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View itemView = convertView;
 		if (itemView == null) {
-			itemView = layInf.inflate(
-					R.layout.adapter_list_row, parent, false);
+			itemView = layInf.inflate(R.layout.adapter_list_row, parent, false);
 		}
 
 		Entity_Comentario currentComment = oComments.get(position);
-		TextView tvUsuario = (TextView) itemView
-				.findViewById(R.id.row_usuario);
+		TextView tvUsuario = (TextView) itemView.findViewById(R.id.row_usuario);
 
 		Entity_Usuario oUser = new Entity_Usuario();
 
@@ -59,12 +56,11 @@ public class Adapter_ListView extends ArrayAdapter<Entity_Comentario> {
 
 		// Condition:
 		TextView tvFecha = (TextView) itemView.findViewById(R.id.row_date1);
-		TextView tvFecha2 = (TextView) itemView
-				.findViewById(R.id.row_date2);
-		tvFecha.setText(oRoutine.customDateConverter(
-				currentComment.getFecha(), "yyyy-MM-dd HH:mm:ss", "yyyy-MMM-dd"));
+		TextView tvFecha2 = (TextView) itemView.findViewById(R.id.row_date2);
+		tvFecha.setText(oRoutine.customDateConverter(currentComment.getFecha(),
+				"yyyy-MM-dd HH:mm:ss", "yyyy-MMM-dd"));
 		tvFecha2.setText(oRoutine.customDateConverter(
-				currentComment.getFecha(),"yyyy-MM-dd HH:mm:ss",
+				currentComment.getFecha(), "yyyy-MM-dd HH:mm:ss",
 				Helper_SubRoutines.TAG_FORMAT_TIME));
 		return itemView;
 	}

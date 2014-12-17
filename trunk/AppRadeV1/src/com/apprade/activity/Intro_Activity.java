@@ -143,7 +143,7 @@ public class Intro_Activity extends FragmentActivity implements
 			if (result) {
 				llamarMapa();
 				Helper_SharedPreferences oShared = new Helper_SharedPreferences();
-				oShared.getAllLoginDataStored(getApplicationContext());
+//				oShared.getAllLoginDataStored(getApplicationContext());
 
 				oShared.storeLogin(dao.oUsuario.getNombre(),
 						dao.oUsuario.getEmail(), dao.oUsuario.getUsuarioID(),
