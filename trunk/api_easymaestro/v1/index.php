@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
         <?php
-         header("Content-type: text/html; charset=utf-8");
+        header("Content-Type: application/json");
+
          include_once "../dao/dao_maestro.php";
          include_once "../utils/JSONFuncions.php";
         
@@ -24,5 +17,3 @@
           }
   
         ?>
-    </body>
-</html>
