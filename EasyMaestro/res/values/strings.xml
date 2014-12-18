@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">EasyMaestro</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="albanil">Albañil</string>
+    <string name="gasfitero">Gasfitero</string>
+    <string name="carpintero">Carpintero</string>
+    <string name="elctricista">Electricista</string>
+    
+    <string name="oficio">Oficio</string>
+
+    <string name="str_tv_ocu">Seleccione ocupación</string>
+    <string name="str_tv_esp">Seleccione especialidad</string>
+    <string name="str_btn_buscar">Buscar</string>
+
+    <string name="title_activity_activity__mapa_principal">Activity_MapaPrincipal</string>
+    <string name="title_activity_activity__detalle_maestro">Activity_DetalleMaestro</string>
+
+</resources>

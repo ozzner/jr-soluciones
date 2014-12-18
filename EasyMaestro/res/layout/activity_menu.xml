@@ -1,0 +1,112 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:weightSum="5"
+    android:background="#3399ff"
+    tools:context=".easy_maestro">
+
+
+    <LinearLayout
+        android:id="@+id/lay_logo"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="3">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_logo"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/logo_temp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lay_spin_ocupacion"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/layout_shape"
+        android:layout_gravity="center_horizontal"
+
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_weight="0.5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_tv_ocu"
+            android:id="@+id/tv_ocupacion"
+            android:layout_gravity="center_horizontal" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_ocup"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lay_spin_especialidad"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/layout_shape"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:layout_weight="0.5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_tv_esp"
+            android:id="@+id/tv_especialidad"
+            android:layout_gravity="center_horizontal" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_especialidad"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lay_button"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/btn_buscar"
+            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:text="@string/str_btn_buscar"
+            style="@style/text_style"
+            android:background="@drawable/button_selector">
+        </Button>
+
+    </LinearLayout>
+
+
+</LinearLayout>
