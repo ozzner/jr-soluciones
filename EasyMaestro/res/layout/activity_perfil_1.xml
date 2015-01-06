@@ -3,42 +3,47 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:orientation="vertical" 
-    android:background="#FF2d2d2d">
+    android:background="#FF2d2d2d"
+    android:orientation="vertical" >
+
+    <RatingBar
+        android:id="@+id/ratingBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:numStars="5"
+     />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dip"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dip"
         android:orientation="vertical" >
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="61dp"
+            android:layout_height="61dp"
             android:src="@drawable/man_icon" />
-
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:layout_marginLeft="10dip"
-        >
+        android:layout_marginTop="25dp" >
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            
             android:layout_marginRight="7dip"
             android:text="Nombres:" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_nombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Renzo David" />
@@ -48,30 +53,31 @@
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" 
-		android:layout_marginLeft="10dip">
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="20dp" >
+
         <TextView
             android:id="@+id/TextView02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginRight="7dip"
-            android:text="Apellidos:" />
+            android:text="Celular" />
 
         <TextView
-            android:id="@+id/TextView01"
+            android:id="@+id/tv_celular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Santillán Chavez" />
+            android:text="993297151" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:layout_marginLeft="10dip" >
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="21dp" >
 
         <TextView
             android:id="@+id/TextView03"
@@ -79,39 +85,50 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginRight="7dip"
-            android:text="Especialidad:"/>
+            android:text="Especialidad:" />
 
         <TextView
-            android:id="@+id/TextView04"
+            android:id="@+id/tv_especialidades"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Levantamiento de columnas" />
     </LinearLayout>
 
-    <RatingBar
-        android:id="@+id/ratingBar1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp" 
-        android:numStars="5"
-        android:rating="3.5"/>
-
-    <Button
-        android:id="@+id/button1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:text="CONTRATAR" />
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp" >
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="128dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dip"
-        android:text="CALIFICAR" />
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Contratar" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Calificar" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+         android:paddingRight="5dp"  >
+
+        <ListView
+            android:id="@+id/lsv_comentarios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+
+    </LinearLayout>
 
 </LinearLayout>
