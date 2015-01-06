@@ -42,6 +42,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
+        
         <activity
             android:name="pe.nullpoint.easymaestro.view.Activity_principal"
             android:screenOrientation="portrait" >
@@ -51,11 +52,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
-            android:name="PerfilActivity_1"
+            android:name="pe.nullpoint.easymaestro.view.Activity_perfil1"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog">
+<!--                 <intent-filter> -->
+<!--                 <action android:name="android.intent.action.MAIN" /> -->
+
+<!--                 <category android:name="android.intent.category.LAUNCHER" /> -->
+<!--             </intent-filter> -->
         </activity>
+        
         <activity
             android:name="PerfilActivity_2"
             android:screenOrientation="portrait" >
