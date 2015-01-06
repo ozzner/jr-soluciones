@@ -10,8 +10,8 @@ public class Model_Tecnico {
 	private int  celular;
 	private double lat;
 	private double lon;
-	private String calificacion;
-	private String comentario;
+	private float calificacion;
+
 	
 	
 	public Model_Tecnico() {
@@ -22,7 +22,7 @@ public class Model_Tecnico {
 
 	public Model_Tecnico(int tecnicoID, String nombre, String profesion,
 			String dni, String direccion, int celular, double lat, double lon,
-			String calificacion, String comentario) {
+			float calificacion) {
 		super();
 		this.tecnicoID = tecnicoID;
 		this.nombre = nombre;
@@ -33,7 +33,7 @@ public class Model_Tecnico {
 		this.lat = lat;
 		this.lon = lon;
 		this.calificacion = calificacion;
-		this.comentario = comentario;
+
 	}
 	
 	
@@ -85,19 +85,12 @@ public class Model_Tecnico {
 	public void setLon(double lon) {
 		this.lon = lon;
 	}
-	public String getCalificacion() {
+	public float getCalificacion() {
 		return calificacion;
 	}
-	public void setCalificacion(String calificacion) {
+	public void setCalificacion(float calificacion) {
 		this.calificacion = calificacion;
 	}
-	public String getComentario() {
-		return comentario;
-	}
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
-	}
-
 	
 
 }

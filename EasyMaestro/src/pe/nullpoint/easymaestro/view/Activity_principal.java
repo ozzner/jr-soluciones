@@ -3,8 +3,9 @@ package pe.nullpoint.easymaestro.view;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import pe.nullpoint.easymaestro.R;
-import pe.nullpoint.easymaestro.controller.Controller_Tecnico;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -77,34 +78,10 @@ public class Activity_principal extends Activity  {
 
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(Activity_principal.this, String.valueOf(spinner_oficio.getSelectedItem()),
-                        Toast.LENGTH_LONG).show();
                 
-                
-                
-        		new Thread(new Runnable() {
-        			boolean bRequest;
-
-        			@Override
-        			public void run() {
-
-        				Controller_Tecnico controller = new Controller_Tecnico();
-		                controller.getTecnicos();
-		                
-        				runOnUiThread(new Runnable() {
-        					@Override
-        					public void run() {
-        		                
-        					}
-        				});
-        			}
-        		}).start();
-
-                
-//                Intent i = new Intent(getApplicationContext(), Activity_mapa.class);
-//                startActivity(i);
-
+                Intent i = new Intent(getApplicationContext(), Activity_mapa.class);
+                startActivity(i);
+                finish();
             }
 
         });
