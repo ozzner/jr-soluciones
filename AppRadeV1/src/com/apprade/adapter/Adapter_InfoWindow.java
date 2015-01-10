@@ -38,6 +38,7 @@ public class Adapter_InfoWindow implements InfoWindowAdapter {
 
 	@Override
 	public View getInfoWindow(Marker arg0) {
+		
 		View infoWindows = inflater.inflate(
 				R.layout.adapter_calificacion_infowindow, null);
 

@@ -56,7 +56,7 @@ public class DAO_Comentario {
 		
 		URL= URI.create(conn.getUrl());
 		InputStream in = null;
-		JSONObject oJson = null,oData = null;
+		JSONObject oJson = null, oData = null;
 
 	    List<Entity_Comentario> lista = new ArrayList<Entity_Comentario>();
 	    List<Entity_Usuario> listaUsu = new ArrayList<Entity_Usuario>();	
