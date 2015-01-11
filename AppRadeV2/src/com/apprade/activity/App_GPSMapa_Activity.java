@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,11 +19,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
 import com.apprade.R;
 import com.apprade.adapter.Adapter_InfoWindow;
 import com.apprade.adapter.Adapter_SpinnerItem;
@@ -42,8 +45,10 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.internal.IGoogleMapDelegate;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -51,7 +56,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class App_GPSMapa_Activity extends FragmentActivity implements
 		OnMarkerClickListener, OnInfoWindowClickListener,
-		ActionBar.OnNavigationListener {
+		ActionBar.OnNavigationListener, OnMapClickListener  {
 
 	private static final String TAG_NO_HAY_COLA = "No hay cola";
 	private static final String TAG_POCA_COLA = "Poca cola";
@@ -154,6 +159,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		oPrefe = new Helper_SharedPreferences();
 		oRoutine = new Helper_SubRoutines();
 		oInfoWindow = new Adapter_InfoWindow();
+
 	}
 
 	
@@ -422,11 +428,12 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 			map = ((SupportMapFragment) getSupportFragmentManager()
 					.findFragmentById(R.id.map)).getMap();
+			
 			map.setMyLocationEnabled(true);
-
 			map.setOnMarkerClickListener(this);
 			map.setOnInfoWindowClickListener(this);
-
+			map.setOnMapClickListener(this);
+			
 			gps = new Helper_GPS_Tracker(App_GPSMapa_Activity.this);
 
 			if (gps.canGetLocation()) {
@@ -804,7 +811,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		v = layInfo.inflate(R.layout.dialog_custom_info, null);
 		adInfo.setView(v);
 
-		adInfo.setNeutralButton("Okay", new DialogInterface.OnClickListener() {
+		adInfo.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -857,6 +864,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	}
 
 	
+
 	private void loadSpinnerNav() {
 
 		actionBar = getActionBar();
@@ -984,6 +992,12 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		}
 
 		return false;
+	}
+
+	@Override
+	public void onMapClick(LatLng arg0) {
+		 hideFragment();
+//		Toast.makeText(getApplicationContext(),"Click Map!", Toast.LENGTH_LONG).show();
 	}
 
 }
