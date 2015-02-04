@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.apprade.R;
@@ -167,7 +168,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_gps_mapa);
+		setContentView(R.layout.activity_gps_mapa_v2);
 
 		ImageView ivNoHayCola = (ImageView) findViewById(R.id.iv_no_hay_cola);
 		ImageView ivPocaCola = (ImageView) findViewById(R.id.iv_poca_cola);
@@ -176,11 +177,11 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 		actionBar = getActionBar();
 
-		hideFragment();
+//		hideFragment();
 		loadSpinnerNav();
 		
 		if (oRoutine.isOnline(getApplicationContext())) 
-			loadAdView();
+//			loadAdView();
 		
 	
 
@@ -194,7 +195,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-					hideFragment();
+//					hideFragment();
 					exeAsyncTask(arrParams);
 				}
 			}
@@ -210,7 +211,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-					hideFragment();
+//					hideFragment();
 					exeAsyncTask(arrParams);
 				}
 
@@ -228,7 +229,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-					hideFragment();
+//					hideFragment();
 					exeAsyncTask(arrParams);
 				}
 
@@ -246,7 +247,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-					hideFragment();
+//					hideFragment();
 					exeAsyncTask(arrParams);
 				}
 
@@ -307,7 +308,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		    adView.setAdUnitId(AD_UNIT_ID);
 		    adView.setBackgroundColor(Color.parseColor("#000000"));
 		    
-		    LinearLayout layout = (LinearLayout) findViewById(R.id.lay_mapa);
+		    RelativeLayout layout = (RelativeLayout) findViewById(R.id.lay_mapa);
 		    layout.addView(adView);
 		
 		    AdRequest adRequest = new AdRequest.Builder()
@@ -402,24 +403,24 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		}
 	}
 
-	private void showFragment(Marker marker) {
+//	private void showFragment(Marker marker) {
+//
+//		mFragment = (Fragment_Calificar) (getSupportFragmentManager()
+//				.findFragmentById(R.id.fragment_calificar));
+//		FragmentManager fm = getSupportFragmentManager();
+//		fm.beginTransaction().show(mFragment).commit();
+//
+//		setMyMarker(marker);
+//	}
 
-		mFragment = (Fragment_Calificar) (getSupportFragmentManager()
-				.findFragmentById(R.id.fragment_calificar));
-		FragmentManager fm = getSupportFragmentManager();
-		fm.beginTransaction().show(mFragment).commit();
-
-		setMyMarker(marker);
-	}
-
-	private void hideFragment() {
-
-		mFragment = (Fragment_Calificar) (getSupportFragmentManager()
-				.findFragmentById(R.id.fragment_calificar));
-		FragmentManager fm = getSupportFragmentManager();
-		fm.beginTransaction().hide(mFragment).commit();
-
-	}
+//	private void hideFragment() {
+//
+//		mFragment = (Fragment_Calificar) (getSupportFragmentManager()
+//				.findFragmentById(R.id.fragment_calificar));
+//		FragmentManager fm = getSupportFragmentManager();
+//		fm.beginTransaction().hide(mFragment).commit();
+//
+//	}
 
 
 	private void setUpMapIfNeeded() {
@@ -429,6 +430,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			map = ((SupportMapFragment) getSupportFragmentManager()
 					.findFragmentById(R.id.map)).getMap();
 			
+			map.getUiSettings().setZoomControlsEnabled(false);
 			map.setMyLocationEnabled(true);
 			map.setOnMarkerClickListener(this);
 			map.setOnInfoWindowClickListener(this);
@@ -442,12 +444,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				longitude = gps.getLongitude();
 
 				CameraUpdate camera1 = CameraUpdateFactory.newLatLngZoom(
-						new LatLng(latitude, longitude), 15f);
+						new LatLng(latitude, longitude), 12f);
 				map.animateCamera(camera1);
 
 			} else {
 				gps.showSettingsAlert();
 			}
+			
 		} catch (Exception e) {
 
 		}
@@ -597,7 +600,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		CalificarAsync task = new CalificarAsync();
 		task.execute(args);
 		getMyMarker().hideInfoWindow();
-		hideFragment();
+//		hideFragment();
 	}
 
 	class CalificarAsync extends AsyncTask<String, Void, Boolean> {
@@ -623,7 +626,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				map2_IdEs_Cola.put(oInfoWindow.getIdEst(), arrParams[1]);
 				oRoutine.showToast(getApplicationContext(),
 						oCalificar.oJsonStatus.getMessage());
-				hideFragment();
+//				hideFragment();
 			} else {
 				actionBar.setSubtitle("¡Error!");
 			}
@@ -772,7 +775,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 				try {
 					refreshMenuItem = item;
-					hideFragment();
+//					hideFragment();
 					myMarker.hideInfoWindow();
 					map.clear();
 
@@ -831,7 +834,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		
 		Intent intent = new Intent(getApplicationContext(),
 				Usuario_Comentar_Activity.class);
-
+		
 		intent.putExtra("establecimientoID", oInfoWindow.getIdEst());
 		intent.putExtra("nomEstablecimiento", oInfoWindow.getNombre());
 		intent.putExtra("direccion", oInfoWindow.getDireccion());
@@ -858,7 +861,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		
 		runAsyncGetLasRate(Integer.parseInt(sIdEst));
 		
-		showFragment(arg0);
+//		showFragment(arg0);
 		
 		return false;
 	}
@@ -996,7 +999,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 	@Override
 	public void onMapClick(LatLng arg0) {
-		 hideFragment();
+//		 hideFragment();
 //		Toast.makeText(getApplicationContext(),"Click Map!", Toast.LENGTH_LONG).show();
 	}
 
