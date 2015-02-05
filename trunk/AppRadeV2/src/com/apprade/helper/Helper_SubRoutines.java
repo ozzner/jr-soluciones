@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -130,6 +131,34 @@ public class Helper_SubRoutines {
 	}
 	
 	
+	/****************** Working with GPS  *********************/
+	
+	
+	public double distanceBetweenPositions(double lat1,double lon1, double lat2, double lon2){
+		
+		
+		Double Lat1_Rad = lat1 * 3.1416 / 180;
+		Double Lon1_Rad = lon1 * 3.1416 / 180;
+		
+		Double Lat2_Rad = lat2 * 3.1416 / 180;
+		Double Lon2_Rad = lon2 * 3.1416 / 180;
+		
+		
+		Double Sin_Lat1 = Math.sin(Lat1_Rad);
+		Double Cos_Lat1 = Math.cos(Lat1_Rad);
+
+		Double Cos_Lat2 = Math.cos(Lat2_Rad);
+		Double Sin_Lat2 = Math.sin(Lat2_Rad);
+		
+		Double Cos_Lon2Lon1 = Math.cos(Lon2_Rad - Lon1_Rad);
+	
+		Double difDistancia = 6378 * 1000 * (Math.acos((Sin_Lat1 * Sin_Lat2)
+				+ (Cos_Lat1 * Cos_Lat2 * Cos_Lon2Lon1)));
+		
+		return difDistancia;
+	}
+	
+
 	
 	public void showToast(Context context, String sms) {
 		Toast.makeText(context, sms, Toast.LENGTH_SHORT).show();
