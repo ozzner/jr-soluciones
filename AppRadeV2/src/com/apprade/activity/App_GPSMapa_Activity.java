@@ -99,6 +99,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private int[] arrIdEstt;
 	int arraymapas[] = new int[1000];
 	String titulo;
+	private LinearLayout lay_rates;
 
 	/* SET GET */
 	/**
@@ -177,7 +178,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 		actionBar = getActionBar();
 
-//		hideFragment();
+		hideRates();
 		loadSpinnerNav();
 		
 		if (oRoutine.isOnline(getApplicationContext())) 
@@ -195,7 +196,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-//					hideFragment();
+					hideRates();
 					exeAsyncTask(arrParams);
 				}
 			}
@@ -211,7 +212,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-//					hideFragment();
+					hideRates();
 					exeAsyncTask(arrParams);
 				}
 
@@ -229,7 +230,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-//					hideFragment();
+					hideRates();
 					exeAsyncTask(arrParams);
 				}
 
@@ -247,7 +248,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				if (!enviarCalificacion())
 					chkTimeCalificacion();
 				else {
-//					hideFragment();
+					hideRates();
 					exeAsyncTask(arrParams);
 				}
 
@@ -403,7 +404,11 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		}
 	}
 
-//	private void showFragment(Marker marker) {
+	private void showRates() {
+		
+	    lay_rates = (LinearLayout)findViewById(R.id.lay_rates);
+		lay_rates.setVisibility(View.GONE);
+		lay_rates.setVisibility(View.VISIBLE);
 //
 //		mFragment = (Fragment_Calificar) (getSupportFragmentManager()
 //				.findFragmentById(R.id.fragment_calificar));
@@ -411,16 +416,19 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 //		fm.beginTransaction().show(mFragment).commit();
 //
 //		setMyMarker(marker);
-//	}
+	}
 
-//	private void hideFragment() {
-//
+	private void hideRates() {
+
+	    lay_rates = (LinearLayout)findViewById(R.id.lay_rates);
+		lay_rates.setVisibility(View.INVISIBLE);
+		
 //		mFragment = (Fragment_Calificar) (getSupportFragmentManager()
 //				.findFragmentById(R.id.fragment_calificar));
 //		FragmentManager fm = getSupportFragmentManager();
 //		fm.beginTransaction().hide(mFragment).commit();
-//
-//	}
+
+	}
 
 
 	private void setUpMapIfNeeded() {
@@ -600,7 +608,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		CalificarAsync task = new CalificarAsync();
 		task.execute(args);
 		getMyMarker().hideInfoWindow();
-//		hideFragment();
+		hideRates();
 	}
 
 	class CalificarAsync extends AsyncTask<String, Void, Boolean> {
@@ -626,7 +634,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				map2_IdEs_Cola.put(oInfoWindow.getIdEst(), arrParams[1]);
 				oRoutine.showToast(getApplicationContext(),
 						oCalificar.oJsonStatus.getMessage());
-//				hideFragment();
+				hideRates();
 			} else {
 				actionBar.setSubtitle("¡Error!");
 			}
@@ -775,7 +783,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 				try {
 					refreshMenuItem = item;
-//					hideFragment();
+					hideRates();
 					myMarker.hideInfoWindow();
 					map.clear();
 
@@ -861,7 +869,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		
 		runAsyncGetLasRate(Integer.parseInt(sIdEst));
 		
-//		showFragment(arg0);
+		setMyMarker(arg0);
+		showRates();
 		
 		return false;
 	}
@@ -999,7 +1008,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 
 	@Override
 	public void onMapClick(LatLng arg0) {
-//		 hideFragment();
+		hideRates();
 //		Toast.makeText(getApplicationContext(),"Click Map!", Toast.LENGTH_LONG).show();
 	}
 
