@@ -88,7 +88,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private static final String TAG_UPDATE = "update";
 	private static final String AD_UNIT_ID = "ca-app-pub-0771856019955508/3441120220";
 	private static final String TEST_DEVICE_ID = "B58F8443FD40945F763B77E7BC6B2A2F";
-	private static Marker myMarker;
+	private final String TAG = App_GPSMapa_Activity.class.getSimpleName();
+	private static Marker myMarker = null;
 	private static Map<Integer, String> map2_IdEs_Cola = new HashMap<Integer,String>();
 	String arrParams[] = new String[4];
 	String arrCategory[] = new String[2];
@@ -100,6 +101,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	int arraymapas[] = new int[1000];
 	String titulo;
 	private LinearLayout lay_rates;
+	private final double DISTANCE_MIN_TO_RATE = 10000;
 
 	/* SET GET */
 	/**
@@ -157,9 +159,8 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		ettEst = new Entity_Establecimiento();
 		status = new Helper_JSONStatus();
 		oCalificar = new DAO_Calificacion();
-		routine = new Helper_SubRoutines();
-		oPrefe = new Helper_SharedPreferences();
 		oRoutine = new Helper_SubRoutines();
+		oPrefe = new Helper_SharedPreferences();
 		oInfoWindow = new Adapter_InfoWindow();
 
 	}
@@ -192,13 +193,16 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			public void onClick(View v) {
 				arrParams[0] = String.valueOf(oInfoWindow.getIdEst());
 				arrParams[1] = TAG_NO_HAY_COLA;
-
-				if (!enviarCalificacion())
-					chkTimeCalificacion();
-				else {
-					hideRates();
-					exeAsyncTask(arrParams);
+				
+				 if (isDistanceOk() > 0) {
+					 if (!enviarCalificacion())
+							chkTimeCalificacion();
+						else {
+							hideRates();
+							exeAsyncTask(arrParams);
+						}
 				}
+				
 			}
 		});
 
@@ -209,11 +213,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				arrParams[0] = String.valueOf(oInfoWindow.getIdEst());
 				arrParams[1] = TAG_POCA_COLA;
 
-				if (!enviarCalificacion())
-					chkTimeCalificacion();
-				else {
-					hideRates();
-					exeAsyncTask(arrParams);
+				 if (isDistanceOk() > 0) {
+					 if (!enviarCalificacion())
+							chkTimeCalificacion();
+						else {
+							hideRates();
+							exeAsyncTask(arrParams);
+						}
 				}
 
 			}
@@ -227,11 +233,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				arrParams[0] = String.valueOf(oInfoWindow.getIdEst());
 				arrParams[1] = TAG_COLA_MODERADA;
 
-				if (!enviarCalificacion())
-					chkTimeCalificacion();
-				else {
-					hideRates();
-					exeAsyncTask(arrParams);
+				 if (isDistanceOk() > 0) {
+					 if (!enviarCalificacion())
+							chkTimeCalificacion();
+						else {
+							hideRates();
+							exeAsyncTask(arrParams);
+						}
 				}
 
 			}
@@ -245,11 +253,13 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 				arrParams[0] = String.valueOf(oInfoWindow.getIdEst());
 				arrParams[1] = TAG_ALTA_COLA;
 
-				if (!enviarCalificacion())
-					chkTimeCalificacion();
-				else {
-					hideRates();
-					exeAsyncTask(arrParams);
+				 if (isDistanceOk() > 0) {
+					 if (!enviarCalificacion())
+							chkTimeCalificacion();
+						else {
+							hideRates();
+							exeAsyncTask(arrParams);
+						}
 				}
 
 			}
@@ -323,7 +333,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	protected boolean enviarCalificacion() {
 		boolean bMsj = false;
 
-		String currentTime = routine
+		String currentTime = oRoutine
 				.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_SHORT);
 		/* KEYS - VALUES */
 		arrKeys[0] = "currentTime";
@@ -366,7 +376,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 	private void chkTimeCalificacion() {
 
 		String sMySharedPref = "Cal" + arrValues[1] + usuarioID;
-		String sCurrentTime = routine
+		String sCurrentTime = oRoutine
 				.getCurrentTime(Helper_SubRoutines.TAG_FORMAT_SHORT);
 		String sValue[] = new String[arrKeys.length];
 		String sMsj = "";
@@ -388,7 +398,7 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 			if (min_dif < 5) {
 				sMsj = "En " + (5 - min_dif)
 						+ " min podrá volver a calificar este establecimiento.";
-				routine.showToast(getApplicationContext(), sMsj);
+				oRoutine.showToast(getApplicationContext(), sMsj);
 			} else {
 				oPrefe.updateMyCurretTime(sMySharedPref,
 						getApplicationContext(), sCurrentTime);
@@ -404,6 +414,46 @@ public class App_GPSMapa_Activity extends FragmentActivity implements
 		}
 	}
 
+	public void showMyToast(String message){
+		Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+	};
+	
+	
+	
+	private int isDistanceOk(){
+		int iReport = -1;
+		
+		if (myMarker != null) {
+			
+			if (gps.canGetLocation()) {
+				double latGPS = gps.getLatitude();
+				double lonGPS = gps.getLongitude();
+				
+				LatLng position = myMarker.getPosition();
+				double latEst = position.latitude;
+				double lonEst = position.longitude;
+				
+				double dDistance = oRoutine.distanceBetweenPositions(latGPS, lonGPS, latEst, lonEst);
+				
+				if (dDistance < DISTANCE_MIN_TO_RATE ) {
+					iReport = 1;
+					Log.e(TAG,"Distance " + dDistance);
+				}else{
+					showMyToast("Puede calificar si está a " 
+								+ DISTANCE_MIN_TO_RATE + " m. del establecimiento");
+					iReport = -2;
+					Log.e(TAG,"Distance " + dDistance);
+				}
+				
+			}else{
+				iReport = 0;
+				showMyToast("Debe habilitar GPS/wifi");
+			}
+			
+		}
+		
+		return iReport;
+	}
 	private void showRates() {
 		
 	    lay_rates = (LinearLayout)findViewById(R.id.lay_rates);
