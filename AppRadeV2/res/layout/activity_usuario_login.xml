@@ -64,34 +64,27 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:orientation="horizontal" >
-
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"  >
+                
                 <com.google.android.gms.common.SignInButton
-                    android:id="@+id/btn_sign_in"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <com.facebook.widget.LoginButton
-                    android:id="@+id/authButton"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Facebook"
-                 />
-
-                <!-- <Button -->
-                <!-- android:id="@+id/btn_logout_google" -->
-                <!-- android:layout_width="match_parent" -->
-                <!-- android:layout_height="match_parent" -->
-                <!-- android:layout_weight="1" -->
-                <!-- android:fontFamily="Trebuchet MS" -->
-                <!-- android:text="Facebook" -->
-                <!-- android:textSize="14dp"/> -->
+                android:id="@+id/btn_sign_in"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+                
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Exit()"
+                android:textSize="14dp" 
+                 android:layout_weight="1"/>
             </LinearLayout>
+
+            
         </LinearLayout>
     </ScrollView>
 
