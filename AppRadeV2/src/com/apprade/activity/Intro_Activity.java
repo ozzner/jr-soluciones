@@ -113,7 +113,7 @@ public class Intro_Activity extends FragmentActivity implements
 		protected Boolean doInBackground(String... params) {
 			boolean bRequest = false;
 
-			if (dao.loginUsuario(sEmail, sPassword))
+			if (dao.loginUsuario(sEmail, sPassword,1))
 				bRequest = true;
 
 			return bRequest;
