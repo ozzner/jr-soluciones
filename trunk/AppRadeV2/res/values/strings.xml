@@ -14,5 +14,6 @@
         que tenga baja cola o aforo de personas.
        Developed by: nullPoint.pe</string>
     <string name="logout">¿Seguro que deseas salir?</string>
+    <string name="APP_ID_FB">355263651328496</string>
 
 </resources>

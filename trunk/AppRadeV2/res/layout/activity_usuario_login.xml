@@ -15,10 +15,10 @@
             android:layout_height="wrap_content"
             android:gravity="center|top"
             android:orientation="vertical"
-            android:paddingTop="60dp"
             android:paddingBottom="40dp"
+            android:paddingLeft="25dp"
             android:paddingRight="25dp"
-             android:paddingLeft="25dp"  >
+            android:paddingTop="60dp" >
 
             <ImageView
                 android:id="@+id/img_check_user"
@@ -52,15 +52,46 @@
 
             <Button
                 android:id="@+id/btnLogin"
+                style="@style/button_text"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="55dp"
+                android:background="@drawable/boton_formato_estandar"
                 android:fontFamily="Trebuchet MS"
                 android:onClick="btnLogin_onClick"
                 android:text="Login"
-                android:background="@drawable/boton_formato_estandar"
-                style="@style/button_text"
                 android:textSize="14dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/btn_sign_in"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <com.facebook.widget.LoginButton
+                    android:id="@+id/authButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Facebook"
+                 />
+
+                <!-- <Button -->
+                <!-- android:id="@+id/btn_logout_google" -->
+                <!-- android:layout_width="match_parent" -->
+                <!-- android:layout_height="match_parent" -->
+                <!-- android:layout_weight="1" -->
+                <!-- android:fontFamily="Trebuchet MS" -->
+                <!-- android:text="Facebook" -->
+                <!-- android:textSize="14dp"/> -->
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
