@@ -24,17 +24,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.apprade.R;
-import com.apprade.activity.Usuario_Registro_Activity.TaskHttpMethodAsync;
 import com.apprade.dao.DAO_Usuario;
 import com.apprade.entity.Entity_Ranking;
 import com.apprade.helper.Helper_SharedPreferences;
 import com.apprade.helper.Helper_SubRoutines;
-import com.facebook.Session;
-import com.facebook.Session.StatusCallback;
-import com.facebook.SessionState;
-import com.facebook.UiLifecycleHelper;
-import com.facebook.android.Facebook;
-import com.facebook.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
@@ -48,7 +41,6 @@ import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.Validator.ValidationListener;
 import com.mobsandgeeks.saripaar.annotation.Required;
 import com.mobsandgeeks.saripaar.annotation.TextRule;
-import com.facebook.widget.LoginButton.UserInfoChangedCallback;
 
 
 
@@ -83,12 +75,7 @@ public class Usuario_Login_Activity extends FragmentActivity implements
 	private boolean intentInProgress;
 	private boolean signInClicked;
 	private static final int RC_SIGN_IN = 0;
-
-	/******** FACEBOOK ********/
-
-	private LoginButton btn_facebook;
-	private final String APP_ID = "355263651328496";
-	private UiLifecycleHelper uiHelper;
+	private Button btn_temp;
 
 
 
@@ -111,7 +98,7 @@ public class Usuario_Login_Activity extends FragmentActivity implements
 		password = (EditText) findViewById(R.id.txtPassword);
 		btnLogin = (Button) findViewById(R.id.btnLogin);
 		btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
-		btn_facebook = (LoginButton) findViewById(R.id.authButton);
+		btn_temp = (Button) findViewById(R.id.btn_logout);
 
 		/* Setting text */
 		email.setText(getIntent().getStringExtra("correo"));
@@ -122,10 +109,6 @@ public class Usuario_Login_Activity extends FragmentActivity implements
 				.addConnectionCallbacks(this)
 				.addOnConnectionFailedListener(this).addApi(Plus.API)
 				.addScope(Plus.SCOPE_PLUS_LOGIN).build();
-
-		// Initializing facebook client
-		uiHelper = new UiLifecycleHelper(this,statusCallback);
-	    uiHelper.onCreate(savedInstanceState);
 
 
 		validator = new Validator(this);
@@ -145,9 +128,8 @@ public class Usuario_Login_Activity extends FragmentActivity implements
 			}
 		});
 		
-		btn_facebook.setText("Login");
-		btn_facebook.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-		btn_facebook.setOnClickListener(new OnClickListener() {
+
+		btn_temp.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -370,22 +352,22 @@ public class Usuario_Login_Activity extends FragmentActivity implements
 
 	
 	/******************* FACEBOOK LOGIN *****************/
-	public void loginToFacebook() {
-
-	}
+//	public void loginToFacebook() {
+//
+//	}
+//	
 	
-	
-	   private Session.StatusCallback statusCallback = new Session.StatusCallback() {
-		           @Override
-		           public void call(Session session, SessionState state,
-		                   Exception exception) {
-		               if (state.isOpened()) {
-		                   Log.d("MainActivity", "Facebook session opened.");
-		               } else if (state.isClosed()) {
-		                   Log.d("MainActivity", "Facebook session closed.");
-		               }
-		           }
-		       };
+//	   private Session.StatusCallback statusCallback = new Session.StatusCallback() {
+//		           @Override
+//		           public void call(Session session, SessionState state,
+//		                   Exception exception) {
+//		               if (state.isOpened()) {
+//		                   Log.d("MainActivity", "Facebook session opened.");
+//		               } else if (state.isClosed()) {
+//		                   Log.d("MainActivity", "Facebook session closed.");
+//		               }
+//		           }
+//		       };
 
 	
 	
@@ -397,6 +379,7 @@ public class Usuario_Login_Activity extends FragmentActivity implements
 	
 	
 	/******************* GOOGLE+ LOGIN *****************/
+
 
 	@Override
 	public void onConnectionFailed(ConnectionResult result) {
@@ -418,7 +401,8 @@ public class Usuario_Login_Activity extends FragmentActivity implements
 			}
 		}
 	}
-
+	
+	
 	private void resolveSignInError() {
 
 		if (connectionResult.hasResolution()) {
@@ -504,23 +488,23 @@ public class Usuario_Login_Activity extends FragmentActivity implements
 	}
 
 	/* facebook */
-	   @Override
-       public void onResume() {
-           super.onResume();
-           uiHelper.onResume();
-       }
-    
-       @Override
-       public void onPause() {
-           super.onPause();
-           uiHelper.onPause();
-       }
-    
-       @Override
-       public void onDestroy() {
-           super.onDestroy();
-           uiHelper.onDestroy();
-       }
+//	   @Override
+//       public void onResume() {
+//           super.onResume();
+//           uiHelper.onResume();
+//       }
+//    
+//       @Override
+//       public void onPause() {
+//           super.onPause();
+//           uiHelper.onPause();
+//       }
+//    
+//       @Override
+//       public void onDestroy() {
+//           super.onDestroy();
+//           uiHelper.onDestroy();
+//       }
 
        
    	/* facebook and google+ */
@@ -529,7 +513,7 @@ public class Usuario_Login_Activity extends FragmentActivity implements
 	protected void onActivityResult(int requestCode, int responseCode,
 			Intent intent) {
 		
-		uiHelper.onActivityResult(requestCode, responseCode, intent);
+//		uiHelper.onActivityResult(requestCode, responseCode, intent);
 
 		if (requestCode == RC_SIGN_IN) {
 			if (responseCode != RESULT_OK) {
@@ -550,7 +534,7 @@ public class Usuario_Login_Activity extends FragmentActivity implements
 	@Override
 	    public void onSaveInstanceState(Bundle savedState) {
 	        super.onSaveInstanceState(savedState);
-	        uiHelper.onSaveInstanceState(savedState);
+//	        uiHelper.onSaveInstanceState(savedState);
 	    }
 
 
@@ -597,5 +581,7 @@ public class Usuario_Login_Activity extends FragmentActivity implements
 		}
 
 	}
+
+
 
 }
