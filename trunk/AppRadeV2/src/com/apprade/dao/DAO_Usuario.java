@@ -4,10 +4,12 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
+
 import com.apprade.entity.Entity_Usuario;
 import com.apprade.helper.Helper_Http_Method;
 import com.apprade.helper.Helper_JSONParser;
@@ -34,7 +36,7 @@ public class DAO_Usuario{
 	}
 
 	
-	public boolean loginUsuario(String email , String password)
+	public boolean loginUsuario(String email , String password,int controller)
 	{	
 		URL= URI.create(conn.getUrl());
 		InputStream in = null;
@@ -46,6 +48,7 @@ public class DAO_Usuario{
 		parametros.add( new BasicNameValuePair("entity", ENTITY));
 		parametros.add( new BasicNameValuePair("email", email));
 		parametros.add( new BasicNameValuePair("password", password));
+		parametros.add( new BasicNameValuePair("controller", String.valueOf(controller)));
 
 		String paramsString = URLEncodedUtils.format(parametros, "UTF-8");
 		

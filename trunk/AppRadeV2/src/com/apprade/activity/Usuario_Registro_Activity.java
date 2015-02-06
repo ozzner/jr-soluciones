@@ -21,7 +21,6 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
 import com.apprade.R;
 import com.apprade.adapter.Adapter_Dialog_Fragment;
 import com.apprade.dao.DAO_Usuario;
@@ -161,6 +160,7 @@ public class Usuario_Registro_Activity extends FragmentActivity implements
 			super.onPostExecute(result);
 			proDialog.dismiss();
 
+			
 			if (result) {
 
 				Helper_SharedPreferences oShaPre = new Helper_SharedPreferences();
@@ -183,7 +183,7 @@ public class Usuario_Registro_Activity extends FragmentActivity implements
 				Toast.makeText(
 						getApplicationContext(),
 						dao.oJsonStatus.getMessage() + ". "
-								+ dao.oJsonStatus.getInfo(), Toast.LENGTH_LONG)
+								+ dao.oJsonStatus.getMessage(), Toast.LENGTH_LONG)
 						.show();
 			}
 
