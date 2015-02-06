@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.apprade"
     android:versionCode="2"
-    android:versionName="1.1">
+    android:versionName="1.1" >
 
     <uses-sdk
-        android:minSdkVersion="10"
+        android:minSdkVersion="12"
         android:targetSdkVersion="18" />
 
     <!-- PERMISOS DE INTERNET Y MAPAS -->
@@ -17,6 +17,10 @@
     <!-- PERMISOS PARA EL GEOPOSICIONAMIENTO -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- FOR GOOGLE+ LOGIN -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
     <!-- PARA LA USAR GOOGLE MAPS V2 -->
     <uses-feature
@@ -37,6 +41,11 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <!-- FACEBOOK -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/APP_ID_FB" />
+
         <!-- ACTIVITIES -->
         <activity
             android:name="com.apprade.activity.App_Splash_Activity"
@@ -54,8 +63,7 @@
         </activity>
         <activity
             android:name="com.apprade.activity.Usuario_Login_Activity"
-            android:windowSoftInputMode="stateHidden"
-            >
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.apprade.activity.App_GPSMapa_Activity"
@@ -65,12 +73,16 @@
             android:name="com.apprade.activity.Usuario_Comentar_Activity"
             android:theme="@style/AppDialog" >
         </activity>
-          <activity
+        <activity
             android:name="com.apprade.activity.Intro_Activity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.google.android.gms.ads.AdActivity"
-             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <activity
+            android:name="com.facebook.LoginActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 
 </manifest>
